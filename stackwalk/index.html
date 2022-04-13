@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Introduction &mdash; Dyninst 12.1.0 documentation</title>
+  <title>Stackwalk Introduction &mdash; Dyninst 12.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction" href="../symtabAPI/index.html" />
+    <link rel="next" title="Symtab API Introduction" href="../symtabAPI/index.html" />
     <link rel="prev" title="Introduction" href="../patchAPI/index.html" /> 
 </head>
 
@@ -57,15 +57,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Instruction API Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction to Parse API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#parse-api-abstractions">Parse API Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#parse-api-examples">Parse API Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
@@ -73,8 +73,8 @@
 <p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patch-api-abstractions">Patch API Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patch-api-examples">Patch API Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
@@ -82,27 +82,27 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#abstractions">Abstractions</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stackwalk Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#stackwalk-abstractions">Stackwalk Abstractions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#stackwalking-interface">Stackwalking Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#callback-interface">Callback Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stackwalk-callback-interface">Stackwalk Callback Interface</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="#stackwalk-api-reference">Stackwalk API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#definitions-and-basic-types">Definitions and Basic Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-types">Basic Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#namespace-stackwalkerapi">Namespace StackwalkerAPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sec-stackwalking-interface">Stackwalking Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stackwalk-interface">Stackwalk Interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#class-walker">Class Walker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#class-frame">Class Frame</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mapping-addresses-to-libraries">Mapping Addresses to Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accessing-local-variables">Accessing Local Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sec-callback-interface">Callback Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sec-callback-interface">Stackwalk Callback Interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#default-implementations">Default Implementations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#class-framestepper">Class FrameStepper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#class-steppergroup">Class StepperGroup</a></li>
@@ -137,10 +137,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Symtab API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#symtab-abstractions">Symtab Abstractions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#symtab-definitions-and-basic-types">Symtab Definitions and Basic Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
@@ -163,7 +163,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Introduction</li>
+      <li>Stackwalk Introduction</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/stackwalk/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -173,8 +173,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="introduction">
-<span id="sec-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+  <div class="section" id="stackwalk-introduction">
+<span id="sec-stackwalk-intro"></span><h1>Stackwalk Introduction<a class="headerlink" href="#stackwalk-introduction" title="Permalink to this headline"></a></h1>
 <p>This document describes StackwalkerAPI, an API and library for walking a
 call stack. The call stack (also known as the run-time stack) is a stack
 found in a process that contains the currently active stack frames. Each
@@ -253,8 +253,8 @@ performs an address to name mapping, allowing StackwalkerAPI to
 associate names with stack frames.</dd>
 </dl>
 </div>
-<div class="section" id="abstractions">
-<span id="sec-abstractions"></span><h1>Abstractions<a class="headerlink" href="#abstractions" title="Permalink to this headline"></a></h1>
+<div class="section" id="stackwalk-abstractions">
+<span id="sec-stackwalk-abstractions"></span><h1>Stackwalk Abstractions<a class="headerlink" href="#stackwalk-abstractions" title="Permalink to this headline"></a></h1>
 <p>StackwalkerAPI contains two interfaces: the Stackwalking Interface and
 the Callback Interface. The stackwalking interface is used to walk the
 call stack, query information about stack frames, and collect basic
@@ -288,8 +288,8 @@ information such as the symbolic name associated with the Frame
 object, and values of its saved registers.</dd>
 </dl>
 </div>
-<div class="section" id="callback-interface">
-<h2>Callback Interface<a class="headerlink" href="#callback-interface" title="Permalink to this headline"></a></h2>
+<div class="section" id="stackwalk-callback-interface">
+<h2>Stackwalk Callback Interface<a class="headerlink" href="#stackwalk-callback-interface" title="Permalink to this headline"></a></h2>
 <p>StackwalkerAPI includes default implementations of the Callback
 Interface on each of its supported platforms. These default
 implementations allow StackwalkerAPI to work “out of the box” in a
@@ -329,8 +329,8 @@ allow StackwalkerAPI to use libelf to look up symbol names instead.</dd>
 </dl>
 </div>
 </div>
-<div class="section" id="api-reference">
-<span id="sec-api"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h1>
+<div class="section" id="stackwalk-api-reference">
+<span id="sec-stackwalk-api"></span><h1>Stackwalk API Reference<a class="headerlink" href="#stackwalk-api-reference" title="Permalink to this headline"></a></h1>
 <p>This section describes the StackwalkerAPI interface. It is divided into
 three sub-sections: a description of the definitions and basic types
 used by this API, a description of the interface for collecting
@@ -459,8 +459,8 @@ Alternatively, a user can add the C++ using keyword above any references
 to StackwalkerAPI objects, e.g, using namespace Dyninst and using
 namespace Stackwalker.</p>
 </div>
-<div class="section" id="sec-stackwalking-interface">
-<span id="id1"></span><h2>Stackwalking Interface<a class="headerlink" href="#sec-stackwalking-interface" title="Permalink to this headline"></a></h2>
+<div class="section" id="stackwalk-interface">
+<span id="sec-stackwalking-interface"></span><h2>Stackwalk Interface<a class="headerlink" href="#stackwalk-interface" title="Permalink to this headline"></a></h2>
 <p>This section describes StackwalkerAPI’s interface for walking a call
 stack. This interface is sufficient for walking call stacks on all the
 systems and variations covered by our default callbacks.</p>
@@ -902,7 +902,7 @@ incorrect.</dd>
 </dl>
 </div>
 <div class="section" id="sec-callback-interface">
-<span id="id2"></span><h2>Callback Interface<a class="headerlink" href="#sec-callback-interface" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Stackwalk Callback Interface<a class="headerlink" href="#sec-callback-interface" title="Permalink to this headline"></a></h2>
 <p>This subsection describes the Callback Interface for StackwalkerAPI. The
 Callback Interface is primarily used to port StackwalkerAPI to new
 platforms, extend support for new types of stack frames, or integrate
@@ -942,8 +942,8 @@ use the default implementations listed in Table&nbsp;<a class="reference externa
 These implementations are described in Section
 <a class="reference external" href="#sec:framesteppers">4.2</a>.</p>
 <div class="container" id="table-defaults">
-<table border="1" class="docutils" id="id3">
-<caption><span class="caption-text">Callback Interface Defaults</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">Callback Interface Defaults</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
 <colgroup>
 <col width="17%" />
 <col width="17%" />
@@ -1806,7 +1806,7 @@ priority than any other <code class="docutils literal notranslate"><span class="
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../patchAPI/index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../symtabAPI/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../symtabAPI/index.html" class="btn btn-neutral float-right" title="Symtab API Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

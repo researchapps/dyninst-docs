@@ -1,9 +1,7 @@
-.. container:: titlepage
+.. _`sec:symtab-intro`:
 
-.. _`sec:intro`:
-
-Introduction
-============
+Symtab API Introduction
+=======================
 
 SymtabAPI is a multi-platform library for parsing symbol tables, object
 file headers and debug information. SymtabAPI currently supports the ELF
@@ -44,10 +42,10 @@ would be incorporated and available for subsequent analysis. Other
 examples of such extensions might involve creating and adding new types
 or adding new local variables to certain functions.
 
-.. _`sec:abstractions`:
+.. _`sec:symtab-abstractions`:
 
-Abstractions
-============
+Symtab Abstractions
+===================
 
 = [rectangle, draw, fill=green!25] = [rectangle, draw, rounded corners,
 fill=yellow!25] = [ellipse, draw, fill=red!25] = [trapezium, trapezium
@@ -128,18 +126,13 @@ Some of the types inherit from a second level of type classes, each
 representing a separate category of types.
 
 fieldListType
-   - This category of types represent the container types that contain a
-   list of fields. Examples of this category include structure and the
-   union types.
+   - This category of types represent the container types that contain a list of fields. Examples of this category include structure and the union types.
 
 derivedType
-   - This category of types represent types derived from a base type.
-   Examples of this category include typedef, pointer and reference
-   types.
+   - This category of types represent types derived from a base type. Examples of this category include typedef, pointer and reference types.
 
 rangedType
-   - This category represents range types. Examples of this category
-   include the array and the sub-range types.
+   - This category represents range types. Examples of this category include the array and the sub-range types.
 
 The enum, function, common block and scalar types do not fall under any
 of the above category of types. Each of the specific types is derived
@@ -154,11 +147,11 @@ look-up and addition of new line information. The main classes for this
 interface are LineInformation and LineNoTuple.
 
 LineInformation
-   - A LineInformation class object represents a mapping of line numbers
+   A LineInformation class object represents a mapping of line numbers
    to address range within a module (source file).
 
 Statement/LineNoTuple
-   - A Statement class object represents a location in source code with
+   A Statement class object represents a location in source code with
    a source file, line number in that source file and start column in
    that line. For backwards compatibility, Statements may also be
    referred to as LineNoTuples.
@@ -173,7 +166,7 @@ variables. All the local variables within a function are tied to the
 Symbol class object representing that function.
 
 localVar
-   - A localVar class object represents a local variable or a parameter
+   A localVar class object represents a local variable or a parameter
    belonging to a function.
 
 Dynamic Address Translation
@@ -332,14 +325,14 @@ within function bar.
 The rest of this document describes the class hierarchy and the API in
 detail.
 
-Definitions and Basic Types
-===========================
+Symtab Definitions and Basic Types
+==================================
 
 The following definitions and basic types are referenced throughout the
 rest of this document.
 
-Definitions
------------
+Symtab Definitions
+------------------
 
 Offset
    Offsets represent an address relative to the start address(base) of
@@ -448,8 +441,8 @@ Local Variable
    A local variable represents a variable that has been declared within
    the scope of a sub-routine or a parameter to a sub-routine.
 
-Basic Types
------------
+Symtab Basic Types
+------------------
 
 .. code-block:: cpp
 
@@ -528,98 +521,73 @@ in-memory. This class is responsible for the parsing of the ``Object``
 file information and holding the data that can be accessed through look
 up functions.
 
-+------------------------+--------------+--------------------------+
-| Method name            | Return type  | Method description       |
-+========================+==============+==========================+
-| ``file``               | std::string  | Full path to the opened  |
-|                        |              | file or provided name    |
-|                        |              | for the memory image.    |
-+------------------------+--------------+--------------------------+
-| ``name``               | std::string  | File name without path.  |
-+------------------------+--------------+--------------------------+
-| ``memberName``         | std::string  | For archive (.a) files,  |
-|                        |              | returns the object file  |
-|                        |              | (.o) this Symtab         |
-|                        |              | represents.              |
-+------------------------+--------------+--------------------------+
-| ``getNumberOfRegions`` | unsigned     | Number of regions.       |
-+------------------------+--------------+--------------------------+
-| ``getNumberOfSymbols`` | unsigned     | Total number of symbols  |
-|                        |              | in both the static and   |
-|                        |              | dynamic tables.          |
-+------------------------+--------------+--------------------------+
-| ``mem_image``          | char *      | Pointer to memory image  |
-|                        |              | for the Symtab; not      |
-|                        |              | valid for disk files.    |
-+------------------------+--------------+--------------------------+
-| ``imageOffset``        | Offset       | Offset of the first code |
-|                        |              | segment from the start   |
-|                        |              | of the binary.           |
-+------------------------+--------------+--------------------------+
-| ``dataOffset``         | Offset       | Offset of the first data |
-|                        |              | segment from the start   |
-|                        |              | of the binary.           |
-+------------------------+--------------+--------------------------+
-| ``imageLength``        | Offset       | Size of the primary      |
-|                        |              | code-containing region,  |
-|                        |              | typically .text.         |
-+------------------------+--------------+--------------------------+
-| ``dataLength``         | Offset       | Size of the primary      |
-|                        |              | data-containing region,  |
-|                        |              | typically .data.         |
-+------------------------+--------------+--------------------------+
-| ``isStaticBinary``     | bool         | True if the binary was   |
-|                        |              | compiled statically.     |
-+------------------------+--------------+--------------------------+
-| ``isExecutable``       | bool         | True if the file is an   |
-|                        |              | executable.              |
-+------------------------+--------------+--------------------------+
-| ``isSharedLibrary``    | bool         | True if the file is a    |
-|                        |              | shared library.          |
-+------------------------+--------------+--------------------------+
-| ``isExec``             | bool         | True if the file is can  |
-|                        |              | only be an executable,   |
-|                        |              | false otherwise          |
-|                        |              | including files that are |
-|                        |              | both exeutables and      |
-|                        |              | shared libraries.        |
-|                        |              | Typically files that are |
-|                        |              | both executables and     |
-|                        |              | shared libraries are     |
-|                        |              | primarily used as        |
-|                        |              | libraries, if you need   |
-|                        |              | to determine specifics   |
-|                        |              | use the methods          |
-|                        |              | ``isExecutable`` and     |
-|                        |              | ``isSharedLibrary``.     |
-+------------------------+--------------+--------------------------+
-| ``isStripped``         | bool         | True if the file was     |
-|                        |              | stripped of symbol table |
-|                        |              | information.             |
-+------------------------+--------------+--------------------------+
-| ``getAddressWidth``    | unsigned     | Size (in bytes) of a     |
-|                        |              | pointer value in the     |
-|                        |              | Symtab; 4 for 32-bit     |
-|                        |              | binaries and 8 for       |
-|                        |              | 64-bit binaries.         |
-+------------------------+--------------+--------------------------+
-| ``getArchitecture``    | Architecture | Representation of the    |
-|                        |              | system architecture for  |
-|                        |              | the binary.              |
-+------------------------+--------------+--------------------------+
-| ``getLoadOffset``      | Offset       | The suggested load       |
-|                        |              | offset of the file;      |
-|                        |              | typically 0 for shared   |
-|                        |              | libraries.               |
-+------------------------+--------------+--------------------------+
-| ``getEntryOffset``     | Offset       | The entry point (where   |
-|                        |              | execution begins) of the |
-|                        |              | binary.                  |
-+------------------------+--------------+--------------------------+
-| ``getBaseOffset``      | Offset       | (Windows only) the       |
-|                        |              | OS-specified base offset |
-|                        |              | of the file.             |
-+------------------------+--------------+--------------------------+
+.. list-table:: The Symtab Class
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - ``file``
+     - std::string
+     - Full path to the opened file or provided name for the memory image.
+   * - ``name``
+     - std::string
+     - File name without path.
+   * - ``memberName``
+     - std::string
+     - For archive (.a) files, returns the object file (.o) this Symtab represents.
+   * - ``getNumberOfRegions``
+     - unsigned
+     - Number of regions.
+   * - ``getNumberOfSymbols``
+     - unsigned
+     - Total number of symbols in both the static and dynamic tables.
+   * - ``mem_image``
+     - char *
+     - Pointer to memory image for the Symtab; not valid for disk files.
+   * - ``imageOffset``
+     - Offset
+     - Offset at the first code segment from the start of the binary.
+   * - ``dataOffset``
+     - Offset
+     - Offset at the first data segment from the start of the binary.
+   * - ``imageLength``
+     - Offset
+     - Size of the primary code-containing region, typically .text.
+   * - ``dataLength``
+     - Offset
+     - Size of the primary data-containing region, typically .data.
+   * - ``isStaticBinary``
+     - bool
+     - True if the binary was compiled statically.
+   * - ``isExecutable``
+     - bool
+     - True if the file is an executable.
+   * - ``isSharedLibrary``
+     - bool
+     - True if the file is a shared library.
+   * - ``isExec``
+     - bool
+     - True if the file can only be an executable, false otherwise including both executables and shared libraries. Typically files that are bot executables and shared libraries are primarily used as libraries, if you need to determine specifics use the methods ``isExecutable`` and ``isSharedLibrary``.
+   * - ``isStripped``
+     - bool
+     - True if the file was stripped of symbol table information.
+   * - ``getAddressWidth``
+     - unsigned
+     - Size (in bytes) of a pointer value in the Symtab; 4 for 32-bit binaries and 8 for 64-bit binaries.
+   * - ``getArchitecture``
+     - Architecture
+     - Representation of the system architecture for the binary.
+   * - ``getLoadOffset``
+     - Offset
+     - The suggested load offset of the file; typically 0 for shared libraries.
+   * - ``getEntryOffset``
+     - Offset
+     - The entry point (where execution beings) of the binary.
+   * - ``getBaseOffset``
+     - Offset
+     - (Windows only) the OS-specified base offset of the file.
 
 .. code-block:: cpp
 
@@ -1356,33 +1324,33 @@ or files produced without module information.
    lang_CMFortran                 Fortran with CM extensions
    ============================== ==============================
 
-+-------------+--------------------+---------------------------------+
-| Method name | Return type        | Method description              |
-+=============+====================+=================================+
-| isShared    | bool               | True if the module is for a     |
-|             |                    | shared library, false for an    |
-|             |                    | executable.                     |
-+-------------+--------------------+---------------------------------+
-| fullName    | std::string &      | Name, including path, of the    |
-|             |                    | source file represented by the  |
-|             |                    | module.                         |
-+-------------+--------------------+---------------------------------+
-| fileName    | std::string &      | Name, not including path, of    |
-|             |                    | the source file represented by  |
-|             |                    | the module.                     |
-+-------------+--------------------+---------------------------------+
-| language    | supportedLanguages | The source language used by the |
-|             |                    | Module.                         |
-+-------------+--------------------+---------------------------------+
-| addr        | Offset             | Offset of the start of the      |
-|             |                    | module, as reported by the      |
-|             |                    | symbol table, assuming          |
-|             |                    | contiguous modules.             |
-+-------------+--------------------+---------------------------------+
-| exec        | Symtab *          | Symtab object that contains the |
-|             |                    | module.                         |
-+-------------+--------------------+---------------------------------+
+.. list-table::
+   :widths: 30  35 35
+   :header-rows: 1
 
+   * - Method name
+     - Return type
+     - Method description
+   * - isShared
+     - bool
+     - True if the module is for a shared library, false for an executable.
+   * - fullName
+     - std::string &
+     - Name, including path, of the source file represented by the module.
+   * - fileName
+     - std::string &
+     - Name, not including path, of the source file represented by the module.
+   * - language
+     - supportedLanguages
+     - The source language used by the Module.
+   * - addr
+     - Offset
+     - Offset of the start of the module, as reported by the symbol table, assuming contiguous modules.
+   * - exec
+     - Symtab *
+     - Symtab object that contains the module.
+     
+ 
 Function, Variable, Symbol lookup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1462,8 +1430,8 @@ symbols with the given type. The error value is set to
 
 .. _line-number-information-1:
 
-Line number information
-~~~~~~~~~~~~~~~~~~~~~~~
+Line number information for Symtab
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -1503,8 +1471,8 @@ for the module.
 
 .. _`subsubsec:typeInfo`:
 
-Type information
-~~~~~~~~~~~~~~~~
+Type information Symtab
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: cpp
 
@@ -1542,24 +1510,29 @@ Class FunctionBase
 The ``FunctionBase`` class provides a common interface that can
 represent either a regular function or an inlined function.
 
-+---------------+-----------------+----------------------------------+
-| Method name   | Return type     | Method description               |
-+===============+=================+==================================+
-| getModule     | const Module * | Module this function belongs to. |
-+---------------+-----------------+----------------------------------+
-| getSize       | unsigned        | Size encoded in the symbol       |
-|               |                 | table; may not be actual         |
-|               |                 | function size.                   |
-+---------------+-----------------+----------------------------------+
-| getRegion     | Region *       | Region containing this function. |
-+---------------+-----------------+----------------------------------+
-| getReturnType | Type *         | Type representing the return     |
-|               |                 | type of the function.            |
-+---------------+-----------------+----------------------------------+
-| getName       | std::string     | Returns primary name of the      |
-|               |                 | function (first mangled name or  |
-|               |                 | DWARF name)                      |
-+---------------+-----------------+----------------------------------+
+.. list-table:: FunctionBase Class
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - getModule
+     - const Module *
+     - Module this function belongs to.
+   * - getSize
+     - unsigned
+     - Size encoded in the symbol table; may not be actual function size.
+   * - getRegion
+     - Region *
+     - Region containing this function.
+   * - getReturnType
+     - Type *
+     - Type representing the return type of the function.
+   * - getName
+     - std::string
+     - Returns primary name of the function (first mangled name or DWARF name).
+
 
 .. code-block:: cpp
 
@@ -1663,61 +1636,53 @@ Gets the set of functions inlined into this one (possibly empty).
 
 .. _Function:
 
-Class Function
---------------
+Symbtab Class Function
+----------------------
 
 The ``Function`` class represents a collection of symbols that have the
 same address and a type of ``ST_FUNCTION``. When appropriate, use this
 representation instead of the underlying ``Symbol`` objects.
 
-+---------------------+----------------------+----------------------+
-| Method name         | Return type          | Method description   |
-+=====================+======================+======================+
-| getModule           | const Module *      | Module this function |
-|                     |                      | belongs to.          |
-+---------------------+----------------------+----------------------+
-| getOffset           | Offset               | Offset in the file   |
-|                     |                      | associated with the  |
-|                     |                      | function.            |
-+---------------------+----------------------+----------------------+
-| getSize             | unsigned             | Size encoded in the  |
-|                     |                      | symbol table; may    |
-|                     |                      | not be actual        |
-|                     |                      | function size.       |
-+---------------------+----------------------+----------------------+
-| mangled_names_begin | Aggregate::name_iter | Beginning of a range |
-|                     |                      | of unique names of   |
-|                     |                      | symbols pointing to  |
-|                     |                      | this function.       |
-+---------------------+----------------------+----------------------+
-| mangled_names_end   | Aggregate::name_iter | End of a range of    |
-|                     |                      | unique names of      |
-|                     |                      | symbols pointing to  |
-|                     |                      | this function.       |
-+---------------------+----------------------+----------------------+
-| pretty_names_begin  | Aggregate::name_iter | As above, but        |
-|                     |                      | prettified with the  |
-|                     |                      | demangler.           |
-+---------------------+----------------------+----------------------+
-| pretty_names_end    | Aggregate::name_iter | As above, but        |
-|                     |                      | prettified with the  |
-|                     |                      | demangler.           |
-+---------------------+----------------------+----------------------+
-| typed_names_begin   | Aggregate::name_iter | As above, but        |
-|                     |                      | including full type  |
-|                     |                      | strings.             |
-+---------------------+----------------------+----------------------+
-| typed_names_end     | Aggregate::name_iter | As above, but        |
-|                     |                      | including full type  |
-|                     |                      | strings.             |
-+---------------------+----------------------+----------------------+
-| getRegion           | Region *            | Region containing    |
-|                     |                      | this function.       |
-+---------------------+----------------------+----------------------+
-| getReturnType       | Type *              | Type representing    |
-|                     |                      | the return type of   |
-|                     |                      | the function.        |
-+---------------------+----------------------+----------------------+
+.. list-table:: Class Function
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - getModule
+     - const Module *
+     - Module this function belongs to.
+   * - getOffset
+     - Offset
+     - Offset in the file associated with the function.
+   * - getSize
+     - unsigned
+     - Size encoded in the symbol table; may not be actual function size.
+   * - mangled_names_begin
+     - Aggregate::name_iter
+     - Beginning of a range of unique names of symbols pointing to this function.
+   * - mangled_names_end
+     - Aggregate::name_iter
+     - End of a range of symbols pointing to this function.
+   * - pretty_names_begin
+     - Aggregate::name_iter
+     - As above, but prettified with the demangler.
+   * - pretty_names_end
+     - Aggregate::name_iter
+     - As above, but prettified with the demangler.
+   * - typed_names_begin
+     - Aggregate::name_iter
+     - As above, but including full type strings.
+   * - typed_names_end
+     - Aggregate::name_iter
+     - As above, but including full type strings.
+   * - getRegion
+     - Region *
+     - Region containing this function
+   * - getReturnType
+     - Type *
+     - Type representing the return type of the function.
 
 .. code-block:: cpp
 
@@ -1835,35 +1800,34 @@ Class Variable
 The ``Variable`` class represents a collection of symbols that have the
 same address and represent data.
 
-+---------------------+----------------------+----------------------+
-| Method name         | Return type          | Method description   |
-+=====================+======================+======================+
-| getOffset           | Offset               | Offset associated    |
-|                     |                      | with this variable.  |
-+---------------------+----------------------+----------------------+
-| getSize             | unsigned             | Size of this         |
-|                     |                      | variable in the      |
-|                     |                      | symbol table.        |
-+---------------------+----------------------+----------------------+
-| mangled_names_begin | Aggregate::name_iter | Beginning of a range |
-|                     |                      | of unique names of   |
-|                     |                      | symbols pointing to  |
-|                     |                      | this variable.       |
-+---------------------+----------------------+----------------------+
-| mangled_names_end   | Aggregate::name_iter | End of a range of    |
-|                     |                      | unique names of      |
-|                     |                      | symbols pointing to  |
-|                     |                      | this variable.       |
-+---------------------+----------------------+----------------------+
-| getType             | Type *              | Type of this         |
-|                     |                      | variable, if known.  |
-+---------------------+----------------------+----------------------+
-| getModule           | const Module *      | Module that contains |
-|                     |                      | this variable.       |
-+---------------------+----------------------+----------------------+
-| getRegion           | Region *            | Region that contains |
-|                     |                      | this variable.       |
-+---------------------+----------------------+----------------------+
+.. list-table:: Variable Class
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - getOffset
+     - Offset
+     - Offset associated with this variable.
+   * - getSize
+     - unsigned
+     - Size of this variable encoded in the symbol table.
+   * - mangled_names_begin
+     - Aggregate::name_iter
+     - Beginning of a range of unique names of symbols pointing to this variable.
+   * - mangled_names_end
+     - Aggregate::name_iter
+     - End of a range of unique names of symbols pointing to this variable.
+   * - getType
+     - Type *
+     - Type of this variable, if known.
+   * - getModule
+     - const Module *
+     - Module this variable belongs to.
+   * - getRegion
+     - Region *
+     - Region that contains this variable.
 
 .. code-block:: cpp
 
@@ -1968,102 +1932,95 @@ The following two types are platform-specific:
 
     typedef enum TAG_UNKNOWN, TAG_USER, TAG_LIBRARY, TAG_INTERNAL SymbolTag;
 
-+-----------------+------------------+-------------------------------+
-| Method name     | Return type      | Method description            |
-+=================+==================+===============================+
-| getMangledName  | string           | Raw name of the symbol in the |
-|                 |                  | symbol table, including name  |
-|                 |                  | mangling.                     |
-+-----------------+------------------+-------------------------------+
-| getPrettyName   | string           | Demangled name of the symbol  |
-|                 |                  | with parameters (for          |
-|                 |                  | functions) removed.           |
-+-----------------+------------------+-------------------------------+
-| getTypedName    | string           | Demangled name of the symbol  |
-|                 |                  | including full function       |
-|                 |                  | parameters.                   |
-+-----------------+------------------+-------------------------------+
-| getModule       | Module *        | The module, if any, that      |
-|                 |                  | contains the symbol.          |
-+-----------------+------------------+-------------------------------+
-| getType         | SymbolType       | The symbol type (as defined   |
-|                 |                  | above) of the symbol.         |
-+-----------------+------------------+-------------------------------+
-| getLinkage      | SymbolLinkage    | The linkage (as defined       |
-|                 |                  | above) of the symbol.         |
-+-----------------+------------------+-------------------------------+
-| getVisibility   | SymbolVisibility | The visibility (as defined    |
-|                 |                  | above) of the symbol.         |
-+-----------------+------------------+-------------------------------+
-| tag             | SymbolTag        | The tag (as defined above) of |
-|                 |                  | the symbol.                   |
-+-----------------+------------------+-------------------------------+
-| getOffset       | Offset           | The offset of the object the  |
-|                 |                  | symbols refers to.            |
-+-----------------+------------------+-------------------------------+
-| getSize         | unsigned         | The size of the object the    |
-|                 |                  | symbol refers to.             |
-+-----------------+------------------+-------------------------------+
-| getRegion       | Region *        | The region containing the     |
-|                 |                  | symbol.                       |
-+-----------------+------------------+-------------------------------+
-| getIndex        | int              | The index of the symbol       |
-|                 |                  | within the symbol table.      |
-+-----------------+------------------+-------------------------------+
-| getStrIndex     | int              | The index of the symbol name  |
-|                 |                  | in the string table.          |
-+-----------------+------------------+-------------------------------+
-| isInDynSymtab   | bool             | If true, the symbol is        |
-|                 |                  | dynamic and can be used as    |
-|                 |                  | the target of an intermodule  |
-|                 |                  | reference. Implies isInSymtab |
-|                 |                  | is false.                     |
-+-----------------+------------------+-------------------------------+
-| isInSymtab      | bool             | If true, the symbol is        |
-|                 |                  | static. Implies isInDynSymtab |
-|                 |                  | is false.                     |
-+-----------------+------------------+-------------------------------+
-| isAbsolute      | bool             | If true, the offset encoded   |
-|                 |                  | in the symbol is an absolute  |
-|                 |                  | value rather than an offset.  |
-+-----------------+------------------+-------------------------------+
-| isFunction      | bool             | If true, the symbol refers to |
-|                 |                  | a function.                   |
-+-----------------+------------------+-------------------------------+
-| getFunction     | Function *      | The Function that contains    |
-|                 |                  | this symbol if such a         |
-|                 |                  | Function exists.              |
-+-----------------+------------------+-------------------------------+
-| isVariable      | bool             | If true, the symbol refers to |
-|                 |                  | a variable.                   |
-+-----------------+------------------+-------------------------------+
-| getVariable     | Variable *      | The Variable that contains    |
-|                 |                  | this symbol if such a         |
-|                 |                  | Variable exists.              |
-+-----------------+------------------+-------------------------------+
-| getSymtab       | Symtab *        | The Symtab that contains this |
-|                 |                  | symbol.                       |
-+-----------------+------------------+-------------------------------+
-| getPtrOffset    | Offset           | For binaries with an OPD      |
-|                 |                  | section, the offset in the    |
-|                 |                  | OPD that contains the         |
-|                 |                  | function pointer data         |
-|                 |                  | structure for this symbol.    |
-+-----------------+------------------+-------------------------------+
-| getLocalTOC     | Offset           | For platforms with a TOC      |
-|                 |                  | register, the expected TOC    |
-|                 |                  | for the object referred to by |
-|                 |                  | this symbol.                  |
-+-----------------+------------------+-------------------------------+
-| isCommonStorage | bool             | True if the symbol represents |
-|                 |                  | a common section (Fortran).   |
-+-----------------+------------------+-------------------------------+
+.. list-table::
+   :widths: 30  35 35
+   :header-rows: 1
 
-SYMTAB_EXPORT Symbol(const std::string& name, SymbolType type,
-SymbolLinkage linkage, SymbolVisibility visibility, Offset offset,
-Module *module = NULL, Region *region = NULL, unsigned size = 0, bool
-dyamic = false, bool absolute = false, int index = -1, int strindex =
--1, bool commonStorage = false)
+   * - Method name
+     - Return type
+     - Method description
+   * - getMangledName
+     - string
+     - Raw name of the symbol in the symbol table, including name mangling.
+   * - getPrettyName
+     - string
+     - Demangled name of the symbol with parameters (for functions) removed.
+   * - getTypedName
+     - string
+     - Demangled name of the symbol including full function parameters.
+   * - getModule
+     - Module *
+     - The module, if any, that contains the symbol.
+   * - getType
+     - SymbolType
+     - The symboltype (as defined above) of the symbol.
+   * - getLinkage
+     - SymbolLinkage
+     - The linkage (as defined above) of the symbol.
+   * - getVisibility
+     - SymbolVisibility
+     - The visibility (as defined above) of the symbol.
+   * - tag
+     - SymbolTag
+     - The tag (as defined above) of the symbol.
+   * - getOffset
+     - Offset
+     - The Offset of the object the symbol refers to.
+   * - getSize
+     - unsigned
+     - The size of the object the symbol refers to.
+   * - getRegion
+     - Region *
+     - The region containing the symbol.
+   * - getIndex
+     - int
+     - The index of the symbol within the symbol table.
+   * - getStrIndex
+     - int
+     - The index of the symbol name in the string table.
+   * - IsInDynSymtab
+     - bool
+     - If true, the symbol is dynamic and can be used as the target of an intermodule reference. Implies isInSymtab is false.
+   * - IsInSymtab
+     - bool
+     - If true, the symbol is static. Implies isInDynSymtab is false.
+   * - IsAbsolute
+     - bool
+     - If true, the offset encoded in the symbol is an absolute value rather than offset.
+   * - IsFunction
+     - bool
+     - If true, the symbol refers to a function.
+   * - GetFunction
+     - Funcion *
+     - The Function that contains this symbol if such a Function exists.
+   * - isVariable
+     - bool
+     - If true, the symbol refers to a variable.
+   * - getVariable
+     - Variable *
+     - The Variable that contains the symbol if such a Variable exists.
+   * - getSymtab
+     - Symtab *
+     - The Symtab that contains the symbol.
+   * - getPtrOffset
+     - Offset
+     - For binaries with an OPD section, the offset in the OPD that contains the function pointer data structure for this symbol.
+   * - getLocalTOC
+     - Offset
+     - For platforms with a TOC register, the expected TOC for this object referred to by this symbol.
+   * - isCommonStorage
+     - bool
+     - True if the symbol represents a common section (Fortran).
+
+
+.. code-block:: cpp
+
+    SYMTAB_EXPORT Symbol(const std::string& name, SymbolType type,
+    SymbolLinkage linkage, SymbolVisibility visibility, Offset offset,
+    Module *module = NULL, Region *region = NULL, unsigned size = 0, bool
+    dyamic = false, bool absolute = false, int index = -1, int strindex =
+    -1, bool commonStorage = false)
+
 
 Symbol creation interface:
 
@@ -2305,69 +2262,56 @@ the object file. For ELF, regions represent ELF sections.
    | RT_OTHER        | Miscellaneous information                         |
    +-----------------+---------------------------------------------------+
 
-+----------------------+---------------+-------------------------+
-| Method name          | Return type   | Method description      |
-+======================+===============+=========================+
-| getRegionNumber      | unsigned      | Index of the region in  |
-|                      |               | the file, starting at   |
-|                      |               | 0.                      |
-+----------------------+---------------+-------------------------+
-| getRegionName        | std::string   | Name of the region      |
-|                      |               | (e.g. .text, .data).    |
-+----------------------+---------------+-------------------------+
-| getPtrToRawData      | void *       | Read-only pointer to    |
-|                      |               | the region’s raw data   |
-|                      |               | buffer.                 |
-+----------------------+---------------+-------------------------+
-| getDiskOffset        | Offset        | Offset within the file  |
-|                      |               | where the region        |
-|                      |               | begins.                 |
-+----------------------+---------------+-------------------------+
-| getDiskSize          | unsigned long | Size of the region’s    |
-|                      |               | data in the file.       |
-+----------------------+---------------+-------------------------+
-| getMemOffset         | Offset        | Location where the      |
-|                      |               | region will be loaded   |
-|                      |               | into memory, modified   |
-|                      |               | by the file’s base load |
-|                      |               | address.                |
-+----------------------+---------------+-------------------------+
-| getMemSize           | unsigned long | Size of the region in   |
-|                      |               | memory, including zero  |
-|                      |               | padding.                |
-+----------------------+---------------+-------------------------+
-| isBSS                | bool          | Type query for          |
-|                      |               | uninitialized data      |
-|                      |               | regions (zero disk      |
-|                      |               | size, non-zero memory   |
-|                      |               | size).                  |
-+----------------------+---------------+-------------------------+
-| isText               | bool          | Type query for          |
-|                      |               | executable code         |
-|                      |               | regions.                |
-+----------------------+---------------+-------------------------+
-| isData               | bool          | Type query for          |
-|                      |               | initialized data        |
-|                      |               | regions.                |
-+----------------------+---------------+-------------------------+
-| getRegionPermissions | perm_t        | Permissions for the     |
-|                      |               | region; perm\_ t is     |
-|                      |               | defined above.          |
-+----------------------+---------------+-------------------------+
-| getRegionType        | RegionType    | Type of the region as   |
-|                      |               | defined above.          |
-+----------------------+---------------+-------------------------+
-| isLoadable           | bool          | True if the region will |
-|                      |               | be loaded into memory   |
-|                      |               | (e.g., code or data),   |
-|                      |               | false otherwise (e.g.,  |
-|                      |               | debug information).     |
-+----------------------+---------------+-------------------------+
-| isDirty              | bool          | True if the region’s    |
-|                      |               | raw data buffer has     |
-|                      |               | been modified by the    |
-|                      |               | user.                   |
-+----------------------+---------------+-------------------------+
+
+.. list-table::
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - getRegionNumber
+     - unsigned
+     - Index of the region in the file, starting at 0.
+   * - getRegionName
+     - std::string
+     - Name of the region (e.g., .text, .data).
+   * - getPtrToRawData
+     - void *
+     - Read-only pointer to the region's raw data buffer.
+   * - getDiskOffset
+     - Offset
+     - Offset within the file where the region begins.
+   * - getDiskSize
+     - unsigned long
+     - Size of the region's data in the file.
+   * - getMemOffset
+     - Offset
+     - Location where the region will be loaded into memory, modified by the file's base load address.
+   * - getMemSize
+     - unsigned long
+     - Size of the region in memory, including zero padding.
+   * - isBSS
+     - bool
+     - Type query for uninitialized data regions (zero disk size, non-zero memory size).
+   * - isText
+     - bool
+     - Type query for executable code regions.
+   * - isData
+     - bool
+     - Type query for initialized data regions.
+   * - getRegionPermissions
+     - perm_t
+     - Permissions for the region; perm_t is defined above.
+   * - getRegionType
+     - RegionType
+     - Type of the region as defined above.
+   * - isLoadable
+     - bool
+     - True if the region will be loaded into memory (e.g., code or data) false otherwise (e.g., debug information).
+   * - isDirty
+     - bool
+     - True if the region's raw data buffer has been modified by the user.
 
 .. code-block:: cpp
 
@@ -2543,20 +2487,25 @@ Class localVar
 
 This represents a local variable or parameter of a function.
 
-+-------------+-------------+----------------------------------------+
-| Method name | Return type | Method description                     |
-+=============+=============+========================================+
-| getName     | string &    | Name of the local variable or          |
-|             |             | parameter.                             |
-+-------------+-------------+----------------------------------------+
-| getType     | Type *     | Type associated with the variable.     |
-+-------------+-------------+----------------------------------------+
-| getFileName | string &    | File where the variable was declared,  |
-|             |             | if known.                              |
-+-------------+-------------+----------------------------------------+
-| getLineNum  | int         | Line number where the variable was     |
-|             |             | declared, if known.                    |
-+-------------+-------------+----------------------------------------+
+.. list-table:: Class localVar
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - getName
+     - string &
+     - Name of the local variable or parameter.
+   * - getType
+     - Type *
+     - Type associated with the variable.
+   * - getFileName
+     - string &
+     - File where the variable was declared, if known.
+   * - getLineNum
+     - int
+     - Line number where the variable was declared, if known.
 
 .. code-block:: cpp
 
@@ -2735,7 +2684,7 @@ SymtabAPI.
 ====== ============= ========================
 Member Return type   Method description
 ====== ============= ========================
-first  const char * Equivalent to getFile.
+first  const char *  Equivalent to getFile.
 second unsigned int  Equivalent to getLine.
 column unsigned int  Equivalent to getColumn.
 ====== ============= ========================
@@ -2969,9 +2918,11 @@ This class represents an enumeration type containing a list of constants
 with values. This class is derived from ``Type``, so all those member
 functions are applicable. ``typeEnum`` inherits from the ``Type`` class.
 
-static typeEnum *create(string &name, vector<pair<string, int> *>
-&consts, Symtab *obj = NULL) static typeEnum *create(string &name,
-vector<string> &constNames, Symtab *obj)
+.. code-block:: cpp
+
+    static typeEnum *create(string &name, vector<pair<string, int> *>
+    &consts, Symtab *obj = NULL) static typeEnum *create(string &name,
+    vector<string> &constNames, Symtab *obj)
 
 These factory methods create a new enumerated type. There are two
 variations to this function. ``consts`` supplies the names and Ids of
@@ -3020,6 +2971,7 @@ inherits from the ``Type`` class.
 .. code-block:: cpp
 
     static typeFunction *create(string &name, Type *retType, vector<Type*> &paramTypes, Symtab *obj = NULL)
+
 
 This factory method creates a new function type with name ``name``.
 ``retType`` represents the return type of the function and
@@ -3633,8 +3585,7 @@ sym and ``false`` otherwise.
 
 .. code-block:: cpp
 
-    bool getSymbol(Address addr, Symbol * &sym, Symtab* &tab, bool close =
-false)
+    bool getSymbol(Address addr, Symbol * &sym, Symtab* &tab, bool close = false)
 
 Given an address, ``addr``, this function returns the ``Symtab`` object,
 ``tab``, and ``Symbol``, ``sym``, that reside at that address. If the

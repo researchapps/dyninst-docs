@@ -1,9 +1,7 @@
-.. container:: titlepage
+.. _`sec:stackwalk-intro`:
 
-.. _`sec:intro`:
-
-Introduction
-============
+Stackwalk Introduction
+======================
 
 This document describes StackwalkerAPI, an API and library for walking a
 call stack. The call stack (also known as the run-time stack) is a stack
@@ -93,10 +91,10 @@ Look up symbolic names
    performs an address to name mapping, allowing StackwalkerAPI to
    associate names with stack frames.
 
-.. _`sec:abstractions`:
+.. _`sec:stackwalk-abstractions`:
 
-Abstractions
-============
+Stackwalk Abstractions
+======================
 
 StackwalkerAPI contains two interfaces: the Stackwalking Interface and
 the Callback Interface. The stackwalking interface is used to walk the
@@ -137,8 +135,8 @@ Frame
    information such as the symbolic name associated with the Frame
    object, and values of its saved registers.
 
-Callback Interface
-------------------
+Stackwalk Callback Interface
+----------------------------
 
 StackwalkerAPI includes default implementations of the Callback
 Interface on each of its supported platforms. These default
@@ -184,10 +182,10 @@ SymbolLookup
    StackwalkerAPI. A user could, for example, use this interface to
    allow StackwalkerAPI to use libelf to look up symbol names instead.
 
-.. _`sec:api`:
+.. _`sec:stackwalk-api`:
 
-API Reference
-=============
+Stackwalk API Reference
+=======================
 
 This section describes the StackwalkerAPI interface. It is divided into
 three sub-sections: a description of the definitions and basic types
@@ -356,8 +354,8 @@ namespace Stackwalker.
 
 .. _`sec:stackwalking-interface`:
 
-Stackwalking Interface
-----------------------
+Stackwalk Interface
+-------------------
 
 This section describes StackwalkerAPI’s interface for walking a call
 stack. This interface is sufficient for walking call stacks on all the
@@ -945,8 +943,8 @@ glvv_EUnknown
 
 .. _`sec:callback-interface`:
 
-Callback Interface
-------------------
+Stackwalk Callback Interface
+----------------------------
 
 This subsection describes the Callback Interface for StackwalkerAPI. The
 Callback Interface is primarily used to port StackwalkerAPI to new

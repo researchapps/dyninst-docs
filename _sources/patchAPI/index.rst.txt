@@ -1,6 +1,4 @@
-.. container:: titlepage
-
-.. _sec-intro:
+.. _sec-patchapi-intro:
 
 Introduction
 ============
@@ -62,10 +60,10 @@ Section `4 <#sec-public-api>`__ and Section `6 <#sec-plugin-api>`__.
 Finally, Appendix `7 <#sec-dyn>`__ provides a quick tutorial of PatchAPI
 to those who are already familiar with DyninstAPI.
 
-.. _sec-abs:
+.. _sec-parseapi-abs:
 
-Abstractions
-============
+Patch API Abstractions
+======================
 
 .. figure:: ./figure/abstraction/img.pdf
    :alt: Object Ownership
@@ -225,8 +223,8 @@ PatchAPI for 1st party code patching.
 
 .. _sec-example:
 
-Examples
-========
+Patch API Examples
+==================
 
 To illustrate the ideas of PatchAPI, we present some simple code
 examples that demonstrate how the API can be used.
@@ -240,8 +238,6 @@ points.
 
 CFG Traversal
 ~~~~~~~~~~~~~
-
-::
 
 .. code-block:: cpp
     
@@ -265,7 +261,7 @@ CFG Traversal
        PatchBlock* blk = *bi;
        std::cout << "\tBlock size:" << blk->size() << std::endl;
      }
-   }
+    }
 
 In the above code, we illustrate how to traverse CFG structures in
 PatchAPI. First, we construct an instance of PatchObject using an
@@ -1549,7 +1545,6 @@ Returns the Point where the Instance is inserted.
 Returns the Snippet. Please note that, the same Snippet may have
 multiple instances inserted at different Points or the same Point.
 
-.. _sec-3.1:
 
 Callback Interface
 ------------------

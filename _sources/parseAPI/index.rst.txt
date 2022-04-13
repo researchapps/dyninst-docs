@@ -1,9 +1,7 @@
-.. container:: titlepage
+.. _`sec:parseapi-intro`:
 
-.. _`sec:intro`:
-
-Introduction
-============
+Introduction to Parse API
+=========================
 
 A binary code parser converts the machine code representation of a
 program, library, or code snippet to abstractions such as the
@@ -34,10 +32,10 @@ analyzing binaries with 8 threads. To control the number of threads used
 during parallel parsing, please set environment variable
 ``OMP_NUM_THREADS``.
 
-.. _`sec:abstractions`:
+.. _`sec:parseapi-abstractions`:
 
-Abstractions
-============
+Parse API Abstractions
+======================
 
 The basic representation of code in this API is the control flow graph
 (CFG). Binary code objects are represented as regions of contiguous
@@ -104,8 +102,8 @@ binary code:
 
 .. _`sec:example`:
 
-Examples
-========
+Parse API Examples
+==================
 
 Function Disassembly
 --------------------
@@ -670,97 +668,78 @@ return to its caller or not; see description below.
    RETURN           may return
    ================ ===============================
 
-typedef boost::transform_iterator<selector, blockmap::iterator>
-bmap_iterator typedef boost::transform_iterator<selector,
-blockmap::const_iterator> bmap_const_iterator typedef
-boost::iterator_range<bmap_iterator> blocklist typedef
-boost::iterator_range<bmap_const_iterator> const_blocklist typedef
-std::set<Edge*> edgelist
+.. code-block:: cpp
+
+    typedef boost::transform_iterator<selector, blockmap::iterator>
+    bmap_iterator typedef boost::transform_iterator<selector,
+    blockmap::const_iterator> bmap_const_iterator typedef
+    boost::iterator_range<bmap_iterator> blocklist typedef
+    boost::iterator_range<bmap_const_iterator> const_blocklist typedef
+    std::set<Edge*> edgelist
 
 Containers for block and edge access. Library users *must not* rely on
 the underlying container type of std::set/std::vector lists, as it is
 subject to change.
 
-+-------------------+----------------------+-----------------------+
-| Method name       | Return type          | Method description    |
-+===================+======================+=======================+
-| name              | string               | Name of the function. |
-+-------------------+----------------------+-----------------------+
-| addr              | Address              | Entry address of the  |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
-| entry             | Block *             | Entry block of the    |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
-| parsed            | bool                 | Whether the function  |
-|                   |                      | has been parsed.      |
-+-------------------+----------------------+-----------------------+
-| blocks            | blocklist &          | List of blocks        |
-|                   |                      | contained by this     |
-|                   |                      | function sorted by    |
-|                   |                      | entry address.        |
-+-------------------+----------------------+-----------------------+
-| callEdges         | const edgelist &     | List of outgoing call |
-|                   |                      | edges from this       |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
-| returnBlocks      | const_blocklist &    | List of all blocks    |
-|                   |                      | ending in return      |
-|                   |                      | edges.                |
-+-------------------+----------------------+-----------------------+
-| exitBlocks        | const_blocklist &    | List of all blocks    |
-|                   |                      | that end the          |
-|                   |                      | function, including   |
-|                   |                      | blocks with no        |
-|                   |                      | out-edges.            |
-+-------------------+----------------------+-----------------------+
-| hasNoStackFrame   | bool                 | True if the function  |
-|                   |                      | does not create a     |
-|                   |                      | stack frame.          |
-+-------------------+----------------------+-----------------------+
-| savesFramePointer | bool                 | True if the function  |
-|                   |                      | saves a frame pointer |
-|                   |                      | (e.g. %ebp).          |
-+-------------------+----------------------+-----------------------+
-| cleansOwnStack    | bool                 | True if the function  |
-|                   |                      | tears down            |
-|                   |                      | stack-passed          |
-|                   |                      | arguments upon        |
-|                   |                      | return.               |
-+-------------------+----------------------+-----------------------+
-| region            | CodeRegion *        | Code region that      |
-|                   |                      | contains the          |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
-| isrc              | InstructionSource * | The InstructionSource |
-|                   |                      | for this function.    |
-+-------------------+----------------------+-----------------------+
-| obj               | CodeObject *        | CodeObject that       |
-|                   |                      | contains this         |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
-| src               | FuncSrc              | The type of hint that |
-|                   |                      | identified this       |
-|                   |                      | function’s entry      |
-|                   |                      | point.                |
-+-------------------+----------------------+-----------------------+
-| restatus          | FuncReturnStatus *  | Returns the           |
-|                   |                      | best-effort           |
-|                   |                      | determination of      |
-|                   |                      | whether this function |
-|                   |                      | may return or not.    |
-|                   |                      | Return status cannot  |
-|                   |                      | always be statically  |
-|                   |                      | determined, and at    |
-|                   |                      | most can guarantee    |
-|                   |                      | that a function *may* |
-|                   |                      | return, not that it   |
-|                   |                      | *will* return.        |
-+-------------------+----------------------+-----------------------+
-| getReturnType     | Type *              | Type representing the |
-|                   |                      | return type of the    |
-|                   |                      | function.             |
-+-------------------+----------------------+-----------------------+
+.. list-table:: 
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - name
+     - string
+     - Name of the function.
+   * - addr
+     - Address
+     - Entry address of the function
+   * - entry
+     - Block *
+     - Entry block of the function
+   * - parsed
+     - bool
+     - Whether the function has been parsed.
+   * - blocks
+     - blocklist &
+     - List of blocks contained by this function sorted by entry address.
+   * - callEdges
+     - const edgelist &
+     - List of outgoing call edges from this function.
+   * - returnBlocks
+     - const blocklist &
+     - List of all blocks ending in return edges
+   * - exitBlocks
+     - const blocklist &
+     - List of all the blocks that end the function, including blocks with no out-edges.
+   * - hasNoStackFrame
+     - bool
+     - True if the function does not create a stack frame
+   * - saveFramePointer
+     - bool
+     - True if the function saves a frame pointer (e.g., %ebp)
+   * - cleansOwnStack
+     - bool
+     - True if the function tears down stack-passed arguments upon return.
+   * - region
+     - CodeRegion *
+     - Code region that contains the function
+   * - isrc
+     - InstructionSource *
+     - The InstructionSource for this function
+   * - obj
+     - CodeObject *
+     - CodeObject that contains this function.
+   * - src
+     - FuncSrc
+     - The type of hint that identified this function's entry point
+   * - restatus
+     - FuncReturnStatus *
+     - Returns the best-effort determination of whether this function may return or not. Return status cannot always be statically determined, and at most can guarantee that a function *may* return, not that it *will* return.
+   * - getReturnType
+     - Type *
+     - Type representing the return type of the function
+
 
 .. code-block:: cpp
     
@@ -893,42 +872,47 @@ Container for edge access. Refer to Section `4.12 <#sec:containers>`__
 for details. Library users *must not* rely on the underlying container
 type of std::vector, as it is subject to change.
 
-+-----------------+------------------+-------------------------------+
-| Method name     | Return type      | Method description            |
-+=================+==================+===============================+
-| start           | Address          | Address of the first          |
-|                 |                  | instruction in the block.     |
-+-----------------+------------------+-------------------------------+
-| end             | Address          | Address immediately following |
-|                 |                  | the last instruction in the   |
-|                 |                  | block.                        |
-+-----------------+------------------+-------------------------------+
-| last            | Address          | Address of the last           |
-|                 |                  | instruction in the block.     |
-+-----------------+------------------+-------------------------------+
-| lastInsnAddr    | Address          | Alias of ``last``.            |
-+-----------------+------------------+-------------------------------+
-| size            | Address          | Size of the block; ``end`` -  |
-|                 |                  | ``start``.                    |
-+-----------------+------------------+-------------------------------+
-| parsed          | bool             | Whether the block has been    |
-|                 |                  | parsed.                       |
-+-----------------+------------------+-------------------------------+
-| obj             | CodeObject *    | CodeObject containing this    |
-|                 |                  | block.                        |
-+-----------------+------------------+-------------------------------+
-| region          | CodeRegion *    | CodeRegion containing this    |
-|                 |                  | block.                        |
-+-----------------+------------------+-------------------------------+
-| sources         | const edgelist & | List of all in-edges to the   |
-|                 |                  | block.                        |
-+-----------------+------------------+-------------------------------+
-| targets         | const edgelist & | List of all out-edges from    |
-|                 |                  | the block.                    |
-+-----------------+------------------+-------------------------------+
-| containingFuncs | int              | Number of Functions that      |
-|                 |                  | contain this block.           |
-+-----------------+------------------+-------------------------------+
+.. list-table:: Title
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - start
+     - Address
+     - Address of the first instruction in the block
+   * - end
+     - Address
+     - Address immediately following the last instruction in the block
+   * - last
+     - Address
+     - Address of the last instruction in the block
+   * - lastInsnAddr
+     - Address
+     - Alias of ``last``
+   * - size
+     - Address
+     - Size of the block; ``end`` - ``start``.
+   * - parsed
+     - bool
+     - Whether the block has been parsed
+   * - obj
+     - CodeObject *
+     - CodeObject containing this block.
+   * - region
+     - CodeRegion *
+     - CodeRegion containing this block.
+   * - sources
+     - const edgelist &
+     - List of all in-edges to the block.
+   * - targets
+     - const edgelist &
+     - List of all out-edges from the block.
+   * - containingFuncs
+     - int
+     - Number of Functions that contain this block.
+
 
 .. code-block:: cpp
     
@@ -991,8 +975,8 @@ Returns the instruction starting at offset ``o`` within the block.
 Returns ``InstructionAPI::Instruction::Ptr()`` if ``o`` is outside the
 block, or if an instruction does not begin at ``o``.
 
-Class Edge
-----------
+Parse API Class Edge
+--------------------
 
 **Defined in:** ``CFG.h``
 
@@ -1022,22 +1006,28 @@ in the case of unresolvable control flow, the edge will target a special
    RET            return
    ============== ==============================
 
-+-------------+--------------+---------------------------------------+
-| Method name | Return type  | Method description                    |
-+=============+==============+=======================================+
-| src         | Block *     | Source of the edge.                   |
-+-------------+--------------+---------------------------------------+
-| trg         | Block *     | Target of the edge.                   |
-+-------------+--------------+---------------------------------------+
-| type        | EdgeTypeEnum | Type of the edge.                     |
-+-------------+--------------+---------------------------------------+
-| sinkEdge    | bool         | True if the target is the sink block. |
-+-------------+--------------+---------------------------------------+
-| interproc   | bool         | True if the edge should be            |
-|             |              | interpreted as interprocedural (e.g.  |
-|             |              | calls, returns, unconditional or      |
-|             |              | conditional tail calls).              |
-+-------------+--------------+---------------------------------------+
+.. list-table::
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - src
+     - Block *
+     - Source of the edge.
+   * - trg
+     - Block *
+     - Target of the edge.
+   * - type
+     - EdgeTypeEnum
+     - Type of the edge.
+   * - sinkEdge
+     - bool
+     - True if the target is the sink block.
+   * - interproc
+     - bool
+     - True if the edge should be interpreted as interprocedural (e.g. calls, returns, unconditional or conditional tail calls).
 
 Class Loop
 ----------
@@ -1364,7 +1354,7 @@ instruction sets).
 =========== =========== ===============================
 Method name Return type Method description
 =========== =========== ===============================
-func        Function * Function linked to this extent.
+func        Function *  Function linked to this extent.
 start       Address     Start of the extent.
 end         Address     End of the extent (exclusive).
 =========== =========== ===============================

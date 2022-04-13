@@ -826,7 +826,7 @@ Set the source / target node.
 Iterator for edges. Common iterator operations including ``++``, ``–``,
 and dereferencing are supported.
 
-.. _`sec:slicing`:
+.. _`sec:slicer`:
 
 Class Slicer
 ------------
@@ -884,19 +884,28 @@ Create a slice node, which represents assignment ``ptr`` in basic block
 Class SliceNode has the following methods to retrieve information
 associated the node:
 
-+-------------+----------------------+------------------------------------------+
-| Method name | Return type          | Method description                       |
-+=============+======================+==========================================+
-| block       | ParseAPI::Block*    | Basic block of this SliceNode.           |
-+-------------+----------------------+------------------------------------------+
-| func        | ParseAPI::Function* | Function of this SliceNode.              |
-+-------------+----------------------+------------------------------------------+
-| addr        | Address              | Address of this SliceNode.               |
-+-------------+----------------------+------------------------------------------+
-| assign      | Assignment::Ptr      | Assignment of this SliceNode.            |
-+-------------+----------------------+------------------------------------------+
-| format      | std::string          | String representation of this SliceNode. |
-+-------------+----------------------+------------------------------------------+
+.. list-table:: Class SlideNode Methods
+   :widths: 30  35 35
+   :header-rows: 1
+
+   * - Method name
+     - Return type
+     - Method description
+   * - block
+     - ParseAPI::Block*
+     - Basic block of this SliceNode.
+   * - func
+     - ParseAPI::Function*
+     - Function of this SliceNode. 
+   * - addr
+     - Address
+     - Address of this SliceNode.
+   * - assign
+     - Assignment::Ptr
+     - Assignment of this SliceNode.
+   * - format
+     - std::string
+     - String representation of this SliceNode. 
 
 .. code-block:: cpp
 

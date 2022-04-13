@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Introduction &mdash; Dyninst 12.1.0 documentation</title>
+  <title>Introduction to Parse API &mdash; Dyninst 12.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction" href="../patchAPI/index.html" />
-    <link rel="prev" title="Introduction" href="../instructionAPI/index.html" /> 
+    <link rel="prev" title="Instruction API Introduction" href="../instructionAPI/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,15 +58,15 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Instruction API Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#abstractions">Abstractions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Parse API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#parse-api-abstractions">Parse API Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#parse-api-examples">Parse API Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#function-disassembly">Function Disassembly</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#control-flow-graph-traversal">Control flow graph traversal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#loop-analysis">Loop analysis</a></li>
@@ -77,7 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#class-coderegion">Class CodeRegion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#class-function">Class Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#class-block">Class Block</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#class-edge">Class Edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-api-class-edge">Parse API Class Edge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#class-loop">Class Loop</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#class-looptreenode">Class LoopTreeNode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#class-codesource">Class CodeSource</a></li>
@@ -97,8 +97,8 @@
 <p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patch-api-abstractions">Patch API Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patch-api-examples">Patch API Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
@@ -106,17 +106,17 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Stackwalk Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#stackwalk-abstractions">Stackwalk Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#stackwalk-api-reference">Stackwalk API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Symtab API Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#symtab-abstractions">Symtab Abstractions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#symtab-definitions-and-basic-types">Symtab Definitions and Basic Types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
@@ -139,7 +139,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Introduction</li>
+      <li>Introduction to Parse API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/parseAPI/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -149,8 +149,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="introduction">
-<span id="sec-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+  <div class="section" id="introduction-to-parse-api">
+<span id="sec-parseapi-intro"></span><h1>Introduction to Parse API<a class="headerlink" href="#introduction-to-parse-api" title="Permalink to this headline"></a></h1>
 <p>A binary code parser converts the machine code representation of a
 program, library, or code snippet to abstractions such as the
 instructions, basic blocks, functions, and loops that the binary code
@@ -178,8 +178,8 @@ analyzing binaries with 8 threads. To control the number of threads used
 during parallel parsing, please set environment variable
 <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>.</p>
 </div>
-<div class="section" id="abstractions">
-<span id="sec-abstractions"></span><h1>Abstractions<a class="headerlink" href="#abstractions" title="Permalink to this headline"></a></h1>
+<div class="section" id="parse-api-abstractions">
+<span id="sec-parseapi-abstractions"></span><h1>Parse API Abstractions<a class="headerlink" href="#parse-api-abstractions" title="Permalink to this headline"></a></h1>
 <p>The basic representation of code in this API is the control flow graph
 (CFG). Binary code objects are represented as regions of contiguous
 bytes that, when parsed, form the nodes and edges of this graph. The
@@ -236,8 +236,8 @@ provides a SymtabAPI-based code source that understands ELF, COFF and
 PE file formats.</p>
 </div>
 </div>
-<div class="section" id="examples">
-<span id="sec-example"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<div class="section" id="parse-api-examples">
+<span id="sec-example"></span><h1>Parse API Examples<a class="headerlink" href="#parse-api-examples" title="Permalink to this headline"></a></h1>
 <div class="section" id="function-disassembly">
 <h2>Function Disassembly<a class="headerlink" href="#function-disassembly" title="Permalink to this headline"></a></h2>
 <p>The following example uses ParseAPI and InstructionAPI to disassemble
@@ -765,15 +765,100 @@ return to its caller or not; see description below.</p>
 </tbody>
 </table>
 </div>
-<p>typedef boost::transform_iterator&lt;selector, blockmap::iterator&gt;
-bmap_iterator typedef boost::transform_iterator&lt;selector,
-blockmap::const_iterator&gt; bmap_const_iterator typedef
-boost::iterator_range&lt;bmap_iterator&gt; blocklist typedef
-boost::iterator_range&lt;bmap_const_iterator&gt; const_blocklist typedef
-std::set&lt;Edge*&gt; edgelist</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">transform_iterator</span><span class="o">&lt;</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">blockmap</span><span class="o">::</span><span class="n">iterator</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">bmap_iterator</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">transform_iterator</span><span class="o">&lt;</span><span class="n">selector</span><span class="p">,</span><span class="w"></span>
+<span class="n">blockmap</span><span class="o">::</span><span class="n">const_iterator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bmap_const_iterator</span><span class="w"> </span><span class="k">typedef</span><span class="w"></span>
+<span class="n">boost</span><span class="o">::</span><span class="n">iterator_range</span><span class="o">&lt;</span><span class="n">bmap_iterator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blocklist</span><span class="w"> </span><span class="k">typedef</span><span class="w"></span>
+<span class="n">boost</span><span class="o">::</span><span class="n">iterator_range</span><span class="o">&lt;</span><span class="n">bmap_const_iterator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">const_blocklist</span><span class="w"> </span><span class="k">typedef</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">edgelist</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Containers for block and edge access. Library users <em>must not</em> rely on
 the underlying container type of std::set/std::vector lists, as it is
 subject to change.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>name</td>
+<td>string</td>
+<td>Name of the function.</td>
+</tr>
+<tr class="row-odd"><td>addr</td>
+<td>Address</td>
+<td>Entry address of the function</td>
+</tr>
+<tr class="row-even"><td>entry</td>
+<td>Block *</td>
+<td>Entry block of the function</td>
+</tr>
+<tr class="row-odd"><td>parsed</td>
+<td>bool</td>
+<td>Whether the function has been parsed.</td>
+</tr>
+<tr class="row-even"><td>blocks</td>
+<td>blocklist &amp;</td>
+<td>List of blocks contained by this function sorted by entry address.</td>
+</tr>
+<tr class="row-odd"><td>callEdges</td>
+<td>const edgelist &amp;</td>
+<td>List of outgoing call edges from this function.</td>
+</tr>
+<tr class="row-even"><td>returnBlocks</td>
+<td>const blocklist &amp;</td>
+<td>List of all blocks ending in return edges</td>
+</tr>
+<tr class="row-odd"><td>exitBlocks</td>
+<td>const blocklist &amp;</td>
+<td>List of all the blocks that end the function, including blocks with no out-edges.</td>
+</tr>
+<tr class="row-even"><td>hasNoStackFrame</td>
+<td>bool</td>
+<td>True if the function does not create a stack frame</td>
+</tr>
+<tr class="row-odd"><td>saveFramePointer</td>
+<td>bool</td>
+<td>True if the function saves a frame pointer (e.g., %ebp)</td>
+</tr>
+<tr class="row-even"><td>cleansOwnStack</td>
+<td>bool</td>
+<td>True if the function tears down stack-passed arguments upon return.</td>
+</tr>
+<tr class="row-odd"><td>region</td>
+<td>CodeRegion *</td>
+<td>Code region that contains the function</td>
+</tr>
+<tr class="row-even"><td>isrc</td>
+<td>InstructionSource *</td>
+<td>The InstructionSource for this function</td>
+</tr>
+<tr class="row-odd"><td>obj</td>
+<td>CodeObject *</td>
+<td>CodeObject that contains this function.</td>
+</tr>
+<tr class="row-even"><td>src</td>
+<td>FuncSrc</td>
+<td>The type of hint that identified this function’s entry point</td>
+</tr>
+<tr class="row-odd"><td>restatus</td>
+<td>FuncReturnStatus *</td>
+<td>Returns the best-effort determination of whether this function may return or not. Return status cannot always be statically determined, and at most can guarantee that a function <em>may</em> return, not that it <em>will</em> return.</td>
+</tr>
+<tr class="row-even"><td>getReturnType</td>
+<td>Type *</td>
+<td>Type representing the return type of the function</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">InstructionSource</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">isource</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
@@ -865,6 +950,66 @@ code in the CFG.</p>
 <p>Container for edge access. Refer to Section <a class="reference external" href="#sec:containers">4.12</a>
 for details. Library users <em>must not</em> rely on the underlying container
 type of std::vector, as it is subject to change.</p>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Title</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>start</td>
+<td>Address</td>
+<td>Address of the first instruction in the block</td>
+</tr>
+<tr class="row-odd"><td>end</td>
+<td>Address</td>
+<td>Address immediately following the last instruction in the block</td>
+</tr>
+<tr class="row-even"><td>last</td>
+<td>Address</td>
+<td>Address of the last instruction in the block</td>
+</tr>
+<tr class="row-odd"><td>lastInsnAddr</td>
+<td>Address</td>
+<td>Alias of <code class="docutils literal notranslate"><span class="pre">last</span></code></td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>Address</td>
+<td>Size of the block; <code class="docutils literal notranslate"><span class="pre">end</span></code> - <code class="docutils literal notranslate"><span class="pre">start</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>parsed</td>
+<td>bool</td>
+<td>Whether the block has been parsed</td>
+</tr>
+<tr class="row-even"><td>obj</td>
+<td>CodeObject *</td>
+<td>CodeObject containing this block.</td>
+</tr>
+<tr class="row-odd"><td>region</td>
+<td>CodeRegion *</td>
+<td>CodeRegion containing this block.</td>
+</tr>
+<tr class="row-even"><td>sources</td>
+<td>const edgelist &amp;</td>
+<td>List of all in-edges to the block.</td>
+</tr>
+<tr class="row-odd"><td>targets</td>
+<td>const edgelist &amp;</td>
+<td>List of all out-edges from the block.</td>
+</tr>
+<tr class="row-even"><td>containingFuncs</td>
+<td>int</td>
+<td>Number of Functions that contain this block.</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="p">(</span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
@@ -913,8 +1058,8 @@ block to the provided OutputIterator. For example:</p>
 Returns <code class="docutils literal notranslate"><span class="pre">InstructionAPI::Instruction::Ptr()</span></code> if <code class="docutils literal notranslate"><span class="pre">o</span></code> is outside the
 block, or if an instruction does not begin at <code class="docutils literal notranslate"><span class="pre">o</span></code>.</p>
 </div>
-<div class="section" id="class-edge">
-<h2>Class Edge<a class="headerlink" href="#class-edge" title="Permalink to this headline"></a></h2>
+<div class="section" id="parse-api-class-edge">
+<h2>Parse API Class Edge<a class="headerlink" href="#parse-api-class-edge" title="Permalink to this headline"></a></h2>
 <p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">CFG.h</span></code></p>
 <p>Typed Edges join two blocks in the CFG, indicating the type of control
 flow transfer instruction that joins the blocks to each other. Edges may
@@ -967,6 +1112,41 @@ in the case of unresolvable control flow, the edge will target a special
 </tbody>
 </table>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>src</td>
+<td>Block *</td>
+<td>Source of the edge.</td>
+</tr>
+<tr class="row-odd"><td>trg</td>
+<td>Block *</td>
+<td>Target of the edge.</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>EdgeTypeEnum</td>
+<td>Type of the edge.</td>
+</tr>
+<tr class="row-odd"><td>sinkEdge</td>
+<td>bool</td>
+<td>True if the target is the sink block.</td>
+</tr>
+<tr class="row-even"><td>interproc</td>
+<td>bool</td>
+<td>True if the edge should be interpreted as interprocedural (e.g. calls, returns, unconditional or conditional tail calls).</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="class-loop">
 <h2>Class Loop<a class="headerlink" href="#class-loop" title="Permalink to this headline"></a></h2>
@@ -1208,6 +1388,33 @@ They may be useful for users who wish to precisely identify the ranges
 of the address space spanned by functions (functions are often
 discontiguous, particularly on architectures with variable length
 instruction sets).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>func</td>
+<td>Function *</td>
+<td>Function linked to this extent.</td>
+</tr>
+<tr class="row-odd"><td>start</td>
+<td>Address</td>
+<td>Start of the extent.</td>
+</tr>
+<tr class="row-even"><td>end</td>
+<td>Address</td>
+<td>End of the extent (exclusive).</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="edge-predicates">
 <span id="sec-pred"></span><h2>Edge Predicates<a class="headerlink" href="#edge-predicates" title="Permalink to this headline"></a></h2>
@@ -1497,7 +1704,7 @@ compensate for its limited coverage of the binary code.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../instructionAPI/index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../instructionAPI/index.html" class="btn btn-neutral float-left" title="Instruction API Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../patchAPI/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
