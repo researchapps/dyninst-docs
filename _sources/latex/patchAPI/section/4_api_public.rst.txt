@@ -1,0 +1,740 @@
+.. _sec-public-api:
+
+Public API Reference
+====================
+
+This section describes public interfaces in PatchAPI. The API is
+organized as a collection of C++ classes. The classes in PatchAPI fall
+under the C++ namespace Dyninst::PatchAPI. To access them, programmers
+should refer to them using the “Dyninst::PatchAPI::” prefix, e.g.,
+Dyninst::PatchAPI::Point. Alternatively, programmers can add the C++
+*using* keyword above any references to PatchAPI objects, e.g.,\ *using
+namespace Dyninst::PatchAPI* or *using Dyninst::PatchAPI::Point*.
+
+Classes in PatchAPI use either the C++ raw pointer or the boost shared
+pointer (*boost::shared_ptr<T>*) for memory management. A class uses a
+raw pointer whenever it is returning a handle to the user that is
+controlled and destroyed by the PatchAPI runtime library. Classes that
+use a raw pointer include the CFG objects, a Point, and various plugins,
+e.g., AddrSpace, CFGMaker, PointMaker, and Instrumenter. A class uses a
+shared_pointer whenever it is handing something to the user that the
+PatchAPI runtime library is not controlling and destroying. Classes that
+use a boost shared pointer include a Snippet, PatchMgr, and Instance,
+where we typedef a class’s shared pointer by appending the Ptr to the
+class name, e.g., PatchMgrPtr for PatchMgr.
+
+CFG Interface
+-------------
+
+.. _sec-3.2.8:
+
+PatchObject
+~~~~~~~~~~~
+
+**Declared in**: PatchObject.h
+
+The PatchObject class is a wrapper of ParseAPI’s CodeObject class
+(has-a), which represents an individual binary code object, such as an
+executable or a library.
+
+.. container:: apient
+
+   static PatchObject\* create(ParseAPI::CodeObject\* co, Address base,
+   CFGMaker\* cm = NULL, PatchCallback \*cb = NULL);
+
+.. container:: apient
+
+   static PatchObject\* clone(PatchObject\* par_obj, Address base,
+   CFGMaker\* cm = NULL, PatchCallback \*cb = NULL);
+
+.. container:: apient
+
+   Address codeBase();
+
+.. container:: apient
+
+   PatchFunction \*getFunc(ParseAPI::Function \*func, bool create =
+   true);
+
+.. container:: apient
+
+   template <class Iter> void funcs(Iter iter);
+
+.. container:: apient
+
+   PatchBlock \*getBlock(ParseAPI::Block\* blk, bool create = true);
+
+.. container:: apient
+
+   template <class Iter> void blocks(Iter iter);
+
+.. container:: apient
+
+   PatchEdge \*getEdge(ParseAPI::Edge\* edge, PatchBlock\* src,
+   PatchBlock\* trg, bool create = true);
+
+.. container:: apient
+
+   template <class Iter> void edges(Iter iter);
+
+.. container:: apient
+
+   PatchCallback \*cb() const;
+
+.. _sec-3.2.9:
+
+PatchFunction
+~~~~~~~~~~~~~
+
+**Declared in**: PatchCFG.h
+
+The PatchFunction class is a wrapper of ParseAPI’s Function class
+(has-a), which represents a function.
+
+.. container:: apient
+
+   const string &name();
+
+.. container:: apient
+
+   Address addr() const;
+
+.. container:: apient
+
+   ParseAPI::Function \*function();
+
+.. container:: apient
+
+   PatchObject\* obj();
+
+.. container:: apient
+
+   typedef std::set<PatchBlock \*> PatchFunction::Blockset;
+
+   const Blockset &blocks();
+
+.. container:: apient
+
+   PatchBlock \*entry();
+
+.. container:: apient
+
+   const Blockset &exitBlocks();
+
+.. container:: apient
+
+   const Blockset &callBlocks();
+
+.. container:: apient
+
+   PatchCallback \*cb() const;
+
+.. container:: apient
+
+   PatchLoopTreeNode\* getLoopTree()
+
+.. container:: apient
+
+   PatchLoop\* findLoop(const char \*name)
+
+.. container:: apient
+
+   bool getLoops(vector<PatchLoop*> &loops);
+
+.. container:: apient
+
+   bool getOuterLoops(vector<PatchLoop*> &loops);
+
+.. container:: apient
+
+   bool dominates(PatchBlock\* A, PatchBlock \*B);
+
+.. container:: apient
+
+   PatchBlock\* getImmediateDominator(PatchBlock \*A);
+
+.. container:: apient
+
+   void getImmediateDominates(PatchBlock \*A, set<PatchBlock*> &imm);
+
+.. container:: apient
+
+   void getAllDominates(PatchBlock \*A, set<PatchBlock*> &dom);
+
+.. container:: apient
+
+   bool postDominates(PatchBlock\* A, PatchBlock \*B);
+
+.. container:: apient
+
+   PatchBlock\* getImmediatePostDominator(PatchBlock \*A);
+
+.. container:: apient
+
+   void getImmediatePostDominates(PatchBlock \*A, set<PatchBlock*>
+   &imm);
+
+.. container:: apient
+
+   void getAllPostDominates(PatchBlock \*A, set<PatchBlock*> &dom);
+
+.. _sec-3.2.10:
+
+PatchBlock
+~~~~~~~~~~
+
+**Declared in**: PatchCFG.h
+
+The PatchBlock class is a wrapper of ParseAPI’s Block class (has-a),
+which represents a basic block.
+
+.. container:: apient
+
+   Address start() const;
+
+.. container:: apient
+
+   Address end() const;
+
+.. container:: apient
+
+   Address last() const;
+
+.. container:: apient
+
+   Address size() const;
+
+.. container:: apient
+
+   bool isShared();
+
+.. container:: apient
+
+   int containingFuncs() const;
+
+.. container:: apient
+
+   typedef std::map<Address, InstructionAPI::Instruction::Ptr> Insns;
+   void getInsns(Insns &insns) const;
+
+.. container:: apient
+
+   InstructionAPI::Instruction::Ptr getInsn(Address a) const;
+
+.. container:: apient
+
+   std::string disassemble() const;
+
+.. container:: apient
+
+   bool containsCall();
+
+.. container:: apient
+
+   bool containsDynamicCall();
+
+.. container:: apient
+
+   PatchFunction\* getCallee();
+
+.. container:: apient
+
+   PatchFunction \*function() const;
+
+.. container:: apient
+
+   ParseAPI::Block \*block() const;
+
+.. container:: apient
+
+   PatchObject\* obj() const;
+
+.. container:: apient
+
+   typedef std::vector<PatchEdge*> PatchBlock::edgelist;
+
+   const edgelist &sources();
+
+.. container:: apient
+
+   const edgelist &targets();
+
+.. container:: apient
+
+   template <class OutputIterator> void getFuncs(OutputIterator result);
+
+.. container:: apient
+
+   PatchCallback \*cb() const;
+
+.. _sec-3.2.11:
+
+PatchEdge
+~~~~~~~~~
+
+**Declared in**: PatchCFG.h
+
+The PatchEdge class is a wrapper of ParseAPI’s Edge class (has-a), which
+joins two PatchBlocks in the CFG, indicating the type of control flow
+transfer instruction that joins the basic blocks to each other.
+
+.. container:: apient
+
+   ParseAPI::Edge \*edge() const;
+
+.. container:: apient
+
+   PatchBlock \*src();
+
+.. container:: apient
+
+   PatchBlock \*trg();
+
+.. container:: apient
+
+   ParseAPI::EdgeTypeEnum type() const;
+
+.. container:: apient
+
+   bool sinkEdge() const;
+
+.. container:: apient
+
+   bool interproc() const;
+
+.. container:: apient
+
+   PatchCallback \*cb() const;
+
+.. _sec-3.2.12:
+
+PatchLoop
+~~~~~~~~~
+
+**Declared in**: PatchCFG.h
+
+The PatchLoop class is a wrapper of ParseAPI’s Loop class (has-a). It
+represents code structure that may execute repeatedly.
+
+.. container:: apient
+
+   PatchLoop\* parent
+
+.. container:: apient
+
+   bool containsAddress(Address addr)
+
+.. container:: apient
+
+   bool containsAddressInclusive(Address addr)
+
+.. container:: apient
+
+   int getLoopEntries(vector<PatchBlock*>& entries);
+
+.. container:: apient
+
+   int getBackEdges(vector<PatchEdge*> &edges)
+
+.. container:: apient
+
+   bool getContainedLoops(vector<PatchLoop*> &loops)
+
+.. container:: apient
+
+   bool getOuterLoops(vector<PatchLoop*> &loops)
+
+.. container:: apient
+
+   bool getLoopBasicBlocks(vector<PatchBlock*> &blocks)
+
+.. container:: apient
+
+   bool getLoopBasicBlocksExclusive(vector<PatchBlock*> &blocks)
+
+.. container:: apient
+
+   bool hasBlock(PatchBlock \*b);
+
+.. container:: apient
+
+   bool hasBlockExclusive(PatchBlock \*b);
+
+.. container:: apient
+
+   bool hasAncestor(PatchLoop \*loop)
+
+.. container:: apient
+
+   PatchFunction \* getFunction();
+
+.. _sec-3.2.13:
+
+PatchLoopTreeNode
+~~~~~~~~~~~~~~~~~
+
+**Declared in**: PatchCFG.h
+
+The PatchLoopTreeNode class provides a tree interface to a collection of
+instances of class PatchLoop contained in a function. The structure of
+the tree follows the nesting relationship of the loops in a function.
+Each PatchLoopTreeNode contains a pointer to a loop (represented by
+PatchLoop), and a set of sub-loops (represented by other
+PatchLoopTreeNode objects). The field at the root node is always since a
+function may contain multiple outer loops. The field is never at any
+other node since it always corresponds to a real loop. Therefore, the
+outer most loops in the function are contained in the vector of of the
+root.
+
+Each instance of PatchLoopTreeNode is given a name that indicates its
+position in the hierarchy of loops. The name of each outermost loop
+takes the form of , where is an integer from 1 to n, where n is the
+number of outer loops in the function. Each sub-loop has the name of its
+parent, followed by a , where is 1 to m, where m is the number of
+sub-loops under the outer loop. For example, consider the following C
+function:
+
+::
+
+
+   void foo() {
+     int x, y, z, i;
+     for (x=0; x<10; x++) {
+       for (y = 0; y<10; y++)
+         ...
+       for (z = 0; z<10; z++)
+         ...
+     }
+     for (i = 0; i<10; i++) {
+        ...
+     }
+   }
+
+The function will have a root PatchLoopTreeNode, containing a NULL loop
+entry and two PatchLoopTreeNode children representing the functions
+outermost loops. These children would have names and , respectively
+representing the and loops. has no children. has two child
+PatchLoopTreeNode objects, named and , respectively representing the and
+loops.
+
+.. container:: apient
+
+   PatchLoop \*loop;
+
+.. container:: apient
+
+   std::vector<PatchLoopTreeNode \*> children;
+
+.. container:: apient
+
+   const char \* name();
+
+.. container:: apient
+
+   const char \* getCalleeName(unsigned int i)
+
+.. container:: apient
+
+   unsigned int numCallees()
+
+.. container:: apient
+
+   bool getCallees(vector<PatchFunction \*> &v);
+
+.. container:: apient
+
+   PatchLoop \* findLoop(const char \*name);
+
+.. _sec-3.1:
+
+Point/Snippet Interface
+-----------------------
+
+.. _sec-3.1.1:
+
+PatchMgr
+~~~~~~~~
+
+**Declared in**: PatchMgr.h
+
+The PatchMgr class is the top-level class for finding instrumentation
+**Points**, inserting or deleting **Snippets**, and registering
+user-provided plugins.
+
+.. container:: apient
+
+   static PatchMgrPtr create(AddrSpace\* as, Instrumenter\* inst = NULL,
+   PointMaker\* pm = NULL);
+
+.. container:: apient
+
+   Point \*findPoint(Location loc, Point::Type type, bool create =
+   true);
+
+::
+
+   if (point is in the buffer) {
+     return point;
+   } else {
+     if (create == true) {
+       create point
+       if (point creation fails) return NULL;
+       put the point in the buffer
+     } else {
+       return NULL;
+     }
+   }
+
+.. container:: apient
+
+   template <class OutputIterator> bool findPoint(Location loc,
+   Point::Type type, OutputIterator outputIter, bool create = true);
+
+.. container:: apient
+
+   template <class OutputIterator> bool findPoints(Location loc,
+   Point::Type types, OutputIterator outputIter, bool create = true);
+
+.. container:: apient
+
+   template <class FilterFunc, class FilterArgument, class
+   OutputIterator> bool findPoints(Location loc, Point::Type types,
+   FilterFunc filter_func, FilterArgument filter_arg, OutputIterator
+   outputIter, bool create = true);
+
+::
+
+   template <class T>
+   class FilterFunc {
+     public:
+       bool operator()(Point::Type type, Location loc, T arg) {
+         // The logic to check whether this point is what we need
+         return true;
+       }
+   };
+
+.. container:: apient
+
+   struct Scope Scope(PatchBlock \*b); Scope(PatchFunction \*f,
+   PatchBlock \*b); Scope(PatchFunction \*f);;
+
+.. container:: apient
+
+   template <class FilterFunc, class FilterArgument, class
+   OutputIterator> bool findPoints(Scope scope, Point::Type types,
+   FilterFunc filter_func, FilterArgument filter_arg, OutputIterator
+   output_iter, bool create = true);
+
+.. container:: apient
+
+   template <class OutputIterator> bool findPoints(Scope scope,
+   Point::Type types, OutputIterator output_iter, bool create = true);
+
+.. container:: apient
+
+   bool removeSnippet(InstancePtr);
+
+.. container:: apient
+
+   template <class FilterFunc, class FilterArgument> bool
+   removeSnippets(Scope scope, Point::Type types, FilterFunc
+   filter_func, FilterArgument filter_arg);
+
+.. container:: apient
+
+   bool removeSnippets(Scope scope, Point::Type types);
+
+.. container:: apient
+
+   void destroy(Point \*point);
+
+.. container:: apient
+
+   AddrSpace\* as() const; PointMaker\* pointMaker() const;
+   Instrumenter\* instrumenter() const;
+
+.. _sec-3.1.2:
+
+Point
+~~~~~
+
+**Declared in**: Point.h
+
+The Point class is in essence a container of a list of snippet
+instances. Therefore, the Point class has methods similar to those in
+STL.
+
+.. container:: apient
+
+   struct Location static Location Function(PatchFunction \*f); static
+   Location Block(PatchBlock \*b); static Location
+   BlockInstance(PatchFunction \*f, PatchBlock \*b, bool trusted =
+   false); static Location Edge(PatchEdge \*e); static Location
+   EdgeInstance(PatchFunction \*f, PatchEdge \*e); static Location
+   Instruction(PatchBlock \*b, Address a); static Location
+   InstructionInstance(PatchFunction \*f, PatchBlock \*b, Address a);
+   static Location InstructionInstance(PatchFunction \*f, PatchBlock
+   \*b, Address a, InstructionAPI::Instruction::Ptr i, bool trusted =
+   false); static Location EntrySite(PatchFunction \*f, PatchBlock \*b,
+   bool trusted = false); static Location CallSite(PatchFunction \*f,
+   PatchBlock \*b); static Location ExitSite(PatchFunction \*f,
+   PatchBlock \*b);;
+
+.. container:: apient
+
+   enum Point::Type PreInsn, PostInsn, BlockEntry, BlockExit,
+   BlockDuring, FuncEntry, FuncExit, FuncDuring, EdgeDuring, PreCall,
+   PostCall, OtherPoint, None, InsnTypes = PreInsn \| PostInsn,
+   BlockTypes = BlockEntry \| BlockExit \| BlockDuring, FuncTypes =
+   FuncEntry \| FuncExit \| FuncDuring, EdgeTypes = EdgeDuring,
+   CallTypes = PreCall \| PostCall;
+
+.. container:: apient
+
+   typedef std::list<InstancePtr>::iterator instance_iter; instance_iter
+   begin(); instance_iter end();
+
+.. container:: apient
+
+   InstancePtr pushBack(SnippetPtr); InstancePtr pushFront(SnippetPtr);
+
+.. container:: apient
+
+   bool remove(InstancePtr instance);
+
+.. container:: apient
+
+   void clear();
+
+.. container:: apient
+
+   size_t size();
+
+.. container:: apient
+
+   Address addr() const;
+
+.. container:: apient
+
+   Type type() const;
+
+.. container:: apient
+
+   bool empty() const;
+
+.. container:: apient
+
+   PatchFunction\* getCallee();
+
+.. container:: apient
+
+   const PatchObject\* obj() const;
+
+.. container:: apient
+
+   const InstructionAPI::Instruction::Ptr insn() const;
+
+.. container:: apient
+
+   PatchFunction\* func() const;
+
+.. container:: apient
+
+   PatchBlock\* block() const;
+
+.. container:: apient
+
+   PatchEdge\* edge() const;
+
+.. container:: apient
+
+   PatchCallback \*cb() const;
+
+.. container:: apient
+
+   static bool TestType(Point::Type types, Point::Type type);
+
+.. container:: apient
+
+   static void AddType(Point::Type& types, Point::Type type);
+
+.. container:: apient
+
+   static void RemoveType(Point::Type& types, Point::Type trg);
+
+.. _sec-3.1.3:
+
+Instance
+~~~~~~~~
+
+**Declared in**: Point.h
+
+The Instance class is a representation of a particular snippet inserted
+at a particular point. If a Snippet is inserted to N points or to the
+same point for N times (N :math:`>` 1), then there will be N Instances.
+
+.. container:: apient
+
+   bool destroy();
+
+.. container:: apient
+
+   Point\* point() const;
+
+.. container:: apient
+
+   SnippetPtr snippet() const;
+
+.. _sec-3.1:
+
+Callback Interface
+------------------
+
+.. _sec-3.2.7:
+
+PatchCallback
+~~~~~~~~~~~~~
+
+**Declared in**: PatchCallback.h
+
+The PatchAPI CFG layer may change at runtime due to program events
+(e.g., a program loading additional code or overwriting its own code
+with new code). The ``PatchCallback`` interface allows users to specify
+callbacks they wish to occur whenever the PatchAPI CFG changes.
+
+.. container:: apient
+
+   virtual void destroy_cb(PatchBlock \*); virtual void
+   destroy_cb(PatchEdge \*); virtual void destroy_cb(PatchFunction \*);
+   virtual void destroy_cb(PatchObject \*);
+
+.. container:: apient
+
+   virtual void create_cb(PatchBlock \*); virtual void
+   create_cb(PatchEdge \*); virtual void create_cb(PatchFunction \*);
+   virtual void create_cb(PatchObject \*);
+
+.. container:: apient
+
+   virtual void split_block_cb(PatchBlock \*first, PatchBlock \*second);
+
+.. container:: apient
+
+   virtual void remove_edge_cb(PatchBlock \*, PatchEdge \*,
+   edge_type_t); virtual void add_edge_cb(PatchBlock \*, PatchEdge \*,
+   edge_type_t);
+
+.. container:: apient
+
+   virtual void remove_block_cb(PatchFunction \*, PatchBlock \*);
+   virtual void add_block_cb(PatchFunction \*, PatchBlock \*);
+
+.. container:: apient
+
+   virtual void create_cb(Point \*pt); virtual void destroy_cb(Point
+   \*pt);
+
+.. container:: apient
+
+   virtual void change_cb(Point \*pt, PatchBlock \*first, PatchBlock
+   \*second);

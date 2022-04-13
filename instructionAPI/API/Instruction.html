@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instruction Class &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Instruction Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/instructionAPI/API/Instruction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="instruction-class">
+<span id="sec-instruction"></span><h1>Instruction Class<a class="headerlink" href="#instruction-class" title="Permalink to this headline"></a></h1>
+<p>The Instruction class is a generic instruction representation that
+contains operands, read/write semantic information about those operands,
+and information about what other registers and memory locations are
+affected by the operation the instruction performs.</p>
+<p>The purpose of an Instruction object is to join an Operation with a
+sequence of Operands, and provide an interface for some common summary
+analyses (namely, the read/write sets, memory access information, and
+control flow information).</p>
+<p>The Operation contains knowledge about its mnemonic and sufficient
+semantic details to answer the following questions:</p>
+<ul class="simple">
+<li>What Operands are read/written?</li>
+<li>What registers are implicitly read/written?</li>
+<li>What memory locations are implicitly read/written?</li>
+<li>What are the possible control flow successors of this instruction?</li>
+</ul>
+<p>Each Operand is an AST built from RegisterAST and Immediate leaves. For
+each Operand, you may determine:</p>
+<ul class="simple">
+<li>Registers read</li>
+<li>Registers written</li>
+<li>Whether memory is read or written</li>
+<li>Which memory addresses are read or written, given the state of all
+relevant registers</li>
+</ul>
+<p>Instructions should be constructed from an pointing to machine language,
+using the InstructionDecoder class. See InstructionDecoder for more
+details.</p>
+<div class="apient container">
+Instruction (Operation::Ptr what, size_t size, const unsigned char *
+raw, Dyninst::Architecture arch)</div>
+<div class="apient container">
+const Operation &amp; getOperation() const</div>
+<div class="apient container">
+void getOperands(std::vector&lt;Operand&gt; &amp; operands) const</div>
+<div class="apient container">
+Operand getOperand(int index) const</div>
+<div class="apient container">
+unsigned char rawByte(unsigned int index) const</div>
+<div class="apient container">
+size_t size() const</div>
+<div class="apient container">
+const void * ptr() const</div>
+<div class="apient container">
+void getWriteSet(std::set&lt;RegisterAST::Ptr&gt; &amp; regsWritten) const</div>
+<div class="apient container">
+void getReadSet(std::set&lt;RegisterAST::Ptr&gt; &amp; regsRead) const</div>
+<div class="apient container">
+bool isRead(Expression::Ptr candidate) const</div>
+<div class="apient container">
+bool isWritten(Expression::Ptr candidate) const</div>
+<div class="apient container">
+bool readsMemory() const</div>
+<div class="apient container">
+bool writesMemory() const</div>
+<div class="apient container">
+void getMemoryReadOperands(std::set&lt;Expression::Ptr&gt; &amp; memAccessors)
+const</div>
+<div class="apient container">
+void getMemoryWriteOperands(std::set&lt;Expression::Ptr&gt; &amp; memAccessors)
+const</div>
+<div class="apient container">
+Expression::Ptr getControlFlowTarget() const</div>
+<div class="apient container">
+bool allowsFallThrough() const</div>
+<div class="apient container">
+std::string format(Address addr = 0)</div>
+<div class="apient container">
+bool isValid() const</div>
+<div class="apient container">
+bool isLegalInsn() const</div>
+<div class="apient container">
+Architecture getArch() const</div>
+<div class="apient container">
+InsnCategory getCategory() const</div>
+<div class="apient container">
+<p>struct CFT Expression::Ptr target; bool isCall; bool isIndirect; bool
+isConditional; bool isFallthrough;</p>
+<p>typedef … cftConstIter; cftConstIter cft_begin() const;
+cftConstIter cft_end() const;</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

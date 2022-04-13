@@ -1,0 +1,210 @@
+Class Region
+------------
+
+This class represents a contiguous range of code or data as encoded in
+the object file. For ELF, regions represent ELF sections.
+
+.. container:: center
+
+   ====== ===============
+   perm_t Meaning
+   ====== ===============
+   RP_R   Read-only data
+   RP_RW  Read/write data
+   RP_RX  Read-only code
+   RP_RWX Read/write code
+   ====== ===============
+
+.. container:: center
+
+   +-----------------+---------------------------------------------------+
+   | RegionType      | Meaning                                           |
+   +=================+===================================================+
+   | RT_TEXT         | Executable code                                   |
+   +-----------------+---------------------------------------------------+
+   | RT_DATA         | Read/write data                                   |
+   +-----------------+---------------------------------------------------+
+   | RT_TEXTDATA     | Mix of code and data                              |
+   +-----------------+---------------------------------------------------+
+   | RT_SYMTAB       | Static symbol table                               |
+   +-----------------+---------------------------------------------------+
+   | RT_STRTAB       | String table used by the symbol table             |
+   +-----------------+---------------------------------------------------+
+   | RT_BSS          | 0-initialized memory                              |
+   +-----------------+---------------------------------------------------+
+   | RT_SYMVERSIONS  | Versioning information for symbols                |
+   +-----------------+---------------------------------------------------+
+   | RT_SYMVERDEF    | Versioning information for symbols                |
+   +-----------------+---------------------------------------------------+
+   | RT_SYMVERNEEDED | Versioning information for symbols                |
+   +-----------------+---------------------------------------------------+
+   | RT_REL          | Relocation section                                |
+   +-----------------+---------------------------------------------------+
+   | RT_RELA         | Relocation section                                |
+   +-----------------+---------------------------------------------------+
+   | RT_PLTREL       | Relocation section for PLT (inter-library         |
+   |                 | references) entries                               |
+   +-----------------+---------------------------------------------------+
+   | RT_PLTRELA      | Relocation section for PLT (inter-library         |
+   |                 | references) entries                               |
+   +-----------------+---------------------------------------------------+
+   | RT_DYNAMIC      | Decription of library dependencies                |
+   +-----------------+---------------------------------------------------+
+   | RT_HASH         | Fast symbol lookup section                        |
+   +-----------------+---------------------------------------------------+
+   | RT_GNU_HASH     | GNU-specific fast symbol lookup section           |
+   +-----------------+---------------------------------------------------+
+   | RT_OTHER        | Miscellaneous information                         |
+   +-----------------+---------------------------------------------------+
+
++----------------------+---------------+-------------------------+
+| Method name          | Return type   | Method description      |
++======================+===============+=========================+
+| getRegionNumber      | unsigned      | Index of the region in  |
+|                      |               | the file, starting at   |
+|                      |               | 0.                      |
++----------------------+---------------+-------------------------+
+| getRegionName        | std::string   | Name of the region      |
+|                      |               | (e.g. .text, .data).    |
++----------------------+---------------+-------------------------+
+| getPtrToRawData      | void \*       | Read-only pointer to    |
+|                      |               | the region’s raw data   |
+|                      |               | buffer.                 |
++----------------------+---------------+-------------------------+
+| getDiskOffset        | Offset        | Offset within the file  |
+|                      |               | where the region        |
+|                      |               | begins.                 |
++----------------------+---------------+-------------------------+
+| getDiskSize          | unsigned long | Size of the region’s    |
+|                      |               | data in the file.       |
++----------------------+---------------+-------------------------+
+| getMemOffset         | Offset        | Location where the      |
+|                      |               | region will be loaded   |
+|                      |               | into memory, modified   |
+|                      |               | by the file’s base load |
+|                      |               | address.                |
++----------------------+---------------+-------------------------+
+| getMemSize           | unsigned long | Size of the region in   |
+|                      |               | memory, including zero  |
+|                      |               | padding.                |
++----------------------+---------------+-------------------------+
+| isBSS                | bool          | Type query for          |
+|                      |               | uninitialized data      |
+|                      |               | regions (zero disk      |
+|                      |               | size, non-zero memory   |
+|                      |               | size).                  |
++----------------------+---------------+-------------------------+
+| isText               | bool          | Type query for          |
+|                      |               | executable code         |
+|                      |               | regions.                |
++----------------------+---------------+-------------------------+
+| isData               | bool          | Type query for          |
+|                      |               | initialized data        |
+|                      |               | regions.                |
++----------------------+---------------+-------------------------+
+| getRegionPermissions | perm_t        | Permissions for the     |
+|                      |               | region; perm\_ t is     |
+|                      |               | defined above.          |
++----------------------+---------------+-------------------------+
+| getRegionType        | RegionType    | Type of the region as   |
+|                      |               | defined above.          |
++----------------------+---------------+-------------------------+
+| isLoadable           | bool          | True if the region will |
+|                      |               | be loaded into memory   |
+|                      |               | (e.g., code or data),   |
+|                      |               | false otherwise (e.g.,  |
+|                      |               | debug information).     |
++----------------------+---------------+-------------------------+
+| isDirty              | bool          | True if the region’s    |
+|                      |               | raw data buffer has     |
+|                      |               | been modified by the    |
+|                      |               | user.                   |
++----------------------+---------------+-------------------------+
+
+.. container:: apient
+
+   static Region \*createRegion(Offset diskOff, perm_t perms, RegionType
+   regType, unsigned long diskSize = 0, Offset memOff = 0, unsigned long
+   memSize = 0, std::string name = "", char \*rawDataPtr = NULL, bool
+   isLoadable = false, bool isTLS = false, unsigned long memAlign =
+   sizeof(unsigned))
+
+.. container:: apient
+
+   bool isOffsetInRegion(const Offset &offset) const
+
+.. container:: apient
+
+   void setRegionNumber(unsigned index) const
+
+.. container:: apient
+
+   bool setPtrToRawData(void \*newPtr, unsigned long rawsize)
+
+.. container:: apient
+
+   bool setRegionPermissions(perm_t newPerms)
+
+.. container:: apient
+
+   bool setLoadable(bool isLoadable)
+
+.. container:: apient
+
+   bool addRelocationEntry(Offset relocationAddr, Symbol \*dynref,
+   unsigned long relType, Region::RegionType rtype = Region::RT_REL)
+
+.. container:: apient
+
+   vector<relocationEntry> &getRelocations()
+
+.. container:: apient
+
+   bool addRelocationEntry(const relocationEntry& rel)
+
+.. container:: apient
+
+   bool patchData(Offset off, void \*buf, unsigned size);
+
+REMOVED
+~~~~~~~
+
+The following methods were removed since they were inconsistent and
+dangerous to use.
+
+.. container:: apient
+
+   Offset getRegionAddr() const
+
+.. container:: apient
+
+   unsigned long getRegionSize() const
+
+Relocation Information
+----------------------
+
+This class represents object relocation information.
+
+.. container:: apient
+
+   Offset target_addr() const
+
+.. container:: apient
+
+   Offset rel_addr() const
+
+.. container:: apient
+
+   Offset addend() const
+
+.. container:: apient
+
+   const std::string name() const
+
+.. container:: apient
+
+   Symbol \*getDynSym() const
+
+.. container:: apient
+
+   unsigned long getRelType() const

@@ -1,0 +1,140 @@
+.. _`sec:instruction`:
+
+Instruction Class
+-----------------
+
+The Instruction class is a generic instruction representation that
+contains operands, read/write semantic information about those operands,
+and information about what other registers and memory locations are
+affected by the operation the instruction performs.
+
+The purpose of an Instruction object is to join an Operation with a
+sequence of Operands, and provide an interface for some common summary
+analyses (namely, the read/write sets, memory access information, and
+control flow information).
+
+The Operation contains knowledge about its mnemonic and sufficient
+semantic details to answer the following questions:
+
+-  What Operands are read/written?
+
+-  What registers are implicitly read/written?
+
+-  What memory locations are implicitly read/written?
+
+-  What are the possible control flow successors of this instruction?
+
+Each Operand is an AST built from RegisterAST and Immediate leaves. For
+each Operand, you may determine:
+
+-  Registers read
+
+-  Registers written
+
+-  Whether memory is read or written
+
+-  Which memory addresses are read or written, given the state of all
+   relevant registers
+
+Instructions should be constructed from an pointing to machine language,
+using the InstructionDecoder class. See InstructionDecoder for more
+details.
+
+.. container:: apient
+
+   Instruction (Operation::Ptr what, size_t size, const unsigned char \*
+   raw, Dyninst::Architecture arch)
+
+.. container:: apient
+
+   const Operation & getOperation() const
+
+.. container:: apient
+
+   void getOperands(std::vector<Operand> & operands) const
+
+.. container:: apient
+
+   Operand getOperand(int index) const
+
+.. container:: apient
+
+   unsigned char rawByte(unsigned int index) const
+
+.. container:: apient
+
+   size_t size() const
+
+.. container:: apient
+
+   const void \* ptr() const
+
+.. container:: apient
+
+   void getWriteSet(std::set<RegisterAST::Ptr> & regsWritten) const
+
+.. container:: apient
+
+   void getReadSet(std::set<RegisterAST::Ptr> & regsRead) const
+
+.. container:: apient
+
+   bool isRead(Expression::Ptr candidate) const
+
+.. container:: apient
+
+   bool isWritten(Expression::Ptr candidate) const
+
+.. container:: apient
+
+   bool readsMemory() const
+
+.. container:: apient
+
+   bool writesMemory() const
+
+.. container:: apient
+
+   void getMemoryReadOperands(std::set<Expression::Ptr> & memAccessors)
+   const
+
+.. container:: apient
+
+   void getMemoryWriteOperands(std::set<Expression::Ptr> & memAccessors)
+   const
+
+.. container:: apient
+
+   Expression::Ptr getControlFlowTarget() const
+
+.. container:: apient
+
+   bool allowsFallThrough() const
+
+.. container:: apient
+
+   std::string format(Address addr = 0)
+
+.. container:: apient
+
+   bool isValid() const
+
+.. container:: apient
+
+   bool isLegalInsn() const
+
+.. container:: apient
+
+   Architecture getArch() const
+
+.. container:: apient
+
+   InsnCategory getCategory() const
+
+.. container:: apient
+
+   struct CFT Expression::Ptr target; bool isCall; bool isIndirect; bool
+   isConditional; bool isFallthrough;
+
+   typedef ... cftConstIter; cftConstIter cft_begin() const;
+   cftConstIter cft_end() const;

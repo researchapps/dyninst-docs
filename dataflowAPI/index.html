@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DynC API" href="../dynC_API/index.html" />
+    <link rel="prev" title="Dyninst" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slicing">Slicing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#symbolic-evaluation">Symbolic Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#liveness-analysis">Liveness Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stack-analysis">Stack Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-assignment">Class Assignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-assignmentconverter">Class AssignmentConverter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-absloc">Class Absloc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-absregion">Class AbsRegion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-absregionconverter">Class AbsRegionConverter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-graph">Class Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-node">Class Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-edge">Class Edge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-slicer">Class Slicer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-slicer-predicates">Class Slicer::Predicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-stackanalysis">Class StackAnalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-stackanalysis-height">Class StackAnalysis::Height</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-ast">Class AST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-symeval">Class SymEval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-astvisitor">Class ASTVisitor</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/dataflowAPI/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<span id="sec-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p>DataFlowAPI aggregates a collection of dataflow analysis algorithms that
+are useful in Dyninst development into a single library. These
+algorithms can also be foundations for users to build customized
+analyses. Currently, these algorithms include:</p>
+<div class="itemize container">
+<p>Slicing takes a program location as input and can either slice
+backward to determine which instructions affect the results of the
+given program location, or slice forward to determine which
+instructions are affected by the results of the given program
+location. One key feature of our slicing implementation is that users
+can control where and when to stop slicing through a set of call back
+functions.</p>
+<p>Stack Analysis determines whether or not a register or memory
+location points to the stack. If it does point to the stack, Stack
+Analysis may be able to determine the exact stack location that is
+pointed to.</p>
+<p>Symbolic Expansion and Evaluation convert instructions to several
+symbolic expressions. Each symbolic expression represents the overall
+effects of these instructions on a register or a memory location.</p>
+<p>Register Liveness determines whether a register is live or not at a
+program location. A register is live at a program location if it will
+be used later in the program before its content is overwritten.</p>
+</div>
+</div>
+<div class="section" id="abstractions">
+<span id="sec-abstractions"></span><h1>Abstractions<a class="headerlink" href="#abstractions" title="Permalink to this headline"></a></h1>
+<p>DataflowAPI starts from the control flow graphs generated by ParseAPI
+and the instructions generated by InstructionAPI. From these, it
+provides dataflow facts in a variety of forms. The key abstractions used
+by DataflowAPI are:</p>
+<div class="itemize container">
+<p>Abstract Location represents a register or memory location in the
+program. DataflowAPI provides three types of abstract locations:
+register, stack, and heap. A register abstract location represents a
+register, and the same register at two different program locations is
+treated as the same abstract location. A stack abstract location
+consists of the stack frame to which it belongs and the offset within
+the stack frame. A heap abstract location consists of the virtual
+address of the heap variable.</p>
+<p>Abstract Region represents a set of abstract locations of the same
+type. If an abstract region contains only a single abstract location,
+the abstract location is precisely represented. If an abstract region
+contains more than one abstract location, the region contains the
+type of the locations. In the cases where it represents memory
+(either heap or stack), an abstract region also contains the memory
+address calculation that gives rise to this region.</p>
+<p>Abstract Syntax Tree (AST) represents a symbolic expression of an
+instruction’s semantics. Specifically, an AST specifies how the value
+of an abstract location is modified by the instruction.</p>
+<p>Assignment represents a single data dependency of abstract regions in
+an instruction. For example, <code class="docutils literal notranslate"><span class="pre">xchg</span> <span class="pre">eax,</span> <span class="pre">ebx</span></code> creates two
+assignments: one from pre-instruction <code class="docutils literal notranslate"><span class="pre">eax</span></code> to post-instruction
+<code class="docutils literal notranslate"><span class="pre">ebx</span></code>, and one from pre-instruction <code class="docutils literal notranslate"><span class="pre">ebx</span></code> to post-instruction
+<code class="docutils literal notranslate"><span class="pre">eax</span></code>.</p>
+<p>Stack Height represents the difference between a value in an abstract
+location and the stack pointer at a function’s call site.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<span id="sec-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<p>We show several examples of how to use DataflowAPI. In these examples,
+we assume that the mutatee has been parsed and we have function and
+block objects to analyze. Users may refer to the ParseAPI manual for how
+to obtain these function and block objects.</p>
+<div class="section" id="slicing">
+<h2>Slicing<a class="headerlink" href="#slicing" title="Permalink to this headline"></a></h2>
+<p>The following example uses DataflowAPI to perform a backward slice on an
+indirect jump instruction to determine the instructions that affect the
+calculation of the jump target. The goal of this example is to show (1)
+how to convert an instruction to assignments; (2) how to perform slicing
+on a given assignment; (3) how to extend the default
+<code class="docutils literal notranslate"><span class="pre">Slicer::Predicates</span></code> and write call back functions to control the
+behavior of slicing.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Instruction.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CFG.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;slicing.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ParseAPI</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">InstructionAPI</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">DataflowAPI</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// We extend the default predicates to control when to stop slicing</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConstantPred</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Slicer</span><span class="o">::</span><span class="n">Predicates</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// We do not want to track through memory writes</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">endAtPoint</span><span class="p">(</span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">ap</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ap</span><span class="o">-&gt;</span><span class="n">insn</span><span class="p">().</span><span class="n">writesMemory</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// We can treat PC as a constant as its value is the address of the instruction</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">addPredecessor</span><span class="p">(</span><span class="n">AbsRegion</span><span class="w"> </span><span class="n">reg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reg</span><span class="p">.</span><span class="n">absloc</span><span class="p">().</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Absloc</span><span class="o">::</span><span class="n">Register</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="n">MachRegister</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reg</span><span class="p">.</span><span class="n">absloc</span><span class="p">().</span><span class="n">reg</span><span class="p">();</span><span class="w"></span>
+<span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="n">r</span><span class="p">.</span><span class="n">isPC</span><span class="p">();</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">// Assume that block b in function f ends with an indirect jump.</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">AnalyzeJumpTarget</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Get the last instruction in this block, which should be a jump</span>
+<span class="w">    </span><span class="n">Instruction</span><span class="w"> </span><span class="n">insn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">getInsn</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">last</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Convert the instruction to assignments</span>
+<span class="w">    </span><span class="c1">// The first parameter means to cache the conversion results.</span>
+<span class="w">    </span><span class="c1">// The second parameter means whether to use stack analysis to anlyze stack accesses.</span>
+<span class="w">    </span><span class="n">AssignmentConverter</span><span class="w"> </span><span class="n">ac</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">assignments</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ac</span><span class="p">.</span><span class="n">convert</span><span class="p">(</span><span class="n">insn</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">last</span><span class="p">(),</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">assignments</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// An instruction can corresponds to multiple assignment.</span>
+<span class="w">    </span><span class="c1">// Here we look for the assignment that changes the PC.</span>
+<span class="w">    </span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">pcAssign</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">ait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assignments</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">ait</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">assignments</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">ait</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ait</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">out</span><span class="p">();</span><span class="w"></span>
+<span class="w">     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">out</span><span class="p">.</span><span class="n">absloc</span><span class="p">().</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Absloc</span><span class="o">::</span><span class="n">Register</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">.</span><span class="n">absloc</span><span class="p">().</span><span class="n">reg</span><span class="p">().</span><span class="n">isPC</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="n">pcAssign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">ait</span><span class="p">;</span><span class="w"></span>
+<span class="w">         </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Create a Slicer that will start from the given assignment</span>
+<span class="w">    </span><span class="n">Slicer</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="n">pcAssign</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// We use the customized predicates to control slicing</span>
+<span class="w">    </span><span class="n">ConstantPred</span><span class="w"> </span><span class="n">mp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">GraphPtr</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">backwardSlice</span><span class="p">(</span><span class="n">mp</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="symbolic-evaluation">
+<h2>Symbolic Evaluation<a class="headerlink" href="#symbolic-evaluation" title="Permalink to this headline"></a></h2>
+<p>The following example shows how to expand a slice to ASTs and analyze an
+AST. Suppose we have a slice representing the instructions that affect
+the jump target of an indirect jump instruction. We can get the
+expression of the jump targets and visit the expression to see if it is
+a constant.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;SymEval.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;slicing.h&quot;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">DataflowAPI</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// We extend the default ASTVisitor to check whether the AST is a constant</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConstVisitor</span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ASTVisitor</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">resolved</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Address</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ConstVisitor</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">resolved</span><span class="p">(</span><span class="nb">true</span><span class="p">),</span><span class="w"> </span><span class="n">target</span><span class="p">(</span><span class="mi">0</span><span class="p">){}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// We reach a constant node and record its value</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">visit</span><span class="p">(</span><span class="n">DataflowAPI</span><span class="o">::</span><span class="n">ConstantAST</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ast</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// If the AST contains a variable</span>
+<span class="w">    </span><span class="c1">// or an operation, then the control flow target cannot</span>
+<span class="w">    </span><span class="c1">// be resolved through constant propagation</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">DataflowAPI</span><span class="o">::</span><span class="n">VariableAST</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">resolved</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">DataflowAPI</span><span class="o">::</span><span class="n">RoseAST</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">resolved</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">     </span><span class="c1">// Recursively visit all children</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">totalChildren</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ast</span><span class="o">-&gt;</span><span class="n">numChildren</span><span class="p">();</span><span class="w"></span>
+<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">totalChildren</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="n">ast</span><span class="o">-&gt;</span><span class="n">child</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="n">Address</span><span class="w"> </span><span class="nf">ExpandSlice</span><span class="p">(</span><span class="n">GraphPtr</span><span class="w"> </span><span class="n">slice</span><span class="p">,</span><span class="w"> </span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">pcAssign</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Result_t</span><span class="w"> </span><span class="n">symRet</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">SymEval</span><span class="o">::</span><span class="n">expand</span><span class="p">(</span><span class="n">slice</span><span class="p">,</span><span class="w"> </span><span class="n">symRet</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// We get AST representing the jump target</span>
+<span class="w">    </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">pcExp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symRet</span><span class="p">[</span><span class="n">pcAssign</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// We analyze the AST to see if it can actually be resolved by constant propagation</span>
+<span class="w">    </span><span class="n">ConstVisitor</span><span class="w"> </span><span class="n">cv</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">pcExp</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cv</span><span class="p">.</span><span class="n">resolved</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cv</span><span class="p">.</span><span class="n">target</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="liveness-analysis">
+<h2>Liveness Analysis<a class="headerlink" href="#liveness-analysis" title="Permalink to this headline"></a></h2>
+<p>The following example shows how to query for live registers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Location.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;liveness.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;bitArray.h&quot;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="o">::</span><span class="nn">ParseAPI</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">LivenessAnalysis</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Construct a liveness analyzer based on the address width of the mutatee.</span>
+<span class="w">    </span><span class="c1">// 32-bit code and 64-bit code have different ABI.</span>
+<span class="w">    </span><span class="n">LivenessAnalyzer</span><span class="w"> </span><span class="n">la</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">obj</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">cs</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getAddressWidth</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Construct a liveness query location</span>
+<span class="w">    </span><span class="n">Location</span><span class="w"> </span><span class="n">loc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Query live registers at the block entry</span>
+<span class="w">    </span><span class="n">bitArray</span><span class="w"> </span><span class="n">liveEntry</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">la</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span><span class="w"> </span><span class="n">LivenessAnalyzer</span><span class="o">::</span><span class="n">Before</span><span class="p">,</span><span class="w"> </span><span class="n">liveEntry</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cannot look up live registers at block entry</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;There are %d registers live at the block entry</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">liveEntry</span><span class="p">.</span><span class="n">count</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Query live register at the block exit</span>
+<span class="w">    </span><span class="n">bitArray</span><span class="w"> </span><span class="n">liveExit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">la</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span><span class="w"> </span><span class="n">LivenessAnalyzer</span><span class="o">::</span><span class="n">After</span><span class="p">,</span><span class="w"> </span><span class="n">liveExit</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">       </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Cannot look up live registers at block exit</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;rbx is live or not at the block exit: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">liveExit</span><span class="p">.</span><span class="n">test</span><span class="p">(</span><span class="n">la</span><span class="p">.</span><span class="n">getIndex</span><span class="p">(</span><span class="n">x86_64</span><span class="o">::</span><span class="n">rbx</span><span class="p">)));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stack-analysis">
+<h2>Stack Analysis<a class="headerlink" href="#stack-analysis" title="Permalink to this headline"></a></h2>
+<p>The following example shows how to use stack analysis to print out all
+defined stack heights at the first instruction in a block.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CFG.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Absloc.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stackanalysis.h&quot;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ParseAPI</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">StackHeight</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Get the address of the first instruction of the block</span>
+<span class="w">    </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">block</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the stack heights at that address</span>
+<span class="w">    </span><span class="n">StackAnalysis</span><span class="w"> </span><span class="n">sa</span><span class="p">(</span><span class="n">func</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">Absloc</span><span class="p">,</span><span class="w"> </span><span class="n">StackAnalysis</span><span class="o">::</span><span class="n">Height</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">heights</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">sa</span><span class="p">.</span><span class="n">findDefinedHeights</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">heights</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Print out the stack heights</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heights</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">heights</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="n">iter</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="o">&amp;</span><span class="n">loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">StackAnalysis</span><span class="o">::</span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s := %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">loc</span><span class="p">.</span><span class="n">format</span><span class="p">().</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">height</span><span class="p">.</span><span class="n">format</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h1>
+<div class="section" id="class-assignment">
+<span id="sec-assign"></span><h2>Class Assignment<a class="headerlink" href="#class-assignment" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Absloc.h</span></code></p>
+<p>An assignment represents data dependencies between an output abstract
+region that is modified by this instruction and several input abstract
+regions that are used by this instruction. An instruction may modify
+several abstract regions, so an instruction can correspond to multiple
+assignments.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Assignment</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shared pointer for Assignment class.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AbsRegion</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inputs</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AbsRegion</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&amp;</span><span class="n">inputs</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the input abstract regions.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">out</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">out</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the output abstract region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Instruction</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">insn</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the instruction that contains this assignment.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="w"> </span><span class="nf">addr</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the address of this assignment.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>ParseAPI::Function \*func() const;
+</pre></div>
+</div>
+<p>Return the function that contains this assignment.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>ParseAPI::Block \*block() const;
+</pre></div>
+</div>
+<p>Return the block that contains this assignment.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of this assignment.</p>
+</div>
+<div class="section" id="class-assignmentconverter">
+<span id="sec-assignmentcovnert"></span><h2>Class AssignmentConverter<a class="headerlink" href="#class-assignmentconverter" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">AbslocInterface.h</span></code></p>
+<p>This class should be used to convert instructions to assignments.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AssignmentConverter</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">cache</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Construct an AssignmentConverter. When <code class="docutils literal notranslate"><span class="pre">cache</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, this
+object will cache the conversion results for converted instructions.
+When <code class="docutils literal notranslate"><span class="pre">stack</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, stack analysis is used to distinguish stack
+variables at different offset. When <code class="docutils literal notranslate"><span class="pre">stack</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>, the stack is
+treated as a single memory region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>void convert(InstructionAPI::Instruction::Ptr insn, const Address &amp;addr,
+ParseAPI::Function \*func, ParseAPI::Block \*blk,
+std::vector&lt;Assignment::Ptr&gt; &amp;assign);
+</pre></div>
+</div>
+<p>Convert instruction <code class="docutils literal notranslate"><span class="pre">insn</span></code> to assignments and return these assignments
+in <code class="docutils literal notranslate"><span class="pre">assign</span></code>. The user also needs to provide the context of <code class="docutils literal notranslate"><span class="pre">insn</span></code>,
+including its address <code class="docutils literal notranslate"><span class="pre">addr</span></code>, function <code class="docutils literal notranslate"><span class="pre">func</span></code>, and block <code class="docutils literal notranslate"><span class="pre">blk</span></code>.</p>
+</div>
+<div class="section" id="class-absloc">
+<span id="sec-abslocs"></span><h2>Class Absloc<a class="headerlink" href="#class-absloc" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Absloc.h</span></code></p>
+<p>Class Absloc represents an abstract location. Abstract locations can
+have the following types</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Register</td>
+<td>The abstract location represents a register</td>
+</tr>
+<tr class="row-odd"><td>Stack</td>
+<td>The abstract location represents a stack variable</td>
+</tr>
+<tr class="row-even"><td>Heap</td>
+<td>The abstract location represents a heap variable</td>
+</tr>
+<tr class="row-odd"><td>Unknown</td>
+<td>The default type of abstract location</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="nf">makePC</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">);</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Absloc</span><span class="w"></span>
+<span class="nf">makeSP</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">);</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Absloc</span><span class="w"></span>
+<span class="nf">makeFP</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shortcut interfaces for creating abstract locations representing PC, SP,
+and FP</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">isPC</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isSP</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isFP</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Check whether this abstract location represents a PC, SP, or FP.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Absloc</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create an Unknown type abstract location.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Absloc</span><span class="p">(</span><span class="n">MachRegister</span><span class="w"> </span><span class="n">reg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create a Register type abstract location, representing register <code class="docutils literal notranslate"><span class="pre">reg</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Absloc</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create a Heap type abstract location, representing a heap variable at
+address <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>Absloc(int o, int r, ParseAPI::Function \*f);
+</pre></div>
+</div>
+<p>Create a Stack type abstract location, representing a stack variable in
+the frame of function <code class="docutils literal notranslate"><span class="pre">f</span></code>, within abstract region <code class="docutils literal notranslate"><span class="pre">r</span></code>, and at offset
+<code class="docutils literal notranslate"><span class="pre">o</span></code> within the frame.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of this abstract location.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Type</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">type</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the type of this abstract location.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">isValid</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Check whether this abstract location is valid or not. Return <code class="docutils literal notranslate"><span class="pre">true</span></code>
+when the type is not Unknown.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">MachRegister</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">reg</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the register represented by this abstract location. This method
+should only be called when this abstract location truly represents a
+register.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">off</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the offset of the stack variable represented by this abstract
+location. This method should only be called when this abstract location
+truly represents a stack variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">region</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the region of the stack variable represented by this abstract
+location. This method should only be called when this abstract location
+truly represents a stack variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>ParseAPI::Function \*func() const;
+</pre></div>
+</div>
+<p>Return the function of the stack variable represented by this abstract
+location. This method should only be called when this abstract location
+truly represents a stack variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="w"> </span><span class="nf">addr</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the address of the heap variable represented by this abstract
+location. This method should only be called when this abstract location
+truly represents a heap variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Comparison operators</p>
+</div>
+<div class="section" id="class-absregion">
+<span id="sec-absregion"></span><h2>Class AbsRegion<a class="headerlink" href="#class-absregion" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Absloc.h</span></code></p>
+<p>Class AbsRegion represents a set of abstract locations of the same type.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AbsRegion</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create a default abstract region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AbsRegion</span><span class="p">(</span><span class="n">Absloc</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create an abstract region representing all abstract locations with type
+<code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AbsRegion</span><span class="p">(</span><span class="n">Absloc</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create an abstract region representing a single abstract location <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Absloc</span><span class="w"> </span><span class="o">&amp;</span><span class="n">abs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this abstract region contains abstract locations of
+type <code class="docutils literal notranslate"><span class="pre">t</span></code>, contains abstract location <code class="docutils literal notranslate"><span class="pre">abs</span></code>, or contains abstract
+region <code class="docutils literal notranslate"><span class="pre">rhs</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">containsOfType</span><span class="p">(</span><span class="n">Absloc</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this abstract region contains abstract locations in
+type <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Comparison operators</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of the abstract region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Absloc</span><span class="w"> </span><span class="nf">absloc</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the abstract location in this abstract region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Absloc</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">type</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the type of this abstract region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">generator</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If this abstract region represents memory locations, this method returns
+address calculation of the memory access.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">isImprecise</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this abstract region represents more than one
+abstract locations.</p>
+</div>
+<div class="section" id="class-absregionconverter">
+<h2>Class AbsRegionConverter<a class="headerlink" href="#class-absregionconverter" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">AbslocInterface.h</span></code></p>
+<p>Class AbsRegionConverter converts instructions to abstract regions.</p>
+<p>AbsRegionConverter(bool cache, bool stack = true);</p>
+<p>Create an AbsRegionConverter. When <code class="docutils literal notranslate"><span class="pre">cache</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, this object
+will cache the conversion results for converted instructions. When
+<code class="docutils literal notranslate"><span class="pre">stack</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>, stack analysis is used to distinguish stack
+variables at different offsets. When <code class="docutils literal notranslate"><span class="pre">stack</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>, the stack
+is treated as a single memory region.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>void convertAll(InstructionAPI::Expression::Ptr expr, Address addr, ParseAPI::Function \*func, ParseAPI::Block \*block, std::vector&lt;AbsRegion&gt; &amp;regions);
+</pre></div>
+</div>
+<p>Create all abstract regions used in <code class="docutils literal notranslate"><span class="pre">expr</span></code> and return them in
+<code class="docutils literal notranslate"><span class="pre">regions</span></code>. All registers appear in <code class="docutils literal notranslate"><span class="pre">expr</span></code> will have a separate
+abstract region. If the expression represents a memory access, we will
+also create a heap or stack abstract region depending on where it
+accesses. <code class="docutils literal notranslate"><span class="pre">addr</span></code>, <code class="docutils literal notranslate"><span class="pre">func</span></code>, and <code class="docutils literal notranslate"><span class="pre">blocks</span></code> specify the contexts of the
+expression. If PC appears in this expression, we assume the expression
+is at address <code class="docutils literal notranslate"><span class="pre">addr</span></code> and replace PC with a constant value <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>void convertAll(InstructionAPI::Instruction::Ptr insn, Address addr, ParseAPI::Function \*func, ParseAPI::Block \*block, std::vector&lt;AbsRegion&gt; &amp;used, std::vector&lt;AbsRegion&gt; &amp;defined);
+</pre></div>
+</div>
+<p>Create abstract regions appearing in instruction <code class="docutils literal notranslate"><span class="pre">insn</span></code>. Input
+abstract regions of this instructions are returned in <code class="docutils literal notranslate"><span class="pre">used</span></code> and
+output abstract regions are returned in <code class="docutils literal notranslate"><span class="pre">defined</span></code>. If the expression
+represents a memory access, we will also create a heap or stack abstract
+region depending on where it accesses. <code class="docutils literal notranslate"><span class="pre">addr</span></code>, <code class="docutils literal notranslate"><span class="pre">func</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">blocks</span></code> specify the contexts of the expression. If PC appears in this
+expression, we assume the expression is at address <code class="docutils literal notranslate"><span class="pre">addr</span></code> and replace
+PC with a constant value <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AbsRegion</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">reg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create an abstract region representing the register <code class="docutils literal notranslate"><span class="pre">reg</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>AbsRegion convert(InstructionAPI::Expression::Ptr expr, Address addr, ParseAPI::Function \*func, ParseAPI::Block \*block);
+</pre></div>
+</div>
+<p>Create and return the single abstract region represented by <code class="docutils literal notranslate"><span class="pre">expr</span></code>.</p>
+</div>
+<div class="section" id="class-graph">
+<h2>Class Graph<a class="headerlink" href="#class-graph" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Graph.h</span></code></p>
+<p>We provide a generic graph interface, which allows users to add, delete,
+and iterate nodes and edges in a graph. Our slicing algorithms are
+implemented upon this graph interface, so users can inherit the defined
+classes for customization.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shared pointer for Graph</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">entryNodes</span><span class="p">(</span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The entry nodes (nodes without any incoming edges) of the graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">exitNodes</span><span class="p">(</span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The exit nodes (nodes without any outgoing edges) of the graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">allNodes</span><span class="p">(</span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Iterate all nodes in the graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">printDOT</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">fileName</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Output the graph in dot format.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Graph</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">createGraph</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return an empty graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">insertPair</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">NodePtr</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">EdgePtr</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EdgePtr</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Insert a pair of nodes into the graph and create a new edge <code class="docutils literal notranslate"><span class="pre">edge</span></code>
+from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">insertEntryNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">entry</span><span class="p">);</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">insertExitNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">exit</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Insert a node as an entry/exit node</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">markAsEntryNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">entry</span><span class="p">);</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">markAsExitNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">exit</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Mark a node that has been added to this graph as an entry/exit node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">);</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Delete / Add a node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">isEntryNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">);</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isExitNode</span><span class="p">(</span><span class="n">NodePtr</span><span class="w"> </span><span class="n">node</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Check whether a node is an entry / exit node</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">clearEntryNodes</span><span class="p">();</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">clearExitNodes</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Clear the marking of entry / exit nodes. Note that the nodes are not
+deleted from the graph.</p>
+<p>Return the number of nodes in the graph.</p>
+</div>
+<div class="section" id="class-node">
+<h2>Class Node<a class="headerlink" href="#class-node" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Node.h</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shared pointer for Node</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">ins</span><span class="p">(</span><span class="n">EdgeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">EdgeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">outs</span><span class="p">(</span><span class="n">EdgeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">EdgeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Iterate over incoming/outgoing edges of this node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">ins</span><span class="p">(</span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">outs</span><span class="p">(</span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">NodeIterator</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Iterate over adjacent nodes connected with incoming/outgoing edges of
+this node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">hasInEdges</span><span class="p">();</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">hasOutEdges</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this node has incoming/outgoing edges.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteInEdge</span><span class="p">(</span><span class="n">EdgeIterator</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteOutEdge</span><span class="p">(</span><span class="n">EdgeIterator</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Delete an incoming/outgoing edge.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nf">addr</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the address of this node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NodeIterator</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Iterator for nodes. Common iterator operations including <code class="docutils literal notranslate"><span class="pre">++</span></code>, <code class="docutils literal notranslate"><span class="pre">–</span></code>,
+and dereferencing are supported.</p>
+</div>
+<div class="section" id="class-edge">
+<h2>Class Edge<a class="headerlink" href="#class-edge" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">Edge.h</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Edge</span><span class="o">::</span><span class="n">Ptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shared pointer for <code class="docutils literal notranslate"><span class="pre">Edge</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Edge</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">Edge::createEdge</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create a new directed edge from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">Edge::source</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">Edge::target</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the source / target node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">Edge::setSource</span><span class="p">(</span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">source</span><span class="p">);</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Edge::setTarget</span><span class="p">(</span><span class="n">Node</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Set the source / target node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EdgeIterator</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Iterator for edges. Common iterator operations including <code class="docutils literal notranslate"><span class="pre">++</span></code>, <code class="docutils literal notranslate"><span class="pre">–</span></code>,
+and dereferencing are supported.</p>
+</div>
+<div class="section" id="class-slicer">
+<span id="sec-slicing"></span><h2>Class Slicer<a class="headerlink" href="#class-slicer" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">slicing.h</span></code></p>
+<p>Class Slicer is the main interface for performing forward and backward
+slicing. The slicing algorithm starts with a user provided Assignment
+and generates a graph as the slicing results. The nodes in the generated
+Graph are individual assignments that affect the starting assignment
+(backward slicing) or are affected by the starting assignment (forward
+slicing). The edges in the graph are directed and represent either data
+flow dependencies or control flow dependencies.</p>
+<p>We provide call back functions and allow users to control when to stop
+slicing. In particular, class <code class="docutils literal notranslate"><span class="pre">Slicer::Predicates</span></code> contains a
+collection of call back functions that can control the specific
+behaviors of the slicer. Users can inherit from the Predicates class to
+provide customized stopping criteria for the slicer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>Slicer(AssignmentPtr a, ParseAPI::Block \*block, ParseAPI::Function \*func, bool cache = true, bool stackAnalysis = true);
+</pre></div>
+</div>
+<p>Construct a slicer, which can then be used to perform forward or
+backward slicing starting at the assignment <code class="docutils literal notranslate"><span class="pre">a</span></code>. <code class="docutils literal notranslate"><span class="pre">block</span></code> and
+<code class="docutils literal notranslate"><span class="pre">func</span></code> represent the context of assignment <code class="docutils literal notranslate"><span class="pre">a</span></code>. <code class="docutils literal notranslate"><span class="pre">cache</span></code> specifies
+whether the slicer will cache the results of conversions from
+instructions to assignments. <code class="docutils literal notranslate"><span class="pre">stackAnalysis</span></code> specifies whether the
+slicer will invoke stack analysis to distinguish stack variables.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GraphPtr</span><span class="w"> </span><span class="nf">forwardSlice</span><span class="p">(</span><span class="n">Predicates</span><span class="w"> </span><span class="o">&amp;</span><span class="n">predicates</span><span class="p">);</span><span class="w"> </span><span class="n">GraphPtr</span><span class="w"> </span><span class="nf">backwardSlice</span><span class="p">(</span><span class="n">Predicates</span><span class="w"> </span><span class="o">&amp;</span><span class="n">predicates</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Perform forward or backward slicing and use <code class="docutils literal notranslate"><span class="pre">predicates</span></code> to control
+the stopping criteria and return the slicing results as a graph</p>
+<p>A slice is represented as a Graph. The nodes and edges are defined as
+below:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SliceNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The default node data type in a slice graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>typedef boost::shared_ptr&lt;SliceNode&gt; Ptr; static SliceNode::Ptr SliceNode::create(AssignmentPtr ptr, ParseAPI::Block \*block, ParseAPI::Function \*func);
+</pre></div>
+</div>
+<p>Create a slice node, which represents assignment <code class="docutils literal notranslate"><span class="pre">ptr</span></code> in basic block
+<code class="docutils literal notranslate"><span class="pre">block</span></code> and function <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p>
+<p>Class SliceNode has the following methods to retrieve information
+associated the node:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="29%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>block</td>
+<td>ParseAPI::Block*</td>
+<td>Basic block of this SliceNode.</td>
+</tr>
+<tr class="row-odd"><td>func</td>
+<td>ParseAPI::Function*</td>
+<td>Function of this SliceNode.</td>
+</tr>
+<tr class="row-even"><td>addr</td>
+<td>Address</td>
+<td>Address of this SliceNode.</td>
+</tr>
+<tr class="row-odd"><td>assign</td>
+<td>Assignment::Ptr</td>
+<td>Assignment of this SliceNode.</td>
+</tr>
+<tr class="row-even"><td>format</td>
+<td>std::string</td>
+<td>String representation of this SliceNode.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SliceEdge</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Edge</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The default edge data type in a slice graph.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">SliceEdge</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="p">;</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">SliceEdge</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">SliceNode</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">SliceNode</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="n">data</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create a slice edge from <code class="docutils literal notranslate"><span class="pre">source</span></code> to <code class="docutils literal notranslate"><span class="pre">target</span></code> and the edge presents
+a dependency about abstract region <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">AbsRegion</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Get the data annotated on this edge.</p>
+</div>
+<div class="section" id="class-slicer-predicates">
+<span id="id1"></span><h2>Class Slicer::Predicates<a class="headerlink" href="#class-slicer-predicates" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">slicing.h</span></code></p>
+<p>Class Predicates abstracts the stopping criteria of slicing. Users can
+inherit this class to control slicing in various situations, including
+whether or not to perform inter-procedural slicing, whether or not to
+search for control flow dependencies, and whether or not to stop slicing
+after discovering certain assignments. We provide a set of call back
+functions that allow users to dynamically control the behavior of the
+Slicer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Predicates</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Construct a default predicate, which will only search for
+intraprocedural data flow dependencies.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">searchForControlFlowDep</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if this predicate will search for control flow
+dependencies. Otherwise, return <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">setSearchForControlFlowDep</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">cfd</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Change whether or not to search for control flow dependencies according
+to <code class="docutils literal notranslate"><span class="pre">cfd</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">widenAtPoint</span><span class="p">(</span><span class="n">AssignmentPtr</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The default behavior is to return <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">endAtPoint</span><span class="p">(</span><span class="n">AssignmentPtr</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In backward slicing, after we find a match for an assignment, we pass it
+to this function. This function should return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the user does
+not want to continue searching for this assignment. Otherwise, it should
+return <code class="docutils literal notranslate"><span class="pre">false</span></code>. The default behavior of this function is to always
+return <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>typedef std::pair&lt;ParseAPI::Function \*, int&gt; StackDepth_t; typedef std::stack&lt;StackDepth_t&gt; CallStack_t; virtual bool followCall(ParseAPI::Function \* callee, CallStack_t &amp; cs, AbsRegion argument);
+</pre></div>
+</div>
+<p>This predicate function is called when the slicer reaches a direct call
+site. If it returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, the slicer will follow into the callee
+function <code class="docutils literal notranslate"><span class="pre">callee</span></code>. This function also takes input <code class="docutils literal notranslate"><span class="pre">cs</span></code>, which
+represents the call stack of the followed callee functions from the
+starting point of the slicing to this call site, and <code class="docutils literal notranslate"><span class="pre">argument</span></code>, which
+represents the variable to slice with in the callee function. This
+function defaults to always returning <code class="docutils literal notranslate"><span class="pre">false</span></code>. Note that as Dyninst
+currently does not try to resolve indirect calls, the slicer will NOT
+call this function at an indirect call site.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>virtual std::vector&lt;ParseAPI::Function \*&gt; followCallBackward(ParseAPI::Block \* caller, CallStack_t &amp; cs, AbsRegion argument);
+</pre></div>
+</div>
+<p>This predicate function is called when the slicer reaches the entry of a
+function in the case of backward slicing or reaches a return instruction
+in the case of forward slicing. It returns a vector of caller functions
+that the user wants the slicer to continue to follow. This function
+takes input <code class="docutils literal notranslate"><span class="pre">caller</span></code>, which represents the call block of the caller,
+<code class="docutils literal notranslate"><span class="pre">cs</span></code>, which represents the caller functions that have been followed to
+this place, and <code class="docutils literal notranslate"><span class="pre">argument</span></code>, which represents the variable to slice
+with in the caller function. This function defaults to always returning
+an empty vector.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">addPredecessor</span><span class="p">(</span><span class="n">AbsRegion</span><span class="w"> </span><span class="n">reg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In backward slicing, after we match an assignment at a location, the
+matched AbsRegion <code class="docutils literal notranslate"><span class="pre">reg</span></code> is passed to this predicate function. This
+function should return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the user wants to continue to search
+for dependencies for this AbsRegion. Otherwise, this function should
+return <code class="docutils literal notranslate"><span class="pre">true</span></code>. The default behavior of this function is to always
+return <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">addNodeCallback</span><span class="p">(</span><span class="n">AssignmentPtr</span><span class="w"> </span><span class="n">assign</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">ParseAPI</span><span class="o">::</span><span class="n">Edge</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">visited</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In backward slicing, this function is called when the slicer adds a new
+node to the slice. The newly added assignment <code class="docutils literal notranslate"><span class="pre">assign</span></code> and the set of
+control flow edges <code class="docutils literal notranslate"><span class="pre">visited</span></code> that have been visited so far are passed
+to this function. This function should return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the user wants
+to continue slicing. If this function returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, the Slicer will
+not continue to search along the path. The default behavior of this
+function is to always return <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="class-stackanalysis">
+<span id="sec-stackanalysis"></span><h2>Class StackAnalysis<a class="headerlink" href="#class-stackanalysis" title="Permalink to this headline"></a></h2>
+<p>The StackAnalysis interface is used to determine the possible stack
+heights of abstract locations at any instruction in a function. Due to
+there often being many paths through the CFG to reach a given
+instruction, abstract locations may have different stack heights
+depending on the path taken to reach that instruction. In other cases,
+StackAnalysis is unable to adequately determine what is contained in an
+abstract location. In both situations, StackAnalysis is conservative in
+its reported stack heights. The table below explains what the reported
+stack heights mean.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Reported stack height</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>TOP</td>
+<td>On all paths to this instruction, the
+specified abstract location contains a
+value that does not point to the stack.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><em>x</em> (some number)</td>
+<td>On at least one path to this instruction,
+the specified abstract location has a stack
+height of <em>x</em>. On all other paths, the
+abstract location either has a stack height
+of <em>x</em> or doesn’t point to the stack.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>BOTTOM</td>
+<td><p class="first">There are three possible meanings:</p>
+<ol class="last arabic simple">
+<li>On at least one path to this
+instruction, StackAnalysis was unable to
+determine whether or not the specified
+abstract location points to the stack.</li>
+<li>On at least one path to this
+instruction, StackAnalysis determined
+that the specified abstract location
+points to the stack but could not
+determine the exact stack height.</li>
+<li>On at least two paths to this
+instruction, the specified abstract
+location pointed to different parts of
+the stack.</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>StackAnalysis(ParseAPI::Function \*f)
+</pre></div>
+</div>
+<p>Constructs a StackAnalysis object for function <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>StackAnalysis(ParseAPI::Function \*f, const std::map&lt;Address, Address&gt; &amp;crm, const std::map&lt;Address, TransferSet&gt; &amp;fs)
+</pre></div>
+</div>
+<p>Constructs a StackAnalysis object for function <code class="docutils literal notranslate"><span class="pre">f</span></code> with
+interprocedural analysis activated. A call resolution map is passed in
+<code class="docutils literal notranslate"><span class="pre">crm</span></code> mapping addresses of call sites to the resolved inter-module
+target address of the call. Generally the call resolution map is created
+with DyninstAPI where PLT resolution is done. Function summaries are
+passed in <code class="docutils literal notranslate"><span class="pre">fs</span></code> which maps function entry addresses to summaries. The
+function summaries are then used at all call sites to those functions.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>StackAnalysis::Height find(ParseAPI::Block \*b, Address addr, Absloc loc)
+</pre></div>
+</div>
+<p>Returns the stack height of abstract location <code class="docutils literal notranslate"><span class="pre">loc</span></code> before execution
+of the instruction with address <code class="docutils literal notranslate"><span class="pre">addr</span></code> contained in basic block <code class="docutils literal notranslate"><span class="pre">b</span></code>.
+The address <code class="docutils literal notranslate"><span class="pre">addr</span></code> must be contained in block <code class="docutils literal notranslate"><span class="pre">b</span></code>, and block <code class="docutils literal notranslate"><span class="pre">b</span></code>
+must be contained in the function used to create this StackAnalysis
+object.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>StackAnalysis::Height findSP(ParseAPI::Block \*b, Address addr)
+StackAnalysis::Height findFP(ParseAPI::Block \*b, Address addr)
+</pre></div>
+</div>
+<p>Returns the stack height of the stack pointer and frame pointer,
+respectively, before execution of the instruction with address <code class="docutils literal notranslate"><span class="pre">addr</span></code>
+contained in basic block <code class="docutils literal notranslate"><span class="pre">b</span></code>. The address <code class="docutils literal notranslate"><span class="pre">addr</span></code> must be contained
+in block <code class="docutils literal notranslate"><span class="pre">b</span></code>, and block <code class="docutils literal notranslate"><span class="pre">b</span></code> must be contained in the function used
+to create this StackAnalysis object.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>void findDefinedHeights(ParseAPI::Block \*b, Address addr, std::vector&lt;std::pair&lt;Absloc, StackAnalysis::Height&gt;&gt; &amp;heights)
+</pre></div>
+</div>
+<p>Writes to the vector <code class="docutils literal notranslate"><span class="pre">heights</span></code> all defined &lt;abstract location, stack
+height&gt; pairs before execution of the instruction with address <code class="docutils literal notranslate"><span class="pre">addr</span></code>
+contained in basic block <code class="docutils literal notranslate"><span class="pre">b</span></code>. Note that abstract locations with stack
+heights of TOP (i.e. they do not point to the stack) are not written to
+<code class="docutils literal notranslate"><span class="pre">heights</span></code>. The address <code class="docutils literal notranslate"><span class="pre">addr</span></code> must be contained in block <code class="docutils literal notranslate"><span class="pre">b</span></code>, and
+block <code class="docutils literal notranslate"><span class="pre">b</span></code> must be contained in the function used to create this
+StackAnalysis object.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">canGetFunctionSummary</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns true if the function associated with this StackAnalysis object
+returns on some execution path.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getFunctionSummary</span><span class="p">(</span><span class="n">TransferSet</span><span class="w"> </span><span class="o">&amp;</span><span class="n">summary</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns in <code class="docutils literal notranslate"><span class="pre">summary</span></code> a summary for the function associated with this
+StackAnalysis object. Function summaries can then be passed to the
+constructors for other StackAnalysis objects to enable interprocedural
+analysis. Returns true on success.</p>
+</div>
+<div class="section" id="class-stackanalysis-height">
+<h2>Class StackAnalysis::Height<a class="headerlink" href="#class-stackanalysis-height" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">stackanalysis.h</span></code></p>
+<p>The Height class is used to represent the abstract notion of stack
+heights. Every Height object represents a stack height of either TOP,
+BOTTOM, or <em>x</em>, where <em>x</em> is some integral number. The Height class also
+defines methods for comparing, combining, and modifying stack heights in
+various ways.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">Height_t</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The underlying data type used to convert between Height objects and
+integral values.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>height</td>
+<td>Height_t</td>
+<td>This stack height as an integral value.</td>
+</tr>
+<tr class="row-odd"><td>format</td>
+<td>std::string</td>
+<td>This stack height as a string.</td>
+</tr>
+<tr class="row-even"><td>isTop</td>
+<td>bool</td>
+<td>True if this stack height is TOP.</td>
+</tr>
+<tr class="row-odd"><td>isBottom</td>
+<td>bool</td>
+<td>True if this stack height is BOTTOM.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Height</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height_t</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Creates a Height object with stack height <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Height</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Creates a Height object with stack height TOP.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&gt;=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Comparison operators for Height objects. Compares based on the integral
+stack height treating TOP as MAX_HEIGHT and BOTTOM as MIN_HEIGHT.</p>
+<p>Height &amp;operator+=(const Height &amp;rhs) Height &amp;operator+=(const signed
+long &amp;rhs) const Height operator+(const Height &amp;rhs) const const Height
+operator+(const signed long &amp;rhs) const const Height operator-(const
+Height &amp;rhs) const</p>
+<p>Returns the result of basic arithmetic on Height objects according to
+the following rules, where <em>x</em> and <em>y</em> are integral stack heights and
+<em>S</em> represents any stack height:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(TOP + TOP = TOP\)</span></li>
+<li><span class="math notranslate nohighlight">\(TOP + x = BOTTOM\)</span></li>
+<li><span class="math notranslate nohighlight">\(x + y = (x+y)\)</span></li>
+<li><span class="math notranslate nohighlight">\(BOTTOM + S = BOTTOM\)</span></li>
+</ul>
+<p>Note that the subtraction rules can be obtained by replacing all + signs
+with - signs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">operator+</span></code> and <code class="docutils literal notranslate"><span class="pre">operator-</span></code> methods leave this Height object
+unmodified while the <code class="docutils literal notranslate"><span class="pre">operator+=</span></code> methods update this Height object
+with the result of the computation. For the methods where <code class="docutils literal notranslate"><span class="pre">rhs</span></code> is a
+<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">signed</span> <span class="pre">long</span></code>, it is not possible to set <code class="docutils literal notranslate"><span class="pre">rhs</span></code> to TOP or
+BOTTOM.</p>
+</div>
+<div class="section" id="class-ast">
+<span id="sec-ast"></span><h2>Class AST<a class="headerlink" href="#class-ast" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">DynAST.h</span></code></p>
+<p>We provide a generic AST framework to represent tree structures. One
+example use case is to represent instruction semantics with symbolic
+expressions. The AST framework includes the base class definitions for
+tree nodes and visitors. Users can inherit tree node classes to create
+their own AST structure and AST visitors to write their own analyses for
+the AST.</p>
+<p>All AST node classes should be derived from the AST class. Currently we
+have the following types of AST nodes.</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">AST::ID</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>V_AST</td>
+<td>Base class type</td>
+</tr>
+<tr class="row-odd"><td>V_BottomAST</td>
+<td>Bottom AST node</td>
+</tr>
+<tr class="row-even"><td>V_ConstantAST</td>
+<td>Constant AST node</td>
+</tr>
+<tr class="row-odd"><td>V_VariableAST</td>
+<td>Variable AST node</td>
+</tr>
+<tr class="row-even"><td>V_RoseAST</td>
+<td>ROSEOperation AST node</td>
+</tr>
+<tr class="row-odd"><td>V_StackAST</td>
+<td>Stack AST node</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AST</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shared pointer for class AST.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Children</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The container type for the children of this AST.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AST</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">rhs</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Check whether two AST nodes are equal. Return <code class="docutils literal notranslate"><span class="pre">true</span></code> when two nodes
+are in the same type and are equal according to the <code class="docutils literal notranslate"><span class="pre">==</span></code> operator of
+that type.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">numChildren</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the number of children of this node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">child</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the <code class="docutils literal notranslate"><span class="pre">i</span></code>th child.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of the node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">substitute</span><span class="p">(</span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Substitute every occurrence of <code class="docutils literal notranslate"><span class="pre">a</span></code> with <code class="docutils literal notranslate"><span class="pre">b</span></code> in AST <code class="docutils literal notranslate"><span class="pre">in</span></code>. Return a
+new AST after the substitution.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">ID</span><span class="w"> </span><span class="nf">AST::getID</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the class type ID of this node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>virtual Ptr accept(ASTVisitor \*v);
+</pre></div>
+</div>
+<p>Apply visitor <code class="docutils literal notranslate"><span class="pre">v</span></code> to this node. Note that this method will not
+automatically apply the visitor to its children.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">AST::setChild</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Set the <code class="docutils literal notranslate"><span class="pre">i</span></code>th child of this node to <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+</div>
+<div class="section" id="class-symeval">
+<span id="sec-symeval"></span><h2>Class SymEval<a class="headerlink" href="#class-symeval" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">SymEval.h</span></code></p>
+<p>Class SymEval provides interfaces for expanding an instruction to its
+symbolic expression and expanding a slice graph to symbolic expressions
+for all abstract locations defined in this slice.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="p">,</span><span class="w"> </span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="p">,</span><span class="w"> </span><span class="n">AssignmentPtrValueComp</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Result_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This data type represents the results of symbolic expansion of a slice.
+Each assignment in the slice has a corresponding AST.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">AST</span><span class="o">::</span><span class="n">Ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">expand</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Assignment</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&amp;</span><span class="n">assignment</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">applyVisitors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This interface expands a single assignment given by <code class="docutils literal notranslate"><span class="pre">assignment</span></code> and
+returns a <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>, in which the first element is the AST after
+expansion and the second element is a bool indicating whether the
+expansion succeeded or not. <code class="docutils literal notranslate"><span class="pre">applyVisitors</span></code> specifies whether or not
+to perform stack analysis to precisely track stack variables.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">expand</span><span class="p">(</span><span class="n">Result_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">InstructionPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">failedInsns</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">applyVisitors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This interface expands a set of assignment prepared in <code class="docutils literal notranslate"><span class="pre">res</span></code>. The
+corresponding ASTs are written back into <code class="docutils literal notranslate"><span class="pre">res</span></code> and all instructions
+that failed during expansion are inserted into <code class="docutils literal notranslate"><span class="pre">failedInsns</span></code>.
+<code class="docutils literal notranslate"><span class="pre">applyVisitors</span></code> specifies whether or not to perform stack analysis to
+precisely track stack variables. This function returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when all
+assignments in <code class="docutils literal notranslate"><span class="pre">res</span></code> are successfully expanded.</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Retval_t</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FAILED</td>
+<td>failed</td>
+</tr>
+<tr class="row-odd"><td>WIDEN_NODE</td>
+<td>widen</td>
+</tr>
+<tr class="row-even"><td>FAILED_TRANSLATION</td>
+<td>failed translation</td>
+</tr>
+<tr class="row-odd"><td>SKIPPED_INPUT</td>
+<td>skipped input</td>
+</tr>
+<tr class="row-even"><td>SUCCESS</td>
+<td>success</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Retval_t</span><span class="w"> </span><span class="nf">expand</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Graph</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">slice</span><span class="p">,</span><span class="w"> </span><span class="n">DataflowAPI</span><span class="o">::</span><span class="n">Result_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This interface expands a slice and returns an AST for each assignment in
+the slice. This function will perform substitution of ASTs.</p>
+<p>We use an AST to represent the symbolic expressions of an assignment. A
+symbolic expression AST contains internal node type <code class="docutils literal notranslate"><span class="pre">RoseAST</span></code>, which
+abstracts the operations performed with its child nodes, and two leave
+node types: <code class="docutils literal notranslate"><span class="pre">VariableAST</span></code> and <code class="docutils literal notranslate"><span class="pre">ConstantAST</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RoseAST</span></code>, <code class="docutils literal notranslate"><span class="pre">VariableAST</span></code>, and <code class="docutils literal notranslate"><span class="pre">ConstantAST</span></code> all extend class
+<code class="docutils literal notranslate"><span class="pre">AST</span></code>. Besides the methods provided by class <code class="docutils literal notranslate"><span class="pre">AST</span></code>, <code class="docutils literal notranslate"><span class="pre">RoseAST</span></code>,
+<code class="docutils literal notranslate"><span class="pre">VariableAST</span></code>, and <code class="docutils literal notranslate"><span class="pre">ConstantAST</span></code> each have a different data
+structure associated with them.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Variable</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">VariableAST::val</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">Constant</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">ConstantAST::val</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">ROSEOperation</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">RoseAST::val</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We now describe data structure <code class="docutils literal notranslate"><span class="pre">Variable</span></code>, <code class="docutils literal notranslate"><span class="pre">Constant</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">ROSEOperation</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Variable</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Variable</span></code> represents an abstract region at a particular address.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Variable</span><span class="o">::</span><span class="n">Variable</span><span class="p">();</span><span class="w"> </span><span class="n">Variable</span><span class="o">::</span><span class="n">Variable</span><span class="p">(</span><span class="n">AbsRegion</span><span class="w"> </span><span class="n">r</span><span class="p">);</span><span class="w"></span>
+<span class="n">Variable</span><span class="o">::</span><span class="n">Variable</span><span class="p">(</span><span class="n">AbsRegion</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The constructors of class Variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">Variable</span><span class="o">::</span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Variable</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"></span>
+<span class="n">Variable</span><span class="o">::</span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Variable</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Two Variable objects are equal when their AbsRegion are equal and their
+addresses are equal.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">Variable::format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of the Variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AbsRegion</span><span class="w"> </span><span class="n">Variable</span><span class="o">::</span><span class="n">reg</span><span class="p">;</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">Variable</span><span class="o">::</span><span class="n">addr</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The abstraction region and the address of this Variable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Constant</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Constant</span></code> object represents a constant value in code.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Constant</span><span class="o">::</span><span class="n">Constant</span><span class="p">();</span><span class="w"> </span><span class="n">Constant</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+<span class="n">Constant</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Construct Constant objects.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">Constant</span><span class="o">::</span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Constant</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"></span>
+<span class="n">Constant</span><span class="o">::</span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Constant</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Comparison operators for Constant objects. Comparison is based on the
+value and size.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">Constant::format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation of the Constant object.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">Constant</span><span class="o">::</span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">Constant</span><span class="o">::</span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The numerical value and bit size of this value.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ROSEOperation</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ROSEOperation</span></code> defines the following operations and we represent the
+semantics of all instructions with these operations.</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ROSEOperation::Op</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>nullOp</td>
+<td>No operation</td>
+</tr>
+<tr class="row-odd"><td>extractOp</td>
+<td>Extract bit ranges from a value</td>
+</tr>
+<tr class="row-even"><td>invertOp</td>
+<td>Flip every bit</td>
+</tr>
+<tr class="row-odd"><td>negateOp</td>
+<td>Negate the value</td>
+</tr>
+<tr class="row-even"><td>signExtendOp</td>
+<td>Sign-extend the value</td>
+</tr>
+<tr class="row-odd"><td>equalToZeroOp</td>
+<td>Check whether the value is zero or not</td>
+</tr>
+<tr class="row-even"><td>generateMaskOp</td>
+<td>Generate mask</td>
+</tr>
+<tr class="row-odd"><td>LSBSetOp</td>
+<td>LSB set op</td>
+</tr>
+<tr class="row-even"><td>MSBSetOp</td>
+<td>MSB set op</td>
+</tr>
+<tr class="row-odd"><td>concatOp</td>
+<td>Concatenate two values to form a new value</td>
+</tr>
+<tr class="row-even"><td>andOp</td>
+<td>Bit-wise and operation</td>
+</tr>
+<tr class="row-odd"><td>orOp</td>
+<td>Bit-wise or operation</td>
+</tr>
+<tr class="row-even"><td>xorOp</td>
+<td>Bit-wise xor operation</td>
+</tr>
+<tr class="row-odd"><td>addOp</td>
+<td>Add operation</td>
+</tr>
+<tr class="row-even"><td>rotateLOp</td>
+<td>Rotate to left operation</td>
+</tr>
+<tr class="row-odd"><td>rotateROp</td>
+<td>Rotate to right operation</td>
+</tr>
+<tr class="row-even"><td>shiftLOp</td>
+<td>Shift to left operation</td>
+</tr>
+<tr class="row-odd"><td>shiftROp</td>
+<td>Shift to right operation</td>
+</tr>
+<tr class="row-even"><td>shiftRArithOp</td>
+<td>Arithmetic shift to right operation</td>
+</tr>
+<tr class="row-odd"><td>derefOp</td>
+<td>Dereference memory operation</td>
+</tr>
+<tr class="row-even"><td>writeRepOp</td>
+<td>Write rep operation</td>
+</tr>
+<tr class="row-odd"><td>writeOp</td>
+<td>Write operation</td>
+</tr>
+<tr class="row-even"><td>ifOp</td>
+<td>If operation</td>
+</tr>
+<tr class="row-odd"><td>sMultOp</td>
+<td>Signed multiplication operation</td>
+</tr>
+<tr class="row-even"><td>uMultOp</td>
+<td>Unsigned multiplication operation</td>
+</tr>
+<tr class="row-odd"><td>sDivOp</td>
+<td>Signed division operation</td>
+</tr>
+<tr class="row-even"><td>sModOp</td>
+<td>Signed modular operation</td>
+</tr>
+<tr class="row-odd"><td>uDivOp</td>
+<td>Unsigned division operation</td>
+</tr>
+<tr class="row-even"><td>uModOp</td>
+<td>Unsigned modular operation</td>
+</tr>
+<tr class="row-odd"><td>extendOp</td>
+<td>Zero extend operation</td>
+</tr>
+<tr class="row-even"><td>extendMSBOp</td>
+<td>Extend the most significant bit operation</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROSEOperation</span><span class="o">::</span><span class="n">ROSEOperation</span><span class="p">(</span><span class="n">Op</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">op</span><span class="p">(</span><span class="n">o</span><span class="p">);</span><span class="w"></span>
+<span class="n">ROSEOperation</span><span class="o">::</span><span class="n">ROSEOperation</span><span class="p">(</span><span class="n">Op</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Constructors for ROSEOperation</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">ROSEOperation</span><span class="o">::</span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROSEOperation</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Equal operator</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">ROSEOperation::format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return the string representation.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROSEOperation</span><span class="o">::</span><span class="n">Op</span><span class="w"> </span><span class="n">ROSEOperation</span><span class="o">::</span><span class="n">op</span><span class="p">;</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ROSEOperation</span><span class="o">::</span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-astvisitor">
+<h2>Class ASTVisitor<a class="headerlink" href="#class-astvisitor" title="Permalink to this headline"></a></h2>
+<p>The ASTVisitor class defines callback functions to apply during visiting
+an AST for each AST node type. Users can inherit from this class to
+write customized analyses for ASTs.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>typedef boost::shared_ptr&lt;AST&gt; ASTVisitor::ASTPtr; virtual
+ASTVisitor::ASTPtr ASTVisitor::visit(AST \*); virtual ASTVisitor::ASTPtr
+ASTVisitor::visit(DataflowAPI::BottomAST \*); virtual ASTVisitor::ASTPtr
+ASTVisitor::visit(DataflowAPI::ConstantAST \*); virtual
+ASTVisitor::ASTPtr ASTVisitor::visit(DataflowAPI::VariableAST \*);
+virtual ASTVisitor::ASTPtr ASTVisitor::visit(DataflowAPI::RoseAST \*);
+virtual ASTVisitor::ASTPtr ASTVisitor::visit(StackAST \*);
+</pre></div>
+</div>
+<p>Callback functions for visiting each type of AST node. The default
+behavior is to return the input parameter.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Dyninst" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dynC_API/index.html" class="btn btn-neutral float-right" title="DynC API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

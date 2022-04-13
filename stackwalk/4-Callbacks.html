@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Callback Interface Default Implementations &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Callback Interface Default Implementations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stackwalk/4-Callbacks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="callback-interface-default-implementations">
+<h1>Callback Interface Default Implementations<a class="headerlink" href="#callback-interface-default-implementations" title="Permalink to this headline"></a></h1>
+<p>StackwalkerAPI provides one or more default implementations of each of
+the callback classes described in Section 3.5. These implementations are
+used by a default configuration of StackwalkerAPI.</p>
+<div class="section" id="debugger-interface">
+<span id="subsec-debugger"></span><h2>Debugger Interface<a class="headerlink" href="#debugger-interface" title="Permalink to this headline"></a></h2>
+<p>This section describes how to use StackwalkerAPI for collecting 3rd
+party stack walks. In 3rd party mode StackwalkerAPI uses the OS’s
+debugger interface to connect to another process and walk its call
+stacks. As part of being a debugger StackwalkerAPI receives and needs to
+handle debug events. When a debugger event occurs, StackwalkerAPI must
+get control of the host process in order to receive the debugger event
+and continue the target process.</p>
+<p>To illustrate the complexities with running in 3rd party mode, consider
+the follow code snippet that uses StackwalkerAPI to collect a stack walk
+every five seconds.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>StackwalkerAPI is running in 3rd party mode, since it attached to the
+target process, . As the target process runs it may be generating debug
+events such a thread creation and destruction, library loads and
+unloads, signals, forking/execing, etc. When one of these debugger
+events is generated the OS will pause the target process and send a
+notice to the host process. The target process will remain paused until
+the host process handles the debug event and resumes the target process.</p>
+<p>In the above example the host process is spending almost all of its time
+in the sleep call. If a debugger event happens during the sleep, then
+StackwalkerAPI will not be able to get control of the host process and
+handle the event for up to five seconds. This will cause long pauses in
+the target process and lead to a potentially very large slowdown.</p>
+<p>To work around this problem StackwalkerAPI provides a notification file
+descriptor. This file descriptor represents a connection between the
+StackwalkerAPI library and user code. StackwalkerAPI will write a single
+byte to this file descriptor when a debug event occurs, thus notifying
+the user code that it needs to let StackwalkerAPI receive and handle
+debug events. The user code can use system calls such as select to watch
+for events on the notification file descriptor.</p>
+<p>The following example illustrates how to properly use StackwalkerAPI to
+collect a stack walk from another process at a five second interval.
+Details on the class, method, and method can be found in
+Section&nbsp;<a class="reference external" href="#subsubsec:procdebug">1.1.1</a>. See the UNIX man pages for
+more information on the system call. Note that this example does not
+include all of the proper error handling and includes that should be
+present when using .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+<span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span> <span class="o">=</span> <span class="p">(</span><span class="n">ProcDebug</span> <span class="o">*</span><span class="p">)</span> <span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">();</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+    <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
+    <span class="n">struct</span> <span class="n">timeval</span> <span class="n">timeout</span><span class="p">;</span>
+    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="nb">max</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">fd_set</span> <span class="n">readfds</span><span class="p">,</span> <span class="n">writefds</span><span class="p">,</span> <span class="n">exceptfds</span><span class="p">;</span>
+    <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">writefds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">);</span>
+    <span class="n">FD_SET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">writefds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">timeout</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">FD_ISSET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="n">readfds</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">Debug</span> <span class="n">event</span>
+            <span class="n">ProcDebug</span><span class="p">::</span><span class="n">handleDebugEvent</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">Timeout</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="class-procdebug">
+<span id="subsubsec-procdebug"></span><h3>Class ProcDebug<a class="headerlink" href="#class-procdebug" title="Permalink to this headline"></a></h3>
+<p>Access to StackwalkerAPI’s debugger is through the class, which inherits
+from the interface. The easiest way to get at a object is to cast the
+return value of into a . C++’s operation can be used to test if a uses
+the interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span><span class="p">;</span>
+<span class="n">debugger</span> <span class="o">=</span> <span class="n">dynamic_cast</span><span class="o">&lt;</span><span class="n">ProcDebug</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">());</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">debugger</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span><span class="mi">3</span><span class="n">rd</span> <span class="n">party</span>
+    <span class="o">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">//</span><span class="mi">1</span><span class="n">st</span> <span class="n">party</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In addition to the handling of debug events, described in
+Section&nbsp;<a class="reference external" href="#subsec:debugger">1.1</a>, the class provides a process control
+interface; users can pause and resume process or threads, detach from a
+process, and test for events such as process death. As an implementation
+of the class, also provides all of the functionality described in
+Section&nbsp;<a class="reference external" href="#subsec:processstate">[subsec:processstate]</a>.</p>
+<div class="apient container">
+virtual bool pause(Dyninst::THR_ID tid = NULL_THR_ID)</div>
+<div class="apient container">
+virtual bool resume(Dyninst::THR_ID tid = NULL_THR_ID)</div>
+<div class="apient container">
+virtual bool detach(bool leave_stopped = false)</div>
+<div class="apient container">
+virtual bool isTerminated()</div>
+<div class="apient container">
+static int getNotificationFD()</div>
+<div class="apient container">
+static bool handleDebugEvent(bool block = false)</div>
+</div>
+</div>
+<div class="section" id="framesteppers">
+<span id="sec-framesteppers"></span><h2>FrameSteppers<a class="headerlink" href="#framesteppers" title="Permalink to this headline"></a></h2>
+<p>StackwalkerAPI ships with numerous default implementations of the class.
+Each of these implementations allow StackwalkerAPI to walk a type of
+call frames. Section&nbsp;<a class="reference external" href="#subsec:defaults">[subsec:defaults]</a> describes
+which implementations are available on which platforms. This sections
+gives a brief description of what each implementation does. Each of the
+following classes implements the interface described in
+Section&nbsp;<a class="reference external" href="#subsec:framestepper">[subsec:framestepper]</a>, so we do not
+repeat the API description for the classes here.</p>
+<p>Several of the s use helper classes (see as an example). Users can
+further customize the behavior of a by providing their own
+implementation of these helper classes.</p>
+<div class="section" id="class-framefuncstepper">
+<h3>Class FrameFuncStepper<a class="headerlink" href="#class-framefuncstepper" title="Permalink to this headline"></a></h3>
+<p>This class implements stack walking through a call frame that is setup
+with the architectures standard stack frame. For example, on x86 this
+will be used to walk through stack frames that are setup with a
+prologue.</p>
+<div class="section" id="class-framefunchelper">
+<h4>Class FrameFuncHelper<a class="headerlink" href="#class-framefunchelper" title="Permalink to this headline"></a></h4>
+<p>uses a helper class, , to get information on what kind of stack frame
+it’s walking through. The will generally use techniques such as binary
+analysis to determine what type of stack frame the is walking through.
+Users can have StackwalkerAPI use their own binary analysis mechanisms
+by providing an implementation of this .</p>
+<p>There are two important types used by and one important function:</p>
+<div class="apient container">
+typedef enum unknown_t=0, no_frame, standard_frame,
+savefp_only_frame, frame_type;</div>
+<div class="apient container">
+typedef enum unknown_s=0, unset_frame, halfset_frame, set_frame
+frame_state;</div>
+<div class="apient container">
+typedef std::pair&lt;frame_type, frame_state&gt; alloc_frame_t; virtual
+alloc_frame_t allocatesFrame(Address addr) = 0;</div>
+</div>
+</div>
+<div class="section" id="class-sighandlerstepper">
+<h3>Class SigHandlerStepper<a class="headerlink" href="#class-sighandlerstepper" title="Permalink to this headline"></a></h3>
+<p>The is used to walk through UNIX signal handlers as found on the call
+stack. On some systems a signal handler generates a special kind of
+stack frame that cannot be walked through using normal stack walking
+techniques.</p>
+</div>
+<div class="section" id="class-debugstepper">
+<h3>Class DebugStepper<a class="headerlink" href="#class-debugstepper" title="Permalink to this headline"></a></h3>
+<p>This class uses debug information found in a binary to walk through a
+stack frame. It depends on SymtabAPI to read debug information from a
+binary, then uses that debug information to walk through a call frame.</p>
+<p>Most binaries must be built with debug information ( with ) in order to
+include debug information that this uses. Some languages, such as C++,
+automatically include stackwalking debug information for use by
+exceptions. The class will also make use of this kind of exception
+information if it is available.</p>
+</div>
+<div class="section" id="class-analysisstepper">
+<h3>Class AnalysisStepper<a class="headerlink" href="#class-analysisstepper" title="Permalink to this headline"></a></h3>
+<p>This class uses dataflow analysis to determine possible stack sizes at
+all locations in a function as well as the location of the frame
+pointer. It is able to handle optimized code with omitted frame pointers
+and overlapping code sequences.</p>
+</div>
+<div class="section" id="class-stepperwanderer">
+<h3>Class StepperWanderer<a class="headerlink" href="#class-stepperwanderer" title="Permalink to this headline"></a></h3>
+<p>This class uses a heuristic approach to find possible return addresses
+in the stack frame. If a return address is found that matches a valid
+caller of the current function, we conclude it is the actual return
+address and construct a matching stack frame. Since this approach is
+heuristic it can make mistakes leading to incorrect stack information.
+It has primarily been replaced by the described above.</p>
+</div>
+<div class="section" id="class-bottomofstackstepper">
+<h3>Class BottomOfStackStepper<a class="headerlink" href="#class-bottomofstackstepper" title="Permalink to this headline"></a></h3>
+<p>The doesn’t actually walk through any type of call frame. Instead it
+attempts to detect whether the bottom of the call stack has been
+reached. If so, will report from its method. Otherwise it will report .
+runs with a higher priority than any other class.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

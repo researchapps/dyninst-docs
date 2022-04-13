@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Examples &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Simple Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/symtabAPI/3-Examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="simple-examples">
+<h1>Simple Examples<a class="headerlink" href="#simple-examples" title="Permalink to this headline"></a></h1>
+<p>To illustrate the ideas in the API, this section presents several short
+examples that demonstrate how the API can be used. SymtabAPI has the
+ability to parse files that are on-disk or present in memory. The user
+program starts by requesting SymtabAPI to parse an object file.
+SymtabAPI returns a handle if the parsing succeeds, whcih can be used
+for further interactions with the SymtabAPI library. The following
+example shows how to parse a shared object file on disk.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+
+<span class="o">//</span><span class="n">Name</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">file</span> <span class="n">to</span> <span class="n">be</span> <span class="n">parsed</span><span class="p">:</span>
+<span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;libfoo.so&quot;</span><span class="p">;</span>
+
+<span class="o">//</span><span class="n">Declare</span> <span class="n">a</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">an</span> <span class="nb">object</span> <span class="n">of</span> <span class="nb">type</span> <span class="n">Symtab</span><span class="p">;</span> <span class="n">this</span> <span class="n">represents</span> <span class="n">the</span> <span class="n">file</span><span class="o">.</span>
+<span class="n">Symtab</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Parse</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">file</span>
+<span class="nb">bool</span> <span class="n">err</span> <span class="o">=</span> <span class="n">Symtab</span><span class="p">::</span><span class="n">openFile</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once the object file is parsed successfully and the handle is obtained,
+symbol look up and update operations can be performed in the following
+way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span> <span class="o">&lt;</span><span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">syms</span><span class="p">;</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span> <span class="o">&lt;</span><span class="n">Function</span> <span class="o">*&gt;</span> <span class="n">funcs</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">search</span> <span class="k">for</span> <span class="n">a</span> <span class="n">function</span> <span class="k">with</span> <span class="n">demangled</span> <span class="p">(</span><span class="n">pretty</span><span class="p">)</span> <span class="n">name</span> <span class="s2">&quot;bar&quot;</span><span class="o">.</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">findFunctionsByName</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">))</span> <span class="p">{</span>
+       <span class="o">//</span> <span class="n">Add</span> <span class="n">a</span> <span class="n">new</span> <span class="p">(</span><span class="n">mangled</span><span class="p">)</span> <span class="n">primary</span> <span class="n">name</span> <span class="n">to</span> <span class="n">the</span> <span class="n">first</span> <span class="n">function</span>
+       <span class="n">funcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">addMangledName</span><span class="p">(</span><span class="s2">&quot;newname&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">search</span> <span class="k">for</span> <span class="n">symbol</span> <span class="n">of</span> <span class="nb">any</span> <span class="nb">type</span> <span class="k">with</span> <span class="n">demangled</span> <span class="p">(</span><span class="n">pretty</span><span class="p">)</span> <span class="n">name</span> <span class="s2">&quot;bar&quot;</span><span class="o">.</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">findSymbol</span><span class="p">(</span><span class="n">syms</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">::</span><span class="n">ST_UNKNOWN</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="o">//</span> <span class="n">change</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">the</span> <span class="n">found</span> <span class="n">symbol</span> <span class="n">to</span> <span class="nb">type</span> <span class="n">variable</span><span class="p">(</span><span class="n">ST_OBJECT</span><span class="p">)</span>
+    <span class="n">syms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">setType</span><span class="p">(</span><span class="n">Symbol</span><span class="p">::</span><span class="n">ST_OBJECT</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">These</span> <span class="n">changes</span> <span class="n">are</span> <span class="n">automatically</span> <span class="n">added</span> <span class="n">to</span> <span class="n">symtabAPI</span><span class="p">;</span> <span class="n">no</span> <span class="n">further</span>
+    <span class="o">//</span> <span class="n">actions</span> <span class="n">are</span> <span class="n">required</span> <span class="n">by</span> <span class="n">the</span> <span class="n">user</span><span class="o">.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>New symbols, functions, and variables can be created and added to the
+library at any point using the handle returned by successful parsing of
+the object file. When possible, add a function or variable rather than a
+symbol directly.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+
+<span class="o">//</span><span class="n">Module</span> <span class="k">for</span> <span class="n">the</span> <span class="n">symbol</span>
+<span class="n">Module</span> <span class="o">*</span><span class="n">mod</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">obj</span> <span class="n">represents</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">a</span> <span class="n">parsed</span> <span class="nb">object</span> <span class="n">file</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">Lookup</span> <span class="n">module</span> <span class="n">handle</span> <span class="k">for</span> <span class="s2">&quot;DEFAULT_MODULE&quot;</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">findModuleByName</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s2">&quot;DEFAULT_MODULE&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">function</span> <span class="n">symbol</span>
+<span class="n">Variable</span> <span class="o">*</span><span class="n">newVar</span> <span class="o">=</span> <span class="n">mod</span><span class="o">-&gt;</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;newIntVar&quot;</span><span class="p">,</span>  <span class="o">//</span> <span class="n">Name</span> <span class="n">of</span> <span class="n">new</span> <span class="n">variable</span>
+                                       <span class="mh">0x12345</span><span class="p">,</span>      <span class="o">//</span> <span class="n">Offset</span> <span class="kn">from</span> <span class="nn">data</span> <span class="n">section</span>
+                                       <span class="n">sizeof</span><span class="p">(</span><span class="nb">int</span><span class="p">));</span> <span class="o">//</span> <span class="n">Size</span> <span class="n">of</span> <span class="n">symbol</span>
+</pre></div>
+</div>
+<p>SymtabAPI gives the ability to query type information present in the
+object file. Also, new user defined types can be added to SymtabAPI. The
+following example shows both how to query type information after an
+object file is successfully parsed and also add a new structure type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">struct</span> <span class="n">Type</span>
+<span class="o">//</span> <span class="n">typedef</span> <span class="n">struct</span><span class="p">{</span>
+<span class="o">//</span><span class="nb">int</span> <span class="n">field1</span><span class="p">,</span>
+<span class="o">//</span><span class="nb">int</span> <span class="n">field2</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="o">//</span> <span class="p">}</span> <span class="n">struct1</span><span class="p">;</span>
+
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Find</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">the</span> <span class="n">integer</span> <span class="nb">type</span><span class="p">;</span> <span class="n">obj</span> <span class="n">represents</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">a</span> <span class="n">parsed</span> <span class="nb">object</span> <span class="n">file</span>
+<span class="n">Type</span> <span class="o">*</span><span class="n">lookupType</span><span class="p">;</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">findType</span><span class="p">(</span><span class="n">lookupType</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Convert</span> <span class="n">the</span> <span class="n">generic</span> <span class="nb">type</span> <span class="nb">object</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specific</span> <span class="n">scalar</span> <span class="nb">type</span> <span class="nb">object</span>
+<span class="n">typeScalar</span> <span class="o">*</span><span class="n">intType</span> <span class="o">=</span> <span class="n">lookupType</span><span class="o">-&gt;</span><span class="n">getScalarType</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">container</span> <span class="n">to</span> <span class="n">hold</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">types</span> <span class="n">of</span> <span class="n">the</span> <span class="n">new</span> <span class="n">structure</span> <span class="nb">type</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*&gt;</span> <span class="o">&gt;</span><span class="n">fields</span><span class="p">;</span>
+
+<span class="o">//</span><span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">array</span> <span class="nb">type</span><span class="p">(</span><span class="nb">int</span> <span class="n">type2</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">typeArray</span> <span class="o">*</span><span class="n">intArray</span> <span class="o">=</span> <span class="n">typeArray</span><span class="p">::</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;intArray&quot;</span><span class="p">,</span><span class="n">intType</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span> <span class="n">obj</span><span class="p">);</span>
+
+<span class="o">//</span><span class="n">types</span> <span class="n">of</span> <span class="n">the</span> <span class="n">structure</span> <span class="n">fields</span>
+<span class="n">fields</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;field1&quot;</span><span class="p">,</span> <span class="n">intType</span><span class="p">));</span>
+<span class="n">fields</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">Type</span> <span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;field2&quot;</span><span class="p">,</span> <span class="n">intArray</span><span class="p">));</span>
+
+<span class="o">//</span><span class="n">create</span> <span class="n">the</span> <span class="n">structure</span> <span class="nb">type</span>
+<span class="n">typeStruct</span> <span class="o">*</span><span class="n">struct1</span> <span class="o">=</span> <span class="n">typeStruct</span><span class="p">::</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;struct1&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Users can also query line number information present in an object file.
+The following example shows how to use SymtabAPI to get the address
+range for a line number within a source file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">obj</span> <span class="n">represents</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">a</span> <span class="n">parsed</span> <span class="nb">object</span> <span class="n">file</span> <span class="n">using</span> <span class="n">symtabAPI</span>
+<span class="o">//</span> <span class="n">Container</span> <span class="n">to</span> <span class="n">hold</span> <span class="n">the</span> <span class="n">address</span> <span class="nb">range</span>
+<span class="n">vector</span><span class="o">&lt;</span> <span class="n">pair</span><span class="o">&lt;</span> <span class="n">Offset</span><span class="p">,</span> <span class="n">Offset</span> <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">ranges</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">address</span> <span class="nb">range</span> <span class="k">for</span> <span class="n">the</span> <span class="n">line</span> <span class="mi">30</span> <span class="ow">in</span> <span class="n">source</span> <span class="n">file</span> <span class="n">foo</span><span class="o">.</span><span class="n">c</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">getAddressRanges</span><span class="p">(</span><span class="n">ranges</span><span class="p">,</span> <span class="s2">&quot;foo.c&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Local variable information can be obtained using symtabAPI. You can
+query for a local variable within the entire object file or just within
+a function. The following example shows how to find local variable foo
+within function bar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">namespace</span> <span class="n">Dyninst</span><span class="p">;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">SymtabAPI</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Obj</span> <span class="n">represents</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">a</span> <span class="n">parsed</span> <span class="nb">object</span> <span class="n">file</span> <span class="n">using</span> <span class="n">symtabAPI</span>
+<span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">Symbol</span> <span class="nb">object</span> <span class="n">representing</span> <span class="n">function</span> <span class="n">bar</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">Symbol</span> <span class="o">*&gt;</span> <span class="n">syms</span><span class="p">;</span>
+<span class="n">obj</span><span class="o">-&gt;</span><span class="n">findSymbol</span><span class="p">(</span><span class="n">syms</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">::</span><span class="n">ST_FUNCTION</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Find</span> <span class="n">the</span> <span class="n">local</span> <span class="n">var</span> <span class="n">foo</span> <span class="n">within</span> <span class="n">function</span> <span class="n">bar</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">localVar</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="nb">vars</span> <span class="o">=</span> <span class="n">syms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findLocalVarible</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The rest of this document describes the class hierarchy and the API in
+detail.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

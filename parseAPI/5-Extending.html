@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extending ParseAPI &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Extending ParseAPI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/parseAPI/5-Extending.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="extending-parseapi">
+<span id="sec-extend"></span><h1>Extending ParseAPI<a class="headerlink" href="#extending-parseapi" title="Permalink to this headline"></a></h1>
+<p>The ParseAPI is design to be a low level toolkit for binary analysis
+tools. Users can extend the ParseAPI in two ways: by extending the
+control flow structures (Functions, Blocks, and Edges) to incorporate
+additional data to support various analysis applications, and by adding
+additional binary code sources that are unsupported by the default
+SymtabAPI-based code source. For example, a code source that represents
+a program image in memory could be implemented by fulfilling the
+CodeSource and InstructionSource interfaces described in Section
+<a class="reference external" href="#sec:codesource">[sec:codesource]</a> and below. Implementations that
+extend the CFG structures need only provide a custom allocation factory
+in order for these objects to be allocated during parsing.</p>
+<div class="section" id="instruction-and-code-sources">
+<h2>Instruction and Code Sources<a class="headerlink" href="#instruction-and-code-sources" title="Permalink to this headline"></a></h2>
+<p>A CodeSource, as described above, exports its own and the
+InstructionSource interface for access to binary code and other details.
+In addition to implementing the virtual methods in the CodeSource base
+class (Section <a class="reference external" href="#sec:codesource">[sec:codesource]</a>), the methods in
+the pure-virtual InstructionSource class must be implemented:</p>
+<div class="apient container">
+virtual bool isValidAddress(const Address)</div>
+<div class="apient container">
+virtual void* getPtrToInstruction(const Address)</div>
+<div class="apient container">
+virtual void* getPtrToData(const Address)</div>
+<div class="apient container">
+virtual unsigned int getAddressWidth()</div>
+<div class="apient container">
+virtual bool isCode(const Address)</div>
+<div class="apient container">
+virtual bool isData(const Address)</div>
+<div class="apient container">
+virtual Address offset()</div>
+<div class="apient container">
+virtual Address length()</div>
+<div class="apient container">
+virtual Architecture getArch()</div>
+<div class="apient container">
+virtual bool isAligned(const Address)</div>
+<p>CodeSource implementors need to fill in several data structures in the
+base CodeSource class:</p>
+<div class="apient container">
+std::map&lt;Address, std::string&gt; _linkage</div>
+<div class="apient container">
+Address _table_of_contents</div>
+<div class="apient container">
+std::vector&lt;CodeRegion *&gt; _regions Dyninst::IBSTree&lt;CodeRegion&gt;
+_region_tree</div>
+<div class="apient container">
+std::vector&lt;Hint&gt; _hints</div>
+</div>
+<div class="section" id="cfg-object-factories">
+<span id="sec-factories"></span><h2>CFG Object Factories<a class="headerlink" href="#cfg-object-factories" title="Permalink to this headline"></a></h2>
+<p>Users who which to incorporate the ParseAPI into large projects may need
+to store additional information about CFG objects like Functions,
+Blocks, and Edges. The simplest way to associate the ParseAPI-level CFG
+representation with higher-level implementation is to extend the CFG
+classes provided as part of the ParseAPI. Because the parser itself does
+not know how to construct such extended types, implementors must provide
+an implementation of the CFGFactory that is specialized for their CFG
+classes. The CFGFactory exports the following simple interface:</p>
+<div class="apient container">
+virtual Function * mkfunc(Address addr, FuncSource src, std::string
+name, CodeObject * obj, CodeRegion * region,
+Dyninst::InstructionSource * isrc)</div>
+<div class="apient container">
+virtual Block * mkblock(Function * func, CodeRegion * region,
+Address addr)</div>
+<div class="apient container">
+virtual Edge * mkedge(Block * src, Block * trg, EdgeTypeEnum type)</div>
+<div class="apient container">
+virtual Block * mksink(CodeObject *obj, CodeRegion *r)</div>
+<p>Implementors of extended CFG classes are required to override the
+default implementations of the <em>mk*</em> functions to allocate and return
+the appropriate derived types statically cast to the base type.
+Implementors must also add all allocated objects to the following
+internal lists:</p>
+<div class="apient container">
+fact_list&lt;Edge&gt; edges_ fact_list&lt;Block&gt; blocks_ fact_list&lt;Function&gt;
+funcs_</div>
+<p>Implementors <em>may</em> but are <em>not required to</em> override the deallocation
+following deallocation routines. The primary reason to override these
+routines is if additional action or cleanup is necessary upon CFG object
+release; the default routines simply remove the objects from the
+allocation list and invoke their destructors.</p>
+<div class="apient container">
+virtual void free_func(Function * f) virtual void free_block(Block
+* b) virtual void free_edge(Edge * e) virtual void free_all()</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

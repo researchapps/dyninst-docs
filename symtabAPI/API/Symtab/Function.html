@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Function &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Class Function</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/symtabAPI/API/Symtab/Function.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="class-function">
+<span id="function"></span><h1>Class Function<a class="headerlink" href="#class-function" title="Permalink to this headline"></a></h1>
+<p>The class represents a collection of symbols that have the same address
+and a type of . When appropriate, use this representation instead of the
+underlying objects.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="34%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>getModule</td>
+<td>const Module *</td>
+<td>Module this function
+belongs to.</td>
+</tr>
+<tr class="row-odd"><td>getOffset</td>
+<td>Offset</td>
+<td>Offset in the file
+associated with the
+function.</td>
+</tr>
+<tr class="row-even"><td>getSize</td>
+<td>unsigned</td>
+<td>Size encoded in the
+symbol table; may
+not be actual
+function size.</td>
+</tr>
+<tr class="row-odd"><td>mangled_names_begin</td>
+<td>Aggregate::name_iter</td>
+<td>Beginning of a range
+of unique names of
+symbols pointing to
+this function.</td>
+</tr>
+<tr class="row-even"><td>mangled_names_end</td>
+<td>Aggregate::name_iter</td>
+<td>End of a range of
+unique names of
+symbols pointing to
+this function.</td>
+</tr>
+<tr class="row-odd"><td>pretty_names_begin</td>
+<td>Aggregate::name_iter</td>
+<td>As above, but
+prettified with the
+demangler.</td>
+</tr>
+<tr class="row-even"><td>pretty_names_end</td>
+<td>Aggregate::name_iter</td>
+<td>As above, but
+prettified with the
+demangler.</td>
+</tr>
+<tr class="row-odd"><td>typed_names_begin</td>
+<td>Aggregate::name_iter</td>
+<td>As above, but
+including full type
+strings.</td>
+</tr>
+<tr class="row-even"><td>typed_names_end</td>
+<td>Aggregate::name_iter</td>
+<td>As above, but
+including full type
+strings.</td>
+</tr>
+<tr class="row-odd"><td>getRegion</td>
+<td>Region *</td>
+<td>Region containing
+this function.</td>
+</tr>
+<tr class="row-even"><td>getReturnType</td>
+<td>Type *</td>
+<td>Type representing
+the return type of
+the function.</td>
+</tr>
+</tbody>
+</table>
+<div class="apient container">
+bool getSymbols(vector&lt;Symbol *&gt; &amp;syms) const</div>
+<div class="apient container">
+bool setModule (Module *module)</div>
+<div class="apient container">
+bool setSize (unsigned size)</div>
+<div class="apient container">
+bool setOffset (Offset offset)</div>
+<div class="apient container">
+bool addMangledName(string name, bool isPrimary)</div>
+<div class="apient container">
+bool addPrettyName(string name, bool isPrimary)</div>
+<div class="apient container">
+bool addTypedName(string name, bool isPrimary)</div>
+<div class="apient container">
+bool getLocalVariables(vector&lt;localVar *&gt; &amp;vars)</div>
+<div class="apient container">
+std::vector&lt;VariableLocation&gt; &amp;getFramePtr()</div>
+<div class="apient container">
+bool getParams(vector&lt;localVar *&gt; &amp;params)</div>
+<div class="apient container">
+bool findLocalVariable(vector&lt;localVar *&gt; &amp;vars, string name)</div>
+<div class="apient container">
+bool setReturnType(Type *type)</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

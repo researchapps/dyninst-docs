@@ -1,0 +1,436 @@
+Class Symtab
+------------
+
+The class represents an object file either on-disk or in-memory. This
+class is responsible for the parsing of the file information and holding
+the data that can be accessed through look up functions.
+
++-------------+--------------+---------------------------------------+
+| Method name | Return type  | Method description                    |
++=============+==============+=======================================+
+|             | std::string  | Full path to the opened file or       |
+|             |              | provided name for the memory image.   |
++-------------+--------------+---------------------------------------+
+|             | std::string  | File name without path.               |
++-------------+--------------+---------------------------------------+
+|             | std::string  | For archive (.a) files, returns the   |
+|             |              | object file (.o) this Symtab          |
+|             |              | represents.                           |
++-------------+--------------+---------------------------------------+
+|             | unsigned     | Number of regions.                    |
++-------------+--------------+---------------------------------------+
+|             | unsigned     | Total number of symbols in both the   |
+|             |              | static and dynamic tables.            |
++-------------+--------------+---------------------------------------+
+|             | char \*      | Pointer to memory image for the       |
+|             |              | Symtab; not valid for disk files.     |
++-------------+--------------+---------------------------------------+
+|             | Offset       | Offset of the first code segment from |
+|             |              | the start of the binary.              |
++-------------+--------------+---------------------------------------+
+|             | Offset       | Offset of the first data segment from |
+|             |              | the start of the binary.              |
++-------------+--------------+---------------------------------------+
+|             | Offset       | Size of the primary code-containing   |
+|             |              | region, typically .text.              |
++-------------+--------------+---------------------------------------+
+|             | Offset       | Size of the primary data-containing   |
+|             |              | region, typically .data.              |
++-------------+--------------+---------------------------------------+
+|             | bool         | True if the binary was compiled       |
+|             |              | statically.                           |
++-------------+--------------+---------------------------------------+
+|             | bool         | True if the file is an executable.    |
++-------------+--------------+---------------------------------------+
+|             | bool         | True if the file is a shared library. |
++-------------+--------------+---------------------------------------+
+|             | bool         | True if the file is can only be an    |
+|             |              | executable, false otherwise including |
+|             |              | files that are both exeutables and    |
+|             |              | shared libraries. Typically files     |
+|             |              | that are both executables and shared  |
+|             |              | libraries are primarily used as       |
+|             |              | libraries, if you need to determine   |
+|             |              | specifics use the methods and .       |
++-------------+--------------+---------------------------------------+
+|             | bool         | True if the file was stripped of      |
+|             |              | symbol table information.             |
++-------------+--------------+---------------------------------------+
+|             | unsigned     | Size (in bytes) of a pointer value in |
+|             |              | the Symtab; 4 for 32-bit binaries and |
+|             |              | 8 for 64-bit binaries.                |
++-------------+--------------+---------------------------------------+
+|             | Architecture | Representation of the system          |
+|             |              | architecture for the binary.          |
++-------------+--------------+---------------------------------------+
+|             | Offset       | The suggested load offset of the      |
+|             |              | file; typically 0 for shared          |
+|             |              | libraries.                            |
++-------------+--------------+---------------------------------------+
+|             | Offset       | The entry point (where execution      |
+|             |              | begins) of the binary.                |
++-------------+--------------+---------------------------------------+
+|             | Offset       | (Windows only) the OS-specified base  |
+|             |              | offset of the file.                   |
++-------------+--------------+---------------------------------------+
+
+.. container:: apient
+
+   ObjectType getObjectType() const
+
+.. container:: apient
+
+   bool isExecutable() bool isSharedLibrary() bool isExec()
+
+File opening/parsing
+~~~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   static bool openFile(Symtab \*&obj, string filename)
+
+.. container:: apient
+
+   static bool openFile(Symtab \*&obj, char \*mem_image, size_t size,
+   std::string name)
+
+.. container:: apient
+
+   static Symtab \*findOpenSymtab(string name)
+
+Module lookup
+~~~~~~~~~~~~~
+
+.. container:: apient
+
+   Module \*getDefaultModule()
+
+.. container:: apient
+
+   bool findModuleByName(Module \*&ret, const string name)
+
+.. container:: apient
+
+   bool findModuleByOffset(Module \*&ret, Offset offset)
+
+.. container:: apient
+
+   bool getAllModules(vector<module \*> &ret)
+
+Function, Variable, and Symbol lookup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   bool findFuncByEntryOffset(Function \*&ret, const Offset offset)
+
+.. container:: apient
+
+   bool findFunctionsByName(std::vector<Function \*> &ret, const
+   std::string name, NameType nameType = anyName, bool isRegex = false,
+   bool checkCase = true)
+
+.. container:: apient
+
+   bool getContainingFunction(Offset offset, Function \*&ret)
+
+.. container:: apient
+
+   bool getAllFunctions(vector<Function \*> &ret)
+
+.. container:: apient
+
+   bool findVariablesByOffset(std::vector<Variable \*> &ret, const
+   Offset offset)
+
+.. container:: apient
+
+   bool findVariablesByName(std::vector<Variable \*> &ret, const
+   std::string name, NameType nameType = anyName, bool isRegex = false,
+   bool checkCase = true)
+
+.. container:: apient
+
+   bool getAllVariables(vector<Variable \*> &ret)
+
+.. container:: apient
+
+   bool findSymbol(vector <Symbol \*> &ret, const string name,
+   Symbol::SymbolType sType, NameType nameType = anyName, bool isRegex =
+   false, bool checkCase = false)
+
+.. container:: apient
+
+   const vector<Symbol \*> \*findSymbolByOffset(Offset offset)
+
+.. container:: apient
+
+   bool getAllSymbols(vector<Symbol \*> &ret)
+
+.. container:: apient
+
+   bool getAllSymbolsByType(vector<Symbol \*> &ret, Symbol::SymbolType
+   sType)
+
+.. container:: apient
+
+   bool getAllUndefinedSymbols(std::vector<Symbol \*> &ret)
+
+Region lookup
+~~~~~~~~~~~~~
+
+.. container:: apient
+
+   bool getCodeRegions(std::vector<Region \*>&ret)
+
+.. container:: apient
+
+   bool getDataRegions(std::vector<Region \*>&ret)
+
+.. container:: apient
+
+   bool getMappedRegions(std::vector<Region \*>&ret)
+
+.. container:: apient
+
+   bool getAllRegions(std::vector<Region \*>&ret)
+
+.. container:: apient
+
+   bool getAllNewRegions(std::vector<Region \*>&ret)
+
+.. container:: apient
+
+   bool findRegion(Region \*&reg, string sname)
+
+.. container:: apient
+
+   bool findRegion(Region \*&reg, const Offset addr, const unsigned long
+   size)
+
+.. container:: apient
+
+   bool findRegionByEntry(Region \*&reg, const Offset soff)
+
+.. container:: apient
+
+   Region \*findEnclosingRegion(const Offset offset)
+
+Insertion and modification
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   bool emit(string file)
+
+.. container:: apient
+
+   bool addLibraryPrereq(string lib)
+
+.. container:: apient
+
+   Function \*createFunction(std::string name, Offset offset, size_t
+   size, Module \*mod = NULL)
+
+.. container:: apient
+
+   Variable \*createVariable(std::string name, Offset offset, size_t
+   size, Module \*mod = NULL)
+
+.. container:: apient
+
+   bool addSymbol(Symbol \*newsym)
+
+.. container:: apient
+
+   bool addSymbol(Symbol \*newsym, Symbol \*referringSymbol)
+
+.. container:: apient
+
+   bool deleteFunction(Function \*func)
+
+.. container:: apient
+
+   bool deleteVariable(Variable \*var)
+
+.. container:: apient
+
+   bool deleteSymbol(Symbol \*sym)
+
+.. container:: apient
+
+   bool addRegion(Offset vaddr, void \*data, unsigned int dataSize,
+   std::string name, Region::RegionType rType_, bool loadable = false,
+   unsigned long memAlign = sizeof(unsigned), bool tls = false)
+
+.. container:: apient
+
+   Offset getFreeOffset(unsigned size)
+
+.. container:: apient
+
+   bool addRegion(Region \*newreg);
+
+Catch and Exception block lookup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   bool getAllExceptions(vector<ExceptionBlock \*> &exceptions)
+
+.. container:: apient
+
+   bool findException(ExceptionBlock &excp, Offset addr)
+
+.. container:: apient
+
+   bool findCatchBlock(ExceptionBlock &excp, Offset addr, unsigned size
+   = 0)
+
+Symtab information
+~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   typedef enum obj_Unknown, obj_SharedLib, obj_Executable,
+   obj_RelocatableFile, ObjectType;
+
+.. container:: apient
+
+   bool isCode(const Offset where) const
+
+.. container:: apient
+
+   bool isData(const Offset where) const
+
+.. container:: apient
+
+   bool isValidOffset(const Offset where) const
+
+Line number information
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   bool getAddressRanges(vector<pair<Offset, Offset> > & ranges, string
+   lineSource, unsigned int LineNo)
+
+.. container:: apient
+
+   bool getSourceLines(vector<LineNoTuple> &lines, Offset
+   addressInRange)
+
+.. container:: apient
+
+   bool addLine(string lineSource, unsigned int lineNo, unsigned int
+   lineOffset, Offset lowInclusiveAddr, Offset highExclusiveAddr)
+
+.. container:: apient
+
+   bool addAddressRange(Offset lowInclusiveAddr, Offset
+   highExclusiveAddr, string lineSource, unsigned int lineNo, unsigned
+   int lineOffset = 0);
+
+Type information
+~~~~~~~~~~~~~~~~
+
+.. container:: apient
+
+   void parseTypesNow()
+
+.. container:: apient
+
+   bool findType(Type \*&type, string name)
+
+.. container:: apient
+
+   bool addType(Type \* type)
+
+.. container:: apient
+
+   static std::vector<Type \*> \* getAllstdTypes()
+
+.. container:: apient
+
+   static std::vector<Type \*> \* getAllbuiltInTypes()
+
+.. container:: apient
+
+   bool findLocalVariable(vector<localVar \*> &vars, string name)
+
+.. container:: apient
+
+   bool findVariableType(Type \*&type, std::string name)
+
+.. container:: apient
+
+   typedef enum ... SymtabError
+
+.. container:: center
+
+   +-------------------------+-------------------------------------------+
+   | SymtabError enum        | Meaning                                   |
+   +=========================+===========================================+
+   | Obj_Parsing             | An error occurred during object           |
+   |                         | parsing(internal error).                  |
+   +-------------------------+-------------------------------------------+
+   | Syms_To_Functions       | An error occurred in converting symbols   |
+   |                         | to functions(internal error).             |
+   +-------------------------+-------------------------------------------+
+   | Build_Function_Lists    | An error occurred while building function |
+   |                         | lists(internal error).                    |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Function        | No matching function exists with the      |
+   |                         | given inputs.                             |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Variable        | No matching variable exists with the      |
+   |                         | given inputs.                             |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Module          | No matching module exists with the given  |
+   |                         | inputs.                                   |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Symbol          | No matching symbol exists with the given  |
+   |                         | inputs.                                   |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Region          | No matching region exists with the given  |
+   |                         | inputs.                                   |
+   +-------------------------+-------------------------------------------+
+   | No_Such_Member          | No matching member exists in the archive  |
+   |                         | with the given inputs.                    |
+   +-------------------------+-------------------------------------------+
+   | Not_A_File              | Binary to be parsed may be an archive and |
+   |                         | not a file.                               |
+   +-------------------------+-------------------------------------------+
+   | Not_An_Archive          | Binary to be parsed is not an archive.    |
+   +-------------------------+-------------------------------------------+
+   | Duplicate_Symbol        | Duplicate symbol found in symbol table.   |
+   +-------------------------+-------------------------------------------+
+   | Export_Error            | Error occurred during export of modified  |
+   |                         | symbol table.                             |
+   +-------------------------+-------------------------------------------+
+   | Emit_Error              | Error occurred during generation of       |
+   |                         | modified binary.                          |
+   +-------------------------+-------------------------------------------+
+   | Invalid_Flags           | Flags passed are invalid.                 |
+   +-------------------------+-------------------------------------------+
+   | Bad_Frame_Data          | Stack walking DWARF information has bad   |
+   |                         | frame data.                               |
+   +-------------------------+-------------------------------------------+
+   | No_Frame_Entry          | No stack walking frame data found in      |
+   |                         | debug information for this location.      |
+   +-------------------------+-------------------------------------------+
+   | Frame_Read_Error        | Failed to read stack frame data.          |
+   +-------------------------+-------------------------------------------+
+   | Multiple_Region_Matches | Multiple regions match the provided data. |
+   +-------------------------+-------------------------------------------+
+   | No_Error                | Previous operation did not result in      |
+   |                         | failure.                                  |
+   +-------------------------+-------------------------------------------+
+
+.. container:: apient
+
+   static SymtabError getLastSymtabError()
+
+.. container:: apient
+
+   static string printError(SymtabError serr)

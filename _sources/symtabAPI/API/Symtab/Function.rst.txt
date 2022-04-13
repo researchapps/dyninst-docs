@@ -1,0 +1,105 @@
+.. _Function:
+
+Class Function
+--------------
+
+The class represents a collection of symbols that have the same address
+and a type of . When appropriate, use this representation instead of the
+underlying objects.
+
++---------------------+----------------------+----------------------+
+| Method name         | Return type          | Method description   |
++=====================+======================+======================+
+| getModule           | const Module \*      | Module this function |
+|                     |                      | belongs to.          |
++---------------------+----------------------+----------------------+
+| getOffset           | Offset               | Offset in the file   |
+|                     |                      | associated with the  |
+|                     |                      | function.            |
++---------------------+----------------------+----------------------+
+| getSize             | unsigned             | Size encoded in the  |
+|                     |                      | symbol table; may    |
+|                     |                      | not be actual        |
+|                     |                      | function size.       |
++---------------------+----------------------+----------------------+
+| mangled_names_begin | Aggregate::name_iter | Beginning of a range |
+|                     |                      | of unique names of   |
+|                     |                      | symbols pointing to  |
+|                     |                      | this function.       |
++---------------------+----------------------+----------------------+
+| mangled_names_end   | Aggregate::name_iter | End of a range of    |
+|                     |                      | unique names of      |
+|                     |                      | symbols pointing to  |
+|                     |                      | this function.       |
++---------------------+----------------------+----------------------+
+| pretty_names_begin  | Aggregate::name_iter | As above, but        |
+|                     |                      | prettified with the  |
+|                     |                      | demangler.           |
++---------------------+----------------------+----------------------+
+| pretty_names_end    | Aggregate::name_iter | As above, but        |
+|                     |                      | prettified with the  |
+|                     |                      | demangler.           |
++---------------------+----------------------+----------------------+
+| typed_names_begin   | Aggregate::name_iter | As above, but        |
+|                     |                      | including full type  |
+|                     |                      | strings.             |
++---------------------+----------------------+----------------------+
+| typed_names_end     | Aggregate::name_iter | As above, but        |
+|                     |                      | including full type  |
+|                     |                      | strings.             |
++---------------------+----------------------+----------------------+
+| getRegion           | Region \*            | Region containing    |
+|                     |                      | this function.       |
++---------------------+----------------------+----------------------+
+| getReturnType       | Type \*              | Type representing    |
+|                     |                      | the return type of   |
+|                     |                      | the function.        |
++---------------------+----------------------+----------------------+
+
+.. container:: apient
+
+   bool getSymbols(vector<Symbol \*> &syms) const
+
+.. container:: apient
+
+   bool setModule (Module \*module)
+
+.. container:: apient
+
+   bool setSize (unsigned size)
+
+.. container:: apient
+
+   bool setOffset (Offset offset)
+
+.. container:: apient
+
+   bool addMangledName(string name, bool isPrimary)
+
+.. container:: apient
+
+   bool addPrettyName(string name, bool isPrimary)
+
+.. container:: apient
+
+   bool addTypedName(string name, bool isPrimary)
+
+.. container:: apient
+
+   bool getLocalVariables(vector<localVar \*> &vars)
+
+.. container:: apient
+
+   std::vector<VariableLocation> &getFramePtr()
+
+.. container:: apient
+
+   bool getParams(vector<localVar \*> &params)
+
+.. container:: apient
+
+   bool findLocalVariable(vector<localVar \*> &vars, string name)
+
+.. container:: apient
+
+   bool setReturnType(Type \*type)

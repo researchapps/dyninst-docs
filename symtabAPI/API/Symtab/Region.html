@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Region &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Class Region</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/symtabAPI/API/Symtab/Region.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="class-region">
+<h1>Class Region<a class="headerlink" href="#class-region" title="Permalink to this headline"></a></h1>
+<p>This class represents a contiguous range of code or data as encoded in
+the object file. For ELF, regions represent ELF sections.</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">perm_t</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RP_R</td>
+<td>Read-only data</td>
+</tr>
+<tr class="row-odd"><td>RP_RW</td>
+<td>Read/write data</td>
+</tr>
+<tr class="row-even"><td>RP_RX</td>
+<td>Read-only code</td>
+</tr>
+<tr class="row-odd"><td>RP_RWX</td>
+<td>Read/write code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">RegionType</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RT_TEXT</td>
+<td>Executable code</td>
+</tr>
+<tr class="row-odd"><td>RT_DATA</td>
+<td>Read/write data</td>
+</tr>
+<tr class="row-even"><td>RT_TEXTDATA</td>
+<td>Mix of code and data</td>
+</tr>
+<tr class="row-odd"><td>RT_SYMTAB</td>
+<td>Static symbol table</td>
+</tr>
+<tr class="row-even"><td>RT_STRTAB</td>
+<td>String table used by the symbol table</td>
+</tr>
+<tr class="row-odd"><td>RT_BSS</td>
+<td>0-initialized memory</td>
+</tr>
+<tr class="row-even"><td>RT_SYMVERSIONS</td>
+<td>Versioning information for symbols</td>
+</tr>
+<tr class="row-odd"><td>RT_SYMVERDEF</td>
+<td>Versioning information for symbols</td>
+</tr>
+<tr class="row-even"><td>RT_SYMVERNEEDED</td>
+<td>Versioning information for symbols</td>
+</tr>
+<tr class="row-odd"><td>RT_REL</td>
+<td>Relocation section</td>
+</tr>
+<tr class="row-even"><td>RT_RELA</td>
+<td>Relocation section</td>
+</tr>
+<tr class="row-odd"><td>RT_PLTREL</td>
+<td>Relocation section for PLT (inter-library
+references) entries</td>
+</tr>
+<tr class="row-even"><td>RT_PLTRELA</td>
+<td>Relocation section for PLT (inter-library
+references) entries</td>
+</tr>
+<tr class="row-odd"><td>RT_DYNAMIC</td>
+<td>Decription of library dependencies</td>
+</tr>
+<tr class="row-even"><td>RT_HASH</td>
+<td>Fast symbol lookup section</td>
+</tr>
+<tr class="row-odd"><td>RT_GNU_HASH</td>
+<td>GNU-specific fast symbol lookup section</td>
+</tr>
+<tr class="row-even"><td>RT_OTHER</td>
+<td>Miscellaneous information</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="24%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>getRegionNumber</td>
+<td>unsigned</td>
+<td>Index of the region in
+the file, starting at
+0.</td>
+</tr>
+<tr class="row-odd"><td>getRegionName</td>
+<td>std::string</td>
+<td>Name of the region
+(e.g. .text, .data).</td>
+</tr>
+<tr class="row-even"><td>getPtrToRawData</td>
+<td>void *</td>
+<td>Read-only pointer to
+the region’s raw data
+buffer.</td>
+</tr>
+<tr class="row-odd"><td>getDiskOffset</td>
+<td>Offset</td>
+<td>Offset within the file
+where the region
+begins.</td>
+</tr>
+<tr class="row-even"><td>getDiskSize</td>
+<td>unsigned long</td>
+<td>Size of the region’s
+data in the file.</td>
+</tr>
+<tr class="row-odd"><td>getMemOffset</td>
+<td>Offset</td>
+<td>Location where the
+region will be loaded
+into memory, modified
+by the file’s base load
+address.</td>
+</tr>
+<tr class="row-even"><td>getMemSize</td>
+<td>unsigned long</td>
+<td>Size of the region in
+memory, including zero
+padding.</td>
+</tr>
+<tr class="row-odd"><td>isBSS</td>
+<td>bool</td>
+<td>Type query for
+uninitialized data
+regions (zero disk
+size, non-zero memory
+size).</td>
+</tr>
+<tr class="row-even"><td>isText</td>
+<td>bool</td>
+<td>Type query for
+executable code
+regions.</td>
+</tr>
+<tr class="row-odd"><td>isData</td>
+<td>bool</td>
+<td>Type query for
+initialized data
+regions.</td>
+</tr>
+<tr class="row-even"><td>getRegionPermissions</td>
+<td>perm_t</td>
+<td>Permissions for the
+region; perm_ t is
+defined above.</td>
+</tr>
+<tr class="row-odd"><td>getRegionType</td>
+<td>RegionType</td>
+<td>Type of the region as
+defined above.</td>
+</tr>
+<tr class="row-even"><td>isLoadable</td>
+<td>bool</td>
+<td>True if the region will
+be loaded into memory
+(e.g., code or data),
+false otherwise (e.g.,
+debug information).</td>
+</tr>
+<tr class="row-odd"><td>isDirty</td>
+<td>bool</td>
+<td>True if the region’s
+raw data buffer has
+been modified by the
+user.</td>
+</tr>
+</tbody>
+</table>
+<div class="apient container">
+static Region *createRegion(Offset diskOff, perm_t perms, RegionType
+regType, unsigned long diskSize = 0, Offset memOff = 0, unsigned long
+memSize = 0, std::string name = “”, char *rawDataPtr = NULL, bool
+isLoadable = false, bool isTLS = false, unsigned long memAlign =
+sizeof(unsigned))</div>
+<div class="apient container">
+bool isOffsetInRegion(const Offset &amp;offset) const</div>
+<div class="apient container">
+void setRegionNumber(unsigned index) const</div>
+<div class="apient container">
+bool setPtrToRawData(void *newPtr, unsigned long rawsize)</div>
+<div class="apient container">
+bool setRegionPermissions(perm_t newPerms)</div>
+<div class="apient container">
+bool setLoadable(bool isLoadable)</div>
+<div class="apient container">
+bool addRelocationEntry(Offset relocationAddr, Symbol *dynref,
+unsigned long relType, Region::RegionType rtype = Region::RT_REL)</div>
+<div class="apient container">
+vector&lt;relocationEntry&gt; &amp;getRelocations()</div>
+<div class="apient container">
+bool addRelocationEntry(const relocationEntry&amp; rel)</div>
+<div class="apient container">
+bool patchData(Offset off, void *buf, unsigned size);</div>
+<div class="section" id="removed">
+<h2>REMOVED<a class="headerlink" href="#removed" title="Permalink to this headline"></a></h2>
+<p>The following methods were removed since they were inconsistent and
+dangerous to use.</p>
+<div class="apient container">
+Offset getRegionAddr() const</div>
+<div class="apient container">
+unsigned long getRegionSize() const</div>
+</div>
+</div>
+<div class="section" id="relocation-information">
+<h1>Relocation Information<a class="headerlink" href="#relocation-information" title="Permalink to this headline"></a></h1>
+<p>This class represents object relocation information.</p>
+<div class="apient container">
+Offset target_addr() const</div>
+<div class="apient container">
+Offset rel_addr() const</div>
+<div class="apient container">
+Offset addend() const</div>
+<div class="apient container">
+const std::string name() const</div>
+<div class="apient container">
+Symbol *getDynSym() const</div>
+<div class="apient container">
+unsigned long getRelType() const</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

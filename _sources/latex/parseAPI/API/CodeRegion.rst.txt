@@ -1,0 +1,30 @@
+Class CodeRegion
+----------------
+
+The CodeRegion interface is an accounting structure used to divide
+CodeSources into distinct regions. This interface is mostly of interest
+to CodeSource implementors.
+
+.. container:: apient
+
+   void names(Address addr, vector<std::string> & names)
+
+.. container:: apient
+
+   virtual bool findCatchBlock(Address addr, Address & catchStart)
+
+.. container:: apient
+
+   Address low()
+
+.. container:: apient
+
+   Address high()
+
+.. container:: apient
+
+   bool contains(Address addr)
+
+.. container:: apient
+
+   virtual bool wasUserAdded() const

@@ -1,0 +1,50 @@
+.. _`subsec:steppergroup`:
+
+Class StepperGroup
+~~~~~~~~~~~~~~~~~~
+
+The class contains a collection of objects. The ’s primary job is to
+decide which should be used to walk through a stack frame given a return
+address. The default keeps a set of address ranges for each . If
+multiple objects overlap an address, then the default will use a
+priority system to decide.
+
+provides both an interface and a default implementation of that
+interface. Users who want to customize the should inherit from this
+class and re-implement any of the below virtual functions.
+
+.. container:: apient
+
+   StepperGroup(Walker \*walker)
+
+.. container:: apient
+
+   virtual bool addStepper(FrameStepper \*stepper)
+
+.. container:: apient
+
+   virtual bool addStepper(FrameStepper \*stepper, Address start,
+   Address end) = 0;
+
+.. container:: apient
+
+   virtual void registerStepper(FrameStepper \*stepper);
+
+.. container:: apient
+
+   virtual bool findStepperForAddr(Address addr, FrameStepper\* &out,
+   const FrameStepper \*last_tried = NULL) = 0
+
+.. container:: apient
+
+   typedef std::pair<std::string, Address> LibAddrPair; typedef enum
+   library_load, library_unload lib_change_t; virtual void
+   newLibraryNotification(LibAddrPair \*libaddr, lib_change_t change);
+
+.. container:: apient
+
+   Walker \*getWalker() const
+
+.. container:: apient
+
+   void getSteppers(std::set<FrameStepper \*> &);

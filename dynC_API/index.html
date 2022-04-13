@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DynC API &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../instructionAPI/index.html" />
+    <link rel="prev" title="Introduction" href="../dataflowAPI/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DynC API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dyninst-api">Dyninst API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dync-api-1">DynC API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calling-dync-api">Calling DynC API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-snippets-without-point-information">Creating Snippets Without Point Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#dync-language-description">DynC Language Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#domains">Domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-flow">Control Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conditionals">Conditionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#first-only-code-block">First-Only Code Block</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#static-variables">Static Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#an-explanation-of-the-internal-workings-of-dync-variable-creation">An Explanation of the Internal Workings of DynC Variable Creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-global-variables-that-work-with-dync">Creating Global Variables That Work With DynC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pointers">Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dync-limitations">DynC Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loops">Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enums-unions-structures">Enums, Unions, Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing">Preprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>DynC API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/dynC_API/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="dync-api">
+<h1>DynC API<a class="headerlink" href="#dync-api" title="Permalink to this headline"></a></h1>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"></a></h2>
+<p>Dyninst is a powerful instrumentation tool, but specifying
+instrumentation code (known as an Abstract Syntax Tree) in the
+<code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span></code> language can be cumbersome. DynC API answers these
+concerns, enabling a programmer to easily and quickly build
+<code class="docutils literal notranslate"><span class="pre">BPatch_snippets</span></code> using a simple C-like language. Other advantages to
+specifying <code class="docutils literal notranslate"><span class="pre">BPatch_snippets</span></code> using dynC include cleaner, more readable
+mutator code, automatic variable handling, and runtime-compiled
+snippets.</p>
+<p>As a motivating example, the following implements a function tracer that
+notifies the user when entering and exiting functions, and keeps track
+of the number of times each function is called.</p>
+<div class="section" id="dyninst-api">
+<h3>Dyninst API<a class="headerlink" href="#dyninst-api" title="Permalink to this headline"></a></h3>
+<p>When creating a function tracer using the Dyninst API, the programmer
+must perform many discrete lookups and create many
+<code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span> <span class="pre">objects</span></code>, which are then combined and inserted into
+the mutatee.</p>
+<p>Look up <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_function</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="n">printf_func</span><span class="p">;</span>
+<span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findFunction</span><span class="p">(</span><span class="s2">&quot;printf&quot;</span><span class="p">,</span> <span class="n">printf_func</span><span class="p">);</span>
+<span class="n">BPatch_function</span> <span class="o">*</span><span class="n">BPF_printf</span> <span class="o">=</span> <span class="n">printf_func</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Create each <code class="docutils literal notranslate"><span class="pre">printf</span></code> pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_constExpr</span> <span class="n">entryPattern</span><span class="p">(</span><span class="s2">&quot;Entering </span><span class="si">%s</span><span class="s2">, called </span><span class="si">%d</span><span class="s2"> times.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="n">BPatch_constExpr</span> <span class="n">exitPattern</span><span class="p">(</span><span class="s2">&quot;Exiting </span><span class="si">%s</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>For each function, do the following:</strong></p>
+<p>Create snippet vectors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">entrySnippetVect</span><span class="p">;</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">exitSnippetVect</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Create the <code class="docutils literal notranslate"><span class="pre">intCounter</span></code> global variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">),</span> <span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="p">(</span><span class="s2">&quot;intCounter&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Get the name of the function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">char</span> <span class="n">fName</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+<span class="n">BPatch_constExpr</span> <span class="n">funcName</span><span class="p">(</span><span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span> <span class="mi">128</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Build the entry <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">entryArgs</span><span class="p">;</span>
+<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">entryPattern</span><span class="p">);</span>
+<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span>
+<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">intCounter</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Build the exit <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">exitArgs</span><span class="p">;</span>
+<span class="n">exitArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">exitPattern</span><span class="p">);</span>
+<span class="n">exitArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">printf</span></code> to the snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span> <span class="n">entryArgs</span><span class="p">));</span>
+<span class="n">exitSnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span> <span class="n">exitArgs</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Increment the counter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_arithExpr</span> <span class="n">addOne</span><span class="p">(</span><span class="n">BPatch_assign</span><span class="p">,</span> <span class="o">*</span><span class="n">intCounter</span><span class="p">,</span>
+       <span class="n">BPatch_arithExpr</span><span class="p">(</span><span class="n">BPatch_plus</span><span class="p">,</span> <span class="o">*</span><span class="n">intCounter</span><span class="p">,</span> <span class="n">BPatch_constExpr</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>Add increment to the entry snippet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">addOne</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Insert the snippets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippetVect</span><span class="p">,</span> <span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_entry</span><span class="p">));</span>
+<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippetVect</span><span class="p">,</span> <span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_exit</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dync-api-1">
+<span id="id1"></span><h3>DynC API<a class="headerlink" href="#dync-api-1" title="Permalink to this headline"></a></h3>
+<p>A function tracer is much easier to build in DynC API, especially if
+reading dynC code from file. Storing dynC code in external files not
+only cleans up mutator code, but also allows the programmer to modify
+snippets without recompiling.</p>
+<p>In this example, the files <code class="docutils literal notranslate"><span class="pre">myEntryDynC.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">myExitDynC.txt</span></code>
+contain dynC code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// myEntryDynC.txt
+static int intCounter;
+printf(&quot;Entering %s, called %d times.\n&quot;, dyninst`function_name, intCounter++);
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// myExitDynC.txt
+printf(&quot;Leaving %s.\n&quot;, dyninst`function_name);
+</pre></div>
+</div>
+<p>The code to read, build, and insert the snippets would look something
+like the following:</p>
+<p>First open files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FILE</span> <span class="o">*</span><span class="n">entryFile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&quot;myEntryDynC.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>
+<span class="n">FILE</span> <span class="o">*</span><span class="n">exitFile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&quot;myExitDynC.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next call DynC API with each function’s entry and exit points:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">entrySnippet</span> <span class="o">=</span>
+     <span class="n">dynC_API</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">entryFile</span><span class="p">,</span> <span class="n">entryPoint</span><span class="p">,</span> <span class="s2">&quot;entrySnippet&quot;</span><span class="p">);</span>
+<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">exitSnippet</span> <span class="o">=</span>
+     <span class="n">dynC_API</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">exitFile</span><span class="p">,</span> <span class="n">exitPoint</span><span class="p">,</span> <span class="s2">&quot;exitSnippet&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally insert the snippets at each function’s entry and exit points:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippet</span><span class="p">,</span> <span class="n">entryPoint</span><span class="p">);</span>
+<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippet</span><span class="p">,</span> <span class="n">exitPoint</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="calling-dync-api">
+<h2>Calling DynC API<a class="headerlink" href="#calling-dync-api" title="Permalink to this headline"></a></h2>
+<p>All DynC functions reside in the <code class="docutils literal notranslate"><span class="pre">dynC_API</span></code> namespace. The primary
+DynC API function is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_Snippet</span> <span class="o">*</span><span class="n">createSnippet</span><span class="p">(</span><span class="o">&lt;</span><span class="n">dynC</span> <span class="n">code</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">location</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span> <span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">where <code class="docutils literal notranslate"><span class="pre">&lt;dynC</span> <span class="pre">code&gt;</span></code> can be either a constant c-style string or a
+file descriptor and <code class="docutils literal notranslate"><span class="pre">&lt;location&gt;</span></code> can take the form of a
+<code class="docutils literal notranslate"><span class="pre">BPatch_point</span></code> or a <code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace</span></code>. There is also an
+optional parameter to name a snippet. A snippet name makes code and
+error reporting much easier to read, and allows for the grouping of
+snippets (see section <a class="reference external" href="#sec:varExplain">2.3.2</a>). If a snippet name
+is not specified, the default name <code class="docutils literal notranslate"><span class="pre">Snippet_[&lt;#&gt;]</span></code> is used.</div>
+</div>
+<div class="centering container">
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> input options: dynC code</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">&lt;dynC</span> <span class="pre">code&gt;</span></code></th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">std::string</span> <span class="pre">str</span></code></td>
+<td>A C++ string containing dynC code.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*s</span></code></td>
+<td>A null terminated string containing dynC code</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">FILE</span> <span class="pre">*f</span></code></td>
+<td>A standard C file descriptor. Facilitates
+reading dynC code from file.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> input options: location</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">&lt;location&gt;</span></code></th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">BPatch_point</span> <span class="pre">&amp;point</span></code></td>
+<td>Creates a snippet specific to a
+single point.</td>
+</tr>
+<tr class="row-odd"><td>`
+<cite>BPatch_addressSpace &amp;addSpace`</cite></td>
+<td>Creates a more flexible snippet
+specific to an address space.
+See Section
+<a class="reference external" href="#sec:nopoint">1.3</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The location parameter is the point or address space in which the
+snippet will be inserted. Inserting a snippet created for one location
+into another can cause undefined behavior.</p>
+</div>
+<div class="section" id="creating-snippets-without-point-information">
+<span id="sec-nopoint"></span><h2>Creating Snippets Without Point Information<a class="headerlink" href="#creating-snippets-without-point-information" title="Permalink to this headline"></a></h2>
+<p>Creating a snippet without point information (i.e., calling
+<code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> with a <code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace</span></code>) results in a far
+more flexible snippet that may be inserted at any point in the specified
+address space. There are, however, a few restrictions on the types of
+operations that may be performed by a flexible snippet. No local
+variables may be accessed, including parameters and return values.
+Mutatee variables must be accessed through the <code class="docutils literal notranslate"><span class="pre">global</span></code> domain.</p>
+</div>
+</div>
+<div class="section" id="dync-language-description">
+<h1>DynC Language Description<a class="headerlink" href="#dync-language-description" title="Permalink to this headline"></a></h1>
+<p>The DynC language is a subset of C with a <strong>domain</strong> specification for
+selecting the location of a resource.</p>
+<div class="section" id="domains">
+<h2>Domains<a class="headerlink" href="#domains" title="Permalink to this headline"></a></h2>
+<p>Domains are special keywords that allow the programmer to precisely
+indicate which resource to use. DynC domains follow the form of
+<code class="docutils literal notranslate"><span class="pre">&lt;domain&gt;‘&lt;identifier&gt;</span></code>, with a back-tick separating the domain and
+the identifier. The DynC domains are as follows:</p>
+<table border="1" class="docutils" id="id4">
+<caption><span class="caption-text">DynC API Domains</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Domain</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">inf</span></code></td>
+<td>The inferior process (the program being
+instrumented). Allows access to functions of the
+mutatee and it’s loaded libraries.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">dyninst</span></code></td>
+<td>Dyninst utility functions. Allows access to context
+information as well as the <code class="docutils literal notranslate"><span class="pre">break()</span></code> function. See
+Appendix <a class="reference external" href="#sec:dyninstdomain">3</a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">local</span></code></td>
+<td>A mutatee variable local to function in which the
+snippet is inserted.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">global</span></code></td>
+<td>A global mutatee variable.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param</span></code></td>
+<td>A parameter of the mutatee function in which the
+snippet is inserted.</td>
+</tr>
+<tr class="row-odd"><td><em>default</em></td>
+<td>The default domain (domain not specified) is the
+domain of snippet variables.</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inf`printf(&quot;n is equal to %d.\n&quot;, ++global`n);
+</pre></div>
+</div>
+<p>This would increment and print the value of the mutatee global variable
+n.</p>
+</div>
+<div class="section" id="control-flow">
+<h2>Control Flow<a class="headerlink" href="#control-flow" title="Permalink to this headline"></a></h2>
+<div class="section" id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Permalink to this headline"></a></h3>
+<p>Block and line comments work as they do in C or C++.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span>
+ <span class="o">*</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">comment</span><span class="o">.</span>
+ <span class="o">*/</span>
+<span class="nb">int</span> <span class="n">i</span><span class="p">;</span> <span class="o">//</span> <span class="n">So</span> <span class="ow">is</span> <span class="n">this</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conditionals">
+<h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline"></a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">if</span></code> to conditionally execute code. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if(x == 0){
+   inf`printf(&quot;x == 0.\n&quot;);
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">else</span></code> command can be used to specify code executed if a condition
+is not true. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if(x == 0){
+   inf`printf(&quot;x == 0.\n&quot;);
+}else if(x &gt; 3){
+   inf`printf(&quot;x &gt; 3.\n&quot;);
+}else{
+   inf`printf(&quot;x &lt; 3 but x }= 0.\n&quot;);
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="first-only-code-block">
+<span id="sec-firstonly"></span><h3>First-Only Code Block<a class="headerlink" href="#first-only-code-block" title="Permalink to this headline"></a></h3>
+<p>Code enclosed by a pair of <code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">&lt;code&gt;</span> <span class="pre">%</span></code> is executed only once by a
+snippet. First-only code blocks can be useful for declaring and
+initilizing variables, or for any task that needs to be executed only
+once. Any number of first-only code blocks can be used in a dynC code
+snippet.</p>
+<p>A first-only code block is equivalent to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">firstTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">firstTime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+  <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span>
+  <span class="n">firstTime</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>DynC will only execute the code in a first-only section the first time a
+snippet is executed. If <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> is called multiple times
+and is passed the same name, then the first-only code will be executed
+only once: the first time that any of those snippets <em>with the same
+name</em> is executed. In contrast, if a snippet is created by calling
+<code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> with a unique snippet name (or if a name is
+unspecified), the first-only code will be executed only once upon
+reaching the first point encountered in the execution of the mutatee
+where the returned <code class="docutils literal notranslate"><span class="pre">BPatch_Snippet</span></code> is inserted.</p>
+<p>Example Touch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{%
+   inf`printf(&quot;Function %s has been touched.\n&quot;, dyninst`function_name);
+%}
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> is passed the code in Example Touch and the
+name <code class="docutils literal notranslate"><span class="pre">&quot;fooTouchSnip&quot;</span></code> and the returned <code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span></code> is inserted
+at the entry to function <code class="docutils literal notranslate"><span class="pre">foo</span></code>, the output would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
+<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the dynC code in Example Touch is passed to <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code>
+multiple times and each snippet is given the same name, but is inserted
+at the entries of the functions <code class="docutils literal notranslate"><span class="pre">foo</span></code>, <code class="docutils literal notranslate"><span class="pre">bar</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code>
+respectively, the output would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
+<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creating the snippets with distinct names (e.g. <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code>
+is called with the dynC code in Example Touch multiple times and the
+snippets are named <code class="docutils literal notranslate"><span class="pre">&quot;fooTouchSnip&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;barTouchSnip&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;runTouchSnip&quot;</span></code>) would produce an output like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
+<span class="n">Function</span> <span class="n">bar</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
+<span class="n">Function</span> <span class="n">run</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
+<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A cautionary note: the use of first-only blocks can be expensive, as a
+conditional must be evaluated each time the snippet is executed. If the
+option is available, one may opt to insert a dynC snippet initializing
+all global variables at the entry point of <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+</div>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline"></a></h2>
+<p>DynC allows for the creation of <em>snippet local</em> variables. These
+variables are in scope only within the snippet in which they are
+created.</p>
+<p>For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>would create an uninitialized variable named <code class="docutils literal notranslate"><span class="pre">i</span></code> of type integer. The
+value of <code class="docutils literal notranslate"><span class="pre">i</span></code> is then set to 5. This is equivalent to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="static-variables">
+<h3>Static Variables<a class="headerlink" href="#static-variables" title="Permalink to this headline"></a></h3>
+<p>Every time a snippet is executed, non-static variables are
+reinitialized. To create a variable with value that persists across
+executions of snippets, declare the variable as static.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>int i = 10;
+inf`printf(&quot;i is %d.\n&quot;, i++);
+</pre></div>
+</div>
+<p>If the above is inserted at the entrance to a function that is called
+four times, the output would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+</pre></div>
+</div>
+<p>Adding <code class="docutils literal notranslate"><span class="pre">static</span></code> to the variable declaration would make the value of
+<code class="docutils literal notranslate"><span class="pre">i</span></code> persist across executions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int i = 10;
+inf`printf(&quot;i is %d.\n&quot;, i++);
+</pre></div>
+</div>
+<p>Produces:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">11.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">12.</span>
+<span class="n">i</span> <span class="ow">is</span> <span class="mf">13.</span>
+</pre></div>
+</div>
+<p>A variable declared in a first-only section will also behave statically,
+as the initialization occurs only once.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span>
+   <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-explanation-of-the-internal-workings-of-dync-variable-creation">
+<span id="sec-varexplain"></span><h3>An Explanation of the Internal Workings of DynC Variable Creation<a class="headerlink" href="#an-explanation-of-the-internal-workings-of-dync-variable-creation" title="Permalink to this headline"></a></h3>
+<p>DynC uses the DyninstAPI function <code class="docutils literal notranslate"><span class="pre">malloc(...)</span></code> to allocate dynC
+declared variables when <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> is called. The variable
+name is mangled with the name of the snippet passed to createSnippet.
+Thus, variables declared in dynC snippets are accessible only to those
+snippets created by calling <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> with the same name.</p>
+<p>If the variables are explicitly initialized, dynC sets the value of the
+variable with a <code class="docutils literal notranslate"><span class="pre">BPatch_arithExpr(BPatch_assign...)</span></code> snippet. Because
+of this, each time the snippet is executed, the value is reset to the
+initialized value. If, however the variables are not explicitly
+initialized, they are automatically set to a type-specific zero-value.
+Scalar variables are set to 0, and c-strings are set to empty,
+null-terminated strings (i.e. <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>).</p>
+<p>If a variable is declared with the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword, then the
+initialization is performed as if in a first-only block (see section
+<a class="reference external" href="#sec:firstOnly">2.2.3</a>). Thus, a variable is initialized only the
+first time that snippet is executed, and subsequent executions of the
+variable initialization are ignored.</p>
+</div>
+<div class="section" id="creating-global-variables-that-work-with-dync">
+<h3>Creating Global Variables That Work With DynC<a class="headerlink" href="#creating-global-variables-that-work-with-dync" title="Permalink to this headline"></a></h3>
+<p>To declare a global variable that is accessible to all snippets inserted
+into a mutatee, one must use the DyninstAPI
+<code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace::malloc(...)</span></code> method (see <em>Dyninst Programmer’s
+Guide</em>). This code is located in mutator code (<em>not</em> in dynC code).</p>
+<p><strong>myMutator.C:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="o">//</span> <span class="n">Creates</span> <span class="n">a</span> <span class="k">global</span> <span class="n">variable</span> <span class="n">of</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">named</span> <span class="n">globalIntN</span>
+<span class="n">myAddressSpace</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">myImage</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">),</span> <span class="s2">&quot;globalIntN&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">file1</span> <span class="ow">and</span> <span class="n">file2</span> <span class="n">are</span> <span class="n">FILE</span> <span class="o">*</span><span class="p">,</span> <span class="n">entryPoint</span> <span class="ow">and</span> <span class="n">exitPoint</span> <span class="n">are</span> <span class="n">BPatch_point</span>
+<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">snippet1</span> <span class="o">=</span> <span class="n">dynC</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">,</span> <span class="s2">&quot;mySnippet1&quot;</span><span class="p">);</span>
+<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">snippet2</span> <span class="o">=</span> <span class="n">dynC</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">,</span> <span class="s2">&quot;mySnippet2&quot;</span><span class="p">);</span>
+
+<span class="k">assert</span><span class="p">(</span><span class="n">snippet1</span><span class="p">);</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">snippet2</span><span class="p">);</span>
+
+<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">);</span>
+<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">run</span> <span class="n">the</span> <span class="n">mutatee</span>
+<span class="p">((</span><span class="n">BPatch_process</span> <span class="o">*</span><span class="p">)</span><span class="n">myAdressSpace</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">continueExecution</span><span class="p">();</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>file1:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{%
+   global`globalIntN = 0; // initialize global variable in first-only section
+%}
+inf`printf(&quot;Welcome to function %s. Global variable globalIntN = %d.\n&quot;,
+     dyninst`function_name, global`globalIntN++);
+</pre></div>
+</div>
+<p><strong>file2:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inf`printf(&quot;Goodbye from function %s. Global variable globalIntN = %d.\n&quot;,
+     dyninst`function_name, global`globalIntN++);
+</pre></div>
+</div>
+<p>When run, the output from the instrumentation would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">4.</span>
+<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">5.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-types">
+<span id="datatypes"></span><h3>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline"></a></h3>
+<div class="line-block">
+<div class="line">DynC supported data types are restricted by those supported by
+Dyninst: <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span></code>, <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code>, and <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>. Integer and
+c-string primitives are also recognized:</div>
+<div class="line">Example:</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="n">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pointers">
+<h3>Pointers<a class="headerlink" href="#pointers" title="Permalink to this headline"></a></h3>
+<p>Pointers are dereferenced with the prefix <code class="docutils literal notranslate"><span class="pre">*&lt;variable&gt;</span></code> and the
+address of variable is specified by <code class="docutils literal notranslate"><span class="pre">&amp;&lt;variable&gt;</span></code>. For example, in
+reference to the previous example from section <a class="reference external" href="#dataTypes">2.3.4</a>,
+the statement <code class="docutils literal notranslate"><span class="pre">*s</span></code> would evaluate to the character <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
+</div>
+<div class="section" id="arrays">
+<h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline"></a></h3>
+<p>Arrays in DynC behave much the same way they do in C.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>int array[3] = {1, 2, 3};
+char *names[] = {&quot;Mark&quot;, &quot;Phil&quot;, &quot;Deb&quot;, &quot;Tracy&quot;};
+names[2] = &quot;Gwen&quot; // change Deb to Gwen
+inf`printf(&quot;The seventh element of mutArray is %d.\n&quot;, global`mutArray[6]); //Mutatee array
+if(inf`strcmp(*names, &quot;Mark&quot;) == 0){} // This will evaluate to true.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dync-limitations">
+<h2>DynC Limitations<a class="headerlink" href="#dync-limitations" title="Permalink to this headline"></a></h2>
+<p>The DynC, while quite expressive, is limited to those actions supported
+by the DyninstAPI. As such, it lacks certain abilities that many
+programmers have come to expect. These differences will be discussed in
+an exploration of those C abilities that dynC lacks.</p>
+<div class="section" id="loops">
+<h3>Loops<a class="headerlink" href="#loops" title="Permalink to this headline"></a></h3>
+<p>There are no looping structures in DynC.</p>
+</div>
+<div class="section" id="enums-unions-structures">
+<h3>Enums, Unions, Structures<a class="headerlink" href="#enums-unions-structures" title="Permalink to this headline"></a></h3>
+<p>These features present a unique implementation challenge and are in
+development. Look to future revisions for full support for enums,
+unions, and structures.</p>
+</div>
+<div class="section" id="preprocessing">
+<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline"></a></h3>
+<p>DynC does not allow C-style preprocessing macros or importation. Rather
+than <code class="docutils literal notranslate"><span class="pre">#define</span></code> statements, constant variables are recommended.</p>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<p>Specifying functions is beyond the scope of the DynC language.
+DyninstAPI has methods for dynamically loading code into a mutatee, and
+these loaded functions can be used in DynC snippets.</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-dyninst-domain">
+<span id="sec-dyninstdomain"></span><h1>The Dyninst Domain<a class="headerlink" href="#the-dyninst-domain" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">dyninst</span></code> domain has quite a few useful values and functions:</p>
+<table border="1" class="docutils" id="id5">
+<caption><span class="caption-text">Dyninst Domain Values</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="27%" />
+<col width="19%" />
+<col width="27%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Identifier</th>
+<th class="head">Type</th>
+<th class="head">Where Valid</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>“
+function_name“</td>
+<td><code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code></td>
+<td>Within a
+function</td>
+<td>Evaluates to
+the name of the
+current
+function. Call
+to
+<code class="docutils literal notranslate"><span class="pre">creat</span>
+<span class="pre">eSnippet(...)</span></code>
+must specify a
+“
+BPatch_point“.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">module_name</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code></td>
+<td>Anywhere</td>
+<td>Evaluates to
+the name of the
+current module.
+Call to
+<code class="docutils literal notranslate"><span class="pre">creat</span>
+<span class="pre">eSnippet(...)</span></code>
+must specify a
+“
+BPatch_point“.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">b</span>
+<span class="pre">ytes_accessed</span></code></td>
+<td>int</td>
+<td>At a memory
+operation</td>
+<td>Evaluates to
+the number of
+bytes accessed
+by a memory
+operation.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">effe</span>
+<span class="pre">ctive_address</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></td>
+<td>At a memory
+operation</td>
+<td>Evaluates the
+effective
+address of a
+memory
+operation.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">ori</span>
+<span class="pre">ginal_address</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></td>
+<td>Anywhere</td>
+<td>Evaluates to
+the original
+address where
+the snippet was
+inserted.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">a</span>
+<span class="pre">ctual_address</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></td>
+<td>Anywhere</td>
+<td>Evaluates to
+the actual
+address of the
+i
+nstrumentation.</td>
+</tr>
+<tr class="row-even"><td>`
+<cite>return_value`</cite></td>
+<td><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></td>
+<td>Function exit</td>
+<td>Evaluates to
+the return
+value of a
+function.</td>
+</tr>
+<tr class="row-odd"><td>`
+<cite>thread_index`</cite></td>
+<td>int</td>
+<td>Anywhere</td>
+<td>Returns the
+index of the
+thread the
+snippet is
+executing on.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">tid</span></code></td>
+<td>int</td>
+<td>Anywhere</td>
+<td>Returns the id
+of the thread
+the snippet is
+executing on.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">d</span>
+<span class="pre">ynamic_target</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code></td>
+<td>At calls,
+jumps, returns</td>
+<td>Calculates the
+target of a
+control flow
+instruction.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">break()</span></code></td>
+<td>void</td>
+<td>Anywhere</td>
+<td>Causes the
+mutatee to
+execute a
+breakpoint.</td>
+</tr>
+<tr class="row-odd"><td>`
+<cite>stopthread()`</cite></td>
+<td>void</td>
+<td>Anywhere</td>
+<td>Stops the
+thread on which
+the snippet is
+executing.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../dataflowAPI/index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../instructionAPI/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Symtab &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Class Symtab</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/symtabAPI/API/Symtab/Symtab.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="class-symtab">
+<h1>Class Symtab<a class="headerlink" href="#class-symtab" title="Permalink to this headline"></a></h1>
+<p>The class represents an object file either on-disk or in-memory. This
+class is responsible for the parsing of the file information and holding
+the data that can be accessed through look up functions.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="21%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#160;</td>
+<td>std::string</td>
+<td>Full path to the opened file or
+provided name for the memory image.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>std::string</td>
+<td>File name without path.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>std::string</td>
+<td>For archive (.a) files, returns the
+object file (.o) this Symtab
+represents.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>unsigned</td>
+<td>Number of regions.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>unsigned</td>
+<td>Total number of symbols in both the
+static and dynamic tables.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>char *</td>
+<td>Pointer to memory image for the
+Symtab; not valid for disk files.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>Offset</td>
+<td>Offset of the first code segment from
+the start of the binary.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>Offset</td>
+<td>Offset of the first data segment from
+the start of the binary.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>Offset</td>
+<td>Size of the primary code-containing
+region, typically .text.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>Offset</td>
+<td>Size of the primary data-containing
+region, typically .data.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>bool</td>
+<td>True if the binary was compiled
+statically.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>bool</td>
+<td>True if the file is an executable.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>bool</td>
+<td>True if the file is a shared library.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>bool</td>
+<td>True if the file is can only be an
+executable, false otherwise including
+files that are both exeutables and
+shared libraries. Typically files
+that are both executables and shared
+libraries are primarily used as
+libraries, if you need to determine
+specifics use the methods and .</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>bool</td>
+<td>True if the file was stripped of
+symbol table information.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>unsigned</td>
+<td>Size (in bytes) of a pointer value in
+the Symtab; 4 for 32-bit binaries and
+8 for 64-bit binaries.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>Architecture</td>
+<td>Representation of the system
+architecture for the binary.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>Offset</td>
+<td>The suggested load offset of the
+file; typically 0 for shared
+libraries.</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>Offset</td>
+<td>The entry point (where execution
+begins) of the binary.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>Offset</td>
+<td>(Windows only) the OS-specified base
+offset of the file.</td>
+</tr>
+</tbody>
+</table>
+<div class="apient container">
+ObjectType getObjectType() const</div>
+<div class="apient container">
+bool isExecutable() bool isSharedLibrary() bool isExec()</div>
+<div class="section" id="file-opening-parsing">
+<h2>File opening/parsing<a class="headerlink" href="#file-opening-parsing" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+static bool openFile(Symtab *&amp;obj, string filename)</div>
+<div class="apient container">
+static bool openFile(Symtab *&amp;obj, char *mem_image, size_t size,
+std::string name)</div>
+<div class="apient container">
+static Symtab *findOpenSymtab(string name)</div>
+</div>
+<div class="section" id="module-lookup">
+<h2>Module lookup<a class="headerlink" href="#module-lookup" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+Module *getDefaultModule()</div>
+<div class="apient container">
+bool findModuleByName(Module *&amp;ret, const string name)</div>
+<div class="apient container">
+bool findModuleByOffset(Module *&amp;ret, Offset offset)</div>
+<div class="apient container">
+bool getAllModules(vector&lt;module *&gt; &amp;ret)</div>
+</div>
+<div class="section" id="function-variable-and-symbol-lookup">
+<h2>Function, Variable, and Symbol lookup<a class="headerlink" href="#function-variable-and-symbol-lookup" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+bool findFuncByEntryOffset(Function *&amp;ret, const Offset offset)</div>
+<div class="apient container">
+bool findFunctionsByName(std::vector&lt;Function *&gt; &amp;ret, const
+std::string name, NameType nameType = anyName, bool isRegex = false,
+bool checkCase = true)</div>
+<div class="apient container">
+bool getContainingFunction(Offset offset, Function *&amp;ret)</div>
+<div class="apient container">
+bool getAllFunctions(vector&lt;Function *&gt; &amp;ret)</div>
+<div class="apient container">
+bool findVariablesByOffset(std::vector&lt;Variable *&gt; &amp;ret, const
+Offset offset)</div>
+<div class="apient container">
+bool findVariablesByName(std::vector&lt;Variable *&gt; &amp;ret, const
+std::string name, NameType nameType = anyName, bool isRegex = false,
+bool checkCase = true)</div>
+<div class="apient container">
+bool getAllVariables(vector&lt;Variable *&gt; &amp;ret)</div>
+<div class="apient container">
+bool findSymbol(vector &lt;Symbol *&gt; &amp;ret, const string name,
+Symbol::SymbolType sType, NameType nameType = anyName, bool isRegex =
+false, bool checkCase = false)</div>
+<div class="apient container">
+const vector&lt;Symbol *&gt; *findSymbolByOffset(Offset offset)</div>
+<div class="apient container">
+bool getAllSymbols(vector&lt;Symbol *&gt; &amp;ret)</div>
+<div class="apient container">
+bool getAllSymbolsByType(vector&lt;Symbol *&gt; &amp;ret, Symbol::SymbolType
+sType)</div>
+<div class="apient container">
+bool getAllUndefinedSymbols(std::vector&lt;Symbol *&gt; &amp;ret)</div>
+</div>
+<div class="section" id="region-lookup">
+<h2>Region lookup<a class="headerlink" href="#region-lookup" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+bool getCodeRegions(std::vector&lt;Region *&gt;&amp;ret)</div>
+<div class="apient container">
+bool getDataRegions(std::vector&lt;Region *&gt;&amp;ret)</div>
+<div class="apient container">
+bool getMappedRegions(std::vector&lt;Region *&gt;&amp;ret)</div>
+<div class="apient container">
+bool getAllRegions(std::vector&lt;Region *&gt;&amp;ret)</div>
+<div class="apient container">
+bool getAllNewRegions(std::vector&lt;Region *&gt;&amp;ret)</div>
+<div class="apient container">
+bool findRegion(Region *&amp;reg, string sname)</div>
+<div class="apient container">
+bool findRegion(Region *&amp;reg, const Offset addr, const unsigned long
+size)</div>
+<div class="apient container">
+bool findRegionByEntry(Region *&amp;reg, const Offset soff)</div>
+<div class="apient container">
+Region *findEnclosingRegion(const Offset offset)</div>
+</div>
+<div class="section" id="insertion-and-modification">
+<h2>Insertion and modification<a class="headerlink" href="#insertion-and-modification" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+bool emit(string file)</div>
+<div class="apient container">
+bool addLibraryPrereq(string lib)</div>
+<div class="apient container">
+Function *createFunction(std::string name, Offset offset, size_t
+size, Module *mod = NULL)</div>
+<div class="apient container">
+Variable *createVariable(std::string name, Offset offset, size_t
+size, Module *mod = NULL)</div>
+<div class="apient container">
+bool addSymbol(Symbol *newsym)</div>
+<div class="apient container">
+bool addSymbol(Symbol *newsym, Symbol *referringSymbol)</div>
+<div class="apient container">
+bool deleteFunction(Function *func)</div>
+<div class="apient container">
+bool deleteVariable(Variable *var)</div>
+<div class="apient container">
+bool deleteSymbol(Symbol *sym)</div>
+<div class="apient container">
+bool addRegion(Offset vaddr, void *data, unsigned int dataSize,
+std::string name, Region::RegionType <a href="#id1"><span class="problematic" id="id2">rType_</span></a>, bool loadable = false,
+unsigned long memAlign = sizeof(unsigned), bool tls = false)</div>
+<div class="apient container">
+Offset getFreeOffset(unsigned size)</div>
+<div class="apient container">
+bool addRegion(Region *newreg);</div>
+</div>
+<div class="section" id="catch-and-exception-block-lookup">
+<h2>Catch and Exception block lookup<a class="headerlink" href="#catch-and-exception-block-lookup" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+bool getAllExceptions(vector&lt;ExceptionBlock *&gt; &amp;exceptions)</div>
+<div class="apient container">
+bool findException(ExceptionBlock &amp;excp, Offset addr)</div>
+<div class="apient container">
+bool findCatchBlock(ExceptionBlock &amp;excp, Offset addr, unsigned size
+= 0)</div>
+</div>
+<div class="section" id="symtab-information">
+<h2>Symtab information<a class="headerlink" href="#symtab-information" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+typedef enum obj_Unknown, obj_SharedLib, obj_Executable,
+obj_RelocatableFile, ObjectType;</div>
+<div class="apient container">
+bool isCode(const Offset where) const</div>
+<div class="apient container">
+bool isData(const Offset where) const</div>
+<div class="apient container">
+bool isValidOffset(const Offset where) const</div>
+</div>
+<div class="section" id="line-number-information">
+<h2>Line number information<a class="headerlink" href="#line-number-information" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+bool getAddressRanges(vector&lt;pair&lt;Offset, Offset&gt; &gt; &amp; ranges, string
+lineSource, unsigned int LineNo)</div>
+<div class="apient container">
+bool getSourceLines(vector&lt;LineNoTuple&gt; &amp;lines, Offset
+addressInRange)</div>
+<div class="apient container">
+bool addLine(string lineSource, unsigned int lineNo, unsigned int
+lineOffset, Offset lowInclusiveAddr, Offset highExclusiveAddr)</div>
+<div class="apient container">
+bool addAddressRange(Offset lowInclusiveAddr, Offset
+highExclusiveAddr, string lineSource, unsigned int lineNo, unsigned
+int lineOffset = 0);</div>
+</div>
+<div class="section" id="type-information">
+<h2>Type information<a class="headerlink" href="#type-information" title="Permalink to this headline"></a></h2>
+<div class="apient container">
+void parseTypesNow()</div>
+<div class="apient container">
+bool findType(Type *&amp;type, string name)</div>
+<div class="apient container">
+bool addType(Type * type)</div>
+<div class="apient container">
+static std::vector&lt;Type *&gt; * getAllstdTypes()</div>
+<div class="apient container">
+static std::vector&lt;Type *&gt; * getAllbuiltInTypes()</div>
+<div class="apient container">
+bool findLocalVariable(vector&lt;localVar *&gt; &amp;vars, string name)</div>
+<div class="apient container">
+bool findVariableType(Type *&amp;type, std::string name)</div>
+<div class="apient container">
+typedef enum … SymtabError</div>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">SymtabError enum</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Obj_Parsing</td>
+<td>An error occurred during object
+parsing(internal error).</td>
+</tr>
+<tr class="row-odd"><td>Syms_To_Functions</td>
+<td>An error occurred in converting symbols
+to functions(internal error).</td>
+</tr>
+<tr class="row-even"><td>Build_Function_Lists</td>
+<td>An error occurred while building function
+lists(internal error).</td>
+</tr>
+<tr class="row-odd"><td>No_Such_Function</td>
+<td>No matching function exists with the
+given inputs.</td>
+</tr>
+<tr class="row-even"><td>No_Such_Variable</td>
+<td>No matching variable exists with the
+given inputs.</td>
+</tr>
+<tr class="row-odd"><td>No_Such_Module</td>
+<td>No matching module exists with the given
+inputs.</td>
+</tr>
+<tr class="row-even"><td>No_Such_Symbol</td>
+<td>No matching symbol exists with the given
+inputs.</td>
+</tr>
+<tr class="row-odd"><td>No_Such_Region</td>
+<td>No matching region exists with the given
+inputs.</td>
+</tr>
+<tr class="row-even"><td>No_Such_Member</td>
+<td>No matching member exists in the archive
+with the given inputs.</td>
+</tr>
+<tr class="row-odd"><td>Not_A_File</td>
+<td>Binary to be parsed may be an archive and
+not a file.</td>
+</tr>
+<tr class="row-even"><td>Not_An_Archive</td>
+<td>Binary to be parsed is not an archive.</td>
+</tr>
+<tr class="row-odd"><td>Duplicate_Symbol</td>
+<td>Duplicate symbol found in symbol table.</td>
+</tr>
+<tr class="row-even"><td>Export_Error</td>
+<td>Error occurred during export of modified
+symbol table.</td>
+</tr>
+<tr class="row-odd"><td>Emit_Error</td>
+<td>Error occurred during generation of
+modified binary.</td>
+</tr>
+<tr class="row-even"><td>Invalid_Flags</td>
+<td>Flags passed are invalid.</td>
+</tr>
+<tr class="row-odd"><td>Bad_Frame_Data</td>
+<td>Stack walking DWARF information has bad
+frame data.</td>
+</tr>
+<tr class="row-even"><td>No_Frame_Entry</td>
+<td>No stack walking frame data found in
+debug information for this location.</td>
+</tr>
+<tr class="row-odd"><td>Frame_Read_Error</td>
+<td>Failed to read stack frame data.</td>
+</tr>
+<tr class="row-even"><td>Multiple_Region_Matches</td>
+<td>Multiple regions match the provided data.</td>
+</tr>
+<tr class="row-odd"><td>No_Error</td>
+<td>Previous operation did not result in
+failure.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="apient container">
+static SymtabError getLastSymtabError()</div>
+<div class="apient container">
+static string printError(SymtabError serr)</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

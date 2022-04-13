@@ -1,0 +1,131 @@
+API Reference - Dynamic Components
+==================================
+
+Unlike the static components discussed in Section
+`[sec:symtabAPI] <#sec:symtabAPI>`__, which operate on files,
+SymtabAPI’s dynamic components operate on a process. The dynamic
+components currently consist of the Dynamic Address Translation system,
+which translates between absolute addresses in a running process and
+static SymtabAPI objects.
+
+Class AddressLookup
+-------------------
+
+The class provides a mapping interface for determining the address in a
+process where a SymtabAPI object is loaded. A single dynamic library may
+load at different addresses in different processes. The ‘address’ fields
+in a dynamic library’s symbol tables will contain offsets rather than
+absolute addresses. These offsets can be added to the library’s load
+address, which is computed at runtime, to determine the absolute address
+where a symbol is loaded.
+
+The class examines a process and finds its dynamic libraries and
+executables and each one’s load address. This information can be used to
+map between SymtabAPI objects and absolute addresses. Each instance is
+associated with one process. An object can be created to work with the
+currently running process or a different process on the same system.
+
+On the Linux platform the class needs to read from the process’ address
+space to determine its shared objects and load addresses. By default,
+will attach to another process using a debugger interface to read the
+necessary information, or simply use if reading from the current
+process. The default behavior can be changed by implementing a new
+ProcessReader class and passing an instance of it to the create factor
+constructors. The ProcessReader class is discussed in more detail in
+Section `1.2 <#subsec:ProcessReader>`__.
+
+When an object is created for a running process it takes a snapshot of
+the process’ currently loaded libraries and their load addresses. This
+snapshot is used to answer queries into the object, and is not
+automatically updated when the process loads or unloads libraries. The
+refresh function can be used to updated an object’s view of its process.
+
+.. container:: apient
+
+   static AddressLookup \*createAddressLookup(ProcessReader \*reader =
+   NULL)
+
+.. container:: apient
+
+   static AddressLookup \*createAddressLookup(PID pid, ProcessReader
+   \*reader = NULL)
+
+.. container:: apient
+
+   typedef struct std::string name; Address codeAddr; Address dataAddr;
+   LoadedLibrary;
+
+.. container:: apient
+
+   static AddressLookup \*createAddressLookup(const
+   std::vector<LoadedLibrary> &ll)
+
+.. container:: apient
+
+   bool getLoadAddresses(std::vector<LoadedLibrary> &ll)
+
+.. container:: apient
+
+   bool refresh()
+
+.. container:: apient
+
+   bool getAddress(Symtab \*tab, Symbol \*sym, Address &addr)
+
+.. container:: apient
+
+   bool getAddress(Symtab \*tab, Offset off, Address &addr)
+
+.. container:: apient
+
+   bool getSymbol(Address addr, Symbol \* &sym, Symtab\* &tab, bool
+   close = false)
+
+.. container:: apient
+
+   bool getOffset(Address addr, Symtab\* &tab, Offset &off)
+
+.. container:: apient
+
+   bool getOffset(Address addr, LoadedLibrary &lib, Offset &off)
+
+.. container:: apient
+
+   bool getAllSymtabs(std::vector<Symtab \*> &tabs)
+
+.. container:: apient
+
+   bool getLoadAddress(Symtab \*sym, Address &load_address)
+
+.. container:: apient
+
+   bool getDataLoadAddress(Symtab \*sym, Address &load_addr)
+
+.. _`subsec:ProcessReader`:
+
+Class ProcessReader
+-------------------
+
+The implementation of the on Linux requires it to be able to read from
+the target process’s address space. By default, reading from another
+process on the same system this is done through the operating system
+debugger interface. A user can provide their own process reading
+mechanism by implementing a child of the class and passing it to the
+constructors. The API described in this section is an interface that a
+user can implement. With the exception of the constructor, these
+functions should not be called by user code.
+
+The is defined, but not used, on non-Linux systems.
+
+.. container:: apient
+
+   ProcessReader()
+
+.. container:: apient
+
+   virtual bool ReadMem(Address traced, void \*inSelf, unsigned size) =
+   0
+
+.. container:: apient
+
+   virtual bool GetReg(MachRegister reg, MachRegisterVal &val) = 0

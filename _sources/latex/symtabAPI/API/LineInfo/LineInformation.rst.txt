@@ -1,0 +1,37 @@
+.. _LineInformation:
+
+Class LineInformation
+---------------------
+
+This class represents an entire line map for a module. This contains
+mappings from a line number within a source to the address ranges.
+
+.. container:: apient
+
+   bool getAddressRanges(const char \* lineSource, unsigned int LineNo,
+   std::vector<AddressRange> & ranges)
+
+.. container:: apient
+
+   bool getSourceLines(Offset addressInRange, std::vector<Statement \*>
+   & lines) bool getSourceLines(Offset addressInRange,
+   std::vector<LineNoTuple> & lines)
+
+.. container:: apient
+
+   bool addLine(const char \* lineSource, unsigned int lineNo, unsigned
+   int lineOffset, Offset lowInclusiveAddr, Offset highExclusiveAddr)
+
+.. container:: apient
+
+   bool addAddressRange(Offset lowInclusiveAddr, Offset
+   highExclusiveAddr, const char\* lineSource, unsigned int lineNo,
+   unsigned int lineOffset = 0);
+
+.. container:: apient
+
+   LineInformation::const_iterator begin() const
+
+.. container:: apient
+
+   LineInformation::const_iterator end() const

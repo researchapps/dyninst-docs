@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abstractions &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Abstractions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/symtabAPI/2-Abstractions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="abstractions">
+<span id="sec-abstractions"></span><h1>Abstractions<a class="headerlink" href="#abstractions" title="Permalink to this headline"></a></h1>
+<p>= [rectangle, draw, fill=green!25] = [rectangle, draw, rounded corners,
+fill=yellow!25] = [ellipse, draw, fill=red!25] = [trapezium, trapezium
+left angle=70, trapezium right angle=70, draw, fill=cyan!25] = []</p>
+<p>SymtabAPI provides a simple set of abstractions over complicated data
+structures which makes it straight-forward to use. The SymtabAPI
+consists of five classes of interfaces: the symbol table interface, the
+type interface, the line map interface, the local variable interface,
+and the address translation interface.</p>
+<p>Figure&nbsp;<a class="reference external" href="#fig:object-ownership">[fig:object-ownership]</a> shows the
+ownership hierarchy for the SymtabAPI classes. Ownership here is a
+“contains” relationship; if one class owns another, then instances of
+the owner class maintain an exclusive instance of the other. For
+example, each Symtab class instance contains multiple instances of class
+Symbol and each Symbol class instance belongs to one Symtab class
+instance. Each of four interfaces and the classes belonging to these
+interfaces are described in the rest of this section. The API functions
+in each of the classes are described in detail in Section
+<a class="reference external" href="#sec:symtabAPI">[sec:symtabAPI]</a>.</p>
+<div class="section" id="symbol-table-interface">
+<h2>Symbol Table Interface<a class="headerlink" href="#symbol-table-interface" title="Permalink to this headline"></a></h2>
+<p>The symbol table interface is responsible for parsing the object file
+and handling the look-up and addition of new symbols. It is also
+responsible for the emit functionality that SymtabAPI supports. The
+Symtab and the Module classes inherit from the LookupInterface class, an
+abstract class, ensuring the same lookup function signatures for both
+Module and Symtab classes.</p>
+<dl class="docutils">
+<dt>Symtab</dt><dd>A Symtab class object represents either an object file on-disk or
+in-memory that the SymtabAPI library operates on.</dd>
+<dt>Symbol</dt><dd>A Symbol class object represents an entry in the symbol table.</dd>
+<dt>Module</dt><dd>A Module class object represents a particular source file in cases
+where multiple files were compiled into a single binary object; if
+this information is not present, we use a single default module.</dd>
+<dt>Archive</dt><dd>An Archive class object represents a collection of binary objects
+stored in a single file (e.g., a static archive).</dd>
+<dt>ExceptionBlock</dt><dd>An ExceptionBlock class object represents an exception block which
+contains the information necessary for run-time exception handling.</dd>
+</dl>
+<p>In addition, we define two symbol aggregates, Function and Variable.
+These classes collect multiple symbols with the same address and type
+but different names; for example, weak and strong symbols for a single
+function.</p>
+</div>
+<div class="section" id="type-interface">
+<span id="subsec-typeinterface"></span><h2>Type Interface<a class="headerlink" href="#type-interface" title="Permalink to this headline"></a></h2>
+<p>The Type interface is responsible for parsing type information from the
+object file and handling the look-up and addition of new type
+information. Figure <a class="reference external" href="#fig:class-inherit">[fig:class-inherit]</a> shows
+the class inheritance diagram for the type interface. Class Type is the
+base class for all of the classes that are part of the interface. This
+class provides the basic common functionality for all the types, such as
+querying the name and size of a type. The rest of the classes represent
+specific types and provide more functionality based on the type.</p>
+<p>= [rectangle, draw, rounded corners, fill=yellow!100] = [rectangle,
+draw, rounded corners, fill=yellow!100, node distance=.65cm] =
+[rectangle, draw, rounded corners, pattern=north west lines, pattern
+color=yellow] = []</p>
+<p>Some of the types inherit from a second level of type classes, each
+representing a separate category of types.</p>
+<dl class="docutils">
+<dt>fieldListType</dt><dd><ul class="simple">
+<li>This category of types represent the container types that contain a</li>
+</ul>
+<p>list of fields. Examples of this category include structure and the
+union types.</p>
+</dd>
+<dt>derivedType</dt><dd><ul class="simple">
+<li>This category of types represent types derived from a base type.</li>
+</ul>
+<p>Examples of this category include typedef, pointer and reference
+types.</p>
+</dd>
+<dt>rangedType</dt><dd><ul class="simple">
+<li>This category represents range types. Examples of this category</li>
+</ul>
+<p>include the array and the sub-range types.</p>
+</dd>
+</dl>
+<p>The enum, function, common block and scalar types do not fall under any
+of the above category of types. Each of the specific types is derived
+from Type.</p>
+</div>
+<div class="section" id="line-number-interface">
+<h2>Line Number Interface<a class="headerlink" href="#line-number-interface" title="Permalink to this headline"></a></h2>
+<p>The Line Number interface is responsible for parsing line number
+information from the object file debug information and handling the
+look-up and addition of new line information. The main classes for this
+interface are LineInformation and LineNoTuple.</p>
+<dl class="docutils">
+<dt>LineInformation</dt><dd><ul class="simple">
+<li>A LineInformation class object represents a mapping of line numbers</li>
+</ul>
+<p>to address range within a module (source file).</p>
+</dd>
+<dt>Statement/LineNoTuple</dt><dd><ul class="simple">
+<li>A Statement class object represents a location in source code with</li>
+</ul>
+<p>a source file, line number in that source file and start column in
+that line. For backwards compatibility, Statements may also be
+referred to as LineNoTuples.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="local-variable-interface">
+<h2>Local Variable Interface<a class="headerlink" href="#local-variable-interface" title="Permalink to this headline"></a></h2>
+<p>The Local Variable Interface is responsible for parsing local variable
+and parameter information of functions from the object file debug
+information and handling the look-up and addition of new add new local
+variables. All the local variables within a function are tied to the
+Symbol class object representing that function.</p>
+<dl class="docutils">
+<dt>localVar</dt><dd><ul class="simple">
+<li>A localVar class object represents a local variable or a parameter</li>
+</ul>
+<p>belonging to a function.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="dynamic-address-translation">
+<h2>Dynamic Address Translation<a class="headerlink" href="#dynamic-address-translation" title="Permalink to this headline"></a></h2>
+<p>The AddressLookup class is a component for mapping between absolute
+addresses found in a running process and SymtabAPI objects. This is
+useful because libraries can load at different addresses in different
+processes. Each AddressLookup instance is associated with, and provides
+mapping for, one process.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

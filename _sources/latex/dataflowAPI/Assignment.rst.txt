@@ -1,0 +1,60 @@
+.. _`sec:assign`:
+
+Class Assignment
+----------------
+
+An assignment represents data dependencies between an output abstract
+region that is modified by this instruction and several input abstract
+regions that are used by this instruction. An instruction may modify
+several abstract regions, so an instruction can correspond to multiple
+assignments.
+
+.. container:: apient
+
+   typedef boost::shared_ptr<Assignment> Ptr;
+
+.. container:: apient
+
+   const std::vector<AbsRegion> &inputs() const; std::vector<AbsRegion>
+   &inputs();
+
+.. container:: apient
+
+   const AbsRegion &out() const; AbsRegion &out();
+
+.. container:: apient
+
+   InstructionAPI::Instruction::Ptr insn() const;
+
+.. container:: apient
+
+   Address addr() const;
+
+.. container:: apient
+
+   ParseAPI::Function \*func() const;
+
+.. container:: apient
+
+   ParseAPI::Block \*block() const;
+
+.. container:: apient
+
+   const std::string format() const;
+
+.. _`sec:assignmentcovnert`:
+
+Class AssignmentConverter
+-------------------------
+
+This class should be used to convert instructions to assignments.
+
+.. container:: apient
+
+   AssignmentConverter(bool cache, bool stack = true);
+
+.. container:: apient
+
+   void convert(InstructionAPI::Instruction::Ptr insn, const Address
+   &addr, ParseAPI::Function \*func, ParseAPI::Block \*blk,
+   std::vector<Assignment::Ptr> &assign);

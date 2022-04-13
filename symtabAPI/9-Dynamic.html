@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference - Dynamic Components &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API Reference - Dynamic Components</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/symtabAPI/9-Dynamic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="api-reference-dynamic-components">
+<h1>API Reference - Dynamic Components<a class="headerlink" href="#api-reference-dynamic-components" title="Permalink to this headline"></a></h1>
+<p>Unlike the static components discussed in Section
+<a class="reference external" href="#sec:symtabAPI">[sec:symtabAPI]</a>, which operate on files,
+SymtabAPI’s dynamic components operate on a process. The dynamic
+components currently consist of the Dynamic Address Translation system,
+which translates between absolute addresses in a running process and
+static SymtabAPI objects.</p>
+<div class="section" id="class-addresslookup">
+<h2>Class AddressLookup<a class="headerlink" href="#class-addresslookup" title="Permalink to this headline"></a></h2>
+<p>The class provides a mapping interface for determining the address in a
+process where a SymtabAPI object is loaded. A single dynamic library may
+load at different addresses in different processes. The ‘address’ fields
+in a dynamic library’s symbol tables will contain offsets rather than
+absolute addresses. These offsets can be added to the library’s load
+address, which is computed at runtime, to determine the absolute address
+where a symbol is loaded.</p>
+<p>The class examines a process and finds its dynamic libraries and
+executables and each one’s load address. This information can be used to
+map between SymtabAPI objects and absolute addresses. Each instance is
+associated with one process. An object can be created to work with the
+currently running process or a different process on the same system.</p>
+<p>On the Linux platform the class needs to read from the process’ address
+space to determine its shared objects and load addresses. By default,
+will attach to another process using a debugger interface to read the
+necessary information, or simply use if reading from the current
+process. The default behavior can be changed by implementing a new
+ProcessReader class and passing an instance of it to the create factor
+constructors. The ProcessReader class is discussed in more detail in
+Section <a class="reference external" href="#subsec:ProcessReader">1.2</a>.</p>
+<p>When an object is created for a running process it takes a snapshot of
+the process’ currently loaded libraries and their load addresses. This
+snapshot is used to answer queries into the object, and is not
+automatically updated when the process loads or unloads libraries. The
+refresh function can be used to updated an object’s view of its process.</p>
+<div class="apient container">
+static AddressLookup *createAddressLookup(ProcessReader *reader =
+NULL)</div>
+<div class="apient container">
+static AddressLookup *createAddressLookup(PID pid, ProcessReader
+*reader = NULL)</div>
+<div class="apient container">
+typedef struct std::string name; Address codeAddr; Address dataAddr;
+LoadedLibrary;</div>
+<div class="apient container">
+static AddressLookup *createAddressLookup(const
+std::vector&lt;LoadedLibrary&gt; &amp;ll)</div>
+<div class="apient container">
+bool getLoadAddresses(std::vector&lt;LoadedLibrary&gt; &amp;ll)</div>
+<div class="apient container">
+bool refresh()</div>
+<div class="apient container">
+bool getAddress(Symtab *tab, Symbol *sym, Address &amp;addr)</div>
+<div class="apient container">
+bool getAddress(Symtab *tab, Offset off, Address &amp;addr)</div>
+<div class="apient container">
+bool getSymbol(Address addr, Symbol * &amp;sym, Symtab* &amp;tab, bool
+close = false)</div>
+<div class="apient container">
+bool getOffset(Address addr, Symtab* &amp;tab, Offset &amp;off)</div>
+<div class="apient container">
+bool getOffset(Address addr, LoadedLibrary &amp;lib, Offset &amp;off)</div>
+<div class="apient container">
+bool getAllSymtabs(std::vector&lt;Symtab *&gt; &amp;tabs)</div>
+<div class="apient container">
+bool getLoadAddress(Symtab *sym, Address &amp;load_address)</div>
+<div class="apient container">
+bool getDataLoadAddress(Symtab *sym, Address &amp;load_addr)</div>
+</div>
+<div class="section" id="class-processreader">
+<span id="subsec-processreader"></span><h2>Class ProcessReader<a class="headerlink" href="#class-processreader" title="Permalink to this headline"></a></h2>
+<p>The implementation of the on Linux requires it to be able to read from
+the target process’s address space. By default, reading from another
+process on the same system this is done through the operating system
+debugger interface. A user can provide their own process reading
+mechanism by implementing a child of the class and passing it to the
+constructors. The API described in this section is an interface that a
+user can implement. With the exception of the constructor, these
+functions should not be called by user code.</p>
+<p>The is defined, but not used, on non-Linux systems.</p>
+<div class="apient container">
+ProcessReader()</div>
+<div class="apient container">
+virtual bool ReadMem(Address traced, void *inSelf, unsigned size) =
+0</div>
+<div class="apient container">
+virtual bool GetReg(MachRegister reg, MachRegisterVal &amp;val) = 0</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+.. _sec-modification-api:
+
+Modification API Reference
+==========================
+
+This section describes the modification interface of PatchAPI. While
+PatchAPI’s main goal is to allow users to insert new code into a
+program, a secondary goal is to allow safe modification of the original
+program code as well.
+
+To modify the binary, a user interacts with the class to manipulate a
+PatchAPI CFG. CFG modifications are then instantiated as new code by the
+PatchAPI. For example, if PatchAPI is being used as part of Dyninst,
+executing a will generate modified code.
+
+The three key benefits of the PatchAPI modification interface are
+abstraction, safety, and interactivity. We use the CFG as a mechanism
+for transforming binaries in a platform-independent way that requires no
+instruction-level knowledge by the user. These transformations are
+limited to ensure that the CFG can always be used to instantiate code,
+and thus the user can avoid unintended side-effects of modification.
+Finally, modifications to the CFG are represented in that CFG, allowing
+users to iteratively combine multiple CFG transformations to achieve
+their goals.
+
+Since modification can modify the CFG, it may invalidate any analyses
+the user has performed over the CFG. We suggest that users take
+advantage of the callback interface described in Section
+`[sec-3.2.7] <#sec-3.2.7>`__ to update any such analysis information.
+
+The PatchAPI modification capabilities are currently in beta; if you
+experience any problems or bugs, please contact .
+
+Many of these methods return a boolean type; true indicates a successful
+operation, and false indicates a failure. For methods that return a
+pointer, a return value indicates a failure.
+
+.. container:: apient
+
+   bool redirect(PatchEdge \*edge, PatchBlock \*target);
+
+.. container:: apient
+
+   PatchBlock \*split(PatchBlock \*orig, Address addr, bool trust =
+   false, Address newlast = (Address) -1);
+
+.. container:: apient
+
+   bool remove(std::vector<PatchBlock \*> &blocks, bool force = true)
+
+.. container:: apient
+
+   bool remove(PatchFunction \*func)
+
+.. container:: apient
+
+   class InsertedCode typedef boost::shared_ptr<...> Ptr; PatchBlock
+   \*entry(); const std::vector<PatchEdge \*> &exits(); const
+   std::set<PatchBlock \*> &blocks();
+
+   InsertedCode::Ptr insert(PatchObject \*obj, SnippetPtr snip, Point
+   \*point); InsertedCode::Ptr insert(PatchObject \*obj, void \*start,
+   unsigned size);

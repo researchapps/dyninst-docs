@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PatchAPI for Dyninst Programmers &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>PatchAPI for Dyninst Programmers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/patchAPI/section/7_dyninst.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="patchapi-for-dyninst-programmers">
+<span id="sec-dyn"></span><h1>PatchAPI for Dyninst Programmers<a class="headerlink" href="#patchapi-for-dyninst-programmers" title="Permalink to this headline"></a></h1>
+<p>The PatchAPI is a Dyninst component and as such is accessible through
+the main Dyninst interface (BPatch objects). However, the PatchAPI
+instrumentation and CFG models differ from the Dyninst models in several
+critical ways that should be accounted for by users. This section
+summarizes those differences and describes how to access PatchAPI
+abstractions from the DyninstAPI interface.</p>
+<div class="section" id="differences-between-dyninstapi-and-patchapi">
+<h2>Differences Between DyninstAPI and PatchAPI<a class="headerlink" href="#differences-between-dyninstapi-and-patchapi" title="Permalink to this headline"></a></h2>
+<p>The DyninstAPI and PatchAPI differ primarily in their CFG
+representations and instrumentation point abstractions. In general,
+PatchAPI is more powerful and can better represent complex binaries
+(e.g., highly optimized code or malware). In order to maintain backwards
+compatibility, the DyninstAPI interface has not been extended to match
+the PatchAPI. As a result, there are some caveats.</p>
+<p>The PatchAPI uses the same CFG model as the ParseAPI. The primary
+representation is an interprocedural graph of basic blocks and edges.
+Functions are defined on top of this graph as collections of blocks. <strong>A
+block may be contained by more than one function;</strong> we call this the
+<em>shared block</em> model. Functions are defined to have a single entry
+block, and functions may overlap if they contain the same blocks. Call
+and return edges exist in the graph, and therefore traversing the graph
+may enter different functions. PatchAPI users may specify instrumenting
+a particular block within a particular function (a <em>block instance</em>) by
+specifying both the block and the function.</p>
+<p>The DyninstAPI uses a historic CFG model. The primary representation is
+the function. Functions contain a intraprocedural graph of blocks and
+edges. As a result, a basic block belongs to only one function, but two
+blocks from different functions may be <em>clones</em> of each other. No
+interprocedural edges are represented in the graph, and thus traversing
+the CFG from a particular function is guaranteed to remain inside that
+function.</p>
+<p>As a result, multiple DyninstAPI blocks may map to the same PatchAPI
+block. If instrumenting a particular block instance is desired, the user
+should provide both the DyninstAPI basic block and function.</p>
+<p>In addition, DyninstAPI uses a <em>module</em> abstraction, where a
+<code class="docutils literal notranslate"><span class="pre">BPatch_module</span></code> represents a collection of functions from a particular
+source file (for the executable) or from an entire library (for all
+libraries). PatchAPI, like ParseAPI, instead uses an <em>object</em>
+representation, where a <code class="docutils literal notranslate"><span class="pre">PatchObject</span></code> object represents a collection
+of functions from a file on disk (executable or libraries).</p>
+<p>The instrumentation point (<em>instPoint</em>) models also differ between
+DyninstAPI and PatchAPI. We classify an instPoint either as a <em>behavior</em>
+point (e.g., function entry) or <em>location</em> point (e.g., a particular
+instruction). PatchAPI fully supports both of these models, with the
+added extension that a location point explicitly specifies whether
+instrumentation will execute before or after the corresponding location.
+Dyninst does not support the behavior model, instead mapping behavior
+instPoints to a corresponding instruction. For example, if a user
+requests a function entry instPoint they instead receive an instPoint
+for the first instruction in the function. These may not always be the
+same (see
+<a class="reference external" href="ftp://ftp.cs.wisc.edu/paradyn/papers/Bernat11AWAT.pdf">Bernat_AWAT</a>).
+In addition, location instPoints represent an instruction, and the user
+must later specify whether they wish to instrument before or after that
+instruction.</p>
+<p>As a result, there are complications for using both DyninstAPI and
+PatchAPI. We cannot emphasize enough, though, that users <em>can combine
+DyninstAPI and PatchAPI</em> with some care. Doing so offers several
+benefits:</p>
+<ul class="simple">
+<li>The ability to extend legacy code that is written for DyninstAPI.</li>
+<li>The ability to use the DyninstAPI extensions and plugins for
+PatchAPI, including snippet-based or dynC-based code generation and
+our instrumentation optimizer.</li>
+</ul>
+<p>We suggest the following best practices to be followed when coding for
+PatchAPI via Dyninst:</p>
+<ul class="simple">
+<li>For legacy code, do not attempt to map between DyninstAPI instPoints
+and PatchAPI instPoints. Instead, use DyninstAPI CFG objects to
+acquire PatchAPI CFG objects, and use a <code class="docutils literal notranslate"><span class="pre">PatchMgr</span></code> (acquired
+through a <code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace</span></code>) to look up PatchAPI instPoints.</li>
+<li>For new code, acquire a <code class="docutils literal notranslate"><span class="pre">PatchMgr</span></code> directly from a
+<code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace</span></code> and use its methods to look up both CFG
+objects and instPoints.</li>
+</ul>
+</div>
+<div class="section" id="patchapi-accessor-methods-in-dyninst">
+<h2>PatchAPI accessor methods in Dyninst<a class="headerlink" href="#patchapi-accessor-methods-in-dyninst" title="Permalink to this headline"></a></h2>
+<p>To access a PatchAPI class from a Dyninst class, use the
+<code class="docutils literal notranslate"><span class="pre">PatchAPI::convert</span></code> function, as in the following example:</p>
+<div class="apient container">
+BPatch_basicBlock *bp_block = …; PatchAPI::PatchBlock *block =
+PatchAPI::convert(bp_block);</div>
+<p>We support the following mappings, where all PatchAPI objects are within
+the <code class="docutils literal notranslate"><span class="pre">Dyninst::PatchAPI</span></code> namespace:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="34%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">From</th>
+<th class="head">To</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">BPatch_function</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchFunction</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">BPatch_basicBlock</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchBlock</span></code></td>
+<td>See above.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">BPatch_edge</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchEdge</span></code></td>
+<td>See above.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">BPatch_module</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchObject</span></code></td>
+<td>See above.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">BPatch_image</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchMgr</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">PatchMgr</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">Snippet</span></code></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>We do not support a direct mapping between <code class="docutils literal notranslate"><span class="pre">BPatch_point</span></code>s and
+<code class="docutils literal notranslate"><span class="pre">Point</span></code>s, as the failure of Dyninst to properly represent behavior
+instPoints leads to confusing results. Instead, use the PatchAPI point
+lookup methods.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

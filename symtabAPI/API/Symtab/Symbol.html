@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Symbol &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Class Symbol</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/symtabAPI/API/Symtab/Symbol.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="class-symbol">
+<h1>Class Symbol<a class="headerlink" href="#class-symbol" title="Permalink to this headline"></a></h1>
+<p>The class represents a symbol in the object file. This class holds the
+symbol information such as the mangled, pretty and typed names, the
+module in which it is present, type, linkage, offset and size.</p>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">SymbolType</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ST_UNKNOWN</td>
+<td>Unknown type</td>
+</tr>
+<tr class="row-odd"><td>ST_FUNCTION</td>
+<td>Function or other executable code sequence</td>
+</tr>
+<tr class="row-even"><td>ST_OBJECT</td>
+<td>Variable or other data object</td>
+</tr>
+<tr class="row-odd"><td>ST_MODULE</td>
+<td>Source file declaration</td>
+</tr>
+<tr class="row-even"><td>ST_SETION</td>
+<td>Region declaration</td>
+</tr>
+<tr class="row-odd"><td>ST_TLS</td>
+<td>Thread-local storage declaration</td>
+</tr>
+<tr class="row-even"><td>ST_DELETED</td>
+<td>Deleted symbol</td>
+</tr>
+<tr class="row-odd"><td>ST_NOTYPE</td>
+<td>Miscellaneous symbol</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="center container">
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">SymbolLinkage</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SL_UNKNOWN</td>
+<td>Unknown linkage</td>
+</tr>
+<tr class="row-odd"><td>SL_GLOBAL</td>
+<td>Process-global symbol</td>
+</tr>
+<tr class="row-even"><td>SL_LOCAL</td>
+<td>Process-local (e.g., static) symbol</td>
+</tr>
+<tr class="row-odd"><td>SL_WEAK</td>
+<td>Alternate name for a function or variable</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following two types are platform-specific:</p>
+<div class="apient container">
+typedef enum SV_UNKNOWN, SV_DEFAULT, SV_INTERNAL, SV_HIDDEN,
+SV_PROTECTED SymbolVisibility;</div>
+<div class="apient container">
+typedef enum TAG_UNKNOWN, TAG_USER, TAG_LIBRARY, TAG_INTERNAL
+SymbolTag;</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="27%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method name</th>
+<th class="head">Return type</th>
+<th class="head">Method description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>getMangledName</td>
+<td>string</td>
+<td>Raw name of the symbol in the
+symbol table, including name
+mangling.</td>
+</tr>
+<tr class="row-odd"><td>getPrettyName</td>
+<td>string</td>
+<td>Demangled name of the symbol
+with parameters (for
+functions) removed.</td>
+</tr>
+<tr class="row-even"><td>getTypedName</td>
+<td>string</td>
+<td>Demangled name of the symbol
+including full function
+parameters.</td>
+</tr>
+<tr class="row-odd"><td>getModule</td>
+<td>Module *</td>
+<td>The module, if any, that
+contains the symbol.</td>
+</tr>
+<tr class="row-even"><td>getType</td>
+<td>SymbolType</td>
+<td>The symbol type (as defined
+above) of the symbol.</td>
+</tr>
+<tr class="row-odd"><td>getLinkage</td>
+<td>SymbolLinkage</td>
+<td>The linkage (as defined
+above) of the symbol.</td>
+</tr>
+<tr class="row-even"><td>getVisibility</td>
+<td>SymbolVisibility</td>
+<td>The visibility (as defined
+above) of the symbol.</td>
+</tr>
+<tr class="row-odd"><td>tag</td>
+<td>SymbolTag</td>
+<td>The tag (as defined above) of
+the symbol.</td>
+</tr>
+<tr class="row-even"><td>getOffset</td>
+<td>Offset</td>
+<td>The offset of the object the
+symbols refers to.</td>
+</tr>
+<tr class="row-odd"><td>getSize</td>
+<td>unsigned</td>
+<td>The size of the object the
+symbol refers to.</td>
+</tr>
+<tr class="row-even"><td>getRegion</td>
+<td>Region *</td>
+<td>The region containing the
+symbol.</td>
+</tr>
+<tr class="row-odd"><td>getIndex</td>
+<td>int</td>
+<td>The index of the symbol
+within the symbol table.</td>
+</tr>
+<tr class="row-even"><td>getStrIndex</td>
+<td>int</td>
+<td>The index of the symbol name
+in the string table.</td>
+</tr>
+<tr class="row-odd"><td>isInDynSymtab</td>
+<td>bool</td>
+<td>If true, the symbol is
+dynamic and can be used as
+the target of an intermodule
+reference. Implies isInSymtab
+is false.</td>
+</tr>
+<tr class="row-even"><td>isInSymtab</td>
+<td>bool</td>
+<td>If true, the symbol is
+static. Implies isInDynSymtab
+is false.</td>
+</tr>
+<tr class="row-odd"><td>isAbsolute</td>
+<td>bool</td>
+<td>If true, the offset encoded
+in the symbol is an absolute
+value rather than an offset.</td>
+</tr>
+<tr class="row-even"><td>isFunction</td>
+<td>bool</td>
+<td>If true, the symbol refers to
+a function.</td>
+</tr>
+<tr class="row-odd"><td>getFunction</td>
+<td>Function *</td>
+<td>The Function that contains
+this symbol if such a
+Function exists.</td>
+</tr>
+<tr class="row-even"><td>isVariable</td>
+<td>bool</td>
+<td>If true, the symbol refers to
+a variable.</td>
+</tr>
+<tr class="row-odd"><td>getVariable</td>
+<td>Variable *</td>
+<td>The Variable that contains
+this symbol if such a
+Variable exists.</td>
+</tr>
+<tr class="row-even"><td>getSymtab</td>
+<td>Symtab *</td>
+<td>The Symtab that contains this
+symbol.</td>
+</tr>
+<tr class="row-odd"><td>getPtrOffset</td>
+<td>Offset</td>
+<td>For binaries with an OPD
+section, the offset in the
+OPD that contains the
+function pointer data
+structure for this symbol.</td>
+</tr>
+<tr class="row-even"><td>getLocalTOC</td>
+<td>Offset</td>
+<td>For platforms with a TOC
+register, the expected TOC
+for the object referred to by
+this symbol.</td>
+</tr>
+<tr class="row-odd"><td>isCommonStorage</td>
+<td>bool</td>
+<td>True if the symbol represents
+a common section (Fortran).</td>
+</tr>
+</tbody>
+</table>
+<div class="apient container">
+SYMTAB_EXPORT Symbol(const std::string&amp; name, SymbolType type,
+SymbolLinkage linkage, SymbolVisibility visibility, Offset offset,
+Module *module = NULL, Region *region = NULL, unsigned size = 0,
+bool dyamic = false, bool absolute = false, int index = -1, int
+strindex = -1, bool commonStorage = false)</div>
+<div class="apient container">
+bool getVersionFileName(std::string &amp;fileName)</div>
+<div class="apient container">
+bool getVersions(std::vector&lt;std::string&gt; *&amp;vers)</div>
+<div class="apient container">
+bool getVersionNum(unsigned &amp;verNum)</div>
+<div class="section" id="symbol-modification">
+<h2>Symbol modification<a class="headerlink" href="#symbol-modification" title="Permalink to this headline"></a></h2>
+<p>Most elements of a can be modified using the functions below. Each
+returns on success and otherwise.</p>
+<div class="apient container">
+bool setSize (unsigned size) bool setOffset (Offset newOffset) bool
+setMangledName (string name) bool setType (SymbolType sType) bool
+setModule (Module *module) bool setRegion (Region *region) bool
+setDynamic (bool dyn) bool setAbsolute (bool absolute) bool
+setCommonStorage (bool common) bool setFunction (Function *func)
+bool setVariable (Variable *var) bool setIndex (int index) bool
+setStrIndex (int index) bool setPtrOffset (Offset ptr) bool
+setLocalTOC (Offset toc) bool setVersionNum (unsigned num) bool
+setVersionFileName (std::string &amp;fileName) bool setVersions
+(std::vector&lt;std::string&gt; &amp;vers)</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

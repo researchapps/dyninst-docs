@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../parseAPI/index.html" />
+    <link rel="prev" title="DynC API" href="../dynC_API/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-interface">Instruction Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-decoding">Instruction Decoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructionast-hierarchy">InstructionAST Hierarchy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#instructionapi-class-reference">InstructionAPI Class Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-class">Instruction Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operation-class">Operation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operand-class">Operand Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructionast-class">InstructionAST Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expression-class">Expression Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visitor-paradigm">Visitor Paradigm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#result-class">Result Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registerast-class">RegisterAST Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#immediate-class">Immediate Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binaryfunction-class">BinaryFunction Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dereference-class">Dereference Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructiondecoder-class">InstructionDecoder Class</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/instructionAPI/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<span id="sec-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p>When analyzing and modifying binary code, it is necessary to translate
+between raw binary instructions and an abstract form that describes the
+semantics of the instructions. As a part of the Dyninst project, we have
+developed the Instruction API, an API and library for decoding and
+representing machine instructions in a platform-independent manner. The
+Instruction API includes methods for decoding machine language,
+convenient abstractions for its analysis, and methods to produce
+disassembly from those abstractions. The current implementation supports
+the x86, x86-64, ARMv8-64, PowerPC-32, and PowerPC-64 instruction sets.
+The Instruction API has the following basic capabilities:</p>
+<ul class="simple">
+<li>Decoding: interpreting a sequence of bytes as a machine instruction
+in a given machine language.</li>
+<li>Abstract representation: representing the behavior of that
+instruction as an abstract syntax tree.</li>
+<li>Disassembly: translating an abstract representation of a machine
+instruction into a string representation of the corresponding
+assembly language instruction.</li>
+</ul>
+<p>Our goal in designing the Instruction API is to provide a representation
+of machine instructions that can be manipulated by higher-level
+algorithms with minimal knowledge of platform-specific details. In
+addition, users who need platform-specific information should be able to
+access it. To do so, we provide an interface that disassembles a machine
+instruction, extracts an operation and its operands, converts the
+operands to abstract syntax trees, and presents this to the user. A user
+of the Instruction API can work at a level of abstraction slightly
+higher than assembly language, rather than working directly with machine
+language. Additionally, by converting the operands to abstract syntax
+trees, we make it possible to analyze the operands in a uniform manner,
+regardless of the complexity involved in the operand’s actual
+computation.</p>
+</div>
+<div class="section" id="instructionapi-modules-and-abstractions">
+<h1>InstructionAPI Modules and Abstractions<a class="headerlink" href="#instructionapi-modules-and-abstractions" title="Permalink to this headline"></a></h1>
+<p>The Instruction API contains three major components: the top-level
+instruction representation, the abstract syntax trees representing the
+operands of an instruction, and the decoder that creates the entire
+representation. We will present an overview of the features and uses of
+each of these three components, followed by an example of how the
+Instruction API can be applied to binary analysis.</p>
+<div class="section" id="instruction-interface">
+<h2>Instruction Interface<a class="headerlink" href="#instruction-interface" title="Permalink to this headline"></a></h2>
+<p>The Instruction API represents a machine language instruction as an
+Instruction object, which contains an Operation and a collection of
+Operands. The Operation contains the following items:</p>
+<ul class="simple">
+<li>The mnemonic for the machine language instruction represented by its
+associated Instruction</li>
+<li>The number of operands accepted by the Operation</li>
+<li>Which Operands are read and/or written by the associated machine
+operation</li>
+<li>What other registers (if any) are affected by the underlying machine
+operation</li>
+</ul>
+<p>Each Operand contains flags to indicate whether it is read, written, or
+both by the machine instruction represented by its parent Instruction,
+and contains a Expression abstract syntax tree representing the
+operations required to compute the value of the operand.
+Figure&nbsp;<a class="reference external" href="#fig:ownership-graph">1</a> depicts these ownership
+relationships within an Instruction.</p>
+<div class="figure align-default" id="fig-ownership-graph">
+<img alt="An Instruction and the objects it owns" src="instructionAPI/fig/ownership_graph.pdf" />
+<p class="caption"><span class="caption-text">An Instruction and the objects it owns</span><a class="headerlink" href="#fig-ownership-graph" title="Permalink to this image"></a></p>
+</div>
+<p>Instruction objects provide two types of interfaces: direct read access
+to their components, and common summary operations on those components.
+The first interface allows access to the Operation and Operand data
+members, and each Operand object in turn allows traversal of its
+abstract syntax tree. More details about how to work with this abstract
+syntax tree can be found in Section&nbsp;<a class="reference external" href="#subsec:hierarchy">2.3</a>. This
+interface would be used, for example, in a data flow analysis where a
+user wants to evaluate the results of an effective address computation
+given a known register state.</p>
+<p>The second interface allows a user to get the sets of registers read and
+written by the instruction, information about how the instruction
+accesses memory, and information about how the instruction affects
+control flow, without having to manipulate the Operands directly. For
+instance, a user could implement a register liveness analysis algorithm
+using just this second interface (namely the <code class="docutils literal notranslate"><span class="pre">getReadSet</span></code> and
+<code class="docutils literal notranslate"><span class="pre">getWriteSet</span></code> functions).</p>
+</div>
+<div class="section" id="instruction-decoding">
+<h2>Instruction Decoding<a class="headerlink" href="#instruction-decoding" title="Permalink to this headline"></a></h2>
+<p>An InstructionDecoder interprets a sequence of bytes according to a
+given machine language and transforms them into an instruction
+representation. It determines the opcode of the machine instruction,
+translates that opcode to an Operation object, uses that Operation to
+determine how to decode the instruction’s Operands, and produces a
+decoded Instruction.</p>
+<div class="figure align-default" id="fig-decoder-use">
+<img alt="The InstructionDecoder’s inputs and outputs" src="instructionAPI/fig/decoder_use.pdf" />
+<p class="caption"><span class="caption-text">The InstructionDecoder’s inputs and outputs</span><a class="headerlink" href="#fig-decoder-use" title="Permalink to this image"></a></p>
+</div>
+<p>Instruction decoders are built from the following elements:</p>
+<ul class="simple">
+<li>A function to find and extract an opcode given a pointer into a
+buffer that points to the beginning of a machine instruction</li>
+<li>A table that, for a particular architecture, maps opcodes to
+Operations and functions that decode Operands</li>
+</ul>
+<p>From these elements, it is possible to generalize the construction of
+Instructions from Operations and Operands to an entirely
+platform-independent algorithm. Likewise, much of the construction of
+the ASTs representing each operand can be performed in a
+platform-independent manner.</p>
+</div>
+<div class="section" id="instructionast-hierarchy">
+<span id="subsec-hierarchy"></span><h2>InstructionAST Hierarchy<a class="headerlink" href="#instructionast-hierarchy" title="Permalink to this headline"></a></h2>
+<p>The AST representation of an operand encapsulates the operations
+performed on registers and immediates to produce an operand for the
+machine language instruction.</p>
+<p>The inheritance hierarchy of the AST classes is shown in
+Figure&nbsp;<a class="reference external" href="#fig:inheritance">3</a>.</p>
+<div class="figure align-default" id="fig-inheritance">
+<img alt="The InstructionAST inheritance hierarchy" src="instructionAPI/fig/full_inheritance_graph.pdf" />
+<p class="caption"><span class="caption-text">The InstructionAST inheritance hierarchy</span><a class="headerlink" href="#fig-inheritance" title="Permalink to this image"></a></p>
+</div>
+<p>The grammar for these AST representations is simple: all leaves must be
+RegisterAST or Immediate nodes. These nodes may be combined using a
+BinaryFunction node, which may be constructed as either an addition or a
+multiplication. Also, a single node may descend from a Dereference node,
+which treats its child as a memory address.
+Figure&nbsp;<a class="reference external" href="#fig:ownership">4</a> shows the allowable parent/child
+relationships within a given tree, and
+Figure&nbsp;<a class="reference external" href="#fig:representation">5</a> shows how an example IA32 instruction
+is represented using these objects.</p>
+<div class="figure align-default" id="fig-ownership">
+<img alt="InstructionAST intermediate node types and the objects they own" src="instructionAPI/fig/ast_ownership.pdf" />
+<p class="caption"><span class="caption-text">InstructionAST intermediate node types and the objects they own</span><a class="headerlink" href="#fig-ownership" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-default" id="fig-representation">
+<img alt="The decomposition of ``mov`` ``%eax``, (``%esi``)" src="instructionAPI/fig/instruction_representation.pdf" />
+<p class="caption"><span class="caption-text">The decomposition of <code class="docutils literal notranslate"><span class="pre">mov</span></code> <code class="docutils literal notranslate"><span class="pre">%eax</span></code>, (<code class="docutils literal notranslate"><span class="pre">%esi</span></code>)</span><a class="headerlink" href="#fig-representation" title="Permalink to this image"></a></p>
+</div>
+<p>These ASTs may be searched for leaf elements or subtrees (via
+<code class="docutils literal notranslate"><span class="pre">getUses</span></code> and <code class="docutils literal notranslate"><span class="pre">isUsed</span></code>) and traversed breadth-first or depth-first
+(via <code class="docutils literal notranslate"><span class="pre">getChildren</span></code>).</p>
+<p>Any node in these ASTs may be evaluated. Evaluation attempts to
+determine the value represented by a node. If successful, it will return
+that value and cache it in the node. The tree structure, combined with
+the evaluation mechanism, allows the substitution of known register and
+memory values into an operand, regardless of whether those values are
+known at the time an instruction is decoded. More details on this
+mechanism may be found in Section&nbsp;<a class="reference external" href="#sec:expression">3.5</a>.</p>
+</div>
+</div>
+<div class="section" id="instructionapi-class-reference">
+<h1>InstructionAPI Class Reference<a class="headerlink" href="#instructionapi-class-reference" title="Permalink to this headline"></a></h1>
+<div class="section" id="instruction-class">
+<span id="sec-instruction"></span><h2>Instruction Class<a class="headerlink" href="#instruction-class" title="Permalink to this headline"></a></h2>
+<p>The Instruction class is a generic instruction representation that
+contains operands, read/write semantic information about those operands,
+and information about what other registers and memory locations are
+affected by the operation the instruction performs.</p>
+<p>The purpose of an Instruction object is to join an Operation with a
+sequence of Operands, and provide an interface for some common summary
+analyses (namely, the read/write sets, memory access information, and
+control flow information).</p>
+<p>The Operation contains knowledge about its mnemonic and sufficient
+semantic details to answer the following questions:</p>
+<ul class="simple">
+<li>What Operands are read/written?</li>
+<li>What registers are implicitly read/written?</li>
+<li>What memory locations are implicitly read/written?</li>
+<li>What are the possible control flow successors of this instruction?</li>
+</ul>
+<p>Each Operand is an AST built from RegisterAST and Immediate leaves. For
+each Operand, you may determine:</p>
+<ul class="simple">
+<li>Registers read</li>
+<li>Registers written</li>
+<li>Whether memory is read or written</li>
+<li>Which memory addresses are read or written, given the state of all
+relevant registers</li>
+</ul>
+<p>Instructions should be constructed from an <code class="docutils literal notranslate"><span class="pre">unsigned</span></code> <code class="docutils literal notranslate"><span class="pre">char\ast</span></code>
+pointing to machine language, using the InstructionDecoder class. See
+InstructionDecoder for more details.</p>
+<p>Instruction (Operation::Ptr what, size_t size, const unsigned char *
+raw, Dyninst::Architecture arch)</p>
+<p><code class="docutils literal notranslate"><span class="pre">what</span></code> is the opcode of the instruction, <code class="docutils literal notranslate"><span class="pre">size</span></code> contains the number
+of bytes occupied by the corresponding machine instruction, and <code class="docutils literal notranslate"><span class="pre">raw</span></code>
+contains a pointer to the buffer from which this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> object
+was decoded. The architecture is specified by <code class="docutils literal notranslate"><span class="pre">arch</span></code>, and may be an
+element from the following set:
+<code class="docutils literal notranslate"><span class="pre">{Arch_x86,</span> <span class="pre">Arch_x86_64,</span> <span class="pre">Arch_ppc32,</span> <span class="pre">Arch_ppc64}</span></code> (as defined in
+<code class="docutils literal notranslate"><span class="pre">dyn_regs.h</span></code>).</p>
+<p>Construct an Instruction from an Operation and a collection of
+Expressions. This method is not intended to be used except by the
+InstructionDecoder class, which serves as a factory class for producing
+Instruction objects.</p>
+<p>While an Instruction object may be built “by hand” if desired, using the
+decoding interface ensures that the operation and operands are a
+sensible combination, and that the size reported is based on the actual
+size of a legal encoding of the machine instruction represented.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Operation</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">getOperation</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the <code class="docutils literal notranslate"><span class="pre">Operation</span></code> used by the <code class="docutils literal notranslate"><span class="pre">Instruction</span></code>. See
+Section&nbsp;<a class="reference external" href="#sec:operation">3.2</a> for details of the <code class="docutils literal notranslate"><span class="pre">Operation</span></code>
+interface.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getOperands</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Operand</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The vector operands has the instruction’s operands appended to it in the
+same order that they were decoded.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Operand</span><span class="w"> </span><span class="n">getOperand</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">getOperand</span></code> method returns the operand at position <code class="docutils literal notranslate"><span class="pre">index</span></code>, or
+an empty operand if <code class="docutils literal notranslate"><span class="pre">index</span></code> does not correspond to a valid operand in
+this instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">rawByte</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the index<span class="math notranslate nohighlight">\(^{th}\)</span> byte in the instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the size of the corresponding machine instruction, in bytes.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>const void \* ptr() const
+</pre></div>
+</div>
+<p>Returns a pointer to the raw byte representation of the corresponding
+machine instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getWriteSet</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">regsWritten</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Insert the set of registers written by the instruction into
+<code class="docutils literal notranslate"><span class="pre">regsWritten</span></code>. The list of registers returned in <code class="docutils literal notranslate"><span class="pre">regsWritten</span></code>
+includes registers that are explicitly written as destination operands
+(like the destination of a move). It also includes registers that are
+implicitly written (like the stack pointer in a push or pop
+instruction). It does not include any registers used only in computing
+the effective address of a write. <code class="docutils literal notranslate"><span class="pre">pop</span></code> <code class="docutils literal notranslate"><span class="pre">\asteax</span></code>, for example,
+writes to <code class="docutils literal notranslate"><span class="pre">esp</span></code>, reads <code class="docutils literal notranslate"><span class="pre">esp</span></code>, and reads <code class="docutils literal notranslate"><span class="pre">eax</span></code>, but despite the
+fact that <code class="docutils literal notranslate"><span class="pre">\asteax</span></code> is the destination operand, <code class="docutils literal notranslate"><span class="pre">eax</span></code> is not itself
+written.</p>
+<p>For both the write set and the read set (below), it is possible to
+determine whether a register is accessed implicitly or explicitly by
+examining the Operands. An explicitly accessed register appears as an
+operand that is written or read; also, any registers used in any address
+calculations are explicitly read. Any element of the write set or read
+set that is not explicitly written or read is implicitly written or
+read.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getReadSet</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">regsRead</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Insert the set of registers read by the instruction into <code class="docutils literal notranslate"><span class="pre">regsRead</span></code>.</p>
+<p>If an operand is used to compute an effective address, the registers
+involved are read but not written, regardless of the effect on the
+operand.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isRead</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">candidate</span></code> is the subexpression to search for among the values read
+by this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> object.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is read by this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isWritten</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">candidate</span></code> is the subexpression to search for among the values
+written by this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> object.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is written by this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">readsMemory</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the instruction reads at least one memory address as
+data.</p>
+<p>If any operand containing a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> object is read, the
+instruction reads the memory at that address. Also, on platforms where a
+stack pop is guaranteed to read memory, <code class="docutils literal notranslate"><span class="pre">readsMemory</span></code> will return
+<code class="docutils literal notranslate"><span class="pre">true</span></code> for a pop instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">writesMemory</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the instruction writes at least one memory address
+as data.</p>
+<p>If any operand containing a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> object is write, the
+instruction writes the memory at that address. Also, on platforms where
+a stack push is guaranteed to write memory, <code class="docutils literal notranslate"><span class="pre">writesMemory</span></code> will return
+<code class="docutils literal notranslate"><span class="pre">true</span></code> for a pop instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getMemoryReadOperands</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">memAccessors</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Addresses read by this instruction are inserted into <code class="docutils literal notranslate"><span class="pre">memAccessors</span></code>.</p>
+<p>The addresses read are in the form of <code class="docutils literal notranslate"><span class="pre">Expression</span></code>s, which may be
+evaluated once all of the registers that they use have had their values
+set. Note that this method returns ASTs representing address
+computations, and not address accesses. For instance, an instruction
+accessing memory through a register dereference would return an
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code> tree containing just the register that determines the
+address being accessed, not a tree representing a dereference of that
+register. Also note that the type of this <code class="docutils literal notranslate"><span class="pre">Expression</span></code> is the type of
+an effective address (generally a word or double word), not the type of
+the memory being accessed. For the memory being accessed, use
+<code class="docutils literal notranslate"><span class="pre">getOperands</span></code> directly.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getMemoryWriteOperands</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">memAccessors</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Addresses written by this instruction are inserted into
+<code class="docutils literal notranslate"><span class="pre">memAccessors</span></code>.</p>
+<p>The addresses written are in the same form as those returned by
+<code class="docutils literal notranslate"><span class="pre">getMemoryReadOperands</span></code> above.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">getControlFlowTarget</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When called on an explicitly control-flow altering instruction, returns
+the non-fallthrough control flow destination. When called on any other
+instruction, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+<p>For direct absolute branch instructions, <code class="docutils literal notranslate"><span class="pre">getControlFlowTarget</span></code> will
+return an immediate value. For direct relative branch instructions,
+<code class="docutils literal notranslate"><span class="pre">getControlFlowTarget</span></code> will return the expression <code class="docutils literal notranslate"><span class="pre">PC</span></code> + offset. In
+the case of indirect branches and calls, it returns a dereference of a
+register (or possibly a dereference of a more complicated expression).
+In this case, data flow analysis will often allow the determination of
+the possible targets of the instruction. We do not do analysis beyond
+the single-instruction level in the Instruction API; if other code
+performs this type of analysis, it may update the information in the
+Dereference object using the setValue method in the Expression
+interface. More details about this may be found in
+Section&nbsp;<a class="reference external" href="#sec:expression">3.5</a> and
+Section&nbsp;<a class="reference external" href="#sec:dereference">3.11</a>.</p>
+<p>Returns an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> evaluating to the non-fallthrough control
+targets, if any, of this instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">allowsFallThrough</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">false</span></code> if control flow will unconditionally go to the result
+of <code class="docutils literal notranslate"><span class="pre">getControlFlowTarget</span></code> after executing this instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the instruction as a string of assembly language. If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is
+specified, the value of the program counter as used by the instruction
+(e.g., a branch) is set to <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isValid</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> object is valid. Invalid
+instructions indicate than an <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> has reached the end
+of its assigned range, and that decoding should terminate.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isLegalInsn</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this Instruction object represents a legal
+instruction, as specified by the architecture used to decode this
+instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Architecture</span><span class="w"> </span><span class="n">getArch</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the architecture containing the instruction. As above, this will
+be an element from the set
+<code class="docutils literal notranslate"><span class="pre">{Arch_x86,</span> <span class="pre">Arch_x86_64,</span> <span class="pre">Arch_ppc32,</span> <span class="pre">Arch_ppc64}</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">InsnCategory</span><span class="w"> </span><span class="n">getCategory</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Currently, the valid categories are <code class="docutils literal notranslate"><span class="pre">c_CallInsn</span></code>, <code class="docutils literal notranslate"><span class="pre">c_ReturnInsn</span></code>,
+<code class="docutils literal notranslate"><span class="pre">c_BranchInsn</span></code>, <code class="docutils literal notranslate"><span class="pre">c_CompareInsn</span></code>, <code class="docutils literal notranslate"><span class="pre">c_PrefetchInsn</span></code>,
+<code class="docutils literal notranslate"><span class="pre">c_SysEnterInsn</span></code>, <code class="docutils literal notranslate"><span class="pre">c_SyscallInsn</span></code>, <code class="docutils literal notranslate"><span class="pre">c_VectorInsn</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">c_NoCategory</span></code>, as defined in <code class="docutils literal notranslate"><span class="pre">InstructionCategories.h</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">CFT</span><span class="w"> </span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isCall</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isIndirect</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isConditional</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isFallthrough</span><span class="p">;</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">cftConstIter</span><span class="p">;</span><span class="w"> </span><span class="n">cftConstIter</span><span class="w"> </span><span class="nf">cft_begin</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="n">cftConstIter</span><span class="w"> </span><span class="nf">cft_end</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>On certain platforms (e.g., PowerPC with conditional call/return
+instructions) the <code class="docutils literal notranslate"><span class="pre">getControlFlowTarget</span></code> function is insufficient to
+represent the successors of an instruction. The <code class="docutils literal notranslate"><span class="pre">cft_begin</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cft_end</span></code> functions return iterators into a list of all control flow
+target expressions as represented by a list of <code class="docutils literal notranslate"><span class="pre">CFT</span></code> structures. In
+most cases, <code class="docutils literal notranslate"><span class="pre">getControlFlowTarget</span></code> suffices.</p>
+</div>
+<div class="section" id="operation-class">
+<span id="sec-operation"></span><h2>Operation Class<a class="headerlink" href="#operation-class" title="Permalink to this headline"></a></h2>
+<p>An Operation object represents a family of opcodes (operation encodings)
+that perform the same task (e.g. the <code class="docutils literal notranslate"><span class="pre">MOV</span></code> family). It includes
+information about the number of operands, their read/write semantics,
+the implicit register reads and writes, and the control flow behavior of
+a particular assembly language operation. It additionally provides
+access to the assembly mnemonic, which allows any semantic details that
+are not encoded in the Instruction representation to be added by higher
+layers of analysis.</p>
+<p>As an example, the <code class="docutils literal notranslate"><span class="pre">CMP</span></code> operation on IA32/AMD64 processors has the
+following properties:</p>
+<ul class="simple">
+<li>Operand 1 is read, but not written</li>
+<li>Operand 2 is read, but not written</li>
+<li>The following flags are written:<ul>
+<li>Overflow</li>
+<li>Sign</li>
+<li>Zero</li>
+<li>Parity</li>
+<li>Carry</li>
+<li>Auxiliary</li>
+</ul>
+</li>
+<li>No other registers are read, and no implicit memory operations are
+performed</li>
+</ul>
+<p>Operations are constructed by the <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> as part of the
+process of constructing an Instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Operation</span><span class="o">::</span><span class="n">registerSet</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">implicitReads</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the set of registers implicitly read (i.e. those not included in
+the operands, but read anyway).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Operation</span><span class="o">::</span><span class="n">registerSet</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">implicitWrites</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the set of registers implicitly written (i.e. those not included
+in the operands, but written anyway).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the mnemonic for the operation. Like <code class="docutils literal notranslate"><span class="pre">instruction::format</span></code>,
+this is exposed for debug- ging and will be replaced with stream
+operators in the public interface.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">entryID</span><span class="w"> </span><span class="n">getID</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the entry ID corresponding to this operation. Entry IDs are
+enumerated values that correspond to assembly mnemonics.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">prefixEntryID</span><span class="w"> </span><span class="n">getPrefixID</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the prefix entry ID corresponding to this operation, if any.
+Prefix IDs are enumerated values that correspond to assembly prefix
+mnemonics.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isRead</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the expression represented by <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is read
+implicitly.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isWritten</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the expression represented by <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is
+written implicitly.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Operation</span><span class="o">::</span><span class="n">VCSet</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">getImplicitMemReads</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the set of memory locations implicitly read.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Operation</span><span class="o">::</span><span class="n">VCSet</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">getImplicitMemWrites</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the set of memory locations implicitly write.</p>
+</div>
+<div class="section" id="operand-class">
+<span id="sec-operand"></span><h2>Operand Class<a class="headerlink" href="#operand-class" title="Permalink to this headline"></a></h2>
+<p>An Operand object contains an AST built from RegisterAST and Immediate
+leaves, and information about whether the Operand is read, written, or
+both. This allows us to determine which of the registers that appear in
+the Operand are read and which are written, as well as whether any
+memory accesses are reads, writes, or both. An Operand, given full
+knowledge of the values of the leaves of the AST, and knowledge of the
+logic associated with the tree’s internal nodes, can determine the
+result of any computations that are encoded in it. It will rarely be the
+case that an Instruction is built with its Operands’ state fully
+specified. This mechanism is instead intended to allow a user to fill in
+knowledge about the state of the processor at the time the Instruction
+is executed.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Operand</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">read</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">written</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Create an operand from an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> and flags describing whether
+the ValueComputation is read, written, or both.</p>
+<p><code class="docutils literal notranslate"><span class="pre">val</span></code> is a reference-counted pointer to the <code class="docutils literal notranslate"><span class="pre">Expression</span></code> that will
+be contained in the <code class="docutils literal notranslate"><span class="pre">Operand</span></code> being constructed. <code class="docutils literal notranslate"><span class="pre">read</span></code> is true if
+this operand is read. <code class="docutils literal notranslate"><span class="pre">written</span></code> is true if this operand is written.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getReadSet</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">regsRead</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Get the registers read by this operand. The registers read are inserted
+into <code class="docutils literal notranslate"><span class="pre">regsRead</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getWriteSet</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">regsWritten</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Get the registers written by this operand. The registers written are
+inserted into <code class="docutils literal notranslate"><span class="pre">regsWritten</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isRead</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this operand is read.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isWritten</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this operand is written.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isRead</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is read by this operand.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isWritten</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">candidate</span></code> is written to by this operand.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">readsMemory</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this operand reads memory.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">writesMemory</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this operand writes memory.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">addEffectiveReadAddresses</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">memAccessors</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">Operand</span></code> is a memory read operand, insert the <code class="docutils literal notranslate"><span class="pre">ExpressionPtr</span></code>
+representing the address being read into <code class="docutils literal notranslate"><span class="pre">memAccessors</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">addEffectiveWriteAddresses</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">memAccessors</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">Operand</span></code> is a memory write operand, insert the <code class="docutils literal notranslate"><span class="pre">ExpressionPtr</span></code>
+representing the address being written into <code class="docutils literal notranslate"><span class="pre">memAccessors</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Return a printable string representation of the operand. The <code class="docutils literal notranslate"><span class="pre">arch</span></code>
+parameter must be supplied, as operands do not record their
+architectures. The optional <code class="docutils literal notranslate"><span class="pre">addr</span></code> parameter specifies the value of
+the program counter.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">getValue</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">getValue</span></code> method returns an <code class="docutils literal notranslate"><span class="pre">ExpressionPtr</span></code> to the AST
+contained by the operand.</p>
+</div>
+<div class="section" id="instructionast-class">
+<span id="sec-instructionast"></span><h2>InstructionAST Class<a class="headerlink" href="#instructionast-class" title="Permalink to this headline"></a></h2>
+<p>The InstructionAST class is the base class for all nodes in the ASTs
+used by the Operand class. It defines the necessary interfaces for
+traversing and searching an abstract syntax tree representing an
+operand. For the purposes of searching an InstructionAST, we provide two
+related interfaces. The first, <code class="docutils literal notranslate"><span class="pre">getUses</span></code>, will return the registers
+that appear in a given tree. The second, <code class="docutils literal notranslate"><span class="pre">isUsed</span></code>, will take as input
+another tree and return true if that tree is a (not necessarily proper)
+subtree of this one. <code class="docutils literal notranslate"><span class="pre">isUsed</span></code> requires us to define an equality
+relation on these abstract syntax trees, and the equality operator is
+provided by the InstructionAST, with the details implemented by the
+classes derived from InstructionAST. Two AST nodes are equal if the
+following conditions hold:</p>
+<ul class="simple">
+<li>They are of the same type</li>
+<li>If leaf nodes, they represent the same immediate value or the same
+register</li>
+<li>If non-leaf nodes, they represent the same operation and their
+corresponding children are equal</li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">InstructionAST</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A type definition for a reference-counted pointer to an
+<code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">InstructionAST</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Compare two AST nodes for equality.</p>
+<p>Non-leaf nodes are equal if they are of the same type and their children
+are equal. <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code>s are equal if they represent the same
+register. <code class="docutils literal notranslate"><span class="pre">Immediate</span></code>s are equal if they represent the same value.
+Note that it is not safe to compare two <code class="docutils literal notranslate"><span class="pre">InstructionAST::Ptr</span></code>
+variables, as those are pointers. Instead, test the underlying
+<code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> objects.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">getChildren</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Children of this node are appended to the vector <code class="docutils literal notranslate"><span class="pre">children</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">getUses</span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">uses</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The use set of an <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> is defined as follows:</p>
+<ul class="simple">
+<li>A <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> uses itself</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> uses the use sets of its children</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">Immediate</span></code> uses nothing</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">Dereference</span> <span class="pre">uses</span> <span class="pre">the</span> <span class="pre">use</span> <span class="pre">set</span> <span class="pre">of</span> <span class="pre">its</span> <span class="pre">child</span></code></li>
+</ul>
+<p>The use set oft his node is appended to the vector <code class="docutils literal notranslate"><span class="pre">uses</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="p">(</span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Unlike <code class="docutils literal notranslate"><span class="pre">getUses</span></code>, <code class="docutils literal notranslate"><span class="pre">isUsed</span></code> looks for <code class="docutils literal notranslate"><span class="pre">findMe</span></code> as a subtree of the
+current tree. <code class="docutils literal notranslate"><span class="pre">getUses</span></code> is designed to return a minimal set of
+registers used in this tree, whereas <code class="docutils literal notranslate"><span class="pre">isUsed</span></code> is designed to allow
+searches for arbitrary subexpressions. <code class="docutils literal notranslate"><span class="pre">findMe</span></code> is the AST node to
+find in the use set of this node.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">findMe</span></code> is used by this AST node.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="p">(</span><span class="n">formatStyle</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">defaultStyle</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">format</span></code> interface returns the contents of an <code class="docutils literal notranslate"><span class="pre">InstructionAPI</span></code>
+object as a string. By default, <code class="docutils literal notranslate"><span class="pre">format</span></code> produces assembly language.</p>
+</div>
+<div class="section" id="expression-class">
+<span id="sec-expression"></span><h2>Expression Class<a class="headerlink" href="#expression-class" title="Permalink to this headline"></a></h2>
+<p>An <code class="docutils literal notranslate"><span class="pre">Expression</span></code> is an AST representation of how the value of an
+operand is computed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Expression</span></code> class extends the <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> class by adding
+the concept of evaluation to the nodes of an <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code>.
+Evaluation attempts to determine the <code class="docutils literal notranslate"><span class="pre">Result</span></code> of the computation that
+the AST being evaluated represents. It will fill in results of as many
+of the nodes in the tree as possible, and if full evaluation is
+possible, it will return the result of the computation performed by the
+tree.</p>
+<p>Permissible leaf nodes of an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> tree are RegisterAST and
+Immediate objects. Permissible internal nodes are <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> and
+Dereference objects. An <code class="docutils literal notranslate"><span class="pre">Expression</span></code> may represent an immediate value,
+the contents of a register, or the contents of memory at a given
+address, interpreted as a particular type.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code>s in an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> tree contain a type and a value.
+Their values may be an undefined value or an instance of their
+associated type. When two <code class="docutils literal notranslate"><span class="pre">Result</span></code>s are combined using a
+<code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>, the <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> specifies the output type.
+Sign extension, type promotion, truncation, and all other necessary
+conversions are handled automatically based on the input types and the
+output type. If both of the <code class="docutils literal notranslate"><span class="pre">Result</span></code>s that are combined have defined
+values, the combination will also have a defined value; otherwise, the
+combination’s value will be undefined. For more information, see
+Section&nbsp;<a class="reference external" href="#sec:result">3.7</a>, Section&nbsp;<a class="reference external" href="#sec:binaryFunction">3.10</a>,
+and Section&nbsp;<a class="reference external" href="#sec:dereference">3.11</a>.</p>
+<p>A user may specify the result of evaluating a given <code class="docutils literal notranslate"><span class="pre">Expression</span></code>. This
+mechanism is designed to allow the user to provide a Dereference or
+RegisterAST with information about the state of memory or registers. It
+may additionally be used to change the value of an Immediate or to
+specify the result of a <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>. This mechanism may be used
+to support other advanced analyses.</p>
+<p>In order to make it more convenient to specify the results of particular
+subexpressions, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> method is provided. <code class="docutils literal notranslate"><span class="pre">bind</span></code> allows the
+user to specify that a given subexpression has a particular value
+everywhere that it appears in an expression. For example, if the state
+of certain registers is known at the time an instruction is executed, a
+user can <code class="docutils literal notranslate"><span class="pre">bind</span></code> those registers to their known values throughout an
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code>.</p>
+<p>The evaluation mechanism, as mentioned above, will evaluate as many
+sub-expressions of an expression as possible. Any operand that is more
+complicated than a single immediate value, however, will depend on
+register or memory values. The <code class="docutils literal notranslate"><span class="pre">Result</span></code>s of evaluating each
+subexpression are cached automatically using the <code class="docutils literal notranslate"><span class="pre">setValue</span></code> mechanism.
+The <code class="docutils literal notranslate"><span class="pre">Expression</span></code> then attempts to determine its <code class="docutils literal notranslate"><span class="pre">Result</span></code> based on
+the <code class="docutils literal notranslate"><span class="pre">Result</span></code>s of its children. If this <code class="docutils literal notranslate"><span class="pre">Result</span></code> can be determined
+(most likely because register contents have been filled in via
+<code class="docutils literal notranslate"><span class="pre">setValue</span></code> or <code class="docutils literal notranslate"><span class="pre">bind</span></code>), it will be returned from <code class="docutils literal notranslate"><span class="pre">eval</span></code>; if it can
+not be determined, a <code class="docutils literal notranslate"><span class="pre">Result</span></code> with an undefined value will be
+returned. See Figure 6 for an illustration of this concept; the operand
+represented is <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">EBX</span> <span class="pre">+</span> <span class="pre">4</span> <span class="pre">\ast</span> <span class="pre">EAX</span> <span class="pre">]</span></code>. The contents of <code class="docutils literal notranslate"><span class="pre">EBX</span></code> and
+<code class="docutils literal notranslate"><span class="pre">EAX</span></code> have been determined through some outside mechanism, and have
+been defined with <code class="docutils literal notranslate"><span class="pre">setValue</span></code>. The <code class="docutils literal notranslate"><span class="pre">eval</span></code> mechanism proceeds to
+determine the address being read by the <code class="docutils literal notranslate"><span class="pre">Dereference</span></code>, since this
+information can be determined given the contents of the registers. This
+address is available from the Dereference through its child in the tree,
+even though calling <code class="docutils literal notranslate"><span class="pre">eval</span></code> on the Dereference returns a <code class="docutils literal notranslate"><span class="pre">Result</span></code>
+with an undefined value.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Expression</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A type definition for a reference-counted pointer to an <code class="docutils literal notranslate"><span class="pre">Expression</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eval</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Expression</span></code> can be evaluated, returns a <code class="docutils literal notranslate"><span class="pre">Result</span></code> containing
+its value. Otherwise returns an undefined <code class="docutils literal notranslate"><span class="pre">Result</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">setValue</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">knownValue</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Sets the result of <code class="docutils literal notranslate"><span class="pre">eval</span></code> for this <code class="docutils literal notranslate"><span class="pre">Expression</span></code> to <code class="docutils literal notranslate"><span class="pre">knownValue</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">clearValue</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">clearValue</span></code> sets the contents of this <code class="docutils literal notranslate"><span class="pre">Expression</span></code> to undefined.
+The next time <code class="docutils literal notranslate"><span class="pre">eval</span></code> is called, it will recalculate the value of the
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">size</span></code> returns the size of this <code class="docutils literal notranslate"><span class="pre">Expression</span></code>’s <code class="docutils literal notranslate"><span class="pre">Result</span></code>, in
+bytes.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>bool bind(Expression \* expr, const Result &amp; value)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">bind</span></code> searches for all instances of the Expression <code class="docutils literal notranslate"><span class="pre">expr</span></code> within
+this Expression, and sets the result of <code class="docutils literal notranslate"><span class="pre">eval</span></code> for those
+subexpressions to <code class="docutils literal notranslate"><span class="pre">value</span></code>. <code class="docutils literal notranslate"><span class="pre">bind</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if at least one
+instance of <code class="docutils literal notranslate"><span class="pre">expr</span></code> was found in this Expression.</p>
+<p><code class="docutils literal notranslate"><span class="pre">bind</span></code> does not operate on subexpressions that happen to evaluate to
+the same value. For example, if a dereference of <code class="docutils literal notranslate"><span class="pre">0xDEADBEEF</span></code> is bound
+to 0, and a register is bound to <code class="docutils literal notranslate"><span class="pre">0xDEADBEEF</span></code>, a deference of that
+register is not bound to 0.</p>
+<p>virtual void apply(Visitor *)</p>
+<p><code class="docutils literal notranslate"><span class="pre">apply</span></code> applies a <code class="docutils literal notranslate"><span class="pre">Visitor</span></code> to this <code class="docutils literal notranslate"><span class="pre">Expression</span></code>. Visitors perform
+postfix-order traversal of the ASTs represented by an <code class="docutils literal notranslate"><span class="pre">Expression</span></code>,
+with user-defined actions performed at each node of the tree. We present
+a thorough discussion with examples in Section <a class="reference external" href="#sec:visitor">3.6</a>.</p>
+<p>virtual void getChildren(std::vector&lt;Expression::Ptr&gt; &amp; children) const</p>
+<p><code class="docutils literal notranslate"><span class="pre">getChildren</span></code> may be called on an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> taking a vector of
+<code class="docutils literal notranslate"><span class="pre">ExpressionPtr</span></code>s, rather than <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code>Ptrs. All children
+which are <code class="docutils literal notranslate"><span class="pre">Expression</span></code>s will be appended to <code class="docutils literal notranslate"><span class="pre">children</span></code>.</p>
+</div>
+<div class="section" id="visitor-paradigm">
+<span id="sec-visitor"></span><h2>Visitor Paradigm<a class="headerlink" href="#visitor-paradigm" title="Permalink to this headline"></a></h2>
+<p>An alternative to the bind/eval mechanism is to use a <em>visitor</em>  <a class="footnote-reference" href="#id2" id="id1">[1]</a>
+over an expression tree. The visitor concept applies a user-specified
+visitor class to all nodes in an expression tree (in a post-order
+traversal). The visitor paradigm can be used as a more efficient
+replacement for bind/eval, to identify whether an expression has a
+desired pattern, or to locate children of an expression tree.</p>
+<p>A visitor is a user-defined class that inherits from the <code class="docutils literal notranslate"><span class="pre">Visitor</span></code>
+class defined in <code class="docutils literal notranslate"><span class="pre">Visitor.h</span></code>. That class is repeated here for
+reference:</p>
+<p>class Visitor public: Visitor() virtual &nbsp;Visitor() virtual void
+visit(BinaryFunction* b) = 0; virtual void visit(Immediate* i) = 0;
+virtual void visit(RegisterAST* r) = 0; virtual void
+visit(Dereference* d) = 0;;</p>
+<p>A user provides implementations of the four <code class="docutils literal notranslate"><span class="pre">visit</span></code> methods. When
+applied to an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> (via the <code class="docutils literal notranslate"><span class="pre">Expression::apply</span></code> method) the
+InstructionAPI will perform a post-order traversal of the tree, calling
+the appropriate <code class="docutils literal notranslate"><span class="pre">visit</span></code> method at each node.</p>
+<p>As a simple example, the following code prints out the name of each
+register used in an <code class="docutils literal notranslate"><span class="pre">Expression</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Instruction.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Operand.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Expression.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Register.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Visitor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Dyninst</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">InstructionAPI</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PrintVisitor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Visitor</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">PrintVisitor</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="o">~</span><span class="n">PrintVisitor</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">BinaryFunction</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">Immediate</span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">RegisterAST</span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">Visiting register &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="o">-&gt;</span><span class="n">getID</span><span class="p">().</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">Dereference</span><span class="o">*</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">printRegisters</span><span class="p">(</span><span class="n">Instruction</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">insn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="n">PrintVisitor</span><span class="w"> </span><span class="n">pv</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Operand</span><span class="o">&gt;</span><span class="w"> </span><span class="n">operands</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">insn</span><span class="o">-&gt;</span><span class="n">getOperands</span><span class="p">(</span><span class="n">operands</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="c1">// c++11x allows auto to determine the type of a variable;</span>
+<span class="w">   </span><span class="c1">// if not using c++11x, use &#39;std::vector&lt;Operand&gt;::iterator&#39; instead.</span>
+<span class="w">   </span><span class="c1">// For gcc, use the -std=c++0x argument.</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operands</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">operands</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Registers used for operand&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="o">*</span><span class="n">iter</span><span class="p">).</span><span class="n">getValue</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pv</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Visitors may also set and use internal state. For example, the following
+visitor (presented without surrounding use code) matches x86 and x86-64
+instructions that add 0 to a register (effectively a noop).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">nopVisitor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Visitor</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">   </span><span class="n">nopVisitor</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foundReg</span><span class="p">(</span><span class="nb">false</span><span class="p">),</span><span class="w"> </span><span class="n">foundImm</span><span class="p">(</span><span class="nb">false</span><span class="p">),</span><span class="w"> </span><span class="n">foundBin</span><span class="p">(</span><span class="nb">false</span><span class="p">),</span><span class="w"> </span><span class="n">isNop</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">   </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">nopVisitor</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="n">foundReg</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="n">foundImm</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="n">foundBin</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="n">isNop</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">   </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">BinaryFunction</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">foundBin</span><span class="p">)</span><span class="w"> </span><span class="n">isNop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">foundImm</span><span class="p">)</span><span class="w"> </span><span class="n">isNop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">foundReg</span><span class="p">)</span><span class="w"> </span><span class="n">isNop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">foundBin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">Immediate</span><span class="w"> </span><span class="o">*</span><span class="n">imm</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">imm</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">isNop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">foundImm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">RegisterAST</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">foundReg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">Dereference</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">isNop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="result-class">
+<span id="sec-result"></span><h2>Result Class<a class="headerlink" href="#result-class" title="Permalink to this headline"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Result</span></code> object represents a value computed by an <code class="docutils literal notranslate"><span class="pre">Expression</span></code>
+AST.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Result</span></code> class is a tagged-union representation of the results
+that Expressions can produce. It includes 8, 16, 32, 48, and 64 bit
+integers (signed and unsigned), bit values, and single and double
+precision floating point values. For each of these types, the value of a
+Result may be undefined, or it may be a value within the range of the
+type.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> field is an enum that may contain any of the following
+values:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">u8:</span></code> an unsigned 8-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">s8:</span></code> a signed 8-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">u16:</span></code> an unsigned 16-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">s16:</span></code> a signed 16-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">u32:</span></code> an unsigned 32-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">s32:</span></code> a signed 32-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">u48:</span></code> an unsigned 48-bit integer (IA32 pointers)</li>
+<li><code class="docutils literal notranslate"><span class="pre">s48:</span></code> a signed 48-bit integer (IA32 pointers)</li>
+<li><code class="docutils literal notranslate"><span class="pre">u64:</span></code> an unsigned 64-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">s64:</span></code> a signed 64-bit integer</li>
+<li><code class="docutils literal notranslate"><span class="pre">sp_float:</span></code> a single-precision float</li>
+<li><code class="docutils literal notranslate"><span class="pre">dp_float:</span></code> a double-precision float</li>
+<li><code class="docutils literal notranslate"><span class="pre">bit_flag:</span></code> a single bit (individual flags)</li>
+<li><code class="docutils literal notranslate"><span class="pre">m512:</span></code> a 512-bit memory value</li>
+<li><code class="docutils literal notranslate"><span class="pre">dbl128:</span></code> a 128-bit integer, which often contains packed floating
+point values - <code class="docutils literal notranslate"><span class="pre">m14:</span></code> a 14 byte memory value</li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Result</span><span class="w"> </span><span class="p">(</span><span class="n">Result_Type</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Result</span></code> may be constructed from a type without providing a value.
+This constructor creates a <code class="docutils literal notranslate"><span class="pre">Result</span></code> of type <code class="docutils literal notranslate"><span class="pre">t</span></code> with undefined
+contents.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Result</span><span class="w"> </span><span class="p">(</span><span class="n">Result_Type</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Result</span></code> may be constructed from a type and any value convertible to
+the type that the tag represents. This constructor creates a <code class="docutils literal notranslate"><span class="pre">Result</span></code>
+of type <code class="docutils literal notranslate"><span class="pre">t</span></code> and contents <code class="docutils literal notranslate"><span class="pre">v</span></code> for any <code class="docutils literal notranslate"><span class="pre">v</span></code> that is implicitly
+convertible to type <code class="docutils literal notranslate"><span class="pre">t</span></code>. Attempting to construct a <code class="docutils literal notranslate"><span class="pre">Result</span></code> with a
+value that is incompatible with its type will result in a compile-time
+error.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Two <code class="docutils literal notranslate"><span class="pre">Result</span></code>s are equal if any of the following hold:</p>
+<ul class="simple">
+<li>Both <code class="docutils literal notranslate"><span class="pre">Result</span></code>s are of the same type and undefined</li>
+<li>Both <code class="docutils literal notranslate"><span class="pre">Result</span></code>s are of the same type, defined, and have the same
+value</li>
+</ul>
+<p>Otherwise, they are unequal (due to having different types, an undefiend
+<code class="docutils literal notranslate"><span class="pre">Result</span></code> compared to a defined <code class="docutils literal notranslate"><span class="pre">Result</span></code>, or different values).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Result</span></code>s are formatted as strings containing their contents,
+represented as hexadecimal. The type of the <code class="docutils literal notranslate"><span class="pre">Result</span></code> is not included
+in the output.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">to_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">to_type</span><span class="w"> </span><span class="n">convert</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Converts the <code class="docutils literal notranslate"><span class="pre">Result</span></code> to the desired datatype. For example, to convert
+a <code class="docutils literal notranslate"><span class="pre">Result</span></code> <code class="docutils literal notranslate"><span class="pre">res</span></code> to a signed char, use <code class="docutils literal notranslate"><span class="pre">res.convert&lt;char&gt;()</span></code>; to
+convert it to an unsigned long, use <code class="docutils literal notranslate"><span class="pre">res.convert&lt;unsigned</span> <span class="pre">long&gt;()</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Returns the size of the contained type, in bytes.</p>
+</div>
+<div class="section" id="registerast-class">
+<span id="sec-registerast"></span><h2>RegisterAST Class<a class="headerlink" href="#registerast-class" title="Permalink to this headline"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> object represents a register contained in an operand.
+As a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> is an <code class="docutils literal notranslate"><span class="pre">Expression</span></code>, it may contain the physical
+register’s contents if they are known.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">dyn_detail</span><span class="o">::</span><span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RegisterAST</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A type definition for a reference-counted pointer to a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">RegisterAST</span><span class="w"> </span><span class="p">(</span><span class="n">MachRegister</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Construct a register using the provided register object <code class="docutils literal notranslate"><span class="pre">r</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">MachRegister</span></code> datatype is Dyninst’s register representation and
+should not be constructed manually.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getChildren</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>By definition, a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> object has no children. Since a
+<code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> has no children, the <code class="docutils literal notranslate"><span class="pre">children</span></code> parameter is unchanged
+by this method.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getUses</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">uses</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>By definition, the use set of a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> object is itself. This
+<code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> will be inserted into <code class="docutils literal notranslate"><span class="pre">uses</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="w"> </span><span class="p">(</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">isUsed</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">findMe</span></code> is a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> that
+represents the same register as this <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code>, and <code class="docutils literal notranslate"><span class="pre">false</span></code>
+otherwise.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="p">(</span><span class="n">formatStyle</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultStyle</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The format method on a <code class="docutils literal notranslate"><span class="pre">RegisterAST</span></code> object returns the name
+associated with its ID.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">RegisterAST</span><span class="w"> </span><span class="n">makePC</span><span class="w"> </span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="k">static</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Utility function to get a <code class="docutils literal notranslate"><span class="pre">Register</span></code> object that represents the
+program counter. <code class="docutils literal notranslate"><span class="pre">makePC</span></code> is provided to support platform-independent
+control flow analysis.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RegisterAST</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We define a partial ordering on registers by their register number so
+that they may be placed into sets or other sorted containers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">MachRegister</span><span class="w"> </span><span class="n">getID</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">getID</span></code> function returns underlying register represented by this
+AST.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">RegisterAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">promote</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">reg</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="k">static</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Utility function to hide aliasing complexity on platforms (IA-32) that
+allow addressing part or all of a register</p>
+</div>
+<div class="section" id="immediate-class">
+<span id="sec-immediate"></span><h2>Immediate Class<a class="headerlink" href="#immediate-class" title="Permalink to this headline"></a></h2>
+<p>The Immediate class represents an immediate value in an operand.</p>
+<p>Since an Immediate represents a constant value, the <code class="docutils literal notranslate"><span class="pre">setValue</span></code> and
+<code class="docutils literal notranslate"><span class="pre">clearValue</span></code> interface are disabled on Immediate objects. If an
+immediate value is being modified, a new Immediate object should be
+created to represent the new value.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="p">(</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">getChildren</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>By definition, an <code class="docutils literal notranslate"><span class="pre">Immediate</span></code> has no children.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getUses</span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>By definition, an <code class="docutils literal notranslate"><span class="pre">Immediate</span></code> uses no registers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="p">(</span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">isUsed</span></code>, when called on an Immediate, will return true if <code class="docutils literal notranslate"><span class="pre">findMe</span></code>
+represents an Immediate with the same value. While this convention may
+seem arbitrary, it allows <code class="docutils literal notranslate"><span class="pre">isUsed</span></code> to follow a natural rule: an
+<code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> is used by another <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> if and only if
+the first <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> is a subtree of the second one.</p>
+</div>
+<div class="section" id="binaryfunction-class">
+<span id="sec-binaryfunction"></span><h2>BinaryFunction Class<a class="headerlink" href="#binaryfunction-class" title="Permalink to this headline"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> object represents a function that can combine two
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code>s and produce another <code class="docutils literal notranslate"><span class="pre">ValueComputation</span></code>.</p>
+<p>For the purposes of representing a single operand of an instruction, the
+<code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>s of interest are addition and multiplication of
+integer values; this allows an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> to represent all
+addressing modes on the architectures currently supported by the
+Instruction API.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BinaryFunction</span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">arg2</span><span class="p">,</span><span class="w"> </span><span class="n">Result_Type</span><span class="w"> </span><span class="n">result_type</span><span class="p">,</span><span class="w"> </span><span class="n">funcT</span><span class="o">:</span><span class="n">Ptr</span><span class="w"> </span><span class="n">func</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The constructor for a <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> may take a reference-counted
+pointer or a plain C++ pointer to each of the child <code class="docutils literal notranslate"><span class="pre">Expression</span></code>s
+that represent its arguments. Since the reference-counted implementation
+requires explicit construction, we provide overloads for all four
+combinations of plain and reference-counted pointers. Note that
+regardless of which constructor is used, the pointers <code class="docutils literal notranslate"><span class="pre">arg1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">arg2</span></code> become owned by the <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> being constructed, and
+should not be deleted. They will be cleaned up when the
+<code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> object is destroyed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">func</span></code> parameter is a binary functor on two <code class="docutils literal notranslate"><span class="pre">Result</span></code>s. It
+should be derived from <code class="docutils literal notranslate"><span class="pre">funcT</span></code>. <code class="docutils literal notranslate"><span class="pre">addResult</span></code> and <code class="docutils literal notranslate"><span class="pre">multResult</span></code>,
+which respectively add and multiply two <code class="docutils literal notranslate"><span class="pre">Result</span></code>s, are provided as
+part of the InstructionAPI, as they are necessary for representing
+address calculations. Other <code class="docutils literal notranslate"><span class="pre">funcTs</span></code> may be implemented by the user if
+desired. <code class="docutils literal notranslate"><span class="pre">funcTs</span></code> have names associated with them for output and
+debugging purposes. The addition and multiplication functors provided
+with the Instruction API are named “+” and “*”, respectively.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eval</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> version of <code class="docutils literal notranslate"><span class="pre">eval</span></code> allows the <code class="docutils literal notranslate"><span class="pre">eval</span></code> mechanism
+to handle complex addressing modes. Like all of the <code class="docutils literal notranslate"><span class="pre">ValueComputation</span></code>
+implementations, a <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>’s <code class="docutils literal notranslate"><span class="pre">eval</span></code> will return the
+result of evaluating the expression it represents if possible, or an
+empty <code class="docutils literal notranslate"><span class="pre">Result</span></code> otherwise. A <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> may have arguments that
+can be evaluated, or arguments that cannot. Additionally, it may have a
+real function pointer, or it may have a null function pointer. If the
+arguments can be evaluated and the function pointer is real, a result
+other than an empty <code class="docutils literal notranslate"><span class="pre">Result</span></code> is guaranteed to be returned. This result
+is cached after its initial calculation; the caching mechanism also
+allows outside information to override the results of the
+<code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>’s internal computation. If the cached result
+exists, it is guaranteed to be returned even if the arguments or the
+function are not evaluable.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getChildren</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The children of a <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> are its two arguments. Appends the
+children of this BinaryFunction to <code class="docutils literal notranslate"><span class="pre">children</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getUses</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">uses</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The use set of a <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> is the union of the use sets of its
+children. Appends the use set of this <code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code> to <code class="docutils literal notranslate"><span class="pre">uses</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="w"> </span><span class="p">(</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">isUsed</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">findMe</span></code> is an argument of this
+<code class="docutils literal notranslate"><span class="pre">BinaryFunction</span></code>, or if it is in the use set of either argument.</p>
+</div>
+<div class="section" id="dereference-class">
+<span id="sec-dereference"></span><h2>Dereference Class<a class="headerlink" href="#dereference-class" title="Permalink to this headline"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> object is an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> that dereferences another
+<code class="docutils literal notranslate"><span class="pre">ValueComputation</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> contains an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> representing an effective
+address computation. Its use set is the same as the use set of the
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code> being dereferenced.</p>
+<p>It is not possible, given the information in a single instruction, to
+evaluate the result of a dereference. <code class="docutils literal notranslate"><span class="pre">eval</span></code> may still be called on an
+<code class="docutils literal notranslate"><span class="pre">Expression</span></code> that includes dereferences, but the expected use case is
+as follows:</p>
+<ul class="simple">
+<li>Determine the address being used in a dereference via the <code class="docutils literal notranslate"><span class="pre">eval</span></code>
+mechanism</li>
+<li>Perform analysis to determine the contents of that address</li>
+<li>If necessary, fill in the <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> node with the contents of
+that addresss, using <code class="docutils literal notranslate"><span class="pre">setValue</span></code></li>
+</ul>
+<p>The type associated with a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> node will be the type of the
+value <em>read</em> <em>from</em> <em>memory</em>, not the type used for the address
+computation. Two <code class="docutils literal notranslate"><span class="pre">Dereference</span></code>s that access the same address but
+interpret the contents of that memory as different types will produce
+different values. The children of a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> at a given address
+are identical, regardless of the type of dereference being performed at
+that address. For example, the <code class="docutils literal notranslate"><span class="pre">Expression</span></code> shown in Figure 6 could
+have its root <code class="docutils literal notranslate"><span class="pre">Dereference</span></code>, which interprets the memory being
+dereferenced as a unsigned 16-bit integer, replaced with a
+<code class="docutils literal notranslate"><span class="pre">Dereference</span></code> that interprets the memory being dereferenced as any
+other type. The remainder of the <code class="docutils literal notranslate"><span class="pre">Expression</span></code> tree would, however,
+remain unchanged.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Dereference</span><span class="w"> </span><span class="p">(</span><span class="n">Expression</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">Result_Type</span><span class="w"> </span><span class="n">result_type</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> is constructed from an <code class="docutils literal notranslate"><span class="pre">Expression</span></code> pointer (raw or
+shared) representing the address to be dereferenced and a type
+indicating how the memory at the address in question is to be
+interpreted.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">getChildren</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> has one child, which represents the address being
+dereferenced. Appends the child of this <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> to <code class="docutils literal notranslate"><span class="pre">children</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">getUses</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="o">&lt;</span><span class="w"> </span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">uses</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The use set of a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> is the same as the use set of its
+children. The use set of this <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> is inserted into <code class="docutils literal notranslate"><span class="pre">uses</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isUsed</span><span class="w"> </span><span class="p">(</span><span class="n">InstructionAST</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">findMe</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">InstructionAST</span></code> is used by a <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> if it is equivalent
+to the <code class="docutils literal notranslate"><span class="pre">Dereference</span></code> or it is used by the lone child of the
+<code class="docutils literal notranslate"><span class="pre">Dereference</span></code></p>
+</div>
+<div class="section" id="instructiondecoder-class">
+<span id="sec-instructiondecoder"></span><h2>InstructionDecoder Class<a class="headerlink" href="#instructiondecoder-class" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> class decodes instructions, given a buffer of
+bytes and a length, and constructs an Instruction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>InstructionDecoder(const unsigned char \*buffer, size_t size, Architecture arch) InstructionDecoder(const void \*buffer, size_t size, Architecture arch)
+</pre></div>
+</div>
+<p>Construct an <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> over the provided <code class="docutils literal notranslate"><span class="pre">buffer</span></code> and
+<code class="docutils literal notranslate"><span class="pre">size</span></code>. We consider the buffer to contain instructions from the
+provided <code class="docutils literal notranslate"><span class="pre">arch</span></code>, which must be from the set
+<code class="docutils literal notranslate"><span class="pre">{Arch_x86,</span> <span class="pre">Arch_x86_64,</span> <span class="pre">Arch_ppc32,</span> <span class="pre">Arch_ppc64}</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Instruction</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="nf">decode</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Decode the next address in the buffer provided at construction time,
+returning either an instruction pointer or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if the buffer
+contains no undecoded instructions.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>From <em>Elements of Reusable Object-Oriented Software</em> by Gamma, Helm,
+Johnson, and Vlissides</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../dynC_API/index.html" class="btn btn-neutral float-left" title="DynC API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../parseAPI/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

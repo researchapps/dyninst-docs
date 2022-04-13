@@ -1,0 +1,121 @@
+.. _`subsec:frame`:
+
+Class Frame
+~~~~~~~~~~~
+
+The class returns a call stack as a vector of objects. As described in
+Section `[subsec:definitions] <#subsec:definitions>`__, each Frame
+object represents a stack frame, and contains a return address (RA),
+stack pointer (SP) and frame pointer (FP). For each of these values,
+optionally, it stores the location where the values were found. Each
+Frame object may also be augmented with symbol information giving a
+function name (or a symbolic name, in the case of non-functions) for the
+object that created the stack frame.
+
+The Frame class provides a set of functions (getRALocation,
+getSPLocation and getFPLocation) that return the location in the target
+process’ memory or registers where the RA, SP, or FP were found. These
+functions may be used to modify the stack. For example, the DyninstAPI
+uses these functions to change return addresses on the stack when it
+relocates code. The RA, SP, and FP may be found in a register or in a
+memory address on a call stack.
+
+.. container:: apient
+
+   static Frame \*newFrame(Dyninst::MachRegisterVal ra,
+   Dyninst::MachRegisterVal sp, Dyninst::MachRegisterVal fp, Walker
+   \*walker)
+
+.. container:: apient
+
+   bool operator==(const Frame &)
+
+.. container:: apient
+
+   Dyninst::MachRegisterVal getRA() const
+
+.. container:: apient
+
+   void setRA(Dyninst::MachRegisterVal val)
+
+.. container:: apient
+
+   Dyninst::MachRegisterVal getSP() const
+
+.. container:: apient
+
+   void setSP(Dyninst::MachRegisterVal val)
+
+.. container:: apient
+
+   Dyninst::MachRegisterVal getFP() const
+
+.. container:: apient
+
+   void setFP(Dyninst::MachRegisterVal val)
+
+.. container:: apient
+
+   bool isTopFrame() const; bool isBottomFrame() const;
+
+.. container:: apient
+
+   typedef enum loc_address, loc_register, loc_unknown storage_t;
+
+.. container:: apient
+
+   typedef struct union Dyninst::Address addr; Dyninst::MachRegister
+   reg; val; storage_t location; location_t;
+
+.. container:: apient
+
+   location_t getRALocation() const
+
+.. container:: apient
+
+   void setRALocation(location_t newval)
+
+.. container:: apient
+
+   location_t getSPLocation() const
+
+.. container:: apient
+
+   void setSPLocation(location_t newval)
+
+.. container:: apient
+
+   location_t getFPLocation() const
+
+.. container:: apient
+
+   void setFPLocation(location_t newval)
+
+.. container:: apient
+
+   bool getName(std::string &str) const
+
+.. container:: apient
+
+   bool getObject(void\* &obj) const
+
+.. container:: apient
+
+   Walker \*getWalker() const;
+
+.. container:: apient
+
+   THR_ID getThread() const;
+
+.. container:: apient
+
+   FrameStepper\* getStepper() const
+
+.. container:: apient
+
+   bool getLibOffset(std::string &lib, Dyninst::Offset &offset, void\*
+   &symtab) const
+
+.. container:: apient
+
+   bool nonCall() const

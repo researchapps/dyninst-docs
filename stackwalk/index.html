@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../symtabAPI/index.html" />
+    <link rel="prev" title="Introduction" href="../patchAPI/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructionAPI/index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#abstractions">Abstractions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stackwalking-interface">Stackwalking Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#callback-interface">Callback Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#definitions-and-basic-types">Definitions and Basic Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-types">Basic Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#namespace-stackwalkerapi">Namespace StackwalkerAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sec-stackwalking-interface">Stackwalking Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-walker">Class Walker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-frame">Class Frame</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mapping-addresses-to-libraries">Mapping Addresses to Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-local-variables">Accessing Local Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sec-callback-interface">Callback Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-implementations">Default Implementations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-framestepper">Class FrameStepper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-steppergroup">Class StepperGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-processstate">Class ProcessState</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#class-librarystate">Class LibraryState</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#class-symbollookup">Class SymbolLookup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#callback-interface-default-implementations">Callback Interface Default Implementations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#debugger-interface">Debugger Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-procdebug">Class ProcDebug</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#framesteppers">FrameSteppers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-framefuncstepper">Class FrameFuncStepper</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#class-framefunchelper">Class FrameFuncHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#class-sighandlerstepper">Class SigHandlerStepper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-debugstepper">Class DebugStepper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-analysisstepper">Class AnalysisStepper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-stepperwanderer">Class StepperWanderer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#class-bottomofstackstepper">Class BottomOfStackStepper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stackwalk/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<span id="sec-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p>This document describes StackwalkerAPI, an API and library for walking a
+call stack. The call stack (also known as the run-time stack) is a stack
+found in a process that contains the currently active stack frames. Each
+stack frame is a record of an executing function (or function-like
+object such as a signal handler or system call). StackwalkerAPI provides
+an API that allows users to collect a call stack (known as walking the
+call stack) and access information about its stack frames. The current
+implementation supports Linux/x86, Linux/x86-64, Linux/Power,
+Linux/Power-64, and Windows/x86.</p>
+<p>StackwalkerAPI is designed to be both easy-to-use and easy-to-extend.
+Users can easily use StackwalkerAPI to walk a call stack without needing
+to understand how call stacks are laid out on their platform. Users can
+easily extend StackwalkerAPI to work with new platforms and types of
+stack frames by implementing a set of callbacks that can be plugged into
+StackwalkerAPI.</p>
+<p>StackwalkerAPI’s ease-of-use comes from it providing a platform
+independent interface that allows users to access detailed information
+about the call stack. For example, the following C++ code-snippet is all
+that is needed to walk and print the call stack of the currently running
+thread.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">stackwalk</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+
+<span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">();</span>
+<span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">stackwalk</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">stackwalk</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">stackwalk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Found function &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>StackwalkerAPI can walk a call stack in the same address space as where
+the StackwalkerAPI library lives (known as a first party stackwalk), or
+it can walk a call stack in another process (known as a third party
+stackwalk). To change the above example to perform a third party
+stackwalk, we would only need to pass a process identifier to newWalker,
+e.g:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Our other design goal with StackwalkerAPI is to make it easy-to-extend.
+The mechanics of how to walk through a stack frame can vary between
+different platforms, and even between different types of stack frames on
+the same platform. In addition, different platforms may have different
+mechanisms for reading the data in a call stack or looking up symbolic
+names that go with a stack frame. StackwalkerAPI provides a callback
+interface for plugging in mechanisms for handling new systems and types
+of stack frames. The callback interface can be used to port
+StackwalkerAPI to new platforms, extend StackwalkerAPI support on
+existing systems, or more easily integrate StackwalkerAPI into existing
+tools. There are callbacks for the following StackwalkerAPI operations:</p>
+<dl class="docutils">
+<dt>Walk through a stack frame</dt><dd>StackwalkerAPI will find different types of stack frames on different
+platforms and even within the same platform. For example, on
+Linux/x86 the stack frame generated by a typical function looks
+different from the stack frame generated by a signal handler. The
+callback interface can be used to register a handler with
+StackwalkerAPI that knows how to walk through a new type of stack
+frame. For example, the DyninstAPI tool registers an object with
+StackwalkerAPI that describes how to walk through the stack frames
+generated by its instrumentation.</dd>
+<dt>Access process data</dt><dd>To walk a call stack, StackwalkerAPI needs to be able to read a
+process’ memory and registers. When doing a first party stackwalk,
+this is done by directly reading them from the current address space.
+When doing a third party stackwalk, this is done by reading them
+using a debugger interface. The callback interface can be used to
+register new objects for accessing process data. This can be used,
+for example, to port StackwalkerAPI to a new operating system or make
+it work with a new debugger interface.</dd>
+<dt>Look up symbolic names</dt><dd>When StackwalkerAPI finds a stack frame, it gets an address that
+points into the piece of code that created that stack frame. This
+address is not necessarily meaningful to a user, so StackwalkerAPI
+attempts to associate the address with a symbolic name. The callback
+interface can be used to register an object with StackwalkerAPI that
+performs an address to name mapping, allowing StackwalkerAPI to
+associate names with stack frames.</dd>
+</dl>
+</div>
+<div class="section" id="abstractions">
+<span id="sec-abstractions"></span><h1>Abstractions<a class="headerlink" href="#abstractions" title="Permalink to this headline"></a></h1>
+<p>StackwalkerAPI contains two interfaces: the Stackwalking Interface and
+the Callback Interface. The stackwalking interface is used to walk the
+call stack, query information about stack frames, and collect basic
+information about threads. The Callback Interface is used to provide
+custom mechanisms for walking a call stack. Users who operate in one of
+StackwalkerAPI’s standard configurations do not need to use the Callback
+Interface.</p>
+<p>Figure&nbsp;<a class="reference external" href="#fig:object-ownership">[fig:object-ownership]</a> shows the
+ownership hierarchy for StackwalkerAPI’s classes. Ownership is a
+“contains” relationship; if one class owns another, then instances of
+the owner class maintain an exclusive instance of the other. For
+example, in Figure&nbsp;<a class="reference external" href="#fig:object-ownership">[fig:object-ownership]</a>
+the each Walker instance contains exactly one instance of a ProcessState
+object. No other instance of Walker uses that instance of ProcessState.</p>
+<p>This remainder of this section briefly describes the six classes that
+make up StackwalkerAPI’s two interfaces. For more details, see the class
+descriptions in Section&nbsp;<a class="reference external" href="#sec:api">3</a>.</p>
+<p>= [rectangle, draw, rounded corners]</p>
+<div class="section" id="stackwalking-interface">
+<h2>Stackwalking Interface<a class="headerlink" href="#stackwalking-interface" title="Permalink to this headline"></a></h2>
+<dl class="docutils">
+<dt>Walker</dt><dd>The Walker class is the top-level class used for collecting
+stackwalks. It provides a simple interface for requesting a
+stackwalk. Each Walker object is associated with one process, but may
+walk the call stacks of multiple threads within that process.</dd>
+<dt>Frame</dt><dd>A call stack is returned as a vector of Frame objects, where each
+Frame object represents a stack frame. It can provide information
+about the stack frame and basic information about the function,
+signal handler or other mechanism that created it. Users can request
+information such as the symbolic name associated with the Frame
+object, and values of its saved registers.</dd>
+</dl>
+</div>
+<div class="section" id="callback-interface">
+<h2>Callback Interface<a class="headerlink" href="#callback-interface" title="Permalink to this headline"></a></h2>
+<p>StackwalkerAPI includes default implementations of the Callback
+Interface on each of its supported platforms. These default
+implementations allow StackwalkerAPI to work “out of the box” in a
+standard configuration on each platform. Users can port StackwalkerAPI
+to new platforms or customize its call stack walking behavior by
+implementing their own versions of the classes in the Callback
+Interface.</p>
+<dl class="docutils">
+<dt>FrameStepper</dt><dd>A FrameStepper object describes how to walk through a single type of
+stack frame. Users can provide an implementation of this interface
+that allows StackwalkerAPI to walk through new types of stack frames.
+For example, the DyninstAPI uses this interface to extend
+StackwalkerAPI to allow it to walk through stack frames created by
+instrumentation code.</dd>
+<dt>StepperGroup</dt><dd>A StepperGroup is a collection of FrameStepper objects and criteria
+that describes when to use each type of FrameStepper. These criteria
+are based on simple address ranges in the code space of the target
+process. In the above example with DyninstAPI, it would be the job of
+the StepperGroup to identify a stack frame as belonging to
+instrumentation code and use the instrumentation FrameStepper to walk
+through it.</dd>
+<dt>ProcessState</dt><dd>A ProcessState interface describes how to access data in the target
+process. To walk a call stack, StackwalkerAPI needs to access both
+registers and memory in the target process; ProcessState provides an
+interface that StackwalkerAPI can use to access that information.
+StackwalkerAPI includes two default implementation of ProcessState
+for each platform: one to collect a first party stackwalk in the
+current process, and one that uses a debugger interface to collect a
+third party stackwalk in another process.</dd>
+<dt>SymbolLookup</dt><dd>The SymbolLookup interface is used to associate a symbolic name with
+a stack frame. A stackwalk returns a collection of addresses in the
+code space of a binary. This class uses the binary’s symbol table to
+map those addresses into symbolic names. A default implementation of
+this class, which uses the DynSymtab package, is provided with
+StackwalkerAPI. A user could, for example, use this interface to
+allow StackwalkerAPI to use libelf to look up symbol names instead.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="api-reference">
+<span id="sec-api"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h1>
+<p>This section describes the StackwalkerAPI interface. It is divided into
+three sub-sections: a description of the definitions and basic types
+used by this API, a description of the interface for collecting
+stackwalks, and a description of the callback interface.</p>
+<div class="section" id="definitions-and-basic-types">
+<h2>Definitions and Basic Types<a class="headerlink" href="#definitions-and-basic-types" title="Permalink to this headline"></a></h2>
+<p>The following definitions and basic types are referenced throughout the
+rest of this manual.</p>
+<div class="section" id="definitions">
+<span id="subsec-definitions"></span><h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline"></a></h3>
+<dl class="docutils">
+<dt>Stack Frame</dt><dd>A stack frame is a record of a function (or function-like object)
+invocation. When a function is executed, it may create a frame on the
+call stack. StackwalkerAPI finds stack frames and returns a
+description of them when it walks a call stack. The following three
+definitions deal with stack frames.</dd>
+<dt>Bottom of the Stack</dt><dd>The bottom of the stack is the earliest stack frame in a call stack,
+usually a thread’s initial function. The stack grows from bottom to
+the top.</dd>
+<dt>Top of the Stack</dt><dd>The top of the stack is the most recent stack frame in a call stack.
+The stack frame at the top of the stack is for the currently
+executing function.</dd>
+<dt>Frame Object</dt><dd>A Frame object is StackwalkerAPI’s representation of a stack frame. A
+Frame object is a snapshot of a stack frame at a specific point in
+time. Even if a stack frame changes as a process executes, a Frame
+object will remain the same. Each Frame object is represented by an
+instance of the Frame class.</dd>
+</dl>
+<p>The following three definitions deal with fields in a Frame object.</p>
+<dl class="docutils">
+<dt>SP (Stack Pointer)</dt><dd>A Frame object’s SP member points to the top of its stack frame (a
+stack frame grows from bottom to top, similar to a call stack). The
+Frame object for the top of the stack has a SP that is equal to the
+value in the stack pointer register at the time the Frame object was
+created. The Frame object for any other stack frame has a SP that is
+equal to the top address in the stack frame.</dd>
+<dt>FP (Frame Pointer)</dt><dd>A Frame object’s FP member points to the beginning (or bottom) of its
+stack frame. The Frame object for the top of the stack has a FP that
+is equal to the value in the frame pointer register at the time the
+Frame object was created. The Frame object for any other stack frame
+has a FP that is equal to the beginning of the stack frame.</dd>
+<dt>RA (Return Address)</dt><dd>A Frame object’s RA member points to the location in the code space
+where control will resume when the function that created the stack
+frame resumes. The Frame object for the top of the stack has a RA
+that is equal to the value in the program counter register at the
+time the Frame object was created. The Frame object for any other
+stack frame has a RA that is found when walking a call stack.</dd>
+</dl>
+<p>= [rectangle, draw, minimum width=3cm, minimum height=1.5em, font=, node
+distance=1.5em] = [rectangle, minimum width=3cm, draw, minimum
+height=1.5em, fill=white, draw=white] = [rectangle] = [rectangle, font=]
+= [draw, -latex’]</p>
+<p>= [rectangle, draw, minimum width=4cm, minimum height=1.5em, font=, node
+distance=1.5em] = [rectangle, minimum width=4cm, draw, minimum
+height=1.5em, fill=white, draw=white] = [rectangle] = [rectangle, font=]
+= [draw, -latex’]</p>
+<p>Figure&nbsp;<a class="reference external" href="#fig:layout">[fig:layout]</a> shows the relationship between
+application code, stack frames, and Frame objects. In the figure, the
+source code on the left has run through the main and foo functions, and
+into the bar function. It has created the call stack in the center,
+which is shown as a sequence of words growing down. The current values
+of the processor registers, while executing in bar, are shown below the
+call stack. When StackwalkerAPI walks the call stack, it creates the
+Frame objects shown on the right. Each Frame object corresponds to one
+of the stack frames found in the call stack or application registers.</p>
+<p>The call stack in Figure&nbsp;<a class="reference external" href="#fig:layout">[fig:layout]</a> is similar to
+one that would be found on the x86 architecture. Details about how the
+call stack is laid out may be different on other architectures, but the
+meanings of the FP, SP, and RA fields in the Frame objects will remain
+the same. The layout of the ARM64 stack may be found in
+Figure&nbsp;<a class="reference external" href="#fig:layout-armv8">[fig:layout-armv8]</a> as an example of the
+scope of architectural variations.</p>
+<p>The following four definitions deal with processes involved in
+StackwalkerAPI.</p>
+<dl class="docutils">
+<dt>Target Process</dt><dd>The process from which StackwalkerAPI is collecting stackwalks.</dd>
+<dt>Host Process</dt><dd>The process in which StackwalkerAPI code is currently running.</dd>
+<dt>First Party Stackwalk</dt><dd>StackwalkerAPI collects first party stackwalk when it walks a call
+stack in the same address space it is running in, i.e. the target
+process is the same as the host process.</dd>
+<dt>Third Party Stackwalk</dt><dd>StackwalkerAPI collects third party stackwalk when it walks the call
+stack in a different address space from the one it is running in,
+i.e. the target process is different from the host process. A third
+party stackwalk is usually done through a debugger interface.</dd>
+</dl>
+</div>
+<div class="section" id="basic-types">
+<h3>Basic Types<a class="headerlink" href="#basic-types" title="Permalink to this headline"></a></h3>
+<p>typedef unsigned long Address</p>
+<p>An integer value capable of holding an address in the target process.
+Address variables should not, and in many cases cannot, be used directly
+as a pointer. It may refer to an address in a different process, and it
+may not directly match the target process’ pointer representation.
+Address is guaranteed to be at least large enough to hold an address in
+a target process, but may be larger.</p>
+<p>typedef … Dyninst::PID</p>
+<p>A handle for identifying a process. On UNIX systems this will be an
+integer representing a PID. On Windows this will be a HANDLE object.</p>
+<p>typedef … Dyninst::THR_ID</p>
+<p>A handle for identifying a thread. On Linux platforms this is an integer
+referring to a TID (Thread Identifier). On Windows it is a HANDLE
+object.</p>
+<p>class Dyninst::MachRegister</p>
+<p>A value that names a machine register.</p>
+<p>typedef unsigned long Dyninst::MachRegisterVal</p>
+<p>A value that holds the contents of a register. A Dyninst::MachRegister
+names a specific register, while a Dyninst::MachRegisterVal represents
+the value that may be in that register.</p>
+</div>
+</div>
+<div class="section" id="namespace-stackwalkerapi">
+<h2>Namespace StackwalkerAPI<a class="headerlink" href="#namespace-stackwalkerapi" title="Permalink to this headline"></a></h2>
+<p>The classes in Section&nbsp;<a class="reference external" href="#sec:stackwalking-interface">3.3</a> and
+Section&nbsp;<a class="reference external" href="#sec:callback-interface">3.6</a> fall under the C++ namespace
+Dyninst::Stackwalker. To access them, a user should refer to them using
+the Dyninst::Stackwalker:: prefix, e.g. Dyninst::Stackwalker::Walker.
+Alternatively, a user can add the C++ using keyword above any references
+to StackwalkerAPI objects, e.g, using namespace Dyninst and using
+namespace Stackwalker.</p>
+</div>
+<div class="section" id="sec-stackwalking-interface">
+<span id="id1"></span><h2>Stackwalking Interface<a class="headerlink" href="#sec-stackwalking-interface" title="Permalink to this headline"></a></h2>
+<p>This section describes StackwalkerAPI’s interface for walking a call
+stack. This interface is sufficient for walking call stacks on all the
+systems and variations covered by our default callbacks.</p>
+<p>To collect a stackwalk, first create new Walker object associated with
+the target process via</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="p">::</span><span class="n">PID</span> <span class="n">pid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once a Walker object has been created, a call stack can be walked with
+the</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">walkStack</span>
+</pre></div>
+</div>
+<p>method. The new stack walk is returned as a vector of Frame objects.</p>
+<div class="section" id="class-walker">
+<span id="subsec-walker"></span><h3>Class Walker<a class="headerlink" href="#class-walker" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">walker.h</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Walker</span></code> class allows users to walk call stacks and query basic
+information about threads in a target process. The user should create a
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code> object for each process from which they are walking call
+stacks. Each <code class="docutils literal notranslate"><span class="pre">Walker</span></code> object is associated with one process, but may
+walk call stacks on multiple threads within that process. The <code class="docutils literal notranslate"><span class="pre">Walker</span></code>
+class allows users to query for the threads available for walking, and
+it allows you to specify a particular thread whose call stack should be
+walked. Stackwalks are returned as a vector of Frame objects.</p>
+<p>Each Walker object contains three objects:</p>
+<ul class="simple">
+<li>ProcessState</li>
+<li>StepperGroup</li>
+<li>SymbolLookup</li>
+</ul>
+<p>These objects are part of the Callback Interface and can be used to
+customize StackwalkerAPI. The <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object tells <code class="docutils literal notranslate"><span class="pre">Walker</span></code>
+how to access data in the target process, and it determines whether this
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code> collects first party or third party stackwalks. <code class="docutils literal notranslate"><span class="pre">Walker</span></code>
+will pick an appropriate default <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object based on which
+factory method the users calls. The <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> object is used to
+customize how the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> steps through stack frames. The
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object is used to customize how StackwalkerAPI looks up
+symbolic names of the function or object that created a stack frame.</p>
+<p>static Walker *newWalker() static Walker *newWalker(Dyninst::PID pid)
+static Walker *newWalker(Dyninst::PID pid, std::string executable)
+static Walker *newWalker(Dyninst::ProcControlAPI::Process::ptr proc);
+static Walker *newWalker(std::string executable, const
+std::vector&lt;std::string&gt; &amp;argv) static Walker *newWalker(ProcessState
+*proc, StepperGroup *steppergroup = NULL , SymbolLookup *lookup =
+NULL)</p>
+<p>These factory methods return new Walker objects:</p>
+<ul class="simple">
+<li>The first takes no arguments and returns a first-party stackwalker.</li>
+<li>The second takes a PID representing a running process and returns a
+third-party stackwalker on that process.</li>
+<li>The third takes the name of the executing binary in addition to the
+PID and also returns a third-party stackwalker on that process.</li>
+<li>The fourth takes a ProcControlAPI process object and returns a
+third-party stackwalker.</li>
+<li>The fifth takes the name of an executable and its arguments, creates
+the process, and returns a third-party stackwalker.</li>
+<li>The sixth takes a ProcessState pointer representing a running process
+as well as user-defined StepperGroup and SymbolLookup pointers. It
+can return both first-party and third-party Walkers, depending on the
+ProcessState parameter.</li>
+</ul>
+<p>Unless overriden with the sixth variant, the new Walker object uses the
+default StepperGroup and SymbolLookup callbacks for the current
+platform. First-party walkers use the ProcSelf callback for its
+ProcessState object. Third-party walkers use ProcDebug instead. See
+Section 3.5.1 for more information about defaults in the Callback
+Interface.</p>
+<p>This method returns NULL if it was unable to create a new Walker object.
+The new Walker object was created with the new operator, and should be
+deallocated with the delete operator when it is no longer needed.</p>
+<p>static bool newWalker(const std::vector&lt;Dyninst::PID&gt; &amp;pids,
+std::vector&lt;Walker *&gt; &amp;walkers_out) static bool newWalker(const
+std::vector&lt;Dyninst::PID&gt; &amp;pids, std::vector&lt;Walker *&gt; &amp;walkers_out,
+std::string executable)</p>
+<p>This method attaches to a group of processes and returns a vector of
+Walker objects that perform third-party stackwalks. As above, the first
+variant takes a list of PIDs and attaches to those processes; the second
+variant also specifies the executable binary.</p>
+<p>bool walkStack(std::vector&lt;Frame&gt; &amp;stackwalk, Dyninst::THR_ID thread =
+NULL_THR_ID)</p>
+<p>This method walks a call stack in the process associated with this
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code>. The call stack is returned as a vector of <code class="docutils literal notranslate"><span class="pre">Frame</span></code> objects
+in stackwalk. The top of the stack is returned in index 0 of stackwalk,
+and the bottom of the stack is returned in index <code class="docutils literal notranslate"><span class="pre">stackwalk.size()-1</span></code>.</p>
+<p>A stackwalk can be taken on a specific thread by passing a value in the
+thread parameter. If <code class="docutils literal notranslate"><span class="pre">thread</span></code> has the value <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code>, then a
+default thread will be chosen. When doing a third party stackwalk, the
+default thread will be the process’ initial thread. When doing a first
+party stackwalk, the default thread will be the thread that called
+<code class="docutils literal notranslate"><span class="pre">walkStack</span></code>. The default StepperGroup provided to a Walker will
+support collecting call stacks from almost all types of functions,
+including signal handlers and optimized, frameless functions.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>bool walkStackFromFrame(std::vector&lt;Frame&gt; &amp;stackwalk, const Frame
+&amp;frame)</p>
+<p>This method walks a call stack starting from the given stack frame,
+<code class="docutils literal notranslate"><span class="pre">frame</span></code>. The call stack will be output in the <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> vector,
+with frame stored in index 0 of <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> and the bottom of the
+stack stored in index <code class="docutils literal notranslate"><span class="pre">stackwalk.size()-1</span></code>.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>bool walkSingleFrame(const Frame &amp;in, Frame &amp;out)</p>
+<p>This methods walks through single frame, <code class="docutils literal notranslate"><span class="pre">in</span></code>. Parameter <code class="docutils literal notranslate"><span class="pre">out</span></code> will
+be set to <code class="docutils literal notranslate"><span class="pre">in</span></code>’s caller frame.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>bool getInitialFrame(Frame &amp;frame, Dyninst::THR_ID thread = NULL_THR_ID)</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object on the top of the stack in
+parameter frame. Under <code class="docutils literal notranslate"><span class="pre">walkStack</span></code>, <code class="docutils literal notranslate"><span class="pre">frame</span></code> would be the one
+returned in index 0 of the <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> vector. A stack frame can be
+found on a specific thread by passing a value in the thread parameter.
+If <code class="docutils literal notranslate"><span class="pre">thread</span></code> has the value <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code>, then a default thread will
+be chosen. When doing a third party stackwalk, the default thread will
+be the process’ initial thread. When doing a first party stackwalk, the
+default thread will be the thread that called <code class="docutils literal notranslate"><span class="pre">getInitialFrame</span></code>.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>bool getAvailableThreads(std::vector&lt;Dyninst::THR_ID&gt; &amp;threads)</p>
+<p>This method returns a vector of threads in the target process upon which
+StackwalkerAPI can walk call stacks. The threads are returned in output
+parameter <code class="docutils literal notranslate"><span class="pre">threads</span></code>. Note that this method may return a subset of the
+actual threads in the process. For example, when walking call stacks on
+the current process, it is only legal to walk the call stack on the
+currently running thread. In this case, <code class="docutils literal notranslate"><span class="pre">getAvailableThreads</span></code> returns
+a vector containing only the current thread.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>ProcessState *getProcessState() const</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object associated with this
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
+<p>StepperGroup *getStepperGroup() const</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> object associated with this
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
+<p>SymbolLookup *getSymbolLookup() const</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object associated with this
+<code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
+<p>bool addStepper(FrameStepper *stepper)</p>
+<p>This method adds a provided FrameStepper to those used by the Walker.</p>
+<p>static SymbolReaderFactory *getSymbolReader()</p>
+<p>This method returns a factory for creating process-specific symbol
+readers. Unlike the above methods it is global across all Walkers and is
+thus defined static.</p>
+<p>static void setSymbolReader(SymbolReaderFactory *);</p>
+<p>Set the symbol reader factory used when creating <code class="docutils literal notranslate"><span class="pre">Walker</span></code> objects.</p>
+<p>static void version(int &amp;major, int &amp;minor, int &amp;maintenance)</p>
+<p>This method returns version information (e.g., 8, 0, 0 for the 8.0
+release).</p>
+</div>
+<div class="section" id="class-frame">
+<span id="subsec-frame"></span><h3>Class Frame<a class="headerlink" href="#class-frame" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">frame.h</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Walker</span></code> class returns a call stack as a vector of <code class="docutils literal notranslate"><span class="pre">Frame</span></code>
+objects. As described in Section&nbsp;<a class="reference external" href="#subsec:definitions">3.1.1</a>, each
+Frame object represents a stack frame, and contains a return address
+(RA), stack pointer (SP) and frame pointer (FP). For each of these
+values, optionally, it stores the location where the values were found.
+Each Frame object may also be augmented with symbol information giving a
+function name (or a symbolic name, in the case of non-functions) for the
+object that created the stack frame.</p>
+<p>The Frame class provides a set of functions (getRALocation,
+getSPLocation and getFPLocation) that return the location in the target
+process’ memory or registers where the RA, SP, or FP were found. These
+functions may be used to modify the stack. For example, the DyninstAPI
+uses these functions to change return addresses on the stack when it
+relocates code. The RA, SP, and FP may be found in a register or in a
+memory address on a call stack.</p>
+<p>static Frame *newFrame(Dyninst::MachRegisterVal ra,
+Dyninst::MachRegisterVal sp, Dyninst::MachRegisterVal fp, Walker
+*walker)</p>
+<p>This method creates a new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object and sets the mandatory data
+members: RA, SP and FP. The new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is associated with
+<code class="docutils literal notranslate"><span class="pre">walker</span></code>.</p>
+<p>The optional location fields can be set by the methods below.</p>
+<p>The new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is created with the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator, and the
+user should be deallocate it with the <code class="docutils literal notranslate"><span class="pre">delete</span></code> operator when it is no
+longer needed.</p>
+<p>bool operator==(const Frame &amp;)</p>
+<p><code class="docutils literal notranslate"><span class="pre">Frame</span></code> objects have a defined equality operator.</p>
+<p>Dyninst::MachRegisterVal getRA() const</p>
+<p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s return address.</p>
+<p>void setRA(Dyninst::MachRegisterVal val)</p>
+<p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s return address to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<p>Dyninst::MachRegisterVal getSP() const</p>
+<p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s stack pointer.</p>
+<p>void setSP(Dyninst::MachRegisterVal val)</p>
+<p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s stack pointer to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<p>Dyninst::MachRegisterVal getFP() const</p>
+<p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s frame pointer.</p>
+<p>void setFP(Dyninst::MachRegisterVal val)</p>
+<p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s frame pointer to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<p>bool isTopFrame() const; bool isBottomFrame() const;</p>
+<p>These methods return whether a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is the top (e.g., most
+recently executing) or bottom of the stack walk.</p>
+<p>typedef enum loc_address, loc_register, loc_unknown storage_t;</p>
+<p>typedef struct union Dyninst::Address addr; Dyninst::MachRegister reg;
+val; storage_t location; location_t;</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">location_t</span></code> structure is used by the <code class="docutils literal notranslate"><span class="pre">getRALocation</span></code>,
+<code class="docutils literal notranslate"><span class="pre">getSPLocation</span></code>, and <code class="docutils literal notranslate"><span class="pre">getFPLocation</span></code> methods to describe where in
+the process a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s RA, SP, or FP were found. When walking
+a call stack these values may be found in registers or memory. If they
+were found in memory, the <code class="docutils literal notranslate"><span class="pre">location</span></code> field of <code class="docutils literal notranslate"><span class="pre">location_t</span></code> will
+contain <code class="docutils literal notranslate"><span class="pre">loc_address</span></code> and the <code class="docutils literal notranslate"><span class="pre">addr</span></code> field will contain the address
+where it was found. If they were found in a register the <code class="docutils literal notranslate"><span class="pre">location</span></code>
+field of <code class="docutils literal notranslate"><span class="pre">location_t</span></code> will contain <code class="docutils literal notranslate"><span class="pre">loc_register</span></code> and the <code class="docutils literal notranslate"><span class="pre">reg</span></code>
+field will refer to the register where it was found. If this <code class="docutils literal notranslate"><span class="pre">Frame</span></code>
+object was not created by a stackwalk (using the <code class="docutils literal notranslate"><span class="pre">newframe</span></code> factory
+method, for example), and has not had a set location method called, then
+location will contain <code class="docutils literal notranslate"><span class="pre">loc_unknown</span></code>.</p>
+<p>location_t getRALocation() const</p>
+<p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the RA was found.</p>
+<p>void setRALocation(location_t newval)</p>
+<p>This method sets the location of where the RA was found to newval.</p>
+<p>location_t getSPLocation() const</p>
+<p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the SP was found.</p>
+<p>void setSPLocation(location_t newval)</p>
+<p>This method sets the location of where the SP was found to <code class="docutils literal notranslate"><span class="pre">newval</span></code>.</p>
+<p>location_t getFPLocation() const</p>
+<p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the FP was found.</p>
+<p>void setFPLocation(location_t newval)</p>
+<p>This method sets the location of where the FP was found to <code class="docutils literal notranslate"><span class="pre">newval</span></code>.</p>
+<p>bool getName(std::string &amp;str) const</p>
+<p>This method returns a stack frame’s symbolic name. Most stack frames are
+created by functions, or function-like objects such as signal handlers
+or system calls. This method returns the name of the object that created
+this stack frame. For stack frames created by functions, this symbolic
+name will be the function name. A symbolic name may not always be
+available for all <code class="docutils literal notranslate"><span class="pre">Frame</span></code> objects, such as in cases of stripped
+binaries or special stack frames types.</p>
+<p>The function name is obtained by using this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s RA to
+call the <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> callback. By default StackwalkerAPI will
+attempt to use the <code class="docutils literal notranslate"><span class="pre">SymtabAPI</span></code> package to look up symbol names in
+binaries. If <code class="docutils literal notranslate"><span class="pre">SymtabAPI</span></code> is not found, and no alternative
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object is present, then this method will return an
+error.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>bool getObject(void* &amp;obj) const</p>
+<p>In addition to returning a symbolic name (see <code class="docutils literal notranslate"><span class="pre">getName</span></code>) the
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> interface allows for an opaque object, a <code class="docutils literal notranslate"><span class="pre">void*</span></code>, to
+be associated with a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object. The contents of this <code class="docutils literal notranslate"><span class="pre">void*</span></code> is
+determined by the <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> implementation. Under the default
+implementation that uses SymtabAPI, the <code class="docutils literal notranslate"><span class="pre">void*</span></code> points to a Symbol
+object or NULL if no symbol is found.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>Walker *getWalker() const;</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> object that constructed this stack
+frame.</p>
+<p>THR_ID getThread() const;</p>
+<p>This method returns the execution thread that the current <code class="docutils literal notranslate"><span class="pre">Frame</span></code>
+represents.</p>
+<p>FrameStepper* getStepper() const</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> object that was used to
+construct this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object in the <code class="docutils literal notranslate"><span class="pre">stepper</span></code> output parameter.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>bool getLibOffset(std::string &amp;lib, Dyninst::Offset &amp;offset, void*
+&amp;symtab) const</p>
+<p>This method returns the DSO (a library or executable) and an offset into
+that DSO that points to the location within that DSO where this frame
+was created. <code class="docutils literal notranslate"><span class="pre">lib</span></code> is the path to the library that was loaded, and
+<code class="docutils literal notranslate"><span class="pre">offset</span></code> is the offset into that library. The return value of the
+<code class="docutils literal notranslate"><span class="pre">symtab</span></code> parameter is dependent on the SymbolLookup implementation-by
+default it will contain a pointer to a Dyninst::Symtab object for this
+DSO. See the SymtabAPI Programmer’s Guide for more information on using
+Dyninst::Symtab objects.</p>
+<p>bool nonCall() const</p>
+<p>This method returns whether a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object represents a function
+call; if <code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> may represent instrumentation, a
+signal handler, or something else.</p>
+</div>
+</div>
+<div class="section" id="mapping-addresses-to-libraries">
+<h2>Mapping Addresses to Libraries<a class="headerlink" href="#mapping-addresses-to-libraries" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">procstate.h</span></code></p>
+<p>StackwalkerAPI provides an interface to access the addresses where
+libraries are mapped in the target process.</p>
+<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair;</p>
+<p>A pair consisting of a library filename and its base address in the
+target process.</p>
+<p>class LibraryState</p>
+<p>Class providing interfaces for library tracking. Only the public query
+interfaces below are user-facing; the other public methods are callbacks
+that allow StackwalkerAPI to update its internal state.</p>
+<p>virtual bool getLibraryAtAddr(Address addr, LibAddrPair &amp;lib) = 0;</p>
+<p>Given an address <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the target process, returns <code class="docutils literal notranslate"><span class="pre">true</span></code> and
+sets <code class="docutils literal notranslate"><span class="pre">lib</span></code> to the name and base address of the library containing
+addr. Given an address outside the target process, returns <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>virtual bool getLibraries(std::vector&lt;LibAddrPair&gt; &amp;libs, bool
+allow_refresh = true) = 0;</p>
+<p>Fills <code class="docutils literal notranslate"><span class="pre">libs</span></code> with the libraries loaded in the target process. If
+<code class="docutils literal notranslate"><span class="pre">allow_refresh</span></code> is true, this method will attempt to ensure that this
+list is freshly updated via inspection of the process; if it is false,
+it will return a cached list.</p>
+<p>virtual bool getLibc(LibAddrPair &amp;lc);</p>
+<p>Convenience function to find the name and base address of the standard C
+runtime, if present.</p>
+<p>virtual bool getLibthread(LibAddrPair &amp;lt);</p>
+<p>Convenience function to find the name and base address of the standard
+thread library, if present (e.g. pthreads).</p>
+<p>virtual bool getAOut(LibAddrPair &amp;ao) = 0;</p>
+<p>Convenience function to find the name and base address of the
+executable.</p>
+</div>
+<div class="section" id="accessing-local-variables">
+<h2>Accessing Local Variables<a class="headerlink" href="#accessing-local-variables" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">local_var.h</span></code></p>
+<p>StackwalkerAPI can be used to access local variables found in the frames
+of a call stack. The StackwalkerAPI interface for accessing the values
+of local variables is closely tied to the SymtabAPI interface for
+collecting information about local variables–SymtabAPI handles for
+functions, local variables, and types are part of this interface.</p>
+<p>Given an initial handle to a SymtabAPI Function object, SymtabAPI can
+look up local variables contained in that function and the types of
+those local variables. See the SymtabAPI Programmer’s Guide for more
+information.</p>
+<p>static Dyninst::SymtabAPI::Function *getFunctionForFrame(Frame f)</p>
+<p>This method returns a SymtabAPI function handle for the function that
+created the call stack frame, f.</p>
+<p>static int glvv_Success = 0; static int glvv_EParam = -1; static int
+glvv_EOutOfScope = -2; static int glvv_EBufferSize = -3; static int
+glvv_EUnknown = -4;</p>
+<p>static int getLocalVariableValue(Dyninst::SymtabAPI::localVar *var,
+std::vector&lt;Frame&gt; &amp;swalk, unsigned frame, void *out_buffer, unsigned
+out_buffer_size)</p>
+<p>Given a local variable and a stack frame from a call stack, this
+function returns the value of the variable in that frame. The local
+variable is specified by the SymtabAPI variable object, <code class="docutils literal notranslate"><span class="pre">var</span></code>.
+<code class="docutils literal notranslate"><span class="pre">swalk</span></code> is a call stack that was collected via StackwalkerAPI, and
+<code class="docutils literal notranslate"><span class="pre">frame</span></code> specifies an index into that call stack that contains the
+local variable. The value of the variable is stored in <code class="docutils literal notranslate"><span class="pre">out_buffer</span></code>
+and the size of <code class="docutils literal notranslate"><span class="pre">out_buffer</span></code> should be specified in
+<code class="docutils literal notranslate"><span class="pre">out_buffer_size</span></code>.</p>
+<p>A local variable only has a limited scope with-in a target process’
+execution. StackwalkerAPI cannot guarantee that it can collect the
+correct return value of a local variable from a call stack if the target
+process is continued after the call stack is collected.</p>
+<p>Finding and collecting the values of local variables is dependent on
+debugging information being present in a target process’ binary. Not all
+binaries contain debugging information, and in some cases, such as for
+binaries built with high compiler optimization levels, that debugging
+information may be incorrect.</p>
+<p><code class="docutils literal notranslate"><span class="pre">getLocalVariableValue</span></code> will return on of the following values:</p>
+<dl class="docutils">
+<dt>glvv_Success</dt><dd>getLocalVariableValue was able to correctly read the value of the
+given variable.</dd>
+<dt>glvv_EParam</dt><dd>An error occurred, an incorrect parameter was specified (frame was
+larger than <code class="docutils literal notranslate"><span class="pre">swalk.size()</span></code>, or var was not a variable in the
+function specified by frame).</dd>
+<dt>glvv_EOutOfScope</dt><dd>An error occurred, the specified variable exists in the function but
+isn’t live at the current execution point.</dd>
+<dt>glvv_EBufferSize</dt><dd>An error occurred, the variable’s value does not fit inside
+<code class="docutils literal notranslate"><span class="pre">out_buffer</span></code>.</dd>
+<dt>glvv_EUnknown</dt><dd>An unknown error occurred. It is most likely that the local variable
+was optimized away or debugging information about the variable was
+incorrect.</dd>
+</dl>
+</div>
+<div class="section" id="sec-callback-interface">
+<span id="id2"></span><h2>Callback Interface<a class="headerlink" href="#sec-callback-interface" title="Permalink to this headline"></a></h2>
+<p>This subsection describes the Callback Interface for StackwalkerAPI. The
+Callback Interface is primarily used to port StackwalkerAPI to new
+platforms, extend support for new types of stack frames, or integrate
+StackwalkerAPI into existing tools.</p>
+<p>The classes in this subsection are interfaces, they cannot be
+instantiated. To create a new implementation of one of these interfaces,
+create a new class that inherits from the callback class and implement
+the necessary methods. To use a new ProcessState, StepperGroup, or
+SymbolLookup class with StackwalkerAPI, create a new instance of the
+class and register it with a new Walker object using the</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">ProcessState</span> <span class="o">*</span><span class="p">,</span> <span class="n">StepperGroup</span> <span class="o">*</span><span class="p">,</span> <span class="n">SymbolLookup</span> <span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>factory method (see Section&nbsp;<a class="reference external" href="#subsec:walker">3.3.1</a>). To use a new
+FrameStepper class with StackwalkerAPI, create a new instance of the
+class and register it with a StepperGroup using the</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StepperGroup</span><span class="p">::</span><span class="n">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span> <span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>method (see Section&nbsp;<a class="reference external" href="#subsec:steppergroup">3.6.3</a>).</p>
+<p>Some of the classes in the Callback Interface have methods with default
+implementations. A new class that inherits from a Callback Interface can
+optionally implement these methods, but it is not required. If a method
+requires implementation, it is written as a C++ pure virtual method
+(<code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">funcName()</span> <span class="pre">=</span> <span class="pre">0</span></code>). A method with a default implementation is
+written as a C++ virtual method (<code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">funcName()</span></code>).</p>
+<div class="section" id="default-implementations">
+<span id="subsec-defaults"></span><h3>Default Implementations<a class="headerlink" href="#default-implementations" title="Permalink to this headline"></a></h3>
+<p>The classes described in the Callback Interface are C++ abstract
+classes, or interfaces. They cannot be instantiated. For each of these
+classes StackwalkerAPI provides one or more default implementations on
+each platform. These default implementations are classes that inherit
+from the abstract classes described in the Callback Interface. If a user
+creates a Walker object without providing their own <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ProcessState</span></code>, and <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> objects, then StackwalkerAPI will
+use the default implementations listed in Table&nbsp;<a class="reference external" href="#table:defaults">1</a>.
+These implementations are described in Section
+<a class="reference external" href="#sec:framesteppers">4.2</a>.</p>
+<div class="container" id="table-defaults">
+<table border="1" class="docutils" id="id3">
+<caption><span class="caption-text">Callback Interface Defaults</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">StepperGroup</th>
+<th class="head">ProcessState</th>
+<th class="head">SymbolLookup</th>
+<th class="head">FrameStepper</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Linux/x86</td>
+<td><ol class="first last arabic simple">
+<li>AddrRange</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>ProcSelf</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>SwkSymtab</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>FrameFuncStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>Linux/x86-64</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>ProcDebug</li>
+</ol>
+</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>SigHandlerStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="3">
+<li>DebugStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="4">
+<li>AnalysisStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="5">
+<li>StepperWanderer</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="6">
+<li>BottomOfStackStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>Linux/PPC</td>
+<td><ol class="first last arabic simple">
+<li>AddrRange</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>ProcSelf</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>SwkSymtab</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>FrameFuncStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>Linux/PPC-64</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>ProcDebug</li>
+</ol>
+</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>SigHandlerStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="3">
+<li>AnalysisStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>Windows/x86</td>
+<td><ol class="first last arabic simple">
+<li>AddrRange</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>ProcSelf</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>SwkSymtab</li>
+</ol>
+</td>
+<td><ol class="first last arabic simple">
+<li>FrameFuncStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>ProcDebug</li>
+</ol>
+</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="2">
+<li>AnalysisStepper</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="3">
+<li>StepperWanderer</li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td><ol class="first last arabic simple" start="4">
+<li>BottomOfStackStepper</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="class-framestepper">
+<span id="subsec-framestepper"></span><h3>Class FrameStepper<a class="headerlink" href="#class-framestepper" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">framestepper.h</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> class is an interface that tells StackwalkerAPI how
+to walk through a specific type of stack frame. There may be many
+different ways of walking through a stack frame on a platform, e.g, on
+Linux/x86 there are different mechanisms for walking through system
+calls, signal handlers, regular functions, and frameless functions. A
+single <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> describes how to walk through one of these types
+of stack frames.</p>
+<p>A user can create their own <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> classes that tell
+StackwalkerAPI how to walk through new types of stack frames. A new
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> object must be added to a <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> before it
+can be used.</p>
+<p>In addition to walking through individual stack frames, a
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> tells its <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> when it can be used. The
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> registers address ranges that cover objects in the
+target process’ code space (such as functions). These address ranges
+should contain the objects that will create stack frames through which
+the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> can walk. If multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects have
+overlapping address ranges, then a priority value is used to determine
+which <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> should be attempted first.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> is an interface class; it cannot be instantiated. Users
+who want to develop new <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects should inherit from
+this class and implement the the desired virtual functions. The
+<code class="docutils literal notranslate"><span class="pre">getCallerFrame,</span> <span class="pre">getPriority</span></code>, and <code class="docutils literal notranslate"><span class="pre">getName</span></code> functions must be
+implemented; all others may be overridden if desired.</p>
+<p>typedef enum gcf_success, gcf_stackbottom, gcf_not_me, gcf_error
+gcframe_ret_t</p>
+<p>virtual gcframe_ret_t getCallerFrame(const Frame &amp;in, Frame &amp;out) = 0</p>
+<p>This method walks through a single stack frame and generates a Frame
+object that represents the caller’s stack frame. Parameter in will be a
+Frame object that this FrameStepper is capable of walking through.
+Parameter out is an output parameter that this method should set to the
+Frame object that called in.</p>
+<p>There may be multiple ways of walking through a different types of stack
+frames. Each <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> class should be able to walk through a
+type of stack frame. For example, on x86 one <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> could be
+used to walk through stack frames generated by ABI-compliant functions;
+out’s FP and RA are found by reading from in’s FP, and out’s SP is set
+to the word below in’s FP. A different <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> might be used to
+walk through stack frames created by functions that have optimized away
+their FP. In this case, in may have a FP that does not point out’s FP
+and RA. The <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> will need to use other mechanisms to
+discover out’s FP or RA; perhaps the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> searches through
+the stack for the RA or performs analysis on the function that created
+the stack frame.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">getCallerFrame</span></code> successfully walks through in, it is required to
+set the following parameters in out. See
+Section&nbsp;<a class="reference external" href="#subsec:frame">3.3.2</a> for more details on the values that
+can be set in a Frame object:</p>
+<dl class="docutils">
+<dt>Return Address (RA)</dt><dd>The RA should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setRA</span></code> method.</dd>
+<dt>Stack Pointer (SP)</dt><dd>The SP should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setSP</span></code> method.</dd>
+<dt>Frame Pointer (FP)</dt><dd>The FP should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setFP</span></code> method</dd>
+</dl>
+<p>Optionally, getCallerFrame can also set any of following parameters in
+out:</p>
+<dl class="docutils">
+<dt>Return Address Location (RALocation)</dt><dd>The RALocation should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setRALocation()</span></code>
+method.</dd>
+<dt>Stack Pointer Location (SPLocation)</dt><dd>The SPLocation should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setRALocation()</span></code>
+method.</dd>
+<dt>Frame Pointer Location (FPLocation)</dt><dd>The FPLocation should be set with the <code class="docutils literal notranslate"><span class="pre">Frame::setFPLocation()</span></code>
+method.</dd>
+</dl>
+<p>If a location field in out is not set, then the appropriate
+<code class="docutils literal notranslate"><span class="pre">Frame::getRALocation</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame::getSPLocation</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Frame::getFPLocation</span></code> method will return <code class="docutils literal notranslate"><span class="pre">loc_unknown</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">getCallerFrame</span></code> should return <code class="docutils literal notranslate"><span class="pre">gcf_success</span></code> if it successfully
+walks through in and creates an <code class="docutils literal notranslate"><span class="pre">out</span></code> <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object. It should
+return <code class="docutils literal notranslate"><span class="pre">gcf_stackbottom</span></code> if in is the bottom of the stack and there
+are no stack frames below it. It should return <code class="docutils literal notranslate"><span class="pre">gcf_not_me</span></code> if in is
+not the correct type of stack frame for this <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to walk
+through. StackwalkerAPI will then attempt to locate another
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to handle <code class="docutils literal notranslate"><span class="pre">in</span></code> or abort the stackwalk. It should
+return <code class="docutils literal notranslate"><span class="pre">gcf_error</span></code> if there was an error and the stack walk should be
+aborted.</p>
+<p>virtual void registerStepperGroup(StepperGroup *steppergroup)</p>
+<p>This method is used to notify a <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> when StackwalkerAPI
+adds it to a <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>. The <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> to which this
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> is being added is passed in parameter steppergroup.
+This method can be used to initialize the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> (in addition
+to any <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> constructor).</p>
+<p>virtual unsigned getPriority() const = 0</p>
+<p>This method is used by the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> to decide which
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to use if multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects are
+registered over the same address range (see addAddressRanges in
+Section&nbsp;<a class="reference external" href="#subsec:steppergroup">3.6.3</a> for more information about
+address ranges). This method returns an integer representing a priority
+level, the lower the number the higher the priority.</p>
+<p>The default <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects provided by StackwalkerAPI all
+return priorities between <code class="docutils literal notranslate"><span class="pre">0x1000</span></code> and <code class="docutils literal notranslate"><span class="pre">0x2000</span></code>. If two
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects have an overlapping address range, and they
+have the same priority, then the order in which they are used is
+undefined.</p>
+<p>FrameStepper(Walker *w);</p>
+<p>Constructor definition for all <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> instances.</p>
+<p>virtual ProcessState *getProcessState();</p>
+<p>Return the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> used by the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. Can be
+overridden if the user desires.</p>
+<p>virtual Walker *getWalker();</p>
+<p>Return the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> associated with the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. Can be
+overridden if the user desires.</p>
+<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair; typedef enum
+library_load, library_unload lib_change_t; virtual void
+newLibraryNotification(LibAddrPair *libAddr, lib_change_t change);</p>
+<p>This function is called when a new library is loaded by the process; it
+should be implemented if the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> requires such information.</p>
+<p>virtual const char *getName() const = 0;</p>
+<p>Returns a name for the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>; must be implemented by the
+user.</p>
+</div>
+<div class="section" id="class-steppergroup">
+<span id="subsec-steppergroup"></span><h3>Class StepperGroup<a class="headerlink" href="#class-steppergroup" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">steppergroup.h</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> class contains a collection of <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>
+objects. The <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>’s primary job is to decide which
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> should be used to walk through a stack frame given a
+return address. The default <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> keeps a set of address
+ranges for each <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. If multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects
+overlap an address, then the default <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> will use a
+priority system to decide.</p>
+<p><code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> provides both an interface and a default implementation
+of that interface. Users who want to customize the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>
+should inherit from this class and re-implement any of the below virtual
+functions.</p>
+<p>StepperGroup(Walker *walker)</p>
+<p>This factory constructor creates a new <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> object
+associated with <code class="docutils literal notranslate"><span class="pre">walker</span></code>.</p>
+<p>virtual bool addStepper(FrameStepper *stepper)</p>
+<p>This method adds a new <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to this <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>. The
+newly added stepper will be tracked by this <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>, and it
+will be considered for use when walking through stack frames.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if it successfully added the
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>, and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool addStepper(FrameStepper *stepper, Address start, Address
+end) = 0;</p>
+<p>Add the specified <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to the list of known steppers, and
+register it to handle frames in the range [<code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">end</span></code>).</p>
+<p>virtual void registerStepper(FrameStepper *stepper);</p>
+<p>Add the specified <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to the list of known steppers and use
+it over the entire address space.</p>
+<p>virtual bool findStepperForAddr(Address addr, FrameStepper* &amp;out, const
+FrameStepper *last_tried = NULL) = 0</p>
+<p>Given an address that points into a function (or function-like object),
+addr, this method decides which <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> should be used to walk
+through the stack frame created by the function at that address. A
+pointer to the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> will be returned in parameter <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p>
+<p>It may be possible that the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> this method decides on is
+unable to walk through the stack frame (it returns <code class="docutils literal notranslate"><span class="pre">gcf_not_me</span></code> from
+<code class="docutils literal notranslate"><span class="pre">FrameStepper::getCallerFrame</span></code>). In this case StackwalkerAPI will call
+findStepperForAddr again with the last_tried parameter set to the failed
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. findStepperForAddr should then find another
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to use. Parameter <code class="docutils literal notranslate"><span class="pre">last_tried</span></code> will be set to NULL
+the first time getStepperToUse is called for a stack frame.</p>
+<p>The default version of this method uses address ranges to decide which
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to use. The address ranges are contained within the
+process’ code space, and map a piece of the code space to a
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> that can walk through stack frames created in that code
+range. If multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects share the same range, then
+the one with the highest priority will be tried first.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair; typedef enum
+library_load, library_unload lib_change_t; virtual void
+newLibraryNotification(LibAddrPair *libaddr, lib_change_t change);</p>
+<p>Called by the StackwalkerAPI when a new library is loaded.</p>
+<p>Walker *getWalker() const</p>
+<p>This method returns the Walker object that associated with this
+StepperGroup.</p>
+<p>void getSteppers(std::set&lt;FrameStepper *&gt; &amp;);</p>
+<p>Fill in the provided set with all <code class="docutils literal notranslate"><span class="pre">FrameSteppers</span></code> registered in the
+<code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>.</p>
+</div>
+<div class="section" id="class-processstate">
+<span id="subsec-processstate"></span><h3>Class ProcessState<a class="headerlink" href="#class-processstate" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">procstate.h</span></code></p>
+<p>The ProcessState class is a virtual class that defines an interface
+through which StackwalkerAPI can access the target process. It allows
+access to registers and memory, and provides basic information about the
+threads in the target process. StackwalkerAPI provides two default types
+of <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> objects: <code class="docutils literal notranslate"><span class="pre">ProcSelf</span></code> does a first party stackwalk,
+and <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> does a third party stackwalk.</p>
+<p>A new <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> class can be created by inheriting from this
+class and implementing the necessary methods.</p>
+<p>static ProcessState *getProcessStateByPid(Dyninst::PID pid)</p>
+<p>Given a <code class="docutils literal notranslate"><span class="pre">PID</span></code>, return the corresponding <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object.</p>
+<p>virtual unsigned getAddressWidth() = 0;</p>
+<p>Return the number of bytes in a pointer for the target process. This
+value is 4 for 32-bit platforms (x86, PowerPC-32) and 8 for 64-bit
+platforms (x86-64, PowerPC-64).</p>
+<p>typedef enum Arch_x86, Arch_x86_64, Arch_ppc32, Arch_ppc64 Architecture;
+virtual Dyninst::Architecture getArchitecture() = 0;</p>
+<p>Return the appropriate architecture for the target process.</p>
+<p>virtual bool getRegValue(Dyninst::MachRegister reg, Dyninst::THR_ID
+thread, Dyninst::MachRegisterVal &amp;val) = 0</p>
+<p>This method takes a register name as input, <code class="docutils literal notranslate"><span class="pre">reg</span></code>, and returns the
+value in that register in <code class="docutils literal notranslate"><span class="pre">val</span></code> in the thread thread.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool readMem(void *dest, Address source, size_t size) = 0</p>
+<p>This method reads memory from the target process. Parameter <code class="docutils literal notranslate"><span class="pre">dest</span></code>
+should point to an allocated buffer of memory at least <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes in
+the host process. Parameter <code class="docutils literal notranslate"><span class="pre">source</span></code> should contain an address in the
+target process to be read from. If this method succeeds, <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes
+of memory is copied from <code class="docutils literal notranslate"><span class="pre">source</span></code>, stored in <code class="docutils literal notranslate"><span class="pre">dest</span></code>, and <code class="docutils literal notranslate"><span class="pre">true</span></code> is
+returned. This method returns <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+<p>virtual bool getThreadIds(std::vector&lt;Dyninst::THR_ID&gt; &amp;threads) = 0</p>
+<p>This method returns a list of threads whose call stacks can be walked in
+the target process. Thread are returned in the <code class="docutils literal notranslate"><span class="pre">threads</span></code> vector. In
+some cases, such as with the default <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>, this method returns
+all of the threads in the target process. In other cases, such as with
+<code class="docutils literal notranslate"><span class="pre">ProcSelf</span></code>, this method returns only the calling thread.</p>
+<p>The first thread in the <code class="docutils literal notranslate"><span class="pre">threads</span></code> vector (index 0) will be used as the
+default thread if the user requests a stackwalk without specifying an
+thread (see <code class="docutils literal notranslate"><span class="pre">Walker::WalkStack</span></code>).</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool getDefaultThread(Dyninst::THR_ID &amp;default_tid) = 0</p>
+<p>This method returns the thread representing the initial process in the
+<code class="docutils literal notranslate"><span class="pre">default_tid</span></code> output parameter.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual Dyninst::PID getProcessId()</p>
+<p>This method returns a process ID for the target process. The default
+<code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> implementations (<code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> and <code class="docutils literal notranslate"><span class="pre">ProcSelf</span></code>) will
+return a PID on UNIX systems and a HANDLE object on Windows.</p>
+<p>Walker *getWalker() const;</p>
+<p>Return the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> associated with the current process state.</p>
+<p>std::string getExecutablePath();</p>
+<p>Returns the name of the executable associated with the current process
+state.</p>
+<div class="section" id="class-librarystate">
+<h4>Class LibraryState<a class="headerlink" href="#class-librarystate" title="Permalink to this headline"></a></h4>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">procstate.h</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">LibraryState</span></code> is a helper class for <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> that provides
+information about the current DSOs (libraries and executables) that are
+loaded into a process’ address space. FrameSteppers frequently use the
+LibraryState to get the DSO through which they are attempting to stack
+walk.</p>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Library</span></code> is represented using a <code class="docutils literal notranslate"><span class="pre">LibAddrPair</span></code> object, which is
+defined as follows:</p>
+<p>typedef std::pair&lt;std::string, Dyninst::Address&gt; LibAddrPair</p>
+<p><code class="docutils literal notranslate"><span class="pre">LibAddrPair.first</span></code> refers to the file path of the library that was
+loaded, and <code class="docutils literal notranslate"><span class="pre">LibAddrPair.second</span></code> is the load address of that library
+in the process’ address space. The load address of a library can be
+added to a symbol offset from the file in order to get the absolute
+address of a symbol.</p>
+<p>virtual bool getLibraryAtAddr(Address addr, LibAddrPair &amp;lib) = 0</p>
+<p>This method returns a DSO, using the <code class="docutils literal notranslate"><span class="pre">lib</span></code> output parameter, that is
+loaded over address <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the current process.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">false</span></code> if no library is loaded over <code class="docutils literal notranslate"><span class="pre">addr</span></code> or
+an error occurs, and <code class="docutils literal notranslate"><span class="pre">true</span></code> if it successfully found a library.</p>
+<p>virtual bool getLibraries(std::vector&lt;LibAddrPair&gt; &amp;libs) = 0</p>
+<p>This method returns all DSOs that are loaded into the process’ address
+space in the output vector parameter, <code class="docutils literal notranslate"><span class="pre">libs</span></code>.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual void notifyOfUpdate() = 0</p>
+<p>This method is called by the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> when it detects a change
+in the process’ list of loaded libraries. Implementations of
+<code class="docutils literal notranslate"><span class="pre">LibraryStates</span></code> should use this method to refresh their lists of
+loaded libraries.</p>
+<p>virtual Address getLibTrapAddress() = 0</p>
+<p>Some platforms that implement the System/V standard (Linux) use a trap
+event to determine when a process loads a library. A trap instruction is
+inserted into a certain address, and that trap will execute whenever the
+list of loaded libraries change.</p>
+<p>On System/V platforms this method should return the address where a trap
+should be inserted to watch for libraries loading and unloading. The
+ProcessState object will insert a trap at this address and then call
+notifyOfUpdate when that trap triggers.</p>
+<p>On non-System/V platforms this method should return 0.</p>
+</div>
+</div>
+<div class="section" id="class-symbollookup">
+<h3>Class SymbolLookup<a class="headerlink" href="#class-symbollookup" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">symlookup.h</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> virtual class is an interface for associating a
+symbolic name with a stack frame. Each <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object contains an
+address (the RA) pointing into the function (or function-like object)
+that created its stack frame. However, users do not always want to deal
+with addresses when symbolic names are more convenient. This class is an
+interface for mapping a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s RA into a name.</p>
+<p>In addition to getting a name, this class can also associate an opaque
+object (via a <code class="docutils literal notranslate"><span class="pre">void*</span></code>) with a Frame object. It is up to the
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> implementation what to return in this opaque object.</p>
+<p>The default implementation of <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> provided by
+StackwalkerAPI uses the <code class="docutils literal notranslate"><span class="pre">SymLite</span></code> tool to lookup symbol names. It
+returns a Symbol object in the anonymous <code class="docutils literal notranslate"><span class="pre">void*</span></code>.</p>
+<p>SymbolLookup(std::string exec_path = “”);</p>
+<p>Constructor for a <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object.</p>
+<p>virtual bool lookupAtAddr(Address addr, string &amp;out_name, void*
+&amp;out_value) = 0</p>
+<p>This method takes an address, <code class="docutils literal notranslate"><span class="pre">addr</span></code>, as input and returns the
+function name, <code class="docutils literal notranslate"><span class="pre">out_name</span></code>, and an opaque value, <code class="docutils literal notranslate"><span class="pre">out_value</span></code>, at that
+address. Output parameter <code class="docutils literal notranslate"><span class="pre">out_name</span></code> should be the name of the
+function that contains <code class="docutils literal notranslate"><span class="pre">addr</span></code>. Output parameter <code class="docutils literal notranslate"><span class="pre">out_value</span></code> can be
+any opaque value determined by the <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> implementation. The
+values returned are used by the <code class="docutils literal notranslate"><span class="pre">Frame::getName</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Frame::getObject</span></code> functions.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual Walker *getWalker()</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> object associated with this
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code>.</p>
+<p>virtual ProcessState *getProcessSate()</p>
+<p>This method returns the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object associated with this
+<code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="callback-interface-default-implementations">
+<h1>Callback Interface Default Implementations<a class="headerlink" href="#callback-interface-default-implementations" title="Permalink to this headline"></a></h1>
+<p>StackwalkerAPI provides one or more default implementations of each of
+the callback classes described in Section 3.5. These implementations are
+used by a default configuration of StackwalkerAPI.</p>
+<div class="section" id="debugger-interface">
+<span id="subsec-debugger"></span><h2>Debugger Interface<a class="headerlink" href="#debugger-interface" title="Permalink to this headline"></a></h2>
+<p>This section describes how to use StackwalkerAPI for collecting 3rd
+party stack walks. In 3rd party mode StackwalkerAPI uses the OS’s
+debugger interface to connect to another process and walk its call
+stacks. As part of being a debugger StackwalkerAPI receives and needs to
+handle debug events. When a debugger event occurs, StackwalkerAPI must
+get control of the host process in order to receive the debugger event
+and continue the target process.</p>
+<p>To illustrate the complexities with running in 3rd party mode, consider
+the follow code snippet that uses StackwalkerAPI to collect a stack walk
+every five seconds.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+             <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
+             <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>StackwalkerAPI is running in 3rd party mode, since it attached to the
+target process, <code class="docutils literal notranslate"><span class="pre">pid</span></code>. As the target process runs it may be generating
+debug events such a thread creation and destruction, library loads and
+unloads, signals, forking/execing, etc. When one of these debugger
+events is generated the OS will pause the target process and send a
+notice to the host process. The target process will remain paused until
+the host process handles the debug event and resumes the target process.</p>
+<p>In the above example the host process is spending almost all of its time
+in the sleep call. If a debugger event happens during the sleep, then
+StackwalkerAPI will not be able to get control of the host process and
+handle the event for up to five seconds. This will cause long pauses in
+the target process and lead to a potentially very large slowdown.</p>
+<p>To work around this problem StackwalkerAPI provides a notification file
+descriptor. This file descriptor represents a connection between the
+StackwalkerAPI library and user code. StackwalkerAPI will write a single
+byte to this file descriptor when a debug event occurs, thus notifying
+the user code that it needs to let StackwalkerAPI receive and handle
+debug events. The user code can use system calls such as select to watch
+for events on the notification file descriptor.</p>
+<p>The following example illustrates how to properly use StackwalkerAPI to
+collect a stack walk from another process at a five second interval.
+Details on the <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> class, <code class="docutils literal notranslate"><span class="pre">getNotificationFD</span></code> method, and
+<code class="docutils literal notranslate"><span class="pre">handleDebugEvent</span></code> method can be found in
+Section&nbsp;<a class="reference external" href="#subsubsec:procdebug">4.1.1</a>. See the UNIX man pages for
+more information on the <code class="docutils literal notranslate"><span class="pre">select</span></code> system call. Note that this example
+does not include all of the proper error handling and includes that
+should be present when using <code class="docutils literal notranslate"><span class="pre">select</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+<span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span> <span class="o">=</span> <span class="p">(</span><span class="n">ProcDebug</span> <span class="o">*</span><span class="p">)</span> <span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">();</span>
+<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+    <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
+    <span class="n">struct</span> <span class="n">timeval</span> <span class="n">timeout</span><span class="p">;</span>
+    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="nb">max</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">fd_set</span> <span class="n">readfds</span><span class="p">,</span> <span class="n">writefds</span><span class="p">,</span> <span class="n">exceptfds</span><span class="p">;</span>
+    <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">writefds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">);</span>
+    <span class="n">FD_SET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">writefds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">timeout</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">FD_ISSET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="n">readfds</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">Debug</span> <span class="n">event</span>
+            <span class="n">ProcDebug</span><span class="p">::</span><span class="n">handleDebugEvent</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span><span class="n">Timeout</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="class-procdebug">
+<span id="subsubsec-procdebug"></span><h3>Class ProcDebug<a class="headerlink" href="#class-procdebug" title="Permalink to this headline"></a></h3>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">procstate.h</span></code></p>
+<p>Access to StackwalkerAPI’s debugger is through the <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> class,
+which inherits from the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> interface. The easiest way to
+get at a <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> object is to cast the return value of
+<code class="docutils literal notranslate"><span class="pre">Walker::getProcessState</span></code> into a <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>. C++’s <code class="docutils literal notranslate"><span class="pre">dynamic_cast</span></code>
+operation can be used to test if a <code class="docutils literal notranslate"><span class="pre">Walker</span></code> uses the <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>
+interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span><span class="p">;</span>
+<span class="n">debugger</span> <span class="o">=</span> <span class="n">dynamic_cast</span><span class="o">&lt;</span><span class="n">ProcDebug</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">());</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">debugger</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span><span class="mi">3</span><span class="n">rd</span> <span class="n">party</span>
+    <span class="o">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">//</span><span class="mi">1</span><span class="n">st</span> <span class="n">party</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In addition to the handling of debug events, described in
+Section&nbsp;<a class="reference external" href="#subsec:debugger">4.1</a>, the <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> class provides a
+process control interface; users can pause and resume process or
+threads, detach from a process, and test for events such as process
+death. As an implementation of the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> class, <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>
+also provides all of the functionality described in
+Section&nbsp;<a class="reference external" href="#subsec:processstate">3.6.4</a>.</p>
+<p>virtual bool pause(Dyninst::THR_ID tid = NULL_THR_ID)</p>
+<p>This method pauses a process or thread. The paused object will not
+resume execution until <code class="docutils literal notranslate"><span class="pre">ProcDebug::resume</span></code> is called. If the <code class="docutils literal notranslate"><span class="pre">tid</span></code>
+parameter is not <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then StackwalkerAPI will pause the
+thread specified by <code class="docutils literal notranslate"><span class="pre">tid</span></code>. If <code class="docutils literal notranslate"><span class="pre">tid</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then
+StackwalkerAPI will pause every thread in the process.</p>
+<p>When StackwalkerAPI collects a call stack from a running thread it first
+pauses the thread, collects the stack walk, and then resumes the thread.
+When collecting a call stack from a paused thread StackwalkerAPI will
+collect the stack walk and leave the thread paused. This method is thus
+useful for pausing threads before stack walks if the user needs to keep
+the returned stack walk synchronized with the current state of the
+thread.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool resume(Dyninst::THR_ID tid = NULL_THR_ID)</p>
+<p>This method resumes execution on a paused process or thread. This method
+only resumes threads that were paused by the <code class="docutils literal notranslate"><span class="pre">ProcDebug::pause</span></code> call,
+using it on other threads is an error. If the <code class="docutils literal notranslate"><span class="pre">tid</span></code> parameter is not
+<code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then StackwalkerAPI will resume the thread specified by
+<code class="docutils literal notranslate"><span class="pre">tid</span></code>. If <code class="docutils literal notranslate"><span class="pre">tid</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then StackwalkerAPI will resume
+all paused threads in the process.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool detach(bool leave_stopped = false)</p>
+<p>This method detaches StackwalkerAPI from the target process.
+StackwalkerAPI will no longer receive debug events on this target
+process and will no longer be able to collect call stacks from it. This
+method invalidates the associated <code class="docutils literal notranslate"><span class="pre">Walker</span></code> and <code class="docutils literal notranslate"><span class="pre">ProcState</span></code> objects,
+they should be cleaned using C++’s <code class="docutils literal notranslate"><span class="pre">delete</span></code> operator after making this
+call. It is an error to attempt to do operations on these objects after
+a detach, and undefined behavior may result.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">leave_stopped</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">true</span></code> StackwalkerAPI will
+detach from the process but leave it in a paused state so that it does
+resume progress. This is useful for attaching another debugger back to
+the process for further analysis. The <code class="docutils literal notranslate"><span class="pre">leave_stopped</span></code> parameter is not
+supported on the Linux platform and its value will have no affect on the
+detach call.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<p>virtual bool isTerminated()</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the associated target process has
+terminated and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. A target process may terminate
+itself by calling exit, returning from main, or receiving an unhandled
+signal. Attempting to collect stack walks or perform other operations on
+a terminated process is illegal an will lead to undefined behavior.</p>
+<p>A process termination will also be signaled through the notification FD.
+Users should check processes for the isTerminated state after returning
+from handleDebugEvent.</p>
+<p>static int getNotificationFD()</p>
+<p>This method returns StackwalkerAPI’s notification FD. The notification
+FD is a file descriptor that StackwalkerAPI will write a byte to
+whenever a debug event occurs that need. If the user code sees a byte on
+this file descriptor it should call <code class="docutils literal notranslate"><span class="pre">handleDebugEvent</span></code> to let
+StackwalkerAPI handle the debug event. Example code using
+<code class="docutils literal notranslate"><span class="pre">getNotificationFD</span></code> can be found in
+Section&nbsp;<a class="reference external" href="#subsec:debugger">4.1</a>.</p>
+<p>StackwalkerAPI will only create one notification FD, even if it is
+attached to multiple 3rd party target processes.</p>
+<p>static bool handleDebugEvent(bool block = false)</p>
+<p>When this method is called StackwalkerAPI will receive and handle all
+pending debug events from each 3rd party target process to which it is
+attached. After handling debug events each target process will be
+continued (unless it was explicitly stopped by the ProcDebug::pause
+method) and any bytes on the notification FD will be cleared. It is
+generally expected that users will call this method when a event is sent
+to the notification FD, although it can be legally called at any time.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">block</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">true</span></code>, then <code class="docutils literal notranslate"><span class="pre">handleDebugEvents</span></code> will
+block until it has handled at least one debug event. If the block
+parameter is <code class="docutils literal notranslate"><span class="pre">false</span></code>, then handleDebugEvents will handle any currently
+pending debug events or immediately return if none are available.</p>
+<p>StackwalkerAPI may receive process exit events for target processes
+while handling debug events. The user should check for any exited
+processes by calling <code class="docutils literal notranslate"><span class="pre">ProcDebug::isTerminated</span></code> after handling debug
+events.</p>
+<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+</div>
+</div>
+<div class="section" id="framesteppers">
+<span id="sec-framesteppers"></span><h2>FrameSteppers<a class="headerlink" href="#framesteppers" title="Permalink to this headline"></a></h2>
+<p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">framestepper.h</span></code></p>
+<p>StackwalkerAPI ships with numerous default implementations of the
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> class. Each of these <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> implementations
+allow StackwalkerAPI to walk a type of call frames.
+Section&nbsp;<a class="reference external" href="#subsec:defaults">3.6.1</a> describes which <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>
+implementations are available on which platforms. This sections gives a
+brief description of what each <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> implementation does.
+Each of the following classes implements the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> interface
+described in Section&nbsp;<a class="reference external" href="#subsec:framestepper">3.6.2</a>, so we do not
+repeat the API description for the classes here.</p>
+<p>Several of the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>s use helper classes (see
+<code class="docutils literal notranslate"><span class="pre">FrameFuncStepper</span></code> as an example). Users can further customize the
+behavior of a <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> by providing their own implementation of
+these helper classes.</p>
+<div class="section" id="class-framefuncstepper">
+<h3>Class FrameFuncStepper<a class="headerlink" href="#class-framefuncstepper" title="Permalink to this headline"></a></h3>
+<p>This class implements stack walking through a call frame that is setup
+with the architectures standard stack frame. For example, on x86 this
+<code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> will be used to walk through stack frames that are
+setup with a <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">%ebp/mov</span> <span class="pre">%esp,%ebp</span></code> prologue.</p>
+<div class="section" id="class-framefunchelper">
+<h4>Class FrameFuncHelper<a class="headerlink" href="#class-framefunchelper" title="Permalink to this headline"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">FrameFuncStepper</span></code> uses a helper class, <code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code>, to get
+information on what kind of stack frame it’s walking through. The
+<code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> will generally use techniques such as binary
+analysis to determine what type of stack frame the <code class="docutils literal notranslate"><span class="pre">FrameFuncStepper</span></code>
+is walking through. Users can have StackwalkerAPI use their own binary
+analysis mechanisms by providing an implementation of this
+<code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code>.</p>
+<p>There are two important types used by <code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> and one
+important function: typedef enum unknown_t=0, no_frame, standard_frame,
+savefp_only_frame, frame_type;</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">frame_type</span></code> describes what kind of stack frame a function uses.
+If it does not set up a stack frame then <code class="docutils literal notranslate"><span class="pre">frame_type</span></code> should be
+<code class="docutils literal notranslate"><span class="pre">no_frame</span></code>. If it sets up a standard frame then <code class="docutils literal notranslate"><span class="pre">frame_type</span></code> should
+be <code class="docutils literal notranslate"><span class="pre">standard_frame</span></code>. The <code class="docutils literal notranslate"><span class="pre">savefp_only_frame</span></code> value currently only
+has meaning on the x86 family of systems, and means that a function
+saves the old frame pointer, but does not setup a new frame pointer (it
+has a <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">%ebp</span></code> instruction, but no <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">%esp,%ebp</span></code>). If the
+<code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> cannot determine the <code class="docutils literal notranslate"><span class="pre">frame_type</span></code>, then it should
+be assigned the value <code class="docutils literal notranslate"><span class="pre">unknown_t</span></code>.</p>
+<p>typedef enum unknown_s=0, unset_frame, halfset_frame, set_frame
+frame_state;</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> type determines the current state of function with a
+stack frame at some point of execution. For example, a function may set
+up a standard stack frame and have a <code class="docutils literal notranslate"><span class="pre">frame_type</span></code> of
+<code class="docutils literal notranslate"><span class="pre">standard_frame</span></code>, but execution may be at the first instruction in the
+function and the frame is not yet setup, in which case the
+<code class="docutils literal notranslate"><span class="pre">frame_state</span></code> will be <code class="docutils literal notranslate"><span class="pre">unset_frame</span></code>.</p>
+<p>If the function sets up a standard stack frame and the execution point
+is someplace where the frame is completely setup, then the
+<code class="docutils literal notranslate"><span class="pre">frame_state</span></code> should be <code class="docutils literal notranslate"><span class="pre">set_frame</span></code>. If the function sets up a
+standard frame and the execution point is at a point where the frame
+does not yet exist or has been torn down, then <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> should be
+<code class="docutils literal notranslate"><span class="pre">unset_frame</span></code>. The <code class="docutils literal notranslate"><span class="pre">halfset_frame</span></code> value of <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> is
+currently only meaningful on the x86 family of architecture, and should
+if the function has saved the old frame pointer, but not yet set up a
+new frame pointer.</p>
+<p>typedef std::pair&lt;frame_type, frame_state&gt; alloc_frame_t; virtual
+alloc_frame_t allocatesFrame(Address addr) = 0;</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">allocatesFrame</span></code> function of <code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> returns a
+<code class="docutils literal notranslate"><span class="pre">alloc_frame_t</span></code> that describes the frame_type of the function at
+<code class="docutils literal notranslate"><span class="pre">addr</span></code> and the <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> of the function when execution reached
+<code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is invalid or an error occurs, allocatedFrame should return
+<code class="docutils literal notranslate"><span class="pre">alloc_frame_t(unknown_t,</span> <span class="pre">unknown_s)</span></code>.</p>
+</div>
+</div>
+<div class="section" id="class-sighandlerstepper">
+<h3>Class SigHandlerStepper<a class="headerlink" href="#class-sighandlerstepper" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SigHandlerStepper</span></code> is used to walk through UNIX signal handlers
+as found on the call stack. On some systems a signal handler generates a
+special kind of stack frame that cannot be walked through using normal
+stack walking techniques.</p>
+</div>
+<div class="section" id="class-debugstepper">
+<h3>Class DebugStepper<a class="headerlink" href="#class-debugstepper" title="Permalink to this headline"></a></h3>
+<p>This class uses debug information found in a binary to walk through a
+stack frame. It depends on SymtabAPI to read debug information from a
+binary, then uses that debug information to walk through a call frame.</p>
+<p>Most binaries must be built with debug information (<code class="docutils literal notranslate"><span class="pre">-g</span></code> with <code class="docutils literal notranslate"><span class="pre">gcc</span></code>)
+in order to include debug information that this <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> uses.
+Some languages, such as C++, automatically include stackwalking debug
+information for use by exceptions. The <code class="docutils literal notranslate"><span class="pre">DebugStepper</span></code> class will also
+make use of this kind of exception information if it is available.</p>
+</div>
+<div class="section" id="class-analysisstepper">
+<h3>Class AnalysisStepper<a class="headerlink" href="#class-analysisstepper" title="Permalink to this headline"></a></h3>
+<p>This class uses dataflow analysis to determine possible stack sizes at
+all locations in a function as well as the location of the frame
+pointer. It is able to handle optimized code with omitted frame pointers
+and overlapping code sequences.</p>
+</div>
+<div class="section" id="class-stepperwanderer">
+<h3>Class StepperWanderer<a class="headerlink" href="#class-stepperwanderer" title="Permalink to this headline"></a></h3>
+<p>This class uses a heuristic approach to find possible return addresses
+in the stack frame. If a return address is found that matches a valid
+caller of the current function, we conclude it is the actual return
+address and construct a matching stack frame. Since this approach is
+heuristic it can make mistakes leading to incorrect stack information.
+It has primarily been replaced by the <code class="docutils literal notranslate"><span class="pre">AnalysisStepper</span></code> described
+above.</p>
+</div>
+<div class="section" id="class-bottomofstackstepper">
+<h3>Class BottomOfStackStepper<a class="headerlink" href="#class-bottomofstackstepper" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">BottomOfStackStepper</span></code> doesn’t actually walk through any type of
+call frame. Instead it attempts to detect whether the bottom of the call
+stack has been reached. If so, <code class="docutils literal notranslate"><span class="pre">BottomOfStackStepper</span></code> will report
+<code class="docutils literal notranslate"><span class="pre">gcf_stackbottom</span></code> from its <code class="docutils literal notranslate"><span class="pre">getCallerFrame</span></code> method. Otherwise it
+will report <code class="docutils literal notranslate"><span class="pre">gcf_not_me</span></code>. <code class="docutils literal notranslate"><span class="pre">BottomOfStackStepper</span></code> runs with a higher
+priority than any other <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> class.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../patchAPI/index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../symtabAPI/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

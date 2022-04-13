@@ -1,0 +1,49 @@
+.. _`sec:instructionAST`:
+
+InstructionAST Class
+--------------------
+
+The InstructionAST class is the base class for all nodes in the ASTs
+used by the Operand class. It defines the necessary interfaces for
+traversing and searching an abstract syntax tree representing an
+operand. For the purposes of searching an InstructionAST, we provide two
+related interfaces. The first, , will return the registers that appear
+in a given tree. The second, , will take as input another tree and
+return true if that tree is a (not necessarily proper) subtree of this
+one. requires us to define an equality relation on these abstract syntax
+trees, and the equality operator is provided by the InstructionAST, with
+the details implemented by the classes derived from InstructionAST. Two
+AST nodes are equal if the following conditions hold:
+
+-  They are of the same type
+
+-  If leaf nodes, they represent the same immediate value or the same
+   register
+
+-  If non-leaf nodes, they represent the same operation and their
+   corresponding children are equal
+
+.. container:: apient
+
+   typedef boost::shared_ptr<InstructionAST> Ptr
+
+.. container:: apient
+
+   bool operator==(const InstructionAST &rhs) const
+
+.. container:: apient
+
+   virtual void getChildren(vector<InstructionAPI::Ptr> & children)
+   const
+
+.. container:: apient
+
+   virtual void getUses(set<InstructionAPI::Ptr> & uses)
+
+.. container:: apient
+
+   virtual bool isUsed(InstructionAPI::Ptr findMe) const
+
+.. container:: apient
+
+   virtual std::string format(formatStyle how == defaultStyle) const

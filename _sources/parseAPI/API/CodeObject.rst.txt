@@ -1,0 +1,135 @@
+Class CodeObject
+----------------
+
+The CodeObject class describes an individual binary code object, such as
+an executable or library. It is the top-level container for parsing the
+object as well as accessing that parse data. The following API routines
+and data types are provided to support parsing and retrieving parsing
+products.
+
+.. container:: apient
+
+   typedef std::set<Function \*, Function::less> funclist
+
+.. container:: apient
+
+   CodeObject(CodeSource \* cs, CFGFactory \* fact = NULL, ParseCallback
+   \* cb = NULL, bool defensiveMode = false)
+
+.. container:: apient
+
+   void parse()
+
+.. container:: apient
+
+   void parse(Address target, bool recursive)
+
+.. container:: apient
+
+   void parse(CodeRegion \* cr, Address target, bool recursive)
+
+.. container:: apient
+
+   struct NewEdgeToParse Block \*source; Address target; EdgeTypeEnum
+   type; bool parseNewEdges( vector<NewEdgeToParse> & worklist )
+
+ParseAPI is able to speculatively parse gaps (regions of binary that has
+not been identified as code or data yet) to identify function entry
+points and perform control flow traversal.
+
+.. container:: center
+
+   +------------------+--------------------------------------------------+
+   | GapParsingType   | Technique description                            |
+   +==================+==================================================+
+   | PreambleMatching | If instruction patterns are matched at an        |
+   |                  | adderss, the address is a function entry point   |
+   +------------------+--------------------------------------------------+
+   | IdiomMatching    | Based on a pre-trained model, this technique     |
+   |                  | calculates the probability of an address to be a |
+   |                  | function entry point and predicts whether which  |
+   |                  | addresses are function entry points              |
+   +------------------+--------------------------------------------------+
+
+.. container:: apient
+
+   void parseGaps(CodeRegion \*cr, GapParsingType type=IdiomMatching)
+
+.. container:: apient
+
+   Function \* findFuncByEntry(CodeRegion \* cr, Address entry)
+
+.. container:: apient
+
+   int findFuncs(CodeRegion \* cr, Address addr, std::set<Function*> &
+   funcs)
+
+.. container:: apient
+
+   int findFuncs(CodeRegion \* cr, Address start, Address end,
+   std::set<Function*> & funcs)
+
+.. container:: apient
+
+   const funclist & funcs()
+
+.. container:: apient
+
+   Block \* findBlockByEntry(CodeRegion \* cr, Address entry)
+
+.. container:: apient
+
+   int findBlocks(CodeRegion \* cr, Address addr, std::set<Block*> &
+   blocks)
+
+.. container:: apient
+
+   Block \* findNextBlock(CodeRegion \* cr, Address addr)
+
+.. container:: apient
+
+   CodeSource \* cs()
+
+.. container:: apient
+
+   CFGFactory \* fact()
+
+.. container:: apient
+
+   bool defensiveMode()
+
+.. container:: apient
+
+   bool isIATcall(Address insn, std::string &calleeName)
+
+.. container:: apient
+
+   void startCallbackBatch()
+
+.. container:: apient
+
+   void finishCallbackBatch()
+
+.. container:: apient
+
+   void registerCallback(ParseCallback \*cb);
+
+.. container:: apient
+
+   void unregisterCallback(ParseCallback \*cb);
+
+.. container:: apient
+
+   void finalize()
+
+.. container:: apient
+
+   void destroy(Edge \*)
+
+.. container:: apient
+
+   void destroy(Block \*)
+
+.. container:: apient
+
+   void destroy(Function \*)

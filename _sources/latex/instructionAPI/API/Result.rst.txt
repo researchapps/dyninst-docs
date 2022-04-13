@@ -1,0 +1,69 @@
+.. _`sec:result`:
+
+Result Class
+------------
+
+A object represents a value computed by an AST.
+
+The class is a tagged-union representation of the results that
+Expressions can produce. It includes 8, 16, 32, 48, and 64 bit integers
+(signed and unsigned), bit values, and single and double precision
+floating point values. For each of these types, the value of a Result
+may be undefined, or it may be a value within the range of the type.
+
+The field is an enum that may contain any of the following values:
+
+-  an unsigned 8-bit integer
+
+-  a signed 8-bit integer
+
+-  an unsigned 16-bit integer
+
+-  a signed 16-bit integer
+
+-  an unsigned 32-bit integer
+
+-  a signed 32-bit integer
+
+-  an unsigned 48-bit integer (IA32 pointers)
+
+-  a signed 48-bit integer (IA32 pointers)
+
+-  an unsigned 64-bit integer
+
+-  a signed 64-bit integer
+
+-  a single-precision float
+
+-  a double-precision float
+
+-  a single bit (individual flags)
+
+-  a 512-bit memory value
+
+-  a 128-bit integer, which often contains packed floating point values
+   - a 14 byte memory value
+
+.. container:: apient
+
+   Result (Result_Type t)
+
+.. container:: apient
+
+   Result (Result_Type t, T v)
+
+.. container:: apient
+
+   bool operator== (const Result & o) const
+
+.. container:: apient
+
+   std::string format () const
+
+.. container:: apient
+
+   template <typename to_type> to_type convert() const
+
+.. container:: apient
+
+   int size () const

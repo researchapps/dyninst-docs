@@ -1,0 +1,45 @@
+.. _`sec:containers`:
+
+Containers
+----------
+
+Several of the ParseAPI data structures export containers of CFG
+objects; the CodeObject provides a list of functions in the binary, for
+example, while functions provide lists of blocks and so on. To avoid
+tying the internal storage for these structures to any particular
+container type, ParseAPI objects export a ContainerWrapper that provides
+an iterator interface to the internal containers. These wrappers and
+predicate interfaces are designed to add minimal overhead while
+protecting ParseAPI users from exposure to internal container storage
+details. Users *must not* rely on properties of the underlying container
+type (e.g. storage order) unless that property is explicity stated in
+this manual.
+
+ContainerWrapper containers export the following interface ( types vary
+depending on the template parameters of the ContainerWrapper, but are
+always instantiations of the PredicateIterator described below):
+
+.. container:: apient
+
+   iterator begin() iterator begin(predicate \*)
+
+.. container:: apient
+
+   iterator const& end()
+
+.. container:: apient
+
+   size_t size()
+
+.. container:: apient
+
+   bool empty()
+
+The elements in ParseAPI containers can be accessed by iteration using
+an instantiation of the PredicateIterator. These iterators can
+optionally act as filters, evaluating a boolean predicate for each
+element and only returning those elements for which the predicate
+returns true. *Iterators with non-null predicates may return fewer
+elements during iteration than their method indicates.* Currently
+PredicateIterators only support forward iteration. The operators (prefix
+and postfix), , , and (dereference) are supported.

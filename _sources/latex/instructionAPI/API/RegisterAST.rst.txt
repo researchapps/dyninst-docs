@@ -1,0 +1,47 @@
+.. _`sec:registerAST`:
+
+RegisterAST Class
+-----------------
+
+A object represents a register contained in an operand. As a is an , it
+may contain the physical register’s contents if they are known.
+
+.. container:: apient
+
+   typedef dyn_detail::boost::shared_ptr<RegisterAST> Ptr
+
+.. container:: apient
+
+   RegisterAST (MachRegister r)
+
+.. container:: apient
+
+   void getChildren (vector< InstructionAST::Ptr > & children) const
+
+.. container:: apient
+
+   void getUses (set< InstructionAST::Ptr > & uses)
+
+.. container:: apient
+
+   bool isUsed (InstructionAST::Ptr findMe) const
+
+.. container:: apient
+
+   std::string format (formatStyle how = defaultStyle) const
+
+.. container:: apient
+
+   RegisterAST makePC (Dyninst::Architecture arch) [static]
+
+.. container:: apient
+
+   bool operator< (const RegisterAST & rhs) const
+
+.. container:: apient
+
+   MachRegister getID () const
+
+.. container:: apient
+
+   RegisterAST::Ptr promote (const InstructionAST::Ptr reg) [static]

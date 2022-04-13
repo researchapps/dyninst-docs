@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstructionAPI Modules and Abstractions &mdash; Dyninst 12.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Dyninst
+          </a>
+              <div class="version">
+                12.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">The Dataflow API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataflowAPI/index.html#api-reference">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">dynC API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html">DynC API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#dync-language-description">DynC Language Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynC_API/index.html#the-dyninst-domain">The Dyninst Domain</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Instruction API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#instructionapi-modules-and-abstractions">InstructionAPI Modules and Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#instructionapi-class-reference">InstructionAPI Class Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Parse API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#the-parsing-api">The Parsing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#extending-parseapi">Extending ParseAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parseAPI/index.html#defensive-mode-parsing">Defensive Mode Parsing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Patch API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#public-api-reference">Public API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#modification-api-reference">Modification API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#plugin-api-reference">Plugin API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../patchAPI/index.html#patchapi-for-dyninst-programmers">PatchAPI for Dyninst Programmers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Stackwalk</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#api-reference">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stackwalk/index.html#callback-interface-default-implementations">Callback Interface Default Implementations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Symtab API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#abstractions">Abstractions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#simple-examples">Simple Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#definitions-and-basic-types">Definitions and Basic Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#namespace-symtabapi">Namespace SymtabAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-symbol-table-interface">API Reference - Symbol Table Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dyninst</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>InstructionAPI Modules and Abstractions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/instructionAPI/2-Abstractions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="instructionapi-modules-and-abstractions">
+<h1>InstructionAPI Modules and Abstractions<a class="headerlink" href="#instructionapi-modules-and-abstractions" title="Permalink to this headline"></a></h1>
+<p>The Instruction API contains three major components: the top-level
+instruction representation, the abstract syntax trees representing the
+operands of an instruction, and the decoder that creates the entire
+representation. We will present an overview of the features and uses of
+each of these three components, followed by an example of how the
+Instruction API can be applied to binary analysis.</p>
+<div class="section" id="instruction-interface">
+<h2>Instruction Interface<a class="headerlink" href="#instruction-interface" title="Permalink to this headline"></a></h2>
+<p>The Instruction API represents a machine language instruction as an
+Instruction object, which contains an Operation and a collection of
+Operands. The Operation contains the following items:</p>
+<ul class="simple">
+<li>The mnemonic for the machine language instruction represented by its
+associated Instruction</li>
+<li>The number of operands accepted by the Operation</li>
+<li>Which Operands are read and/or written by the associated machine
+operation</li>
+<li>What other registers (if any) are affected by the underlying machine
+operation</li>
+</ul>
+<p>Each Operand contains flags to indicate whether it is read, written, or
+both by the machine instruction represented by its parent Instruction,
+and contains a Expression abstract syntax tree representing the
+operations required to compute the value of the operand.
+Figure&nbsp;<a class="reference external" href="#fig:ownership-graph">1</a> depicts these ownership
+relationships within an Instruction.</p>
+<div class="figure align-default" id="fig-ownership-graph">
+<img alt="An Instruction and the objects it owns" src="instructionAPI/fig/ownership_graph.pdf" />
+<p class="caption"><span class="caption-text">An Instruction and the objects it owns</span><a class="headerlink" href="#fig-ownership-graph" title="Permalink to this image"></a></p>
+</div>
+<p>Instruction objects provide two types of interfaces: direct read access
+to their components, and common summary operations on those components.
+The first interface allows access to the Operation and Operand data
+members, and each Operand object in turn allows traversal of its
+abstract syntax tree. More details about how to work with this abstract
+syntax tree can be found in Section&nbsp;<a class="reference external" href="#subsec:hierarchy">1.3</a>. This
+interface would be used, for example, in a data flow analysis where a
+user wants to evaluate the results of an effective address computation
+given a known register state.</p>
+<p>The second interface allows a user to get the sets of registers read and
+written by the instruction, information about how the instruction
+accesses memory, and information about how the instruction affects
+control flow, without having to manipulate the Operands directly. For
+instance, a user could implement a register liveness analysis algorithm
+using just this second interface (namely the and functions).</p>
+</div>
+<div class="section" id="instruction-decoding">
+<h2>Instruction Decoding<a class="headerlink" href="#instruction-decoding" title="Permalink to this headline"></a></h2>
+<p>An InstructionDecoder interprets a sequence of bytes according to a
+given machine language and transforms them into an instruction
+representation. It determines the opcode of the machine instruction,
+translates that opcode to an Operation object, uses that Operation to
+determine how to decode the instruction’s Operands, and produces a
+decoded Instruction.</p>
+<div class="figure align-default" id="fig-decoder-use">
+<img alt="The InstructionDecoder’s inputs and outputs" src="instructionAPI/fig/decoder_use.pdf" />
+<p class="caption"><span class="caption-text">The InstructionDecoder’s inputs and outputs</span><a class="headerlink" href="#fig-decoder-use" title="Permalink to this image"></a></p>
+</div>
+<p>Instruction decoders are built from the following elements:</p>
+<ul class="simple">
+<li>A function to find and extract an opcode given a pointer into a
+buffer that points to the beginning of a machine instruction</li>
+<li>A table that, for a particular architecture, maps opcodes to
+Operations and functions that decode Operands</li>
+</ul>
+<p>From these elements, it is possible to generalize the construction of
+Instructions from Operations and Operands to an entirely
+platform-independent algorithm. Likewise, much of the construction of
+the ASTs representing each operand can be performed in a
+platform-independent manner.</p>
+</div>
+<div class="section" id="instructionast-hierarchy">
+<span id="subsec-hierarchy"></span><h2>InstructionAST Hierarchy<a class="headerlink" href="#instructionast-hierarchy" title="Permalink to this headline"></a></h2>
+<p>The AST representation of an operand encapsulates the operations
+performed on registers and immediates to produce an operand for the
+machine language instruction.</p>
+<p>The inheritance hierarchy of the AST classes is shown in
+Figure&nbsp;<a class="reference external" href="#fig:inheritance">3</a>.</p>
+<div class="figure align-default" id="fig-inheritance">
+<img alt="The InstructionAST inheritance hierarchy" src="instructionAPI/fig/full_inheritance_graph.pdf" />
+<p class="caption"><span class="caption-text">The InstructionAST inheritance hierarchy</span><a class="headerlink" href="#fig-inheritance" title="Permalink to this image"></a></p>
+</div>
+<p>The grammar for these AST representations is simple: all leaves must be
+RegisterAST or Immediate nodes. These nodes may be combined using a
+BinaryFunction node, which may be constructed as either an addition or a
+multiplication. Also, a single node may descend from a Dereference node,
+which treats its child as a memory address.
+Figure&nbsp;<a class="reference external" href="#fig:ownership">4</a> shows the allowable parent/child
+relationships within a given tree, and
+Figure&nbsp;<a class="reference external" href="#fig:representation">5</a> shows how an example IA32 instruction
+is represented using these objects.</p>
+<div class="figure align-default" id="fig-ownership">
+<img alt="InstructionAST intermediate node types and the objects they own" src="instructionAPI/fig/ast_ownership.pdf" />
+<p class="caption"><span class="caption-text">InstructionAST intermediate node types and the objects they own</span><a class="headerlink" href="#fig-ownership" title="Permalink to this image"></a></p>
+</div>
+<div class="figure align-default" id="fig-representation">
+<img alt="The decomposition of , ()" src="instructionAPI/fig/instruction_representation.pdf" />
+<p class="caption"><span class="caption-text">The decomposition of , ()</span><a class="headerlink" href="#fig-representation" title="Permalink to this image"></a></p>
+</div>
+<p>These ASTs may be searched for leaf elements or subtrees (via and ) and
+traversed breadth-first or depth-first (via ).</p>
+<p>Any node in these ASTs may be evaluated. Evaluation attempts to
+determine the value represented by a node. If successful, it will return
+that value and cache it in the node. The tree structure, combined with
+the evaluation mechanism, allows the substitution of known register and
+memory values into an operand, regardless of whether those values are
+known at the time an instruction is decoded. More details on this
+mechanism may be found in
+Section&nbsp;<a class="reference external" href="#sec:expression">[sec:expression]</a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1996-2022, Barton P. Miller.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
