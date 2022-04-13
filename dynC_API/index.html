@@ -132,6 +132,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
 </ul>
 
         </div>
@@ -180,61 +181,61 @@ must perform many discrete lookups and create many
 <code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span> <span class="pre">objects</span></code>, which are then combined and inserted into
 the mutatee.</p>
 <p>Look up <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_function</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="n">printf_func</span><span class="p">;</span>
-<span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findFunction</span><span class="p">(</span><span class="s2">&quot;printf&quot;</span><span class="p">,</span> <span class="n">printf_func</span><span class="p">);</span>
-<span class="n">BPatch_function</span> <span class="o">*</span><span class="n">BPF_printf</span> <span class="o">=</span> <span class="n">printf_func</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_function</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">printf_func</span><span class="p">;</span><span class="w"></span>
+<span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findFunction</span><span class="p">(</span><span class="s">&quot;printf&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">printf_func</span><span class="p">);</span><span class="w"></span>
+<span class="n">BPatch_function</span><span class="w"> </span><span class="o">*</span><span class="n">BPF_printf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">printf_func</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Create each <code class="docutils literal notranslate"><span class="pre">printf</span></code> pattern:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_constExpr</span> <span class="n">entryPattern</span><span class="p">(</span><span class="s2">&quot;Entering </span><span class="si">%s</span><span class="s2">, called </span><span class="si">%d</span><span class="s2"> times.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="n">BPatch_constExpr</span> <span class="n">exitPattern</span><span class="p">(</span><span class="s2">&quot;Exiting </span><span class="si">%s</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_constExpr</span><span class="w"> </span><span class="nf">entryPattern</span><span class="p">(</span><span class="s">&quot;Entering %s, called %d times.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">BPatch_constExpr</span><span class="w"> </span><span class="nf">exitPattern</span><span class="p">(</span><span class="s">&quot;Exiting %s.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>For each function, do the following:</strong></p>
 <p>Create snippet vectors:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">entrySnippetVect</span><span class="p">;</span>
-<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">exitSnippetVect</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">entrySnippetVect</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">exitSnippetVect</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Create the <code class="docutils literal notranslate"><span class="pre">intCounter</span></code> global variable:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">),</span> <span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="p">(</span><span class="s2">&quot;intCounter&quot;</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">appImage</span><span class="o">-&gt;</span><span class="n">findType</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;intCounter&quot;</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Get the name of the function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">char</span> <span class="n">fName</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
-<span class="n">BPatch_constExpr</span> <span class="n">funcName</span><span class="p">(</span><span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span> <span class="mi">128</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">fName</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"></span>
+<span class="n">BPatch_constExpr</span><span class="w"> </span><span class="nf">funcName</span><span class="p">(</span><span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(</span><span class="n">fName</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Build the entry <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">entryArgs</span><span class="p">;</span>
-<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">entryPattern</span><span class="p">);</span>
-<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span>
-<span class="n">entryArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">intCounter</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">entryArgs</span><span class="p">;</span><span class="w"></span>
+<span class="n">entryArgs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">entryPattern</span><span class="p">);</span><span class="w"></span>
+<span class="n">entryArgs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span><span class="w"></span>
+<span class="n">entryArgs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">intCounter</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Build the exit <code class="docutils literal notranslate"><span class="pre">printf</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span> <span class="o">*&gt;</span> <span class="n">exitArgs</span><span class="p">;</span>
-<span class="n">exitArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">exitPattern</span><span class="p">);</span>
-<span class="n">exitArgs</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">exitArgs</span><span class="p">;</span><span class="w"></span>
+<span class="n">exitArgs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">exitPattern</span><span class="p">);</span><span class="w"></span>
+<span class="n">exitArgs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">funcName</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Add <code class="docutils literal notranslate"><span class="pre">printf</span></code> to the snippet:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span> <span class="n">entryArgs</span><span class="p">));</span>
-<span class="n">exitSnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span> <span class="n">exitArgs</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span><span class="w"> </span><span class="n">entryArgs</span><span class="p">));</span><span class="w"></span>
+<span class="n">exitSnippetVect</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">BPatch_functionCallExpr</span><span class="p">(</span><span class="o">*</span><span class="n">printf_func</span><span class="p">,</span><span class="w"> </span><span class="n">exitArgs</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Increment the counter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_arithExpr</span> <span class="n">addOne</span><span class="p">(</span><span class="n">BPatch_assign</span><span class="p">,</span> <span class="o">*</span><span class="n">intCounter</span><span class="p">,</span>
-       <span class="n">BPatch_arithExpr</span><span class="p">(</span><span class="n">BPatch_plus</span><span class="p">,</span> <span class="o">*</span><span class="n">intCounter</span><span class="p">,</span> <span class="n">BPatch_constExpr</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_arithExpr</span><span class="w"> </span><span class="nf">addOne</span><span class="p">(</span><span class="n">BPatch_assign</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">intCounter</span><span class="p">,</span><span class="w"></span>
+<span class="n">BPatch_arithExpr</span><span class="p">(</span><span class="n">BPatch_plus</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">intCounter</span><span class="p">,</span><span class="w"> </span><span class="n">BPatch_constExpr</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Add increment to the entry snippet:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">addOne</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">entrySnippetVect</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">addOne</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Insert the snippets:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippetVect</span><span class="p">,</span> <span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_entry</span><span class="p">));</span>
-<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippetVect</span><span class="p">,</span> <span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_exit</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippetVect</span><span class="p">,</span><span class="w"> </span><span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_entry</span><span class="p">));</span><span class="w"></span>
+<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippetVect</span><span class="p">,</span><span class="w"> </span><span class="n">functions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">findPoint</span><span class="p">(</span><span class="n">BPatch_exit</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -246,32 +247,32 @@ only cleans up mutator code, but also allows the programmer to modify
 snippets without recompiling.</p>
 <p>In this example, the files <code class="docutils literal notranslate"><span class="pre">myEntryDynC.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">myExitDynC.txt</span></code>
 contain dynC code:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// myEntryDynC.txt
-static int intCounter;
-printf(&quot;Entering %s, called %d times.\n&quot;, dyninst`function_name, intCounter++);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// myEntryDynC.txt</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">intCounter</span><span class="p">;</span><span class="w"></span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Entering %s, called %d times.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dyninstfunction_name</span><span class="p">,</span><span class="w"> </span><span class="n">intCounter</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// myExitDynC.txt
-printf(&quot;Leaving %s.\n&quot;, dyninst`function_name);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// myExitDynC.txt</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Leaving %s.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dyninst</span><span class="w"> </span><span class="n">function_name</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The code to read, build, and insert the snippets would look something
 like the following:</p>
 <p>First open files:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FILE</span> <span class="o">*</span><span class="n">entryFile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&quot;myEntryDynC.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>
-<span class="n">FILE</span> <span class="o">*</span><span class="n">exitFile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&quot;myExitDynC.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">entryFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;myEntryDynC.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">exitFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;myExitDynC.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Next call DynC API with each function’s entry and exit points:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">entrySnippet</span> <span class="o">=</span>
-     <span class="n">dynC_API</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">entryFile</span><span class="p">,</span> <span class="n">entryPoint</span><span class="p">,</span> <span class="s2">&quot;entrySnippet&quot;</span><span class="p">);</span>
-<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">exitSnippet</span> <span class="o">=</span>
-     <span class="n">dynC_API</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">exitFile</span><span class="p">,</span> <span class="n">exitPoint</span><span class="p">,</span> <span class="s2">&quot;exitSnippet&quot;</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*</span><span class="n">entrySnippet</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">     </span><span class="n">dynC_API</span><span class="o">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">entryFile</span><span class="p">,</span><span class="w"> </span><span class="n">entryPoint</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;entrySnippet&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*</span><span class="n">exitSnippet</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">     </span><span class="n">dynC_API</span><span class="o">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">exitFile</span><span class="p">,</span><span class="w"> </span><span class="n">exitPoint</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;exitSnippet&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Finally insert the snippets at each function’s entry and exit points:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippet</span><span class="p">,</span> <span class="n">entryPoint</span><span class="p">);</span>
-<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippet</span><span class="p">,</span> <span class="n">exitPoint</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">entrySnippet</span><span class="p">,</span><span class="w"> </span><span class="n">entryPoint</span><span class="p">);</span><span class="w"></span>
+<span class="n">appProc</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="o">*</span><span class="n">exitSnippet</span><span class="p">,</span><span class="w"> </span><span class="n">exitPoint</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -280,7 +281,7 @@ like the following:</p>
 <h2>Calling DynC API<a class="headerlink" href="#calling-dync-api" title="Permalink to this headline"></a></h2>
 <p>All DynC functions reside in the <code class="docutils literal notranslate"><span class="pre">dynC_API</span></code> namespace. The primary
 DynC API function is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_Snippet</span> <span class="o">*</span><span class="n">createSnippet</span><span class="p">(</span><span class="o">&lt;</span><span class="n">dynC</span> <span class="n">code</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">location</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span> <span class="n">name</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">BPatch_Snippet</span><span class="w"> </span><span class="o">*</span><span class="nf">createSnippet</span><span class="p">(</span><span class="o">&lt;</span><span class="n">dynC</span><span class="w"> </span><span class="n">code</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">location</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -408,7 +409,7 @@ domain of snippet variables.</td>
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inf`printf(&quot;n is equal to %d.\n&quot;, ++global`n);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;n is equal to %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">++</span><span class="n">global</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This would increment and print the value of the mutatee global variable
@@ -420,30 +421,30 @@ n.</p>
 <h3>Comments<a class="headerlink" href="#comments" title="Permalink to this headline"></a></h3>
 <p>Block and line comments work as they do in C or C++.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span>
- <span class="o">*</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">comment</span><span class="o">.</span>
- <span class="o">*/</span>
-<span class="nb">int</span> <span class="n">i</span><span class="p">;</span> <span class="o">//</span> <span class="n">So</span> <span class="ow">is</span> <span class="n">this</span><span class="o">.</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a comment.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// So is this.</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="conditionals">
 <h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline"></a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">if</span></code> to conditionally execute code. Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if(x == 0){
-   inf`printf(&quot;x == 0.\n&quot;);
-}
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x == 0.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">else</span></code> command can be used to specify code executed if a condition
 is not true. Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if(x == 0){
-   inf`printf(&quot;x == 0.\n&quot;);
-}else if(x &gt; 3){
-   inf`printf(&quot;x &gt; 3.\n&quot;);
-}else{
-   inf`printf(&quot;x &lt; 3 but x }= 0.\n&quot;);
-}
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x == 0.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &gt; 3.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x &lt; 3 but x }= 0.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -455,11 +456,11 @@ initilizing variables, or for any task that needs to be executed only
 once. Any number of first-only code blocks can be used in a dynC code
 snippet.</p>
 <p>A first-only code block is equivalent to the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">firstTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="k">if</span><span class="p">(</span><span class="n">firstTime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-  <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span>
-  <span class="n">firstTime</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">firstTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="p">(</span><span class="n">firstTime</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span><span class="w"></span>
+<span class="w">  </span><span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="n">firstTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>DynC will only execute the code in a first-only section the first time a
@@ -472,34 +473,34 @@ unspecified), the first-only code will be executed only once upon
 reaching the first point encountered in the execution of the mutatee
 where the returned <code class="docutils literal notranslate"><span class="pre">BPatch_Snippet</span></code> is inserted.</p>
 <p>Example Touch:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{%
-   inf`printf(&quot;Function %s has been touched.\n&quot;, dyninst`function_name);
-%}
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span><span class="w"></span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Function %s has been touched.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dyninst</span><span class="w"> </span><span class="n">function_name</span><span class="p">);</span><span class="w"></span>
+<span class="o">%</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code> is passed the code in Example Touch and the
 name <code class="docutils literal notranslate"><span class="pre">&quot;fooTouchSnip&quot;</span></code> and the returned <code class="docutils literal notranslate"><span class="pre">BPatch_snippet</span></code> is inserted
 at the entry to function <code class="docutils literal notranslate"><span class="pre">foo</span></code>, the output would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
-<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">touched</span><span class="p">.</span><span class="w"></span>
+<span class="p">(</span><span class="n">mutatee</span><span class="w"> </span><span class="n">exit</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If the dynC code in Example Touch is passed to <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code>
 multiple times and each snippet is given the same name, but is inserted
 at the entries of the functions <code class="docutils literal notranslate"><span class="pre">foo</span></code>, <code class="docutils literal notranslate"><span class="pre">bar</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code>
 respectively, the output would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
-<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">touched</span><span class="p">.</span><span class="w"></span>
+<span class="p">(</span><span class="n">mutatee</span><span class="w"> </span><span class="n">exit</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Creating the snippets with distinct names (e.g. <code class="docutils literal notranslate"><span class="pre">createSnippet(...)</span></code>
 is called with the dynC code in Example Touch multiple times and the
 snippets are named <code class="docutils literal notranslate"><span class="pre">&quot;fooTouchSnip&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;barTouchSnip&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;runTouchSnip&quot;</span></code>) would produce an output like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span> <span class="n">foo</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
-<span class="n">Function</span> <span class="n">bar</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
-<span class="n">Function</span> <span class="n">run</span> <span class="n">has</span> <span class="n">been</span> <span class="n">touched</span><span class="o">.</span>
-<span class="p">(</span><span class="n">mutatee</span> <span class="n">exit</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">touched</span><span class="p">.</span><span class="w"></span>
+<span class="n">Function</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">touched</span><span class="p">.</span><span class="w"></span>
+<span class="n">Function</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">touched</span><span class="p">.</span><span class="w"></span>
+<span class="p">(</span><span class="n">mutatee</span><span class="w"> </span><span class="n">exit</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>A cautionary note: the use of first-only blocks can be expensive, as a
@@ -514,13 +515,13 @@ all global variables at the entry point of <code class="docutils literal notrans
 variables are in scope only within the snippet in which they are
 created.</p>
 <p>For example,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
-<span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>would create an uninitialized variable named <code class="docutils literal notranslate"><span class="pre">i</span></code> of type integer. The
 value of <code class="docutils literal notranslate"><span class="pre">i</span></code> is then set to 5. This is equivalent to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="section" id="static-variables">
@@ -529,36 +530,36 @@ value of <code class="docutils literal notranslate"><span class="pre">i</span></
 reinitialized. To create a variable with value that persists across
 executions of snippets, declare the variable as static.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>int i = 10;
-inf`printf(&quot;i is %d.\n&quot;, i++);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If the above is inserted at the entrance to a function that is called
 four times, the output would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">10.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">10.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">10.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">10.</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Adding <code class="docutils literal notranslate"><span class="pre">static</span></code> to the variable declaration would make the value of
 <code class="docutils literal notranslate"><span class="pre">i</span></code> persist across executions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>static int i = 10;
-inf`printf(&quot;i is %d.\n&quot;, i++);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;i is %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Produces:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="ow">is</span> <span class="mf">10.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">11.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">12.</span>
-<span class="n">i</span> <span class="ow">is</span> <span class="mf">13.</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">10.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">11.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">12.</span><span class="w"></span>
+<span class="n">i</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mf">13.</span><span class="w"></span>
 </pre></div>
 </div>
 <p>A variable declared in a first-only section will also behave statically,
 as the initialization occurs only once.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span>
-   <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="o">%</span><span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span><span class="w"></span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="o">%</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -589,45 +590,43 @@ into a mutatee, one must use the DyninstAPI
 <code class="docutils literal notranslate"><span class="pre">BPatch_addressSpace::malloc(...)</span></code> method (see <em>Dyninst Programmer’s
 Guide</em>). This code is located in mutator code (<em>not</em> in dynC code).</p>
 <p><strong>myMutator.C:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
-<span class="o">//</span> <span class="n">Creates</span> <span class="n">a</span> <span class="k">global</span> <span class="n">variable</span> <span class="n">of</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">named</span> <span class="n">globalIntN</span>
-<span class="n">myAddressSpace</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">myImage</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">),</span> <span class="s2">&quot;globalIntN&quot;</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span><span class="w"></span>
+<span class="c1">// Creates a global variable of type in named globalIntN</span>
+<span class="n">myAddressSpace</span><span class="o">-&gt;</span><span class="n">malloc</span><span class="p">(</span><span class="n">myImage</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">(</span><span class="s">&quot;int&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;globalIntN&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="o">//</span> <span class="n">file1</span> <span class="ow">and</span> <span class="n">file2</span> <span class="n">are</span> <span class="n">FILE</span> <span class="o">*</span><span class="p">,</span> <span class="n">entryPoint</span> <span class="ow">and</span> <span class="n">exitPoint</span> <span class="n">are</span> <span class="n">BPatch_point</span>
-<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">snippet1</span> <span class="o">=</span> <span class="n">dynC</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">,</span> <span class="s2">&quot;mySnippet1&quot;</span><span class="p">);</span>
-<span class="n">BPatch_snippet</span> <span class="o">*</span><span class="n">snippet2</span> <span class="o">=</span> <span class="n">dynC</span><span class="p">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">,</span> <span class="s2">&quot;mySnippet2&quot;</span><span class="p">);</span>
+<span class="c1">// file1 and file2 are FILE *, entryPoint and exitPoint are BPatch_point</span>
+<span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*</span><span class="n">snippet1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynC</span><span class="o">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mySnippet1&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">BPatch_snippet</span><span class="w"> </span><span class="o">*</span><span class="n">snippet2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynC</span><span class="o">::</span><span class="n">createSnippet</span><span class="p">(</span><span class="n">file2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mySnippet2&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">assert</span><span class="p">(</span><span class="n">snippet1</span><span class="p">);</span>
-<span class="k">assert</span><span class="p">(</span><span class="n">snippet2</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">snippet1</span><span class="p">);</span><span class="w"></span>
+<span class="n">assert</span><span class="p">(</span><span class="n">snippet2</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">);</span>
-<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">);</span>
+<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">entryPoint</span><span class="p">);</span><span class="w"></span>
+<span class="n">myAdressSpace</span><span class="o">-&gt;</span><span class="n">insertSnippet</span><span class="p">(</span><span class="n">snippet2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">exitPoint</span><span class="p">);</span><span class="w"></span>
 
-<span class="o">//</span> <span class="n">run</span> <span class="n">the</span> <span class="n">mutatee</span>
-<span class="p">((</span><span class="n">BPatch_process</span> <span class="o">*</span><span class="p">)</span><span class="n">myAdressSpace</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">continueExecution</span><span class="p">();</span>
-<span class="o">...</span>
+<span class="c1">// run the mutatee</span>
+<span class="p">((</span><span class="n">BPatch_process</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">myAdressSpace</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">continueExecution</span><span class="p">();</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>file1:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{%
-   global`globalIntN = 0; // initialize global variable in first-only section
-%}
-inf`printf(&quot;Welcome to function %s. Global variable globalIntN = %d.\n&quot;,
-     dyninst`function_name, global`globalIntN++);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">global</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// initialize global variable in first-only section</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Welcome to function %s. Global variable globalIntN = %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">dyninst</span><span class="w"> </span><span class="n">function_name</span><span class="p">,</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="n">globalIntN</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>file2:</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inf`printf(&quot;Goodbye from function %s. Global variable globalIntN = %d.\n&quot;,
-     dyninst`function_name, global`globalIntN++);
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Goodbye from function %s. Global variable globalIntN = %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">dyninst</span><span class="w"> </span><span class="n">function_name</span><span class="p">,</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="n">globalIntN</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>When run, the output from the instrumentation would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">0.</span>
-<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">2.</span>
-<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">3.</span>
-<span class="n">Welcome</span> <span class="n">to</span> <span class="n">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">4.</span>
-<span class="n">Goodbye</span> <span class="kn">from</span> <span class="nn">function</span> <span class="n">foo</span><span class="o">.</span> <span class="n">Global</span> <span class="n">variable</span> <span class="n">globalIntN</span> <span class="o">=</span> <span class="mf">5.</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="w"></span>
+<span class="n">Goodbye</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="w"></span>
+<span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="w"></span>
+<span class="n">Goodbye</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.</span><span class="w"></span>
+<span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.</span><span class="w"></span>
+<span class="n">Goodbye</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">foo</span><span class="p">.</span><span class="w"> </span><span class="n">Global</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">globalIntN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -639,8 +638,8 @@ Dyninst: <code class="docutils literal notranslate"><span class="pre">int</span>
 c-string primitives are also recognized:</div>
 <div class="line">Example:</div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
-<span class="n">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -655,11 +654,11 @@ the statement <code class="docutils literal notranslate"><span class="pre">*s</s
 <h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline"></a></h3>
 <p>Arrays in DynC behave much the same way they do in C.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>int array[3] = {1, 2, 3};
-char *names[] = {&quot;Mark&quot;, &quot;Phil&quot;, &quot;Deb&quot;, &quot;Tracy&quot;};
-names[2] = &quot;Gwen&quot; // change Deb to Gwen
-inf`printf(&quot;The seventh element of mutArray is %d.\n&quot;, global`mutArray[6]); //Mutatee array
-if(inf`strcmp(*names, &quot;Mark&quot;) == 0){} // This will evaluate to true.
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">names</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Mark&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Phil&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Deb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Tracy&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="n">names</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Gwen&quot;</span><span class="w"> </span><span class="c1">// change Deb to Gwen</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;The seventh element of mutArray is %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global</span><span class="w"> </span><span class="n">mutArray</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span><span class="w"> </span><span class="c1">//Mutatee array</span>
+<span class="k">if</span><span class="p">(</span><span class="n">istrcmp</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mark&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){}</span><span class="w"> </span><span class="c1">// This will evaluate to true.</span>
 </pre></div>
 </div>
 </div>

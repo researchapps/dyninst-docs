@@ -368,7 +368,7 @@ this instruction.</p>
 </pre></div>
 </div>
 <p>Returns the size of the corresponding machine instruction, in bytes.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>const void \* ptr() const
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Returns a pointer to the raw byte representation of the corresponding
@@ -823,7 +823,7 @@ The next time <code class="docutils literal notranslate"><span class="pre">eval<
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">size</span></code> returns the size of this <code class="docutils literal notranslate"><span class="pre">Expression</span></code>’s <code class="docutils literal notranslate"><span class="pre">Result</span></code>, in
 bytes.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>bool bind(Expression \* expr, const Result &amp; value)
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">bind</span><span class="p">(</span><span class="n">Expression</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">expr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">bind</span></code> searches for all instances of the Expression <code class="docutils literal notranslate"><span class="pre">expr</span></code> within
@@ -1217,7 +1217,7 @@ to the <code class="docutils literal notranslate"><span class="pre">Dereference<
 <span id="sec-instructiondecoder"></span><h2>InstructionDecoder Class<a class="headerlink" href="#instructiondecoder-class" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> class decodes instructions, given a buffer of
 bytes and a length, and constructs an Instruction.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>InstructionDecoder(const unsigned char \*buffer, size_t size, Architecture arch) InstructionDecoder(const void \*buffer, size_t size, Architecture arch)
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">InstructionDecoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">)</span><span class="w"> </span><span class="n">InstructionDecoder</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">Architecture</span><span class="w"> </span><span class="n">arch</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Construct an <code class="docutils literal notranslate"><span class="pre">InstructionDecoder</span></code> over the provided <code class="docutils literal notranslate"><span class="pre">buffer</span></code> and

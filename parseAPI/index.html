@@ -122,6 +122,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
 </ul>
 
         </div>
@@ -245,7 +246,7 @@ as follows:
 <code class="docutils literal notranslate"><span class="pre">g++</span> <span class="pre">-std=c++0x</span> <span class="pre">-o</span> <span class="pre">code_sample</span> <span class="pre">code_sample.cc</span> <span class="pre">-L&lt;library</span> <span class="pre">install</span> <span class="pre">path&gt;</span> <span class="pre">-I&lt;headers</span> <span class="pre">install</span> <span class="pre">path&gt;</span> <span class="pre">-lparseAPI</span> <span class="pre">-linstructionAPI</span> <span class="pre">-lsymtabAPI</span> <span class="pre">-lsymLite</span> <span class="pre">-ldynDwarf</span> <span class="pre">-ldynElf</span> <span class="pre">-lcommon</span> <span class="pre">-L&lt;libelf</span> <span class="pre">path&gt;</span> <span class="pre">-lelf</span> <span class="pre">-L&lt;libdwarf</span> <span class="pre">path&gt;</span> <span class="pre">-ldwarf</span></code>.
 Note: this example must be compiled with C++11x support; for G++ this is
 enabled with <code class="docutils literal notranslate"><span class="pre">-std=c++0x</span></code>, and it is on by default for Visual Studio.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">   Copyright (C) 2015 Alin Mindroc</span>
 <span class="cm">   (mindroc dot alin at gmail dot com)</span>
 
@@ -340,7 +341,7 @@ it can be built with G++ as follows:
 <code class="docutils literal notranslate"><span class="pre">g++</span> <span class="pre">-std=c++0x</span> <span class="pre">-o</span> <span class="pre">example</span> <span class="pre">example.cc</span> <span class="pre">-L&lt;library</span> <span class="pre">install</span> <span class="pre">path&gt;</span> <span class="pre">-I&lt;headers</span> <span class="pre">install</span> <span class="pre">path&gt;</span> <span class="pre">-lparseAPI</span> <span class="pre">-linstructionAPI</span> <span class="pre">-lsymtabAPI</span> <span class="pre">-lsymLite</span> <span class="pre">-ldynDwarf</span> <span class="pre">-ldynElf</span> <span class="pre">-lcommon</span> <span class="pre">-L&lt;libelf</span> <span class="pre">path&gt;</span> <span class="pre">-lelf</span> <span class="pre">-L&lt;libdwarf</span> <span class="pre">path&gt;</span> <span class="pre">-ldwarf</span></code>.
 Note: this example must be compiled with C++11x support; for G++ this is
 enabled with <code class="docutils literal notranslate"><span class="pre">-std=c++0x</span></code>, and it is on by default for Visual Studio.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example ParseAPI program; produces a graph (in DOT format) of the</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example ParseAPI program; produces a graph (in DOT format) of the</span>
 <span class="c1">// control flow graph of the provided binary.</span>
 <span class="c1">//</span>
 <span class="c1">// Improvements by E. Robbins (er209 at kent dot ac dot uk)</span>
@@ -443,28 +444,28 @@ enabled with <code class="docutils literal notranslate"><span class="pre">-std=c
 <h2>Loop analysis<a class="headerlink" href="#loop-analysis" title="Permalink to this headline"></a></h2>
 <p>The following code example shows how to get loop information using
 ParseAPI once we have an parsed Function object.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">GetLoopInFunc</span><span class="p">(</span><span class="n">Function</span> <span class="o">*</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="o">//</span> <span class="n">Get</span> <span class="nb">all</span> <span class="n">loops</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">function</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span> <span class="n">loops</span><span class="p">;</span>
-    <span class="n">f</span><span class="o">-&gt;</span><span class="n">getLoops</span><span class="p">(</span><span class="n">loops</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">GetLoopInFunc</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Get all loops in the function</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">loops</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">getLoops</span><span class="p">(</span><span class="n">loops</span><span class="p">);</span><span class="w"></span>
 
-    <span class="o">//</span> <span class="n">Iterate</span> <span class="n">over</span> <span class="nb">all</span> <span class="n">loops</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">lit</span> <span class="o">=</span> <span class="n">loops</span><span class="o">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">lit</span> <span class="o">!=</span> <span class="n">loops</span><span class="o">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">lit</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Loop</span> <span class="o">*</span><span class="n">loop</span> <span class="o">=</span> <span class="o">*</span><span class="n">lit</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Iterate over all loops</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">lit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loops</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">lit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">loops</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">lit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Loop</span><span class="w"> </span><span class="o">*</span><span class="n">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lit</span><span class="p">;</span><span class="w"></span>
 
-        <span class="o">//</span> <span class="n">Get</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">entry</span> <span class="n">blocks</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
-     <span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span> <span class="n">entries</span><span class="p">;</span>
-     <span class="n">loop</span><span class="o">-&gt;</span><span class="n">getLoopEntries</span><span class="p">(</span><span class="n">entries</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Get all the entry blocks of the loop</span>
+<span class="w">     </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">entries</span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">getLoopEntries</span><span class="p">(</span><span class="n">entries</span><span class="p">);</span><span class="w"></span>
 
-        <span class="o">//</span> <span class="n">Get</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">blocks</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">loop</span>
-        <span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span> <span class="n">blocks</span><span class="p">;</span>
-     <span class="n">loop</span><span class="o">-&gt;</span><span class="n">getLoopBasicBlocks</span><span class="p">(</span><span class="n">blocks</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Get all the blocks in the loop</span>
+<span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">blocks</span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">getLoopBasicBlocks</span><span class="p">(</span><span class="n">blocks</span><span class="p">);</span><span class="w"></span>
 
-     <span class="o">//</span> <span class="n">Get</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">back</span> <span class="n">edges</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">loop</span>
-     <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">*&gt;</span> <span class="n">backEdges</span><span class="p">;</span>
-     <span class="n">loop</span><span class="o">-&gt;</span><span class="n">getBackEdges</span><span class="p">(</span><span class="n">backEdges</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">     </span><span class="c1">// Get all the back edges in the loop</span>
+<span class="w">     </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">backEdges</span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="n">loop</span><span class="o">-&gt;</span><span class="n">getBackEdges</span><span class="p">(</span><span class="n">backEdges</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -479,12 +480,16 @@ an executable or library. It is the top-level container for parsing the
 object as well as accessing that parse data. The following API routines
 and data types are provided to support parsing and retrieving parsing
 products.</p>
-<p>typedef std::set&lt;Function *, Function::less&gt; funclist</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">::</span><span class="n">less</span><span class="o">&gt;</span><span class="w"> </span><span class="n">funclist</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Container for access to functions. Refer to Section
 <a class="reference external" href="#sec:containers">4.12</a> for details. Library users <em>must not</em> rely on
 the underlying container type of std::set, as it is subject to change.</p>
-<p>CodeObject(CodeSource * cs, CFGFactory * fact = NULL, ParseCallback *
-cb = NULL, bool defensiveMode = false)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CodeObject</span><span class="p">(</span><span class="n">CodeSource</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">CFGFactory</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">ParseCallback</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">defensiveMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Constructs a new CodeObject from the provided CodeSource and optional
 object factory and callback handlers. Any parsing hints provided by the
 CodeSource are processed, but the binary is not parsed when this
@@ -494,7 +499,9 @@ object. However, it must have the same lifetime as the CodeObject.</p>
 safety; this mode is not recommended for most applications as it makes
 very conservative assumptions about control flow transfer instructions
 (see Section <a class="reference external" href="#sec:defmode">6</a>).</p>
-<p>void parse()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">parse</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Recursively parses the binary represented by this CodeObject from all
 known function entry points (i.e., the hints provided by the
 CodeSource). This method and the following parsing methods may safely be
@@ -502,19 +509,25 @@ invoked repeatedly if new information about function locations is
 provided through the CodeSource. Note that these parsing methods do not
 automatically perform speculative gap parsing. parseGaps should be used
 for this purpose.</p>
-<p>void parse(Address target, bool recursive)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">recursive</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Parses the binary starting with the instruction at the provided target
 address. If <code class="docutils literal notranslate"><span class="pre">recursive</span></code> is true, recursive traversal parsing is used
 as in the default <code class="docutils literal notranslate"><span class="pre">parse()</span></code> method; otherwise only instructions
 reachable through intraprocedural control flow are visited.</p>
-<p>void parse(CodeRegion * cr, Address target, bool recursive)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">recursive</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Parses the specified core region of the binary starting with the
 instruction at the provided target address. If <code class="docutils literal notranslate"><span class="pre">recursive</span></code> is true,
 recursive traversal parsing is used as in the default <code class="docutils literal notranslate"><span class="pre">parse()</span></code>
 method; otherwise only instructions reachable through intraprocedural
 control flow are visited.</p>
-<p>struct NewEdgeToParse Block *source; Address target; EdgeTypeEnum type;
-bool parseNewEdges( vector&lt;NewEdgeToParse&gt; &amp; worklist )</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">NewEdgeToParse</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">source</span><span class="p">;</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"> </span><span class="n">EdgeTypeEnum</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">parseNewEdges</span><span class="p">(</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">NewEdgeToParse</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">worklist</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Parses a set of newly created edges specified in the worklist supplied
 that were not included when the function was originally parsed.</p>
 <p>ParseAPI is able to speculatively parse gaps (regions of binary that has
@@ -545,64 +558,102 @@ addresses are function entry points</td>
 </tbody>
 </table>
 </div>
-<p>void parseGaps(CodeRegion *cr, GapParsingType type=IdiomMatching)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">parseGaps</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">GapParsingType</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="n">IdiomMatching</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Speculatively parse the indicated region of the binary using the
 specified technique to find likely function entry points, enabled on the
 x86 and x86-64 platforms.</p>
-<p>Function * findFuncByEntry(CodeRegion * cr, Address entry)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">findFuncByEntry</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">entry</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Find the function starting at address <code class="docutils literal notranslate"><span class="pre">entry</span></code> in the indicated
 CodeRegion. Returns null if no such function exists.</p>
-<p>int findFuncs(CodeRegion * cr, Address addr, std::set&lt;Function*&gt; &amp;
-funcs)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">findFuncs</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">funcs</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Finds all functions spanning <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the code region, adding each to
 <code class="docutils literal notranslate"><span class="pre">funcs</span></code>. The number of results of this stabbing query are returned.</p>
-<p>int findFuncs(CodeRegion * cr, Address start, Address end,
-std::set&lt;Function*&gt; &amp; funcs)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">findFuncs</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">funcs</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Finds all functions overlapping the range <code class="docutils literal notranslate"><span class="pre">[start,end)</span></code> in the code
 region, adding each to <code class="docutils literal notranslate"><span class="pre">funcs</span></code>. The number of results of this stabbing
 query are returned.</p>
-<p>const funclist &amp; funcs()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">funclist</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">funcs</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a const reference to a container of all functions in the binary.
 Refer to Section <a class="reference external" href="#sec:containers">4.12</a> for container access
 details.</p>
-<p>Block * findBlockByEntry(CodeRegion * cr, Address entry)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">findBlockByEntry</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">entry</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Find the basic block starting at address <code class="docutils literal notranslate"><span class="pre">entry</span></code>. Returns null if no
 such block exists.</p>
-<p>int findBlocks(CodeRegion * cr, Address addr, std::set&lt;Block*&gt; &amp;
-blocks)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">findBlocks</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">blocks</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Finds all blocks spanning <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the code region, adding each to
 <code class="docutils literal notranslate"><span class="pre">blocks</span></code>. Multiple blocks can be returned only on platforms with
 variable-length instruction sets (such as IA32) for which overlapping
 instructions are possible; at most one block will be returned on all
 other platforms.</p>
-<p>Block * findNextBlock(CodeRegion * cr, Address addr)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">findNextBlock</span><span class="p">(</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Find the next reachable basic block starting at address <code class="docutils literal notranslate"><span class="pre">entry</span></code>.
 Returns null if no such block exists.</p>
-<p>CodeSource * cs()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CodeSource</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cs</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return a reference to the underlying CodeSource.</p>
-<p>CFGFactory * fact()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CFGFactory</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fact</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return a reference to the CFG object factory.</p>
-<p>bool defensiveMode()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">defensiveMode</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return a boolean specifying whether or not defensive mode is enabled.</p>
-<p>bool isIATcall(Address insn, std::string &amp;calleeName)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">isIATcall</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">insn</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">calleeName</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a boolean specifying if the address at <code class="docutils literal notranslate"><span class="pre">addr</span></code> is located at
 the call named in <code class="docutils literal notranslate"><span class="pre">calleeName</span></code>.</p>
-<p>void startCallbackBatch()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">startCallbackBatch</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Starts a batch of callbacks that have been registered.</p>
-<p>void finishCallbackBatch()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">finishCallbackBatch</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Completes all callbacks in the current batch.</p>
-<p>void registerCallback(ParseCallback *cb);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">registerCallback</span><span class="p">(</span><span class="n">ParseCallback</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Register a callback <code class="docutils literal notranslate"><span class="pre">cb</span></code></p>
-<p>void unregisterCallback(ParseCallback *cb);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">unregisterCallback</span><span class="p">(</span><span class="n">ParseCallback</span><span class="w"> </span><span class="o">*</span><span class="n">cb</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Unregister an existing callback <code class="docutils literal notranslate"><span class="pre">cb</span></code></p>
-<p>void finalize()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">finalize</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Force complete parsing of the CodeObject; parsing operations are
 otherwise completed only as needed to answer queries.</p>
-<p>void destroy(Edge *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">destroy</span><span class="p">(</span><span class="n">Edge</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Destroy the edge listed.</p>
-<p>void destroy(Block *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">destroy</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Destroy the code block listed.</p>
-<p>void destroy(Function *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">destroy</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Destroy the function listed.</p>
 </div>
 <div class="section" id="class-coderegion">
@@ -611,23 +662,35 @@ otherwise completed only as needed to answer queries.</p>
 <p>The CodeRegion interface is an accounting structure used to divide
 CodeSources into distinct regions. This interface is mostly of interest
 to CodeSource implementors.</p>
-<p>void names(Address addr, vector&lt;std::string&gt; &amp; names)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills the provided vector with any names associated with the function at
 a given address in the region, e.g. symbol names in an ELF or PE binary.</p>
-<p>virtual bool findCatchBlock(Address addr, Address &amp; catchStart)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">findCatchBlock</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">catchStart</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Finds the exception handler associated with an address, if one exists.
 This routine is only implemented for binary code sources that support
 structured exception handling, such as the SymtabAPI-based
 SymtabCodeSource provided as part of the ParseAPI.</p>
-<p>Address low()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="w"> </span><span class="n">low</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The lower bound of the interval of address space covered by this region.</p>
-<p>Address high()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="w"> </span><span class="n">high</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The upper bound of the interval of address space covered by this region.</p>
-<p>bool contains(Address addr)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns true if
 <span class="math notranslate nohighlight">\(\small \texttt{addr} \in [\small \texttt{low()},\small \texttt{high()})\)</span>,
 false otherwise.</p>
-<p>virtual bool wasUserAdded() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">wasUserAdded</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return true if this region was added by the user, false otherwise.</p>
 </div>
 <div class="section" id="class-function">
@@ -711,174 +774,83 @@ std::set&lt;Edge*&gt; edgelist</p>
 <p>Containers for block and edge access. Library users <em>must not</em> rely on
 the underlying container type of std::set/std::vector lists, as it is
 subject to change.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="30%" />
-<col width="34%" />
-<col width="36%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method name</th>
-<th class="head">Return type</th>
-<th class="head">Method description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>name</td>
-<td>string</td>
-<td>Name of the function.</td>
-</tr>
-<tr class="row-odd"><td>addr</td>
-<td>Address</td>
-<td>Entry address of the
-function.</td>
-</tr>
-<tr class="row-even"><td>entry</td>
-<td>Block *</td>
-<td>Entry block of the
-function.</td>
-</tr>
-<tr class="row-odd"><td>parsed</td>
-<td>bool</td>
-<td>Whether the function
-has been parsed.</td>
-</tr>
-<tr class="row-even"><td>blocks</td>
-<td>blocklist &amp;</td>
-<td>List of blocks
-contained by this
-function sorted by
-entry address.</td>
-</tr>
-<tr class="row-odd"><td>callEdges</td>
-<td>const edgelist &amp;</td>
-<td>List of outgoing call
-edges from this
-function.</td>
-</tr>
-<tr class="row-even"><td>returnBlocks</td>
-<td>const_blocklist &amp;</td>
-<td>List of all blocks
-ending in return
-edges.</td>
-</tr>
-<tr class="row-odd"><td>exitBlocks</td>
-<td>const_blocklist &amp;</td>
-<td>List of all blocks
-that end the
-function, including
-blocks with no
-out-edges.</td>
-</tr>
-<tr class="row-even"><td>hasNoStackFrame</td>
-<td>bool</td>
-<td>True if the function
-does not create a
-stack frame.</td>
-</tr>
-<tr class="row-odd"><td>savesFramePointer</td>
-<td>bool</td>
-<td>True if the function
-saves a frame pointer
-(e.g. %ebp).</td>
-</tr>
-<tr class="row-even"><td>cleansOwnStack</td>
-<td>bool</td>
-<td>True if the function
-tears down
-stack-passed
-arguments upon
-return.</td>
-</tr>
-<tr class="row-odd"><td>region</td>
-<td>CodeRegion *</td>
-<td>Code region that
-contains the
-function.</td>
-</tr>
-<tr class="row-even"><td>isrc</td>
-<td>InstructionSource *</td>
-<td>The InstructionSource
-for this function.</td>
-</tr>
-<tr class="row-odd"><td>obj</td>
-<td>CodeObject *</td>
-<td>CodeObject that
-contains this
-function.</td>
-</tr>
-<tr class="row-even"><td>src</td>
-<td>FuncSrc</td>
-<td>The type of hint that
-identified this
-function’s entry
-point.</td>
-</tr>
-<tr class="row-odd"><td>restatus</td>
-<td>FuncReturnStatus *</td>
-<td>Returns the
-best-effort
-determination of
-whether this function
-may return or not.
-Return status cannot
-always be statically
-determined, and at
-most can guarantee
-that a function <em>may</em>
-return, not that it
-<em>will</em> return.</td>
-</tr>
-<tr class="row-even"><td>getReturnType</td>
-<td>Type *</td>
-<td>Type representing the
-return type of the
-function.</td>
-</tr>
-</tbody>
-</table>
-<p>Function(Address addr, string name, CodeObject * obj, CodeRegion *
-region, InstructionSource * isource)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">InstructionSource</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">isource</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Creates a function at <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the code region specified. Insructions
 for this function are given in <code class="docutils literal notranslate"><span class="pre">isource</span></code>.</p>
-<p>LoopTreeNode* getLoopTree()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">LoopTreeNode</span><span class="o">*</span><span class="w"> </span><span class="n">getLoopTree</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the nesting tree of the loops in the function. See class
 <code class="docutils literal notranslate"><span class="pre">LoopTreeNode</span></code> for more details</p>
-<p>Loop* findLoop(const char *name)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Loop</span><span class="o">*</span><span class="w"> </span><span class="n">findLoop</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the loop with the given nesting name. See class <code class="docutils literal notranslate"><span class="pre">LoopTreeNode</span></code>
 for more details about how loop nesting names are assigned.</p>
-<p>bool getLoops(vector&lt;Loop*&gt; &amp;loops);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">getLoops</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">loops</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">loops</span></code> with all the loops in the function</p>
-<p>bool getOuterLoops(vector&lt;Loop*&gt; &amp;loops);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">getOuterLoops</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">loops</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">loops</span></code> with all the outermost loops in the function</p>
-<p>bool dominates(Block* A, Block *B);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">dominates</span><span class="p">(</span><span class="n">Block</span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return true if block <code class="docutils literal notranslate"><span class="pre">A</span></code> dominates block <code class="docutils literal notranslate"><span class="pre">B</span></code></p>
-<p>Block* getImmediateDominator(Block *A);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="o">*</span><span class="w"> </span><span class="nf">getImmediateDominator</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the immediate dominator of block <code class="docutils literal notranslate"><span class="pre">A</span></code>，<code class="docutils literal notranslate"><span class="pre">NULL</span></code> if the block
 <code class="docutils literal notranslate"><span class="pre">A</span></code> does not have an immediate dominator.</p>
-<p>void getImmediateDominates(Block *A, set&lt;Block*&gt; &amp;imm);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">getImmediateDominates</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">imm</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">imm</span></code> with all the blocks immediate dominated by block <code class="docutils literal notranslate"><span class="pre">A</span></code></p>
-<p>void getAllDominates(Block *A, set&lt;Block*&gt; &amp;dom);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">getAllDominates</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dom</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">dom</span></code> with all the blocks dominated by block <code class="docutils literal notranslate"><span class="pre">A</span></code></p>
-<p>bool postDominates(Block* A, Block *B);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">postDominates</span><span class="p">(</span><span class="n">Block</span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return true if block <code class="docutils literal notranslate"><span class="pre">A</span></code> post-dominates block <code class="docutils literal notranslate"><span class="pre">B</span></code></p>
-<p>Block* getImmediatePostDominator(Block *A);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="o">*</span><span class="w"> </span><span class="nf">getImmediatePostDominator</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the immediate post-dominator of block <code class="docutils literal notranslate"><span class="pre">A</span></code>，<code class="docutils literal notranslate"><span class="pre">NULL</span></code> if the
 block <code class="docutils literal notranslate"><span class="pre">A</span></code> does not have an immediate post-dominator.</p>
-<p>void getImmediatePostDominates(Block *A, set&lt;Block*&gt; &amp;imm);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">getImmediatePostDominates</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">imm</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">imm</span></code> with all the blocks immediate post-dominated by block <code class="docutils literal notranslate"><span class="pre">A</span></code></p>
-<p>void getAllPostDominates(Block *A, set&lt;Block*&gt; &amp;dom);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">getAllPostDominates</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dom</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill <code class="docutils literal notranslate"><span class="pre">dom</span></code> with all the blocks post-dominated by block <code class="docutils literal notranslate"><span class="pre">A</span></code></p>
-<p>std::vector&lt;FuncExtent *&gt; const&amp; extents()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FuncExtent</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">extents</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a list of contiguous extents of binary code within the function.</p>
-<p>void setEntryBlock(block * new_entry)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setEntryBlock</span><span class="p">(</span><span class="n">block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">new_entry</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Set the entry block for this function to <code class="docutils literal notranslate"><span class="pre">new_entry</span></code>.</p>
-<p>void set_retstatus(FuncReturnStatus rs)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">set_retstatus</span><span class="p">(</span><span class="n">FuncReturnStatus</span><span class="w"> </span><span class="n">rs</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Set the return status for the function to <code class="docutils literal notranslate"><span class="pre">rs</span></code>.</p>
-<p>bool contains(Block *b)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return true if this function contains the given block <code class="docutils literal notranslate"><span class="pre">b</span></code>; otherwise
 false.</p>
-<p>void removeBlock(Block *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">removeBlock</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Remove a basic block from the function.</p>
 </div>
 <div class="section" id="class-block">
@@ -887,113 +859,56 @@ false.</p>
 <p>A Block represents a basic block as defined in Section
 <a class="reference external" href="#sec:abstractions">2</a>, and is the lowest level representation of
 code in the CFG.</p>
-<p>typedef std::vector&lt;Edge *&gt; edgelist</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">edgelist</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Container for edge access. Refer to Section <a class="reference external" href="#sec:containers">4.12</a>
 for details. Library users <em>must not</em> rely on the underlying container
 type of std::vector, as it is subject to change.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="26%" />
-<col width="27%" />
-<col width="47%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method name</th>
-<th class="head">Return type</th>
-<th class="head">Method description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>start</td>
-<td>Address</td>
-<td>Address of the first
-instruction in the block.</td>
-</tr>
-<tr class="row-odd"><td>end</td>
-<td>Address</td>
-<td>Address immediately following
-the last instruction in the
-block.</td>
-</tr>
-<tr class="row-even"><td>last</td>
-<td>Address</td>
-<td>Address of the last
-instruction in the block.</td>
-</tr>
-<tr class="row-odd"><td>lastInsnAddr</td>
-<td>Address</td>
-<td>Alias of <code class="docutils literal notranslate"><span class="pre">last</span></code>.</td>
-</tr>
-<tr class="row-even"><td>size</td>
-<td>Address</td>
-<td>Size of the block; <code class="docutils literal notranslate"><span class="pre">end</span></code> -
-<code class="docutils literal notranslate"><span class="pre">start</span></code>.</td>
-</tr>
-<tr class="row-odd"><td>parsed</td>
-<td>bool</td>
-<td>Whether the block has been
-parsed.</td>
-</tr>
-<tr class="row-even"><td>obj</td>
-<td>CodeObject *</td>
-<td>CodeObject containing this
-block.</td>
-</tr>
-<tr class="row-odd"><td>region</td>
-<td>CodeRegion *</td>
-<td>CodeRegion containing this
-block.</td>
-</tr>
-<tr class="row-even"><td>sources</td>
-<td>const edgelist &amp;</td>
-<td>List of all in-edges to the
-block.</td>
-</tr>
-<tr class="row-odd"><td>targets</td>
-<td>const edgelist &amp;</td>
-<td>List of all out-edges from
-the block.</td>
-</tr>
-<tr class="row-even"><td>containingFuncs</td>
-<td>int</td>
-<td>Number of Functions that
-contain this block.</td>
-</tr>
-</tbody>
-</table>
-<p>Block(CodeObject * o, CodeRegion * r, Address start, Function* f =
-NULL)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="p">(</span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Creates a block at <code class="docutils literal notranslate"><span class="pre">start</span></code> in the code region and code object
 specified. Optionally, one can specify the function that will parse the
 block. This constructor is used by the ParseAPI parser, which will
 update its end address during parsing.</p>
-<p>Block(CodeObject * o, CodeRegion * r, Address start, Address end,
-Address last, Function* f = NULL)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Block</span><span class="p">(</span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">last</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Creates a block at <code class="docutils literal notranslate"><span class="pre">start</span></code> in the code region and code object
 specified. The block has its last instruction at address <code class="docutils literal notranslate"><span class="pre">last</span></code> and
 ends at address <code class="docutils literal notranslate"><span class="pre">end</span></code>. This constructor allows external parsers to
 construct their own blocks.</p>
-<p>bool consistent(Address addr, Address &amp; prev_insn)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">consistent</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">prev_insn</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Check whether address <code class="docutils literal notranslate"><span class="pre">addr</span></code> is <em>consistent</em> with this basic block. An
 address is consistent if it is the boundary between two instructions in
 the block. As long as <code class="docutils literal notranslate"><span class="pre">addr</span></code> is within the range of the block,
 <code class="docutils literal notranslate"><span class="pre">prev_insn</span></code> will contain the address of the previous instruction
 boundary before <code class="docutils literal notranslate"><span class="pre">addr</span></code>, regardless of whether <code class="docutils literal notranslate"><span class="pre">addr</span></code> is consistent
 or not.</p>
-<p>void getFuncs(std::vector&lt;Function *&gt; &amp; funcs)</p>
-<p>Fills in the provided vector with all functions that share this basic
-block.</p>
-<p>template &lt;class OutputIterator&gt; void getFuncs(OutputIterator result)</p>
-<p>Generic version of the above; adds each Function that contains this
-block to the provided OutputIterator. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="nb">set</span><span class="o">&lt;</span><span class="n">Function</span> <span class="o">*&gt;</span> <span class="n">funcs</span><span class="p">;</span>
-<span class="n">block</span><span class="o">-&gt;</span><span class="n">getFuncs</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">inserter</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">funcs</span><span class="o">.</span><span class="n">begin</span><span class="p">()));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">getFuncs</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Function</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">funcs</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>typedef std::map&lt;Offset, InstructionAPI::Instruction::Ptr&gt; Insns void
-getInsns(Insns &amp;insns) const</p>
+<p>Fills in the provided vector with all functions that share this basic
+block.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">OutputIterator</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">getFuncs</span><span class="p">(</span><span class="n">OutputIterator</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Generic version of the above; adds each Function that contains this
+block to the provided OutputIterator. For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Function</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">funcs</span><span class="p">;</span><span class="w"></span>
+<span class="n">block</span><span class="o">-&gt;</span><span class="n">getFuncs</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">inserter</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span><span class="w"> </span><span class="n">funcs</span><span class="p">.</span><span class="n">begin</span><span class="p">()));</span><span class="w"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">Offset</span><span class="p">,</span><span class="w"> </span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Instruction</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Insns</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="n">getInsns</span><span class="p">(</span><span class="n">Insns</span><span class="w"> </span><span class="o">&amp;</span><span class="n">insns</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Disassembles the block and stores the result in <code class="docutils literal notranslate"><span class="pre">Insns</span></code>.</p>
-<p>InstructionAPI::Instruction::Ptr getInsn(Offset o) const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">InstructionAPI</span><span class="o">::</span><span class="n">Instruction</span><span class="o">::</span><span class="n">Ptr</span><span class="w"> </span><span class="n">getInsn</span><span class="p">(</span><span class="n">Offset</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the instruction starting at offset <code class="docutils literal notranslate"><span class="pre">o</span></code> within the block.
 Returns <code class="docutils literal notranslate"><span class="pre">InstructionAPI::Instruction::Ptr()</span></code> if <code class="docutils literal notranslate"><span class="pre">o</span></code> is outside the
 block, or if an instruction does not begin at <code class="docutils literal notranslate"><span class="pre">o</span></code>.</p>
@@ -1052,44 +967,6 @@ in the case of unresolvable control flow, the edge will target a special
 </tbody>
 </table>
 </div>
-<table border="1" class="docutils">
-<colgroup>
-<col width="20%" />
-<col width="21%" />
-<col width="59%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method name</th>
-<th class="head">Return type</th>
-<th class="head">Method description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>src</td>
-<td>Block *</td>
-<td>Source of the edge.</td>
-</tr>
-<tr class="row-odd"><td>trg</td>
-<td>Block *</td>
-<td>Target of the edge.</td>
-</tr>
-<tr class="row-even"><td>type</td>
-<td>EdgeTypeEnum</td>
-<td>Type of the edge.</td>
-</tr>
-<tr class="row-odd"><td>sinkEdge</td>
-<td>bool</td>
-<td>True if the target is the sink block.</td>
-</tr>
-<tr class="row-even"><td>interproc</td>
-<td>bool</td>
-<td>True if the edge should be
-interpreted as interprocedural (e.g.
-calls, returns, unconditional or
-conditional tail calls).</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="class-loop">
 <h2>Class Loop<a class="headerlink" href="#class-loop" title="Permalink to this headline"></a></h2>
@@ -1102,38 +979,64 @@ being an entry block of the loop. It represents the end of an iteration
 of the loop. For all the loops detected in a function, we also build a
 loop nesting tree to represent the nesting relations between the loops.
 See class <code class="docutils literal notranslate"><span class="pre">LoopTreeNode</span></code> for more details.</p>
-<p>Loop* parent</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Loop</span><span class="o">*</span><span class="w"> </span><span class="n">parent</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the loop which directly encloses this loop. NULL if no such
 loop.</p>
-<p>bool containsAddress(Address addr)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">containsAddress</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns true if the given address is within the range of this loop’s
 basic blocks.</p>
-<p>bool containsAddressInclusive(Address addr)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">containsAddressInclusive</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns true if the given address is within the range of this loop’s
 basic blocks or its children.</p>
-<p>int getLoopEntries(vector&lt;Block*&gt;&amp; entries);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">getLoopEntries</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;&amp;</span><span class="w"> </span><span class="n">entries</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills <code class="docutils literal notranslate"><span class="pre">entries</span></code> with the set of entry basic blocks of the loop. Return
 the number of the entries that this loop has</p>
-<p>int getBackEdges(vector&lt;Edge*&gt; &amp;edges)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">getBackEdges</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">edges</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Sets <code class="docutils literal notranslate"><span class="pre">edges</span></code> to the set of back edges in this loop. It returns the
 number of back edges that are in this loop.</p>
-<p>bool getContainedLoops(vector&lt;Loop*&gt; &amp;loops)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getContainedLoops</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">loops</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a vector of loops that are nested under this loop.</p>
-<p>bool getOuterLoops(vector&lt;Loop*&gt; &amp;loops)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getOuterLoops</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Loop</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">loops</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a vector of loops that are directly nested under this loop.</p>
-<p>bool getLoopBasicBlocks(vector&lt;Block*&gt; &amp;blocks)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getLoopBasicBlocks</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">blocks</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills <code class="docutils literal notranslate"><span class="pre">blocks</span></code> with all basic blocks in the loop</p>
-<p>bool getLoopBasicBlocksExclusive(vector&lt;Block*&gt; &amp;blocks)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getLoopBasicBlocksExclusive</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">blocks</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills <code class="docutils literal notranslate"><span class="pre">blocks</span></code> with all basic blocks in this loop, excluding the
 blocks of its sub loops.</p>
-<p>bool hasBlock(Block *b);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">hasBlock</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this loop contains basic block <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
-<p>bool hasBlockExclusive(Block *b);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">hasBlockExclusive</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if this loop contains basic block <code class="docutils literal notranslate"><span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> is
 not in its sub loops.</p>
-<p>bool hasAncestor(Loop *loop)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">hasAncestor</span><span class="p">(</span><span class="n">Loop</span><span class="w"> </span><span class="o">*</span><span class="n">loop</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns true if this loop is a descendant of the given loop.</p>
-<p>Function * getFunction();</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">getFunction</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the function that this loop is in.</p>
 </div>
 <div class="section" id="class-looptreenode">
@@ -1156,18 +1059,18 @@ where n is the number of outer loops in the function. Each sub-loop has
 the name of its parent, followed by a <code class="docutils literal notranslate"><span class="pre">.y</span></code>, where <code class="docutils literal notranslate"><span class="pre">y</span></code> is 1 to m,
 where m is the number of sub-loops under the outer loop. For example,
 consider the following C function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
-      <span class="o">...</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">z</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">z</span><span class="o">++</span><span class="p">)</span>
-      <span class="o">...</span>
-  <span class="p">}</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-     <span class="o">...</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">foo</span></code> function will have a root LoopTreeNode, containing a NULL
@@ -1177,19 +1080,33 @@ outermost loops. These children would have names <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">loop_2</span></code> has no children. <code class="docutils literal notranslate"><span class="pre">loop_1</span></code> has two child LoopTreeNode
 objects, named <code class="docutils literal notranslate"><span class="pre">loop_1.1</span></code> and <code class="docutils literal notranslate"><span class="pre">loop_1.2</span></code>, respectively representing
 the <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> loops.</p>
-<p>Loop *loop;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Loop</span><span class="w"> </span><span class="o">*</span><span class="n">loop</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The Loop instance it points to.</p>
-<p>std::vector&lt;LoopTreeNode *&gt; children;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">LoopTreeNode</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">children</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The LoopTreeNode instances nested within this loop.</p>
-<p>const char * name();</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">name</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the hierarchical name of this loop.</p>
-<p>const char * getCalleeName(unsigned int i)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">getCalleeName</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the function name of the ith callee.</p>
-<p>unsigned int numCallees()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numCallees</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the number of callees contained in this loop’s body.</p>
-<p>bool getCallees(vector&lt;Function *&gt; &amp;v);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">getCallees</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Function</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills <code class="docutils literal notranslate"><span class="pre">v</span></code> with a vector of the functions called inside this loop.</p>
-<p>Loop * findLoop(const char *name);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Loop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">findLoop</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Looks up a loop by the hierarchical name</p>
 </div>
 <div class="section" id="class-codesource">
@@ -1202,33 +1119,49 @@ debugging symbols) to seed the parser. The ParseAPI provides a default
 implementation based on the SymtabAPI that supports many common binary
 formats. For details on implementing a custom CodeSource, see Appendix
 <a class="reference external" href="#sec:extend">5</a>.</p>
-<p>virtual bool nonReturning(Address func_entry) virtual bool
-nonReturning(std::string func_name)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">nonReturning</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">func_entry</span><span class="p">)</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"></span>
+<span class="n">nonReturning</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">func_name</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Looks up whether a function returns (by name or location). This
 information may be statically known for some code sources, and can lead
 to better parsing accuracy.</p>
-<p>virtual bool nonReturningSyscall(int /<em>number</em>/)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">nonReturningSyscall</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="cm">/*number*/</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Looks up whether a system call returns (by system call number). This
 information may be statically known for some code sources, and can lead
 to better parsing accuracy.</p>
-<p>virtual Address baseAddress() virtual Address loadAddress()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">baseAddress</span><span class="p">()</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">loadAddress</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>If the binary file type supplies non-zero base or load addresses (e.g.
 Windows PE), implementations should override these functions.</p>
-<p>std::map&lt; Address, std::string &gt; &amp; linkage()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="w"> </span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">linkage</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a reference to the external linkage map, which may or may not be
 filled in for a particular CodeSource implementation.</p>
-<p>struct Hint Address _addr; CodeRegion *_region; std::string _name;
-Hint(Addr, CodeRegion *, std::string); std::vector&lt; Hint &gt; const&amp;
-hints()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Hint</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">_addr</span><span class="p">;</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="n">_region</span><span class="p">;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">_name</span><span class="p">;</span><span class="w"></span>
+<span class="n">Hint</span><span class="p">(</span><span class="n">Addr</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">);</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">Hint</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"></span>
+<span class="n">hints</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a vector of the currently defined function entry hints.</p>
-<p>std::vector&lt;CodeRegion *&gt; const&amp; regions()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">regions</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a read-only vector of code regions within the binary represented
 by this code source.</p>
-<p>int findRegions(Address addr, set&lt;CodeRegion *&gt; &amp; ret)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">findRegions</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="o">&lt;</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Finds all CodeRegion objects that overlap the provided address. Some
 code sources (e.g. archive files) may have several regions with
 overlapping address ranges; others (e.g. ELF binaries) do not.</p>
-<p>bool regionsOverlap()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">regionsOverlap</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Indicates whether the CodeSource contains overlapping regions.</p>
 </div>
 <div class="section" id="class-parsecallback">
@@ -1241,22 +1174,30 @@ CodeObject during initialization. Users who wish to be notified must
 implement a class that inherits from ParseCallback, and implement one or
 more of the methods described below to receive notification of those
 events.</p>
-<p>struct default_details default_details(unsigned char * b,size_t s, bool
-ib); unsigned char * ibuf; size_t isize; bool isbranch;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">default_details</span><span class="w"> </span><span class="n">default_details</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="kt">size_t</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">ib</span><span class="p">);</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ibuf</span><span class="p">;</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">isize</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isbranch</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Details used in the <code class="docutils literal notranslate"><span class="pre">unresolved_cf</span></code> and <code class="docutils literal notranslate"><span class="pre">abruptEnd_cf</span></code> callbacks.</p>
-<p>virtual void instruction_cb(Function *, Block *, Address, insn_details
-*)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">instruction_cb</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">insn_details</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Invoked for each instruction decoded during parsing. Implementing this
 callback may incur significant overhead.</p>
-<p>struct insn_details InsnAdapter::InstructionAdapter * insn;</p>
-<p>void interproc_cf(Function *, Address, interproc_details *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">insn_details</span><span class="w"> </span><span class="n">InsnAdapter</span><span class="o">::</span><span class="n">InstructionAdapter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">insn</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">interproc_cf</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">interproc_details</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Invoked for each interprocedural control flow instruction.</p>
-<p>struct interproc_details typedef enum ret, call, branch_interproc, //
-tail calls, branches to plts syscall type_t; unsigned char * ibuf;
-size_t isize; type_t type; union struct Address target; bool
-absolute_address; bool dynamic_call; call; data;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">interproc_details</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">ret</span><span class="p">,</span><span class="w"> </span><span class="n">call</span><span class="p">,</span><span class="w"> </span><span class="n">branch_interproc</span><span class="p">,</span><span class="w"> </span><span class="c1">//</span>
+<span class="n">tail</span><span class="w"> </span><span class="n">calls</span><span class="p">,</span><span class="w"> </span><span class="n">branches</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">plts</span><span class="w"> </span><span class="n">syscall</span><span class="w"> </span><span class="n">type_t</span><span class="p">;</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ibuf</span><span class="p">;</span><span class="w"></span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">isize</span><span class="p">;</span><span class="w"> </span><span class="n">type_t</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="nc">struct</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">target</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"></span>
+<span class="n">absolute_address</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">dynamic_call</span><span class="p">;</span><span class="w"> </span><span class="n">call</span><span class="p">;</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Details used in the <code class="docutils literal notranslate"><span class="pre">interproc_cf</span></code> callback.</p>
-<p>void overlapping_blocks(Block *, Block *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">overlapping_blocks</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Noification of inconsistent parse data (overlapping blocks).</p>
 </div>
 <div class="section" id="class-funcextent">
@@ -1267,33 +1208,6 @@ They may be useful for users who wish to precisely identify the ranges
 of the address space spanned by functions (functions are often
 discontiguous, particularly on architectures with variable length
 instruction sets).</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="21%" />
-<col width="21%" />
-<col width="58%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method name</th>
-<th class="head">Return type</th>
-<th class="head">Method description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>func</td>
-<td>Function *</td>
-<td>Function linked to this extent.</td>
-</tr>
-<tr class="row-odd"><td>start</td>
-<td>Address</td>
-<td>Start of the extent.</td>
-</tr>
-<tr class="row-even"><td>end</td>
-<td>Address</td>
-<td>End of the extent (exclusive).</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="edge-predicates">
 <span id="sec-pred"></span><h2>Edge Predicates<a class="headerlink" href="#edge-predicates" title="Permalink to this headline"></a></h2>
@@ -1306,39 +1220,39 @@ provided: <code class="docutils literal notranslate"><span class="pre">SingleCon
 function context, and <code class="docutils literal notranslate"><span class="pre">NoSinkPredicate</span></code> does not visit edges to the
 <em>sink</em> block. The following code traverses all of the basic blocks
 within a function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#include &lt;boost/filter_iterator.hpp&gt;
-using boost::make_filter_iterator;
-struct target_block
-{
-  Block* operator()(Edge* e) { return e-&gt;trg(); }
-};
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;boost/filter_iterator.hpp&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">make_filter_iterator</span><span class="p">;</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">target_block</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Block</span><span class="o">*</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">Edge</span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">trg</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
 
-vector&lt;Block*&gt; work;
-Intraproc epred; // ignore calls, returns
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">work</span><span class="p">;</span><span class="w"></span>
+<span class="n">Intraproc</span><span class="w"> </span><span class="n">epred</span><span class="p">;</span><span class="w"> </span><span class="c1">// ignore calls, returns</span>
 
-work.push_back(func-&gt;entry()); // assuming `func&#39; is a Function*
+<span class="n">work</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">func</span><span class="o">-&gt;</span><span class="n">entry</span><span class="p">());</span><span class="w"> </span><span class="c1">// assuming `func&#39; is a Function*</span>
 
-// do_stuff is a functor taking a Block* as its argument
-while(!work.empty()) {
-    Block * b = work.back();
-    work.pop_back();
+<span class="c1">// do_stuff is a functor taking a Block* as its argument</span>
+<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">work</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">back</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">work</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="w"></span>
 
-    Block::edgelist &amp; targets = block-&gt;targets();
-    // Do stuff for each out edge
-    std::for_each(make_filter_iterator(targets.begin(), epred),
-                  make_filter_iterator(targets.end(), epred),
-                  do_stuff());
-    std::transform(make_filter_iterator(targets.begin(), epred),
-                   make_filter_iterator(targets.end(), epred),
-                   std::back_inserter(work),
-                   std::mem_fun(Edge::trg));
-    Block::edgelist::const_iterator found_interproc =
-            std::find_if(targets.begin(), targets.end(), Interproc());
-    if(interproc != targets.end()) {
-            // do something with the interprocedural edge you found
-    }
-}
+<span class="w">    </span><span class="n">Block</span><span class="o">::</span><span class="n">edgelist</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">block</span><span class="o">-&gt;</span><span class="n">targets</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Do stuff for each out edge</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">for_each</span><span class="p">(</span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">epred</span><span class="p">),</span><span class="w"></span>
+<span class="w">                  </span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">epred</span><span class="p">),</span><span class="w"></span>
+<span class="w">                  </span><span class="n">do_stuff</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">epred</span><span class="p">),</span><span class="w"></span>
+<span class="w">                   </span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">epred</span><span class="p">),</span><span class="w"></span>
+<span class="w">                   </span><span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">work</span><span class="p">),</span><span class="w"></span>
+<span class="w">                   </span><span class="n">std</span><span class="o">::</span><span class="n">mem_fun</span><span class="p">(</span><span class="n">Edge</span><span class="o">::</span><span class="n">trg</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">Block</span><span class="o">::</span><span class="n">edgelist</span><span class="o">::</span><span class="n">const_iterator</span><span class="w"> </span><span class="n">found_interproc</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Interproc</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">interproc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// do something with the interprocedural edge you found</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Anything that can be treated as a function from <code class="docutils literal notranslate"><span class="pre">Edge*</span></code> to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>
@@ -1346,24 +1260,24 @@ can be used in this manner. This replaces the beta interface where all
 <code class="docutils literal notranslate"><span class="pre">EdgePredicate</span></code>s needed to descend from a common parent class. Code
 that previously constructed iterators from an edge predicate should be
 replaced with equivalent code using filter iterators as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">OLD</span>
-<span class="k">for</span><span class="p">(</span><span class="n">Block</span><span class="p">::</span><span class="n">edgelist</span><span class="p">::</span><span class="n">iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">targets</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="n">epred</span><span class="p">);</span>
-    <span class="n">i</span> <span class="o">!=</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">epred</span><span class="p">);</span>
-    <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="o">//</span> <span class="o">...</span>
-<span class="p">}</span>
-<span class="o">//</span> <span class="n">NEW</span>
-<span class="n">for_each</span><span class="p">(</span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">()),</span>
-         <span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">targets</span><span class="p">,</span><span class="n">end</span><span class="p">()),</span>
-         <span class="n">loop_body_as_function</span><span class="p">);</span>
-<span class="o">//</span> <span class="n">NEW</span> <span class="p">(</span><span class="n">C</span><span class="o">++</span><span class="mi">11</span><span class="p">)</span>
-<span class="k">for</span><span class="p">(</span><span class="n">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">());</span>
-    <span class="n">i</span> <span class="o">!=</span> <span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">targets</span><span class="o">.</span><span class="n">end</span><span class="p">());</span>
-    <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="o">//</span> <span class="o">...</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// OLD</span>
+<span class="k">for</span><span class="p">(</span><span class="n">Block</span><span class="o">::</span><span class="n">edgelist</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">epred</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="n">epred</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+<span class="c1">// NEW</span>
+<span class="n">for_each</span><span class="p">(</span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">()),</span><span class="w"></span>
+<span class="w">         </span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">targets</span><span class="p">,</span><span class="n">end</span><span class="p">()),</span><span class="w"></span>
+<span class="w">         </span><span class="n">loop_body_as_function</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// NEW (C++11)</span>
+<span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">make_filter_iterator</span><span class="p">(</span><span class="n">epred</span><span class="p">,</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">targets</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1383,17 +1297,25 @@ this manual.</p>
 <p>ContainerWrapper containers export the following interface (<code class="docutils literal notranslate"><span class="pre">iterator</span></code>
 types vary depending on the template parameters of the ContainerWrapper,
 but are always instantiations of the PredicateIterator described below):</p>
-<p>iterator begin() iterator begin(predicate *)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="n">begin</span><span class="p">(</span><span class="n">predicate</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return an iterator pointing to the beginning of the container, with or
 without a filtering predicate implementation (see Section
 <a class="reference external" href="#sec:pred">4.11</a> for details on filter predicates).</p>
-<p>iterator const&amp; end()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the iterator pointing to the end of the container (past the last
 element).</p>
-<p>size_t size()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the number of elements in the container. Execution cost may vary
 depending on the underlying container type.</p>
-<p>bool empty()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">empty</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Indicates whether the container is empty or not.</p>
 <p>The elements in ParseAPI containers can be accessed by iteration using
 an instantiation of the PredicateIterator. These iterators can
@@ -1426,47 +1348,74 @@ InstructionSource interface for access to binary code and other details.
 In addition to implementing the virtual methods in the CodeSource base
 class (Section <a class="reference external" href="#sec:codesource">4.8</a>), the methods in the
 pure-virtual InstructionSource class must be implemented:</p>
-<p>virtual bool isValidAddress(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isValidAddress</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns true if the address is a valid code location.</p>
-<p>virtual void* getPtrToInstruction(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">getPtrToInstruction</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns pointer to raw memory in the binary at the provided address.</p>
-<p>virtual void* getPtrToData(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">getPtrToData</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns pointer to raw memory in the binary at the provided address. The
 address need not correspond to an executable code region.</p>
-<p>virtual unsigned int getAddressWidth()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getAddressWidth</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the address width (e.g. four or eight bytes) for the represented
 binary.</p>
-<p>virtual bool isCode(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isCode</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Indicates whether the location is in a code region.</p>
-<p>virtual bool isData(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isData</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Indicates whether the location is in a data region.</p>
-<p>virtual Address offset()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">offset</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The start of the region covered by this instruction source.</p>
-<p>virtual Address length()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">length</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The size of the region.</p>
-<p>virtual Architecture getArch()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Architecture</span><span class="w"> </span><span class="n">getArch</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The architecture of the instruction source. See the Dyninst manual for
 details on architecture differences.</p>
-<p>virtual bool isAligned(const Address)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isAligned</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Address</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>For fixed-width instruction architectures, must return true if the
 address is a valid instruction boundary and false otherwise; otherwise
 returns true. This method has a default implementation that should be
 sufficient.</p>
 <p>CodeSource implementors need to fill in several data structures in the
 base CodeSource class:</p>
-<p>std::map&lt;Address, std::string&gt; _linkage</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">Address</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_linkage</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Entries in the linkage map represent external linkage, e.g. the PLT in
 ELF binaries. Filling in this map is optional.</p>
-<p>Address _table_of_contents</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="w"> </span><span class="n">_table_of_contents</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Many binary format have “table of contents” structures for position
 independant references. If such a structure exists, its address should
 be filled in.</p>
-<p>std::vector&lt;CodeRegion *&gt; _regions Dyninst::IBSTree&lt;CodeRegion&gt;
-_region_tree</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">_regions</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">IBSTree</span><span class="o">&lt;</span><span class="n">CodeRegion</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_region_tree</span><span class="w"></span>
+</pre></div>
+</div>
 <p>One or more contiguous regions of code or data in the binary object must
 be registered with the base class. Keeping these structures in sync is
 the responsibility of the implementing class.</p>
-<p>std::vector&lt;Hint&gt; _hints</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Hint</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_hints</span><span class="w"></span>
+</pre></div>
+</div>
 <p>CodeSource implementors can supply a set of Hint objects describing
 where functions are known to start in the binary. These hints are used
 to seed the parsing algorithm. Refer to the CodeSource header file for
@@ -1482,24 +1431,31 @@ classes provided as part of the ParseAPI. Because the parser itself does
 not know how to construct such extended types, implementors must provide
 an implementation of the CFGFactory that is specialized for their CFG
 classes. The CFGFactory exports the following simple interface:</p>
-<p>virtual Function * mkfunc(Address addr, FuncSource src, std::string
-name, CodeObject * obj, CodeRegion * region,
-Dyninst::InstructionSource * isrc)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mkfunc</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">FuncSource</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"></span>
+<span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"></span>
+<span class="n">Dyninst</span><span class="o">::</span><span class="n">InstructionSource</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">isrc</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns an object derived from Function as though the provided
 parameters had been passed to the Function constructor. The ParseAPI
 parser will never invoke <code class="docutils literal notranslate"><span class="pre">mkfunc()</span></code> twice with identical <code class="docutils literal notranslate"><span class="pre">addr</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">region</span></code> parameters—that is, Functions are guaranteed to be unique by
 address within a region.</p>
-<p>virtual Block * mkblock(Function * func, CodeRegion * region, Address
-addr)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mkblock</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns an object derived from Block as though the provided parameters
 had been passed to the Block constructor. The parser will never invoke
 <code class="docutils literal notranslate"><span class="pre">mkblock()</span></code> with identical <code class="docutils literal notranslate"><span class="pre">addr</span></code> and <code class="docutils literal notranslate"><span class="pre">region</span></code> parameters.</p>
-<p>virtual Edge * mkedge(Block * src, Block * trg, EdgeTypeEnum type)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Edge</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mkedge</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trg</span><span class="p">,</span><span class="w"> </span><span class="n">EdgeTypeEnum</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns an object derived from Edge as though the provided parameters
 had been passed to the Edge constructor. The parser <em>may</em> invoke
 <code class="docutils literal notranslate"><span class="pre">mkedge()</span></code> multiple times with identical parameters.</p>
-<p>virtual Block * mksink(CodeObject *obj, CodeRegion *r)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mksink</span><span class="p">(</span><span class="n">CodeObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">CodeRegion</span><span class="w"> </span><span class="o">*</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a “sink” block derived from Block to which all unresolvable
 control flow instructions will be linked. Implementors may return a
 unique sink block per CodeObject or a single global sink.</p>
@@ -1508,8 +1464,9 @@ default implementations of the <em>mk*</em> functions to allocate and return
 the appropriate derived types statically cast to the base type.
 Implementors must also add all allocated objects to the following
 internal lists:</p>
-<p>fact_list&lt;Edge&gt; edges_ fact_list&lt;Block&gt; blocks_ fact_list&lt;Function&gt;
-funcs_</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">fact_list</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span><span class="w"> </span><span class="n">edges_</span><span class="w"> </span><span class="n">fact_list</span><span class="o">&lt;</span><span class="n">Block</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blocks_</span><span class="w"> </span><span class="n">fact_list</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="w"> </span><span class="n">funcs_</span><span class="w"></span>
+</pre></div>
+</div>
 <p>O(1) allocation lists for CFG types. See the CFG.h header file for list
 insertion and removal operations.</p>
 <p>Implementors <em>may</em> but are <em>not required to</em> override the deallocation
@@ -1517,8 +1474,10 @@ following deallocation routines. The primary reason to override these
 routines is if additional action or cleanup is necessary upon CFG object
 release; the default routines simply remove the objects from the
 allocation list and invoke their destructors.</p>
-<p>virtual void free_func(Function * f) virtual void free_block(Block *
-b) virtual void free_edge(Edge * e) virtual void free_all()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">free_func</span><span class="p">(</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">free_block</span><span class="p">(</span><span class="n">Block</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">free_edge</span><span class="p">(</span><span class="n">Edge</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">free_all</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>CFG objects should be freed using these functions, rather than delete,
 to avoid leaking memory.</p>
 </div>

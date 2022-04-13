@@ -146,6 +146,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-line-number-interface">API Reference - Line Number Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-type-interface">API Reference - Type Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#api-reference-dynamic-components">API Reference - Dynamic Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../symtabAPI/index.html#building-symtabapi">Building SymtabAPI</a></li>
 </ul>
 
         </div>
@@ -194,15 +195,15 @@ independent interface that allows users to access detailed information
 about the call stack. For example, the following C++ code-snippet is all
 that is needed to walk and print the call stack of the currently running
 thread.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">stackwalk</span><span class="p">;</span>
-<span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stackwalk</span><span class="p">;</span><span class="w"></span>
+<span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
 
-<span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">();</span>
-<span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">stackwalk</span><span class="p">);</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">stackwalk</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-             <span class="n">stackwalk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-             <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Found function &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">();</span><span class="w"></span>
+<span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">stackwalk</span><span class="p">);</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">stackwalk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">             </span><span class="n">stackwalk</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">getName</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+<span class="w">             </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Found function &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>StackwalkerAPI can walk a call stack in the same address space as where
@@ -211,7 +212,7 @@ it can walk a call stack in another process (known as a third party
 stackwalk). To change the above example to perform a third party
 stackwalk, we would only need to pass a process identifier to newWalker,
 e.g:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Our other design goal with StackwalkerAPI is to make it easy-to-extend.
@@ -425,16 +426,24 @@ as a pointer. It may refer to an address in a different process, and it
 may not directly match the target process’ pointer representation.
 Address is guaranteed to be at least large enough to hold an address in
 a target process, but may be larger.</p>
-<p>typedef … Dyninst::PID</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"></span>
+</pre></div>
+</div>
 <p>A handle for identifying a process. On UNIX systems this will be an
 integer representing a PID. On Windows this will be a HANDLE object.</p>
-<p>typedef … Dyninst::THR_ID</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"></span>
+</pre></div>
+</div>
 <p>A handle for identifying a thread. On Linux platforms this is an integer
 referring to a TID (Thread Identifier). On Windows it is a HANDLE
 object.</p>
-<p>class Dyninst::MachRegister</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dyninst</span><span class="o">::</span><span class="n">MachRegister</span><span class="w"></span>
+</pre></div>
+</div>
 <p>A value that names a machine register.</p>
-<p>typedef unsigned long Dyninst::MachRegisterVal</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"></span>
+</pre></div>
+</div>
 <p>A value that holds the contents of a register. A Dyninst::MachRegister
 names a specific register, while a Dyninst::MachRegisterVal represents
 the value that may be in that register.</p>
@@ -457,16 +466,16 @@ stack. This interface is sufficient for walking call stacks on all the
 systems and variations covered by our default callbacks.</p>
 <p>To collect a stackwalk, first create new Walker object associated with
 the target process via</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">()</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="p">::</span><span class="n">PID</span> <span class="n">pid</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"> </span><span class="n">pid</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Once a Walker object has been created, a call stack can be walked with
 the</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">walkStack</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="o">::</span><span class="n">walkStack</span><span class="w"></span>
 </pre></div>
 </div>
 <p>method. The new stack walk is returned as a vector of Frame objects.</p>
@@ -496,13 +505,13 @@ factory method the users calls. The <code class="docutils literal notranslate"><
 customize how the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> steps through stack frames. The
 <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object is used to customize how StackwalkerAPI looks up
 symbolic names of the function or object that created a stack frame.</p>
-<p>static Walker *newWalker() static Walker *newWalker(Dyninst::PID pid)
-static Walker *newWalker(Dyninst::PID pid, std::string executable)
-static Walker *newWalker(Dyninst::ProcControlAPI::Process::ptr proc);
-static Walker *newWalker(std::string executable, const
-std::vector&lt;std::string&gt; &amp;argv) static Walker *newWalker(ProcessState
-*proc, StepperGroup *steppergroup = NULL , SymbolLookup *lookup =
-NULL)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="nf">newWalker</span><span class="p">()</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"> </span><span class="n">pid</span><span class="p">)</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">executable</span><span class="p">)</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">newWalker</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">ProcControlAPI</span><span class="o">::</span><span class="n">Process</span><span class="o">::</span><span class="n">ptr</span><span class="w"> </span><span class="n">proc</span><span class="p">);</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">newWalker</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">executable</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">newWalker</span><span class="p">(</span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="n">proc</span><span class="p">,</span><span class="w"> </span><span class="n">StepperGroup</span><span class="w"> </span><span class="o">*</span><span class="n">steppergroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">SymbolLookup</span><span class="w"> </span><span class="o">*</span><span class="n">lookup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>These factory methods return new Walker objects:</p>
 <ul class="simple">
 <li>The first takes no arguments and returns a first-party stackwalker.</li>
@@ -528,16 +537,19 @@ Interface.</p>
 <p>This method returns NULL if it was unable to create a new Walker object.
 The new Walker object was created with the new operator, and should be
 deallocated with the delete operator when it is no longer needed.</p>
-<p>static bool newWalker(const std::vector&lt;Dyninst::PID&gt; &amp;pids,
-std::vector&lt;Walker *&gt; &amp;walkers_out) static bool newWalker(const
-std::vector&lt;Dyninst::PID&gt; &amp;pids, std::vector&lt;Walker *&gt; &amp;walkers_out,
-std::string executable)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">newWalker</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pids</span><span class="p">,</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Walker</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">walkers_out</span><span class="p">)</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">newWalker</span><span class="p">(</span><span class="k">const</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pids</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Walker</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">walkers_out</span><span class="p">,</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">executable</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method attaches to a group of processes and returns a vector of
 Walker objects that perform third-party stackwalks. As above, the first
 variant takes a list of PIDs and attaches to those processes; the second
 variant also specifies the executable binary.</p>
-<p>bool walkStack(std::vector&lt;Frame&gt; &amp;stackwalk, Dyninst::THR_ID thread =
-NULL_THR_ID)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">walkStack</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stackwalk</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"> </span><span class="kr">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NULL_THR_ID</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method walks a call stack in the process associated with this
 <code class="docutils literal notranslate"><span class="pre">Walker</span></code>. The call stack is returned as a vector of <code class="docutils literal notranslate"><span class="pre">Frame</span></code> objects
 in stackwalk. The top of the stack is returned in index 0 of stackwalk,
@@ -551,18 +563,23 @@ party stackwalk, the default thread will be the thread that called
 support collecting call stacks from almost all types of functions,
 including signal handlers and optimized, frameless functions.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>bool walkStackFromFrame(std::vector&lt;Frame&gt; &amp;stackwalk, const Frame
-&amp;frame)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">walkStackFromFrame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stackwalk</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">frame</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method walks a call stack starting from the given stack frame,
 <code class="docutils literal notranslate"><span class="pre">frame</span></code>. The call stack will be output in the <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> vector,
 with frame stored in index 0 of <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> and the bottom of the
 stack stored in index <code class="docutils literal notranslate"><span class="pre">stackwalk.size()-1</span></code>.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>bool walkSingleFrame(const Frame &amp;in, Frame &amp;out)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">walkSingleFrame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This methods walks through single frame, <code class="docutils literal notranslate"><span class="pre">in</span></code>. Parameter <code class="docutils literal notranslate"><span class="pre">out</span></code> will
 be set to <code class="docutils literal notranslate"><span class="pre">in</span></code>’s caller frame.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>bool getInitialFrame(Frame &amp;frame, Dyninst::THR_ID thread = NULL_THR_ID)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getInitialFrame</span><span class="p">(</span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"> </span><span class="kr">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NULL_THR_ID</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object on the top of the stack in
 parameter frame. Under <code class="docutils literal notranslate"><span class="pre">walkStack</span></code>, <code class="docutils literal notranslate"><span class="pre">frame</span></code> would be the one
 returned in index 0 of the <code class="docutils literal notranslate"><span class="pre">stackwalk</span></code> vector. A stack frame can be
@@ -572,7 +589,9 @@ be chosen. When doing a third party stackwalk, the default thread will
 be the process’ initial thread. When doing a first party stackwalk, the
 default thread will be the thread that called <code class="docutils literal notranslate"><span class="pre">getInitialFrame</span></code>.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>bool getAvailableThreads(std::vector&lt;Dyninst::THR_ID&gt; &amp;threads)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getAvailableThreads</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">threads</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a vector of threads in the target process upon which
 StackwalkerAPI can walk call stacks. The threads are returned in output
 parameter <code class="docutils literal notranslate"><span class="pre">threads</span></code>. Note that this method may return a subset of the
@@ -581,24 +600,38 @@ the current process, it is only legal to walk the call stack on the
 currently running thread. In this case, <code class="docutils literal notranslate"><span class="pre">getAvailableThreads</span></code> returns
 a vector containing only the current thread.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>ProcessState *getProcessState() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="n">getProcessState</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object associated with this
 <code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
-<p>StepperGroup *getStepperGroup() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StepperGroup</span><span class="w"> </span><span class="o">*</span><span class="n">getStepperGroup</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> object associated with this
 <code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
-<p>SymbolLookup *getSymbolLookup() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SymbolLookup</span><span class="w"> </span><span class="o">*</span><span class="n">getSymbolLookup</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object associated with this
 <code class="docutils literal notranslate"><span class="pre">Walker</span></code>.</p>
-<p>bool addStepper(FrameStepper *stepper)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="n">stepper</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method adds a provided FrameStepper to those used by the Walker.</p>
-<p>static SymbolReaderFactory *getSymbolReader()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">SymbolReaderFactory</span><span class="w"> </span><span class="o">*</span><span class="n">getSymbolReader</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a factory for creating process-specific symbol
 readers. Unlike the above methods it is global across all Walkers and is
 thus defined static.</p>
-<p>static void setSymbolReader(SymbolReaderFactory *);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSymbolReader</span><span class="p">(</span><span class="n">SymbolReaderFactory</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Set the symbol reader factory used when creating <code class="docutils literal notranslate"><span class="pre">Walker</span></code> objects.</p>
-<p>static void version(int &amp;major, int &amp;minor, int &amp;maintenance)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">version</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">major</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">minor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">maintenance</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns version information (e.g., 8, 0, 0 for the 8.0
 release).</p>
 </div>
@@ -620,9 +653,9 @@ functions may be used to modify the stack. For example, the DyninstAPI
 uses these functions to change return addresses on the stack when it
 relocates code. The RA, SP, and FP may be found in a register or in a
 memory address on a call stack.</p>
-<p>static Frame *newFrame(Dyninst::MachRegisterVal ra,
-Dyninst::MachRegisterVal sp, Dyninst::MachRegisterVal fp, Walker
-*walker)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">*</span><span class="n">newFrame</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">ra</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">sp</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method creates a new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object and sets the mandatory data
 members: RA, SP and FP. The new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is associated with
 <code class="docutils literal notranslate"><span class="pre">walker</span></code>.</p>
@@ -630,26 +663,43 @@ members: RA, SP and FP. The new <code class="docutils literal notranslate"><span
 <p>The new <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is created with the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator, and the
 user should be deallocate it with the <code class="docutils literal notranslate"><span class="pre">delete</span></code> operator when it is no
 longer needed.</p>
-<p>bool operator==(const Frame &amp;)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">Frame</span></code> objects have a defined equality operator.</p>
-<p>Dyninst::MachRegisterVal getRA() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">getRA</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s return address.</p>
-<p>void setRA(Dyninst::MachRegisterVal val)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setRA</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s return address to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-<p>Dyninst::MachRegisterVal getSP() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">getSP</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s stack pointer.</p>
-<p>void setSP(Dyninst::MachRegisterVal val)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setSP</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s stack pointer to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-<p>Dyninst::MachRegisterVal getFP() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">getFP</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s frame pointer.</p>
-<p>void setFP(Dyninst::MachRegisterVal val)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setFP</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s frame pointer to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-<p>bool isTopFrame() const; bool isBottomFrame() const;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">isTopFrame</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isBottomFrame</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>These methods return whether a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object is the top (e.g., most
 recently executing) or bottom of the stack walk.</p>
-<p>typedef enum loc_address, loc_register, loc_unknown storage_t;</p>
-<p>typedef struct union Dyninst::Address addr; Dyninst::MachRegister reg;
-val; storage_t location; location_t;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">loc_address</span><span class="p">,</span><span class="w"> </span><span class="n">loc_register</span><span class="p">,</span><span class="w"> </span><span class="n">loc_unknown</span><span class="w"> </span><span class="n">storage_t</span><span class="p">;</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">union</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegister</span><span class="w"> </span><span class="n">reg</span><span class="p">;</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="n">storage_t</span><span class="w"> </span><span class="n">location</span><span class="p">;</span><span class="w"> </span><span class="n">location_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">location_t</span></code> structure is used by the <code class="docutils literal notranslate"><span class="pre">getRALocation</span></code>,
 <code class="docutils literal notranslate"><span class="pre">getSPLocation</span></code>, and <code class="docutils literal notranslate"><span class="pre">getFPLocation</span></code> methods to describe where in
 the process a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object’s RA, SP, or FP were found. When walking
@@ -662,19 +712,33 @@ field will refer to the register where it was found. If this <code class="docuti
 object was not created by a stackwalk (using the <code class="docutils literal notranslate"><span class="pre">newframe</span></code> factory
 method, for example), and has not had a set location method called, then
 location will contain <code class="docutils literal notranslate"><span class="pre">loc_unknown</span></code>.</p>
-<p>location_t getRALocation() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">location_t</span><span class="w"> </span><span class="n">getRALocation</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the RA was found.</p>
-<p>void setRALocation(location_t newval)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setRALocation</span><span class="p">(</span><span class="n">location_t</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets the location of where the RA was found to newval.</p>
-<p>location_t getSPLocation() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">location_t</span><span class="w"> </span><span class="n">getSPLocation</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the SP was found.</p>
-<p>void setSPLocation(location_t newval)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setSPLocation</span><span class="p">(</span><span class="n">location_t</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets the location of where the SP was found to <code class="docutils literal notranslate"><span class="pre">newval</span></code>.</p>
-<p>location_t getFPLocation() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">location_t</span><span class="w"> </span><span class="n">getFPLocation</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a <code class="docutils literal notranslate"><span class="pre">location_t</span></code> describing where the FP was found.</p>
-<p>void setFPLocation(location_t newval)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">setFPLocation</span><span class="p">(</span><span class="n">location_t</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method sets the location of where the FP was found to <code class="docutils literal notranslate"><span class="pre">newval</span></code>.</p>
-<p>bool getName(std::string &amp;str) const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a stack frame’s symbolic name. Most stack frames are
 created by functions, or function-like objects such as signal handlers
 or system calls. This method returns the name of the object that created
@@ -689,7 +753,9 @@ binaries. If <code class="docutils literal notranslate"><span class="pre">Symtab
 <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object is present, then this method will return an
 error.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>bool getObject(void* &amp;obj) const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getObject</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="o">&amp;</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>In addition to returning a symbolic name (see <code class="docutils literal notranslate"><span class="pre">getName</span></code>) the
 <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> interface allows for an opaque object, a <code class="docutils literal notranslate"><span class="pre">void*</span></code>, to
 be associated with a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object. The contents of this <code class="docutils literal notranslate"><span class="pre">void*</span></code> is
@@ -697,18 +763,25 @@ determined by the <code class="docutils literal notranslate"><span class="pre">S
 implementation that uses SymtabAPI, the <code class="docutils literal notranslate"><span class="pre">void*</span></code> points to a Symbol
 object or NULL if no symbol is found.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>Walker *getWalker() const;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="nf">getWalker</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> object that constructed this stack
 frame.</p>
-<p>THR_ID getThread() const;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">THR_ID</span><span class="w"> </span><span class="nf">getThread</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the execution thread that the current <code class="docutils literal notranslate"><span class="pre">Frame</span></code>
 represents.</p>
-<p>FrameStepper* getStepper() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">FrameStepper</span><span class="o">*</span><span class="w"> </span><span class="n">getStepper</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> object that was used to
-construct this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object in the <code class="docutils literal notranslate"><span class="pre">stepper</span></code> output parameter.</p>
-<p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>bool getLibOffset(std::string &amp;lib, Dyninst::Offset &amp;offset, void*
-&amp;symtab) const</p>
+construct this <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object in the <code class="docutils literal notranslate"><span class="pre">stepper</span></code> output parameter.
+This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">getLibOffset</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lib</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Offset</span><span class="w"> </span><span class="o">&amp;</span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="o">&amp;</span><span class="n">symtab</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the DSO (a library or executable) and an offset into
 that DSO that points to the location within that DSO where this frame
 was created. <code class="docutils literal notranslate"><span class="pre">lib</span></code> is the path to the library that was loaded, and
@@ -717,7 +790,9 @@ was created. <code class="docutils literal notranslate"><span class="pre">lib</s
 default it will contain a pointer to a Dyninst::Symtab object for this
 DSO. See the SymtabAPI Programmer’s Guide for more information on using
 Dyninst::Symtab objects.</p>
-<p>bool nonCall() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">nonCall</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns whether a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> object represents a function
 call; if <code class="docutils literal notranslate"><span class="pre">false</span></code>, the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> may represent instrumentation, a
 signal handler, or something else.</p>
@@ -728,30 +803,43 @@ signal handler, or something else.</p>
 <p><strong>Defined in:</strong> <code class="docutils literal notranslate"><span class="pre">procstate.h</span></code></p>
 <p>StackwalkerAPI provides an interface to access the addresses where
 libraries are mapped in the target process.</p>
-<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>A pair consisting of a library filename and its base address in the
 target process.</p>
-<p>class LibraryState</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LibraryState</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Class providing interfaces for library tracking. Only the public query
 interfaces below are user-facing; the other public methods are callbacks
 that allow StackwalkerAPI to update its internal state.</p>
-<p>virtual bool getLibraryAtAddr(Address addr, LibAddrPair &amp;lib) = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">getLibraryAtAddr</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lib</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Given an address <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the target process, returns <code class="docutils literal notranslate"><span class="pre">true</span></code> and
 sets <code class="docutils literal notranslate"><span class="pre">lib</span></code> to the name and base address of the library containing
 addr. Given an address outside the target process, returns <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
-<p>virtual bool getLibraries(std::vector&lt;LibAddrPair&gt; &amp;libs, bool
-allow_refresh = true) = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">getLibraries</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">LibAddrPair</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">libs</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">allow_refresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fills <code class="docutils literal notranslate"><span class="pre">libs</span></code> with the libraries loaded in the target process. If
 <code class="docutils literal notranslate"><span class="pre">allow_refresh</span></code> is true, this method will attempt to ensure that this
 list is freshly updated via inspection of the process; if it is false,
 it will return a cached list.</p>
-<p>virtual bool getLibc(LibAddrPair &amp;lc);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">getLibc</span><span class="p">(</span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lc</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Convenience function to find the name and base address of the standard C
 runtime, if present.</p>
-<p>virtual bool getLibthread(LibAddrPair &amp;lt);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">getLibthread</span><span class="p">(</span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Convenience function to find the name and base address of the standard
 thread library, if present (e.g. pthreads).</p>
-<p>virtual bool getAOut(LibAddrPair &amp;ao) = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">getAOut</span><span class="p">(</span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ao</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Convenience function to find the name and base address of the
 executable.</p>
 </div>
@@ -767,15 +855,19 @@ functions, local variables, and types are part of this interface.</p>
 look up local variables contained in that function and the types of
 those local variables. See the SymtabAPI Programmer’s Guide for more
 information.</p>
-<p>static Dyninst::SymtabAPI::Function *getFunctionForFrame(Frame f)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">SymtabAPI</span><span class="o">::</span><span class="n">Function</span><span class="w"> </span><span class="o">*</span><span class="n">getFunctionForFrame</span><span class="p">(</span><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a SymtabAPI function handle for the function that
 created the call stack frame, f.</p>
-<p>static int glvv_Success = 0; static int glvv_EParam = -1; static int
-glvv_EOutOfScope = -2; static int glvv_EBufferSize = -3; static int
-glvv_EUnknown = -4;</p>
-<p>static int getLocalVariableValue(Dyninst::SymtabAPI::localVar *var,
-std::vector&lt;Frame&gt; &amp;swalk, unsigned frame, void *out_buffer, unsigned
-out_buffer_size)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">glvv_Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">glvv_EParam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"></span>
+<span class="n">glvv_EOutOfScope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-2</span><span class="p">;</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">glvv_EBufferSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-3</span><span class="p">;</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"></span>
+<span class="n">glvv_EUnknown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-4</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getLocalVariableValue</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">SymtabAPI</span><span class="o">::</span><span class="n">localVar</span><span class="w"> </span><span class="o">*</span><span class="n">var</span><span class="p">,</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">swalk</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">out_buffer</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">out_buffer_size</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Given a local variable and a stack frame from a call stack, this
 function returns the value of the variable in that frame. The local
 variable is specified by the SymtabAPI variable object, <code class="docutils literal notranslate"><span class="pre">var</span></code>.
@@ -821,13 +913,13 @@ create a new class that inherits from the callback class and implement
 the necessary methods. To use a new ProcessState, StepperGroup, or
 SymbolLookup class with StackwalkerAPI, create a new instance of the
 class and register it with a new Walker object using the</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">ProcessState</span> <span class="o">*</span><span class="p">,</span> <span class="n">StepperGroup</span> <span class="o">*</span><span class="p">,</span> <span class="n">SymbolLookup</span> <span class="o">*</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">StepperGroup</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">SymbolLookup</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>factory method (see Section&nbsp;<a class="reference external" href="#subsec:walker">3.3.1</a>). To use a new
 FrameStepper class with StackwalkerAPI, create a new instance of the
 class and register it with a StepperGroup using the</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">StepperGroup</span><span class="p">::</span><span class="n">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span> <span class="o">*</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StepperGroup</span><span class="o">::</span><span class="n">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>method (see Section&nbsp;<a class="reference external" href="#subsec:steppergroup">3.6.3</a>).</p>
@@ -1052,9 +1144,10 @@ who want to develop new <code class="docutils literal notranslate"><span class="
 this class and implement the the desired virtual functions. The
 <code class="docutils literal notranslate"><span class="pre">getCallerFrame,</span> <span class="pre">getPriority</span></code>, and <code class="docutils literal notranslate"><span class="pre">getName</span></code> functions must be
 implemented; all others may be overridden if desired.</p>
-<p>typedef enum gcf_success, gcf_stackbottom, gcf_not_me, gcf_error
-gcframe_ret_t</p>
-<p>virtual gcframe_ret_t getCallerFrame(const Frame &amp;in, Frame &amp;out) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">gcf_success</span><span class="p">,</span><span class="w"> </span><span class="n">gcf_stackbottom</span><span class="p">,</span><span class="w"> </span><span class="n">gcf_not_me</span><span class="p">,</span><span class="w"> </span><span class="n">gcf_error</span><span class="w"> </span><span class="n">gcframe_ret_t</span><span class="w"></span>
+<span class="k">virtual</span><span class="w"> </span><span class="n">gcframe_ret_t</span><span class="w"> </span><span class="n">getCallerFrame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method walks through a single stack frame and generates a Frame
 object that represents the caller’s stack frame. Parameter in will be a
 Frame object that this FrameStepper is capable of walking through.
@@ -1103,13 +1196,17 @@ through. StackwalkerAPI will then attempt to locate another
 <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to handle <code class="docutils literal notranslate"><span class="pre">in</span></code> or abort the stackwalk. It should
 return <code class="docutils literal notranslate"><span class="pre">gcf_error</span></code> if there was an error and the stack walk should be
 aborted.</p>
-<p>virtual void registerStepperGroup(StepperGroup *steppergroup)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">registerStepperGroup</span><span class="p">(</span><span class="n">StepperGroup</span><span class="w"> </span><span class="o">*</span><span class="n">steppergroup</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method is used to notify a <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> when StackwalkerAPI
 adds it to a <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>. The <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> to which this
 <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> is being added is passed in parameter steppergroup.
 This method can be used to initialize the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> (in addition
 to any <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> constructor).</p>
-<p>virtual unsigned getPriority() const = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">getPriority</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method is used by the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> to decide which
 <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to use if multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects are
 registered over the same address range (see addAddressRanges in
@@ -1121,20 +1218,30 @@ return priorities between <code class="docutils literal notranslate"><span class
 <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects have an overlapping address range, and they
 have the same priority, then the order in which they are used is
 undefined.</p>
-<p>FrameStepper(Walker *w);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">FrameStepper</span><span class="p">(</span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">w</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Constructor definition for all <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> instances.</p>
-<p>virtual ProcessState *getProcessState();</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="nf">getProcessState</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> used by the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. Can be
 overridden if the user desires.</p>
-<p>virtual Walker *getWalker();</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="nf">getWalker</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> associated with the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>. Can be
 overridden if the user desires.</p>
-<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair; typedef enum
-library_load, library_unload lib_change_t; virtual void
-newLibraryNotification(LibAddrPair *libAddr, lib_change_t change);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="p">;</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"></span>
+<span class="nc">library_load</span><span class="p">,</span><span class="w"> </span><span class="n">library_unload</span><span class="w"> </span><span class="n">lib_change_t</span><span class="p">;</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="nf">newLibraryNotification</span><span class="p">(</span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">*</span><span class="n">libAddr</span><span class="p">,</span><span class="w"> </span><span class="n">lib_change_t</span><span class="w"> </span><span class="n">change</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This function is called when a new library is loaded by the process; it
 should be implemented if the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> requires such information.</p>
-<p>virtual const char *getName() const = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns a name for the <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>; must be implemented by the
 user.</p>
 </div>
@@ -1152,24 +1259,32 @@ priority system to decide.</p>
 of that interface. Users who want to customize the <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>
 should inherit from this class and re-implement any of the below virtual
 functions.</p>
-<p>StepperGroup(Walker *walker)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StepperGroup</span><span class="p">(</span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This factory constructor creates a new <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code> object
 associated with <code class="docutils literal notranslate"><span class="pre">walker</span></code>.</p>
-<p>virtual bool addStepper(FrameStepper *stepper)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="n">stepper</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method adds a new <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to this <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>. The
 newly added stepper will be tracked by this <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>, and it
 will be considered for use when walking through stack frames.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if it successfully added the
 <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code>, and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool addStepper(FrameStepper *stepper, Address start, Address
-end) = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">addStepper</span><span class="p">(</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="n">stepper</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Add the specified <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to the list of known steppers, and
 register it to handle frames in the range [<code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">end</span></code>).</p>
-<p>virtual void registerStepper(FrameStepper *stepper);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerStepper</span><span class="p">(</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="n">stepper</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Add the specified <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> to the list of known steppers and use
 it over the entire address space.</p>
-<p>virtual bool findStepperForAddr(Address addr, FrameStepper* &amp;out, const
-FrameStepper *last_tried = NULL) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">findStepperForAddr</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">FrameStepper</span><span class="o">*</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*</span><span class="n">last_tried</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Given an address that points into a function (or function-like object),
 addr, this method decides which <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> should be used to walk
 through the stack frame created by the function at that address. A
@@ -1188,14 +1303,20 @@ process’ code space, and map a piece of the code space to a
 range. If multiple <code class="docutils literal notranslate"><span class="pre">FrameStepper</span></code> objects share the same range, then
 the one with the highest priority will be tried first.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
-<p>typedef std::pair&lt;std::string, Address&gt; LibAddrPair; typedef enum
-library_load, library_unload lib_change_t; virtual void
-newLibraryNotification(LibAddrPair *libaddr, lib_change_t change);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="p">;</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"></span>
+<span class="nc">library_load</span><span class="p">,</span><span class="w"> </span><span class="n">library_unload</span><span class="w"> </span><span class="n">lib_change_t</span><span class="p">;</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="nf">newLibraryNotification</span><span class="p">(</span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">*</span><span class="n">libaddr</span><span class="p">,</span><span class="w"> </span><span class="n">lib_change_t</span><span class="w"> </span><span class="n">change</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Called by the StackwalkerAPI when a new library is loaded.</p>
-<p>Walker *getWalker() const</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">getWalker</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the Walker object that associated with this
 StepperGroup.</p>
-<p>void getSteppers(std::set&lt;FrameStepper *&gt; &amp;);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">getSteppers</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">FrameStepper</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Fill in the provided set with all <code class="docutils literal notranslate"><span class="pre">FrameSteppers</span></code> registered in the
 <code class="docutils literal notranslate"><span class="pre">StepperGroup</span></code>.</p>
 </div>
@@ -1210,28 +1331,40 @@ of <code class="docutils literal notranslate"><span class="pre">ProcessState</sp
 and <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> does a third party stackwalk.</p>
 <p>A new <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> class can be created by inheriting from this
 class and implementing the necessary methods.</p>
-<p>static ProcessState *getProcessStateByPid(Dyninst::PID pid)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="n">getProcessStateByPid</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"> </span><span class="n">pid</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Given a <code class="docutils literal notranslate"><span class="pre">PID</span></code>, return the corresponding <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object.</p>
-<p>virtual unsigned getAddressWidth() = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="nf">getAddressWidth</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the number of bytes in a pointer for the target process. This
 value is 4 for 32-bit platforms (x86, PowerPC-32) and 8 for 64-bit
 platforms (x86-64, PowerPC-64).</p>
-<p>typedef enum Arch_x86, Arch_x86_64, Arch_ppc32, Arch_ppc64 Architecture;
-virtual Dyninst::Architecture getArchitecture() = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">Arch_x86</span><span class="p">,</span><span class="w"> </span><span class="n">Arch_x86_64</span><span class="p">,</span><span class="w"> </span><span class="n">Arch_ppc32</span><span class="p">,</span><span class="w"> </span><span class="n">Arch_ppc64</span><span class="w"> </span><span class="n">Architecture</span><span class="p">;</span><span class="w"></span>
+<span class="k">virtual</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Architecture</span><span class="w"> </span><span class="nf">getArchitecture</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the appropriate architecture for the target process.</p>
-<p>virtual bool getRegValue(Dyninst::MachRegister reg, Dyninst::THR_ID
-thread, Dyninst::MachRegisterVal &amp;val) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">getRegValue</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegister</span><span class="w"> </span><span class="n">reg</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"></span>
+<span class="kr">thread</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">MachRegisterVal</span><span class="w"> </span><span class="o">&amp;</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method takes a register name as input, <code class="docutils literal notranslate"><span class="pre">reg</span></code>, and returns the
 value in that register in <code class="docutils literal notranslate"><span class="pre">val</span></code> in the thread thread.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool readMem(void *dest, Address source, size_t size) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">readMem</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method reads memory from the target process. Parameter <code class="docutils literal notranslate"><span class="pre">dest</span></code>
 should point to an allocated buffer of memory at least <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes in
 the host process. Parameter <code class="docutils literal notranslate"><span class="pre">source</span></code> should contain an address in the
 target process to be read from. If this method succeeds, <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes
 of memory is copied from <code class="docutils literal notranslate"><span class="pre">source</span></code>, stored in <code class="docutils literal notranslate"><span class="pre">dest</span></code>, and <code class="docutils literal notranslate"><span class="pre">true</span></code> is
 returned. This method returns <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
-<p>virtual bool getThreadIds(std::vector&lt;Dyninst::THR_ID&gt; &amp;threads) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">getThreadIds</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">threads</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a list of threads whose call stacks can be walked in
 the target process. Thread are returned in the <code class="docutils literal notranslate"><span class="pre">threads</span></code> vector. In
 some cases, such as with the default <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>, this method returns
@@ -1241,17 +1374,25 @@ all of the threads in the target process. In other cases, such as with
 default thread if the user requests a stackwalk without specifying an
 thread (see <code class="docutils literal notranslate"><span class="pre">Walker::WalkStack</span></code>).</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool getDefaultThread(Dyninst::THR_ID &amp;default_tid) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">getDefaultThread</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"> </span><span class="o">&amp;</span><span class="n">default_tid</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the thread representing the initial process in the
 <code class="docutils literal notranslate"><span class="pre">default_tid</span></code> output parameter.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual Dyninst::PID getProcessId()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">PID</span><span class="w"> </span><span class="n">getProcessId</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a process ID for the target process. The default
 <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> implementations (<code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code> and <code class="docutils literal notranslate"><span class="pre">ProcSelf</span></code>) will
 return a PID on UNIX systems and a HANDLE object on Windows.</p>
-<p>Walker *getWalker() const;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="nf">getWalker</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Return the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> associated with the current process state.</p>
-<p>std::string getExecutablePath();</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getExecutablePath</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Returns the name of the executable associated with the current process
 state.</p>
 <div class="section" id="class-librarystate">
@@ -1264,27 +1405,37 @@ LibraryState to get the DSO through which they are attempting to stack
 walk.</p>
 <p>Each <code class="docutils literal notranslate"><span class="pre">Library</span></code> is represented using a <code class="docutils literal notranslate"><span class="pre">LibAddrPair</span></code> object, which is
 defined as follows:</p>
-<p>typedef std::pair&lt;std::string, Dyninst::Address&gt; LibAddrPair</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">Dyninst</span><span class="o">::</span><span class="n">Address</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="w"></span>
+</pre></div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">LibAddrPair.first</span></code> refers to the file path of the library that was
 loaded, and <code class="docutils literal notranslate"><span class="pre">LibAddrPair.second</span></code> is the load address of that library
 in the process’ address space. The load address of a library can be
 added to a symbol offset from the file in order to get the absolute
 address of a symbol.</p>
-<p>virtual bool getLibraryAtAddr(Address addr, LibAddrPair &amp;lib) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">getLibraryAtAddr</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">LibAddrPair</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lib</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns a DSO, using the <code class="docutils literal notranslate"><span class="pre">lib</span></code> output parameter, that is
 loaded over address <code class="docutils literal notranslate"><span class="pre">addr</span></code> in the current process.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">false</span></code> if no library is loaded over <code class="docutils literal notranslate"><span class="pre">addr</span></code> or
 an error occurs, and <code class="docutils literal notranslate"><span class="pre">true</span></code> if it successfully found a library.</p>
-<p>virtual bool getLibraries(std::vector&lt;LibAddrPair&gt; &amp;libs) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">getLibraries</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">LibAddrPair</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">libs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns all DSOs that are loaded into the process’ address
 space in the output vector parameter, <code class="docutils literal notranslate"><span class="pre">libs</span></code>.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual void notifyOfUpdate() = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">notifyOfUpdate</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method is called by the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> when it detects a change
 in the process’ list of loaded libraries. Implementations of
 <code class="docutils literal notranslate"><span class="pre">LibraryStates</span></code> should use this method to refresh their lists of
 loaded libraries.</p>
-<p>virtual Address getLibTrapAddress() = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">getLibTrapAddress</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Some platforms that implement the System/V standard (Linux) use a trap
 event to determine when a process loads a library. A trap instruction is
 inserted into a certain address, and that trap will execute whenever the
@@ -1311,10 +1462,13 @@ object (via a <code class="docutils literal notranslate"><span class="pre">void*
 <p>The default implementation of <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> provided by
 StackwalkerAPI uses the <code class="docutils literal notranslate"><span class="pre">SymLite</span></code> tool to lookup symbol names. It
 returns a Symbol object in the anonymous <code class="docutils literal notranslate"><span class="pre">void*</span></code>.</p>
-<p>SymbolLookup(std::string exec_path = “”);</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">SymbolLookup</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">exec_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Constructor for a <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code> object.</p>
-<p>virtual bool lookupAtAddr(Address addr, string &amp;out_name, void*
-&amp;out_value) = 0</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">lookupAtAddr</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out_name</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out_value</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method takes an address, <code class="docutils literal notranslate"><span class="pre">addr</span></code>, as input and returns the
 function name, <code class="docutils literal notranslate"><span class="pre">out_name</span></code>, and an opaque value, <code class="docutils literal notranslate"><span class="pre">out_value</span></code>, at that
 address. Output parameter <code class="docutils literal notranslate"><span class="pre">out_name</span></code> should be the name of the
@@ -1323,10 +1477,14 @@ any opaque value determined by the <code class="docutils literal notranslate"><s
 values returned are used by the <code class="docutils literal notranslate"><span class="pre">Frame::getName</span></code> and
 <code class="docutils literal notranslate"><span class="pre">Frame::getObject</span></code> functions.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual Walker *getWalker()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">getWalker</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">Walker</span></code> object associated with this
 <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code>.</p>
-<p>virtual ProcessState *getProcessSate()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="n">ProcessState</span><span class="w"> </span><span class="o">*</span><span class="n">getProcessSate</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> object associated with this
 <code class="docutils literal notranslate"><span class="pre">SymbolLookup</span></code>.</p>
 </div>
@@ -1349,12 +1507,12 @@ and continue the target process.</p>
 <p>To illustrate the complexities with running in 3rd party mode, consider
 the follow code snippet that uses StackwalkerAPI to collect a stack walk
 every five seconds.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
-<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
-<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
-             <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
-             <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="n">swalk</span><span class="p">;</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">             </span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span><span class="w"></span>
+<span class="w">             </span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>StackwalkerAPI is running in 3rd party mode, since it attached to the
@@ -1384,30 +1542,30 @@ Section&nbsp;<a class="reference external" href="#subsubsec:procdebug">4.1.1</a>
 more information on the <code class="docutils literal notranslate"><span class="pre">select</span></code> system call. Note that this example
 does not include all of the proper error handling and includes that
 should be present when using <code class="docutils literal notranslate"><span class="pre">select</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span> <span class="o">*</span><span class="n">walker</span> <span class="o">=</span> <span class="n">Walker</span><span class="p">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
-<span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span> <span class="o">=</span> <span class="p">(</span><span class="n">ProcDebug</span> <span class="o">*</span><span class="p">)</span> <span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">();</span>
-<span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span> <span class="n">swalk</span><span class="p">;</span>
-<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
-    <span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span>
-    <span class="n">struct</span> <span class="n">timeval</span> <span class="n">timeout</span><span class="p">;</span>
-    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">timeout</span><span class="o">.</span><span class="n">tv_usec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="nb">int</span> <span class="nb">max</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">fd_set</span> <span class="n">readfds</span><span class="p">,</span> <span class="n">writefds</span><span class="p">,</span> <span class="n">exceptfds</span><span class="p">;</span>
-    <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">writefds</span><span class="p">);</span> <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">);</span>
-    <span class="n">FD_SET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
-        <span class="nb">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">readfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">writefds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">timeout</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">FD_ISSET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="p">::</span><span class="n">getNotificationFD</span><span class="p">(),</span> <span class="n">readfds</span><span class="p">))</span> <span class="p">{</span>
-            <span class="o">//</span><span class="n">Debug</span> <span class="n">event</span>
-            <span class="n">ProcDebug</span><span class="p">::</span><span class="n">handleDebugEvent</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">//</span><span class="n">Timeout</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Walker</span><span class="w"> </span><span class="o">*</span><span class="n">walker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Walker</span><span class="o">::</span><span class="n">newWalker</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span><span class="w"></span>
+<span class="n">ProcDebug</span><span class="w"> </span><span class="o">*</span><span class="n">debugger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ProcDebug</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="w"> </span><span class="n">swalk</span><span class="p">;</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">walkStack</span><span class="p">(</span><span class="n">swalk</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">timeval</span><span class="w"> </span><span class="n">timeout</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">timeout</span><span class="p">.</span><span class="n">tv_sec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">timeout</span><span class="p">.</span><span class="n">tv_usec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">fd_set</span><span class="w"> </span><span class="n">readfds</span><span class="p">,</span><span class="w"> </span><span class="n">writefds</span><span class="p">,</span><span class="w"> </span><span class="n">exceptfds</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span><span class="w"> </span><span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">writefds</span><span class="p">);</span><span class="w"> </span><span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">FD_SET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="o">::</span><span class="n">getNotificationFD</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">readfds</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">writefds</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">exceptfds</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">timeout</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FD_ISSET</span><span class="p">(</span><span class="n">ProcDebug</span><span class="o">::</span><span class="n">getNotificationFD</span><span class="p">(),</span><span class="w"> </span><span class="n">readfds</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//Debug event</span>
+<span class="w">            </span><span class="n">ProcDebug</span><span class="o">::</span><span class="n">handleDebugEvent</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//Timeout</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="section" id="class-procdebug">
@@ -1419,15 +1577,15 @@ get at a <code class="docutils literal notranslate"><span class="pre">ProcDebug<
 <code class="docutils literal notranslate"><span class="pre">Walker::getProcessState</span></code> into a <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>. C++’s <code class="docutils literal notranslate"><span class="pre">dynamic_cast</span></code>
 operation can be used to test if a <code class="docutils literal notranslate"><span class="pre">Walker</span></code> uses the <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>
 interface:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ProcDebug</span> <span class="o">*</span><span class="n">debugger</span><span class="p">;</span>
-<span class="n">debugger</span> <span class="o">=</span> <span class="n">dynamic_cast</span><span class="o">&lt;</span><span class="n">ProcDebug</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">());</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">debugger</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
-    <span class="o">//</span><span class="mi">3</span><span class="n">rd</span> <span class="n">party</span>
-    <span class="o">...</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="o">//</span><span class="mi">1</span><span class="n">st</span> <span class="n">party</span>
-    <span class="o">...</span>
-<span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ProcDebug</span><span class="w"> </span><span class="o">*</span><span class="n">debugger</span><span class="p">;</span><span class="w"></span>
+<span class="n">debugger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">ProcDebug</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">walker</span><span class="o">-&gt;</span><span class="n">getProcessState</span><span class="p">());</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">debugger</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//3rd party</span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//1st party</span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In addition to the handling of debug events, described in
@@ -1437,7 +1595,9 @@ threads, detach from a process, and test for events such as process
 death. As an implementation of the <code class="docutils literal notranslate"><span class="pre">ProcessState</span></code> class, <code class="docutils literal notranslate"><span class="pre">ProcDebug</span></code>
 also provides all of the functionality described in
 Section&nbsp;<a class="reference external" href="#subsec:processstate">3.6.4</a>.</p>
-<p>virtual bool pause(Dyninst::THR_ID tid = NULL_THR_ID)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">pause</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NULL_THR_ID</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method pauses a process or thread. The paused object will not
 resume execution until <code class="docutils literal notranslate"><span class="pre">ProcDebug::resume</span></code> is called. If the <code class="docutils literal notranslate"><span class="pre">tid</span></code>
 parameter is not <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then StackwalkerAPI will pause the
@@ -1451,7 +1611,9 @@ useful for pausing threads before stack walks if the user needs to keep
 the returned stack walk synchronized with the current state of the
 thread.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool resume(Dyninst::THR_ID tid = NULL_THR_ID)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">resume</span><span class="p">(</span><span class="n">Dyninst</span><span class="o">::</span><span class="n">THR_ID</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NULL_THR_ID</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method resumes execution on a paused process or thread. This method
 only resumes threads that were paused by the <code class="docutils literal notranslate"><span class="pre">ProcDebug::pause</span></code> call,
 using it on other threads is an error. If the <code class="docutils literal notranslate"><span class="pre">tid</span></code> parameter is not
@@ -1459,7 +1621,9 @@ using it on other threads is an error. If the <code class="docutils literal notr
 <code class="docutils literal notranslate"><span class="pre">tid</span></code>. If <code class="docutils literal notranslate"><span class="pre">tid</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL_THR_ID</span></code> then StackwalkerAPI will resume
 all paused threads in the process.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool detach(bool leave_stopped = false)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">detach</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">leave_stopped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method detaches StackwalkerAPI from the target process.
 StackwalkerAPI will no longer receive debug events on this target
 process and will no longer be able to collect call stacks from it. This
@@ -1474,7 +1638,9 @@ the process for further analysis. The <code class="docutils literal notranslate"
 supported on the Linux platform and its value will have no affect on the
 detach call.</p>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if successful and <code class="docutils literal notranslate"><span class="pre">false</span></code> on error.</p>
-<p>virtual bool isTerminated()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">isTerminated</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the associated target process has
 terminated and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. A target process may terminate
 itself by calling exit, returning from main, or receiving an unhandled
@@ -1483,7 +1649,9 @@ a terminated process is illegal an will lead to undefined behavior.</p>
 <p>A process termination will also be signaled through the notification FD.
 Users should check processes for the isTerminated state after returning
 from handleDebugEvent.</p>
-<p>static int getNotificationFD()</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">getNotificationFD</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
 <p>This method returns StackwalkerAPI’s notification FD. The notification
 FD is a file descriptor that StackwalkerAPI will write a byte to
 whenever a debug event occurs that need. If the user code sees a byte on
@@ -1493,7 +1661,9 @@ StackwalkerAPI handle the debug event. Example code using
 Section&nbsp;<a class="reference external" href="#subsec:debugger">4.1</a>.</p>
 <p>StackwalkerAPI will only create one notification FD, even if it is
 attached to multiple 3rd party target processes.</p>
-<p>static bool handleDebugEvent(bool block = false)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">handleDebugEvent</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">block</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <p>When this method is called StackwalkerAPI will receive and handle all
 pending debug events from each 3rd party target process to which it is
 attached. After handling debug events each target process will be
@@ -1555,8 +1725,9 @@ saves the old frame pointer, but does not setup a new frame pointer (it
 has a <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">%ebp</span></code> instruction, but no <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">%esp,%ebp</span></code>). If the
 <code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> cannot determine the <code class="docutils literal notranslate"><span class="pre">frame_type</span></code>, then it should
 be assigned the value <code class="docutils literal notranslate"><span class="pre">unknown_t</span></code>.</p>
-<p>typedef enum unknown_s=0, unset_frame, halfset_frame, set_frame
-frame_state;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">unknown_s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">unset_frame</span><span class="p">,</span><span class="w"> </span><span class="n">halfset_frame</span><span class="p">,</span><span class="w"> </span><span class="n">set_frame</span><span class="w"> </span><span class="n">frame_state</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> type determines the current state of function with a
 stack frame at some point of execution. For example, a function may set
 up a standard stack frame and have a <code class="docutils literal notranslate"><span class="pre">frame_type</span></code> of
@@ -1572,8 +1743,9 @@ does not yet exist or has been torn down, then <code class="docutils literal not
 currently only meaningful on the x86 family of architecture, and should
 if the function has saved the old frame pointer, but not yet set up a
 new frame pointer.</p>
-<p>typedef std::pair&lt;frame_type, frame_state&gt; alloc_frame_t; virtual
-alloc_frame_t allocatesFrame(Address addr) = 0;</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">frame_type</span><span class="p">,</span><span class="w"> </span><span class="n">frame_state</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alloc_frame_t</span><span class="p">;</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">alloc_frame_t</span><span class="w"> </span><span class="nf">allocatesFrame</span><span class="p">(</span><span class="n">Address</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">allocatesFrame</span></code> function of <code class="docutils literal notranslate"><span class="pre">FrameFuncHelper</span></code> returns a
 <code class="docutils literal notranslate"><span class="pre">alloc_frame_t</span></code> that describes the frame_type of the function at
 <code class="docutils literal notranslate"><span class="pre">addr</span></code> and the <code class="docutils literal notranslate"><span class="pre">frame_state</span></code> of the function when execution reached

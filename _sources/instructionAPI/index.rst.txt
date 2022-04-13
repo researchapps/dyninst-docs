@@ -285,7 +285,7 @@ Returns the size of the corresponding machine instruction, in bytes.
 
 .. code-block:: cpp
 
-    const void \* ptr() const
+    const void * ptr() const
 
 Returns a pointer to the raw byte representation of the corresponding
 machine instruction.
@@ -891,7 +891,7 @@ bytes.
 
 .. code-block:: cpp
     
-    bool bind(Expression \* expr, const Result & value)
+    bool bind(Expression * expr, const Result & value)
 
 ``bind`` searches for all instances of the Expression ``expr`` within
 this Expression, and sets the result of ``eval`` for those
@@ -1400,7 +1400,7 @@ bytes and a length, and constructs an Instruction.
 
 .. code-block:: cpp
 
-    InstructionDecoder(const unsigned char \*buffer, size_t size, Architecture arch) InstructionDecoder(const void \*buffer, size_t size, Architecture arch)
+    InstructionDecoder(const unsigned char *buffer, size_t size, Architecture arch) InstructionDecoder(const void *buffer, size_t size, Architecture arch)
 
 Construct an ``InstructionDecoder`` over the provided ``buffer`` and
 ``size``. We consider the buffer to contain instructions from the
